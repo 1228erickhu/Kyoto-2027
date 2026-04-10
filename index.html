@@ -451,6 +451,32 @@ nav::-webkit-scrollbar{display:none;}
   .flight-row{grid-template-columns:75px 1fr 1fr !important;}
   .flight-result-grid{grid-template-columns:1fr;}
 }
+
+/* ── DAY VISUAL: photo + map ── */
+.day-visual{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;border-radius:6px;overflow:hidden;}
+.day-photo-wrap{position:relative;height:160px;overflow:hidden;border-radius:6px;}
+.day-photo-img{width:100%;height:100%;object-fit:cover;display:block;}
+.day-photo-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(40,20,10,.65) 0%,transparent 55%);}
+.day-photo-label{position:absolute;bottom:10px;left:12px;color:white;font-size:12px;font-weight:700;text-shadow:0 1px 4px rgba(0,0,0,.5);}
+.day-map-wrap{height:160px;border-radius:6px;overflow:hidden;border:2px solid var(--border);}
+.day-map-wrap iframe{width:100%;height:100%;border:none;display:block;}
+/* simplified spot chips under photo+map */
+.spot-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+.spot-chip{
+  display:flex;align-items:center;gap:5px;
+  background:#fff9f0;border:1.5px solid var(--border);
+  padding:5px 10px;border-radius:4px;font-size:11px;font-weight:600;
+  box-shadow:1px 1px 0 rgba(0,0,0,.05);
+}
+.spot-chip-icon{font-size:14px;}
+.spot-chip.food{border-color:#f4b0b0;background:#fff5f5;}
+.spot-chip.alert{border-color:#ffaaaa;background:#fff5f5;color:var(--red);}
+.spot-chip.highlight{border-color:#f4c882;background:#fffbee;}
+/* collapse note by default */
+.tl-card .card-note{display:none;}
+.tl-card.expanded .card-note{display:block;}
+.expand-btn{font-size:10px;color:var(--warm);cursor:pointer;margin-top:4px;display:inline-block;background:none;border:none;font-family:inherit;padding:0;}
+@media(max-width:600px){.day-visual{grid-template-columns:1fr;}.day-photo-wrap,.day-map-wrap{height:130px;}}
 </style>
 </head>
 <body>
@@ -495,6 +521,8 @@ nav::-webkit-scrollbar{display:none;}
   <div class="sec-desc">點選下方日期切換每天的行程安排 🌸</div>
   <div class="day-tabs" id="day-tabs"></div>
   <div class="day-header" id="day-header"></div>
+  <div class="day-visual" id="day-visual"></div>
+  <div class="spot-chips" id="spot-chips"></div>
   <div class="timeline" id="timeline"></div>
   </div>
 </div>
@@ -1034,13 +1062,77 @@ function checkBadge(){
 function renderItinerary(di){
   const d=days[di];
   document.querySelectorAll('.day-tab').forEach((t,i)=>t.classList.toggle('active',i===di));
+
+  // Photo URLs per day (Unsplash curated)
+  const photos=[
+    'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80', // DAY1 京都
+    'https://images.unsplash.com/photo-1555652736-e92021d28a10?w=800&q=80', // DAY2 大阪
+    'https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?w=800&q=80', // DAY3 伏見稻荷
+    'https://images.unsplash.com/photo-1570459027562-4a916cc6113f?w=800&q=80', // DAY4 東寺
+    'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&q=80', // DAY5 嵐山
+    'https://images.unsplash.com/photo-1548872591-37a48c859d02?w=800&q=80', // DAY6 奈良鹿
+    'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=800&q=80', // DAY7 貴船
+    'https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=800&q=80', // DAY8 天橋立
+    'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=80', // DAY9 神戶
+    'https://images.unsplash.com/photo-1493997181344-712f2f19d87a?w=800&q=80', // DAY10 京都
+    'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80', // DAY11 飛機
+  ];
+
+  // Map queries per day
+  const mapQ=[
+    '錦市場+京都',
+    '道頓堀+大阪',
+    '伏見稲荷大社+京都',
+    '東寺+梅小路公園+京都',
+    '嵐山竹林+天龍寺+京都',
+    '東大寺+奈良公園',
+    '貴船神社+鞍馬寺+京都',
+    '天橋立+京都府',
+    '神戸動物王国+王子動物園+神戸',
+    '藤森神社+下鴨神社+京都',
+    '関西空港',
+  ];
+
+  const photo=photos[di]||photos[0];
+  const q=encodeURIComponent(mapQ[di]||d.area);
+  const mapSrc=`https://www.google.com/maps/search/?api=1&query=${q}`;
+
+  // Spot chips — only sightseeing + food + alert items, no transport
+  const chips=d.items.filter(it=>it.type!=='transport').map(it=>{
+    const cls=it.isAlert?'alert':it.isHighlight?'highlight':it.type==='food'?'food':'';
+    const ico={sightseeing:'📍',food:'🍽️',hotel:'🏨',alert:'⚠️'}[it.type]||'📌';
+    const shortTitle=it.title.replace(/^[^\s]+\s/,'').split('（')[0].split(' ')[0];
+    return `<div class="spot-chip ${cls}"><span class="spot-chip-icon">${ico}</span>${shortTitle}</div>`;
+  }).join('');
+
   document.getElementById('day-header').innerHTML=`
     <h2>${d.date} — ${d.title}</h2><p>📍 ${d.area}</p>`;
+
+  // Photo + map visual
+  document.getElementById('day-visual').innerHTML=`
+    <div class="day-photo-wrap">
+      <img class="day-photo-img" src="${photo}" alt="${d.title}" onerror="this.parentNode.style.background='#e8dece'">
+      <div class="day-photo-overlay"></div>
+      <div class="day-photo-label">📸 ${d.title}</div>
+    </div>
+    <div class="day-map-wrap">
+      <a href="${mapSrc}" target="_blank" style="display:block;width:100%;height:100%;position:relative;">
+        <img src="https://maps.googleapis.com/maps/api/staticmap?center=${q}&zoom=13&size=400x320&scale=2&maptype=roadmap&style=feature:poi|element:labels|visibility:simplified&style=feature:road|element:labels|visibility:simplified&markers=color:red|${q}&key=AIzaSyD-placeholder" 
+             onerror="this.style.display='none';this.parentNode.innerHTML='<div style=\'width:100%;height:100%;background:#f0e8d8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;\'><div style=\'font-size:28px;\'>🗺️</div><div style=\'font-size:11px;color:#9e8272;font-weight:600;\'>${d.area}</div><div style=\'font-size:10px;color:#b0a090;\'>點擊開啟 Google 地圖</div></div>'"
+             style="width:100%;height:100%;object-fit:cover;">
+      </a>
+    </div>`;
+
+  // Spot chips
+  document.getElementById('spot-chips').innerHTML=chips;
+
+  // Timeline — simplified, note hidden by default
   document.getElementById('timeline').innerHTML=d.items.map((item,i)=>{
-    const tl={sightseeing:'景點',food:'美食',transport:'交通',hotel:'住宿',alert:'注意事項'}[item.type]||item.type;
+    const tl={sightseeing:'景點',food:'美食',transport:'交通',hotel:'住宿',alert:'注意'}[item.type]||item.type;
     const cc=item.isAlert?'tl-card is-alert':item.isHighlight?'tl-card is-hi':'tl-card';
     const ts=(item.tags||[]).map(t=>`<span class="ctag ${item.isAlert?'red':item.isHighlight?'gold':''}">${t}</span>`).join('');
-    return `<div class="tl-item" style="animation-delay:${i*.06}s"><div class="time-col"><div class="time-lbl">${item.time||''}</div></div><div class="tl-dot ${item.type}"></div><div class="${cc}"><div class="card-type ${item.type}">${tl}</div><div class="card-title">${item.title}</div>${item.note?`<div class="card-note">${item.note.replace(/\n/g,'<br>')}</div>`:''}${ts?`<div class="card-tags">${ts}</div>`:''}</div></div>`;
+    const noteHtml=item.note?`<div class="card-note">${item.note.replace(/\n/g,'<br>')}</div><button class="expand-btn" onclick="this.previousElementSibling.style.display=this.previousElementSibling.style.display==='block'?'none':'block';this.textContent=this.textContent==='▼ 詳細'?'▲ 收起':'▼ 詳細'">▼ 詳細</button>`:'';
+    return `<div class="tl-item" style="animation-delay:${i*.05}s"><div class="time-col"><div class="time-lbl">${item.time||''}</div></div><div class="tl-dot ${item.type}"></div><div class="${cc}"><div class="card-type ${item.type}">${tl}</div><div class="card-title">${item.title}</div>${noteHtml}${ts?`<div class="card-tags">${ts}</div>`:''}</div></div>`;
   }).join('');
 }
 function buildTabs(){
