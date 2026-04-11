@@ -3,493 +3,266 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🍌 Nano Banana 陪你遊京都 2027</title>
+<title>京都之旅 2027</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Ma+Shan+Zheng&family=Shippori+Mincho:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600&family=Shippori+Mincho:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Ma+Shan+Zheng&family=DM+Sans:wght@300;400;500&family=Shippori+Mincho:wght@400;600&display=swap');
-
-:root{
-  --banana:#fce38a;
-  --banana-dark:#f39c12;
-  --banana-deep:#d35400;
-  --matcha:#95e1d3;
-  --sakura:#f38181;
-  --lavender:#a29bfe;
-  --mint:#00b894;
-  --ink:#2d3436;
-  --paper:#fcf8e8;
-  --white:#ffffff;
-  --muted:#636e72;
-  --light:#f1f2f6;
-  --border:#2d3436;
-  --red:#e17055;
-  --green:#00b894;
-  --shadow:6px 6px 0px var(--banana);
-}
-
+:root{--ink:#1a1410;--paper:#f7f3ee;--warm:#c8a96e;--red:#c0392b;--muted:#8c7b6b;--light:#ede8e0;--white:#ffffff;--green:#4a7c59;--border:#ddd5c8;--alert-bg:#fdeaea;}
 *{margin:0;padding:0;box-sizing:border-box;}
-
-body{
-  font-family:'ZCOOL KuaiLe',cursive;
-  background-color:var(--paper);
-  background-image:radial-gradient(#e5e5d5 1px,transparent 1px);
-  background-size:20px 20px;
-  color:var(--ink);
-  min-height:100vh;
-}
-
-/* ── HERO ── */
-.hero{
-  background:var(--banana);
-  border-bottom:4px solid var(--ink);
-  padding:28px 20px 24px;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-}
-.hero::before{
-  content:'🍌';
-  position:absolute;top:10px;left:20px;
-  font-size:48px;opacity:.2;transform:rotate(-20deg);
-}
-.hero::after{
-  content:'🍌';
-  position:absolute;bottom:10px;right:20px;
-  font-size:48px;opacity:.2;transform:rotate(20deg);
-}
-.hero-bg,.hero-pat,.hero-c{display:none;}
-.hero-content{position:relative;z-index:2;}
-.hero-label{
-  display:inline-block;
-  background:white;
-  border:3px solid var(--ink);
-  border-radius:15px 55px 20px 50px;
-  padding:16px 28px;
-  box-shadow:var(--shadow);
-  position:relative;
-}
-.hero-label::before{
-  content:'🍌 ~ 哦依西 ~ 🍌';
-  display:block;font-size:14px;
-  color:var(--banana-deep);margin-bottom:6px;
-}
-.hero-jp{
-  font-family:'Ma Shan Zheng',cursive;
-  font-size:clamp(26px,6vw,48px);
-  color:var(--banana-deep);
-  margin-bottom:4px;
-}
-.hero-sub{font-size:12px;color:var(--muted);margin-bottom:12px;}
-.hero-meta{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px;}
-.hero-pill{
-  background:var(--banana);border:2px solid var(--ink);
-  padding:5px 13px;font-size:11px;color:var(--ink);
-  border-radius:50px;font-weight:bold;
-}
-.hero-pill span{color:var(--banana-deep);}
-.hero-deco{margin-top:14px;font-size:20px;letter-spacing:6px;}
-.scroll-hint{display:none;}
-
-/* ── NAV ── */
-nav{
-  position:sticky;top:0;z-index:100;
-  background:var(--banana);
-  border-bottom:3px solid var(--ink);
-  display:flex;justify-content:center;
-  overflow-x:auto;padding:6px 8px;gap:6px;
-}
-nav::-webkit-scrollbar{display:none;}
-.nav-btn{
-  padding:8px 14px;font-size:12px;
-  background:white;border:2px solid var(--ink);
-  border-radius:50px;cursor:pointer;
-  transition:all .15s;
-  font-family:'ZCOOL KuaiLe',cursive;
-  white-space:nowrap;font-weight:bold;
-  box-shadow:2px 2px 0 var(--ink);
-}
-.nav-btn:hover{background:var(--sakura);color:white;transform:translateY(-2px) rotate(2deg);}
-.nav-btn.active{background:var(--banana-deep);color:white;border-color:var(--banana-deep);box-shadow:3px 3px 0 var(--ink);}
-
-/* ── SECTION ── */
-.section{display:none;padding:20px 16px;max-width:860px;margin:0 auto;}
-.section.active{display:block;animation:popIn .3s ease both;}
-
-.nb-page{
-  background:white;
-  border:3px solid var(--ink);
-  border-radius:15px 55px 20px 50px;
-  padding:24px 20px 28px;
-  box-shadow:var(--shadow);
-  position:relative;
-  margin-bottom:16px;
-}
-
-/* ── SEC TITLE ── */
-.sec-title{
-  display:inline-flex;align-items:center;gap:10px;
-  background:var(--matcha);
-  border:2px solid var(--ink);
-  border-radius:5px 20px;
-  padding:6px 16px;
-  font-size:18px;
-  margin-bottom:6px;
-  box-shadow:3px 3px 0 var(--ink);
-}
-.sec-title span{
-  background:var(--banana-deep);color:white;
-  width:24px;height:24px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:700;font-family:'DM Sans',sans-serif;
-}
-.sec-desc{font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.7;padding-left:4px;}
-
-/* ── KAWAII BANNER ── */
-.kawaii-banner{
-  background:var(--banana);
-  border:2px solid var(--ink);
-  border-radius:10px 40px 12px 35px;
-  padding:12px 16px;margin-bottom:16px;
-  display:flex;align-items:center;gap:12px;
-  box-shadow:4px 4px 0 var(--ink);
-}
-.kawaii-banner-icon{font-size:30px;animation:wiggle 2s ease-in-out infinite;}
-.kawaii-banner-title{font-size:14px;font-weight:bold;color:var(--ink);margin-bottom:2px;}
-.kawaii-banner-sub{font-size:11px;color:var(--muted);}
-
-/* ── TIPS ── */
-.tips{background:#fff9e6;border:2px dashed var(--banana-dark);border-left:4px solid var(--banana-dark);padding:12px 16px;margin-bottom:16px;border-radius:0 12px 12px 0;}
-.tips-t{font-size:11px;text-transform:uppercase;color:var(--banana-deep);margin-bottom:7px;font-weight:bold;letter-spacing:.1em;}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;}
+.hero{position:relative;height:100vh;min-height:560px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;background:var(--ink);}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,#1a1410 0%,#2d1f14 40%,#1a1410 100%);}
+.hero-pat{position:absolute;inset:0;background:linear-gradient(to bottom, rgba(26,20,16,0.3) 0%, rgba(26,20,16,0.6) 100%);}
+.hero-c{position:absolute;width:600px;height:600px;border-radius:50%;border:1px solid rgba(200,169,110,.18);top:50%;left:50%;transform:translate(-50%,-50%);}
+.hero-c:nth-child(3){width:370px;height:370px;}
+.hero-content{position:relative;z-index:2;text-align:center;animation:fadeUp 1s ease both;}
+.hero-jp{font-family:'Shippori Mincho',serif;font-size:clamp(52px,10vw,96px);color:var(--warm);letter-spacing:.15em;line-height:1;margin-bottom:12px;}
+.hero-sub{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:rgba(200,169,110,.5);margin-bottom:24px;}
+.hero-meta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.hero-pill{border:1px solid rgba(200,169,110,.22);padding:8px 18px;font-size:12px;color:rgba(247,243,238,.6);letter-spacing:.05em;}
+.hero-pill span{color:var(--warm);}
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;color:rgba(200,169,110,.3);font-size:10px;letter-spacing:.2em;text-transform:uppercase;animation:bounce 2.2s infinite;}
+.scroll-line{width:1px;height:34px;background:linear-gradient(to bottom,rgba(200,169,110,.3),transparent);}
+nav{position:sticky;top:0;z-index:100;background:rgba(247,243,238,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);display:flex;justify-content:center;overflow-x:auto;}
+.nav-btn{padding:14px 18px;font-size:12px;letter-spacing:.06em;color:var(--muted);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.nav-btn:hover{color:var(--ink);}
+.nav-btn.active{color:var(--ink);border-bottom-color:var(--warm);font-weight:500;}
+.section{display:none;padding:40px 20px;max-width:840px;margin:0 auto;}
+.section.active{display:block;}
+/* 各頁面頂部京都風景裝飾 - 已移除 */
+/* Flight calculator */
+.flight-calc{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:20px;margin-bottom:22px;}
+.flight-calc-title{font-family:'Shippori Mincho',serif;font-size:16px;font-weight:400;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.flight-rows{display:flex;flex-direction:column;gap:10px;margin-bottom:14px;}
+.flight-row{display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:8px;align-items:center;}
+.flight-row-label{font-size:12px;color:var(--muted);font-weight:500;min-width:80px;}
+.flight-input{padding:8px 9px;font-size:12px;background:var(--paper);border:1px solid var(--border);color:var(--ink);border-radius:2px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .15s;width:100%;}
+.flight-input:focus{border-color:var(--warm);}
+.flight-input-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.flight-calc-btn{width:100%;padding:10px;background:var(--ink);color:var(--warm);border:none;font-size:13px;cursor:pointer;border-radius:2px;font-family:'DM Sans',sans-serif;font-weight:500;transition:background .15s;margin-top:4px;}
+.flight-calc-btn:hover{background:#2d1f14;}
+.flight-result{background:#fffbf0;border:1px solid #e6c97a;border-radius:4px;padding:16px;margin-top:14px;display:none;}
+.flight-result-title{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#a0732a;margin-bottom:12px;font-weight:500;}
+.flight-result-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.flight-result-item{background:var(--white);border:1px solid var(--border);padding:10px 12px;border-radius:2px;}
+.flight-result-lbl{font-size:10px;color:var(--muted);margin-bottom:3px;}
+.flight-result-val{font-size:16px;font-weight:500;}
+.flight-result-val.total{color:var(--warm);font-size:20px;}
+.flight-result-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+.flight-divider{border:none;border-top:1px solid var(--border);margin:10px 0;}
+.flight-sub{font-size:13px;font-weight:500;color:var(--ink);padding-top:8px;}
+@media(max-width:600px){.flight-row{grid-template-columns:80px 1fr 1fr;}.flight-sub{display:none;}}
+.sec-title{font-family:'Shippori Mincho',serif;font-size:24px;font-weight:400;margin-bottom:5px;}
+.sec-title span{color:var(--warm);margin-right:8px;}
+.sec-desc{font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.6;}
+.tips{background:#fffbf0;border:1px solid #e6c97a;border-left:3px solid var(--warm);padding:13px 16px;margin-bottom:20px;border-radius:2px;}
+.tips-t{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#a0732a;margin-bottom:7px;font-weight:500;}
 .tips ul{list-style:none;}
-.tips li{font-size:12px;color:var(--ink);line-height:1.8;padding-left:20px;position:relative;}
-.tips li::before{content:'🍌';position:absolute;left:0;font-size:10px;top:3px;}
-
-/* ── ALERT ── */
-.alert-box{background:#fff5f5;border:2px dashed var(--sakura);border-left:4px solid var(--red);padding:10px 14px;border-radius:0 12px 12px 0;margin:8px 0;}
-.alert-box p{font-size:13px;color:var(--red);font-weight:bold;line-height:1.6;}
-
-/* ── DAY VISUAL ── */
-.day-visual{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
-.day-photo-wrap{position:relative;height:155px;overflow:hidden;border:3px solid var(--ink);border-radius:12px 40px 12px 35px;box-shadow:4px 4px 0 var(--ink);}
-.day-photo-img{width:100%;height:100%;object-fit:cover;display:block;}
-.day-photo-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(45,52,54,.65) 0%,transparent 55%);}
-.day-photo-label{position:absolute;bottom:9px;left:12px;color:white;font-size:12px;font-weight:bold;text-shadow:0 1px 4px rgba(0,0,0,.5);}
-.day-map-wrap{height:155px;border:3px solid var(--ink);border-radius:12px 40px 12px 35px;overflow:hidden;box-shadow:4px 4px 0 var(--ink);}
-.day-map-wrap iframe{width:100%;height:100%;border:none;display:block;}
-
-/* ── SPOT CHIPS ── */
-.spot-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
-.spot-chip{
-  display:flex;align-items:center;gap:5px;
-  background:white;border:2px solid var(--ink);
-  padding:5px 10px;border-radius:50px;
-  font-size:11px;font-weight:bold;
-  box-shadow:2px 2px 0 var(--ink);
-  transition:all .15s;
-}
-.spot-chip:hover{transform:translateY(-2px) rotate(2deg);}
-.spot-chip-icon{font-size:13px;}
-.spot-chip.food{background:#ffe8e8;border-color:var(--sakura);}
-.spot-chip.alert{background:#fff5f5;border-color:var(--red);color:var(--red);}
-.spot-chip.highlight{background:var(--banana);border-color:var(--banana-dark);}
-
-/* ── DAY TABS ── */
-.day-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
-.day-tab{
-  padding:7px 11px;font-size:11px;
-  background:white;border:2px solid var(--ink);
-  cursor:pointer;transition:all .2s;
-  font-family:'ZCOOL KuaiLe',cursive;color:var(--muted);
-  border-radius:50px;line-height:1.4;text-align:center;
-  box-shadow:2px 2px 0 var(--ink);font-weight:bold;
-}
-.day-tab:hover{background:var(--matcha);color:var(--ink);transform:translateY(-2px);}
-.day-tab.active{background:var(--banana-deep);color:white;border-color:var(--banana-deep);transform:translateY(-3px);box-shadow:3px 3px 0 var(--ink);}
-.day-tab small{display:block;font-size:9px;opacity:.8;}
-
-/* ── DAY HEADER ── */
-.day-header{
-  margin-bottom:12px;
-  background:var(--banana);border:2px solid var(--ink);
-  border-radius:10px 40px 10px 35px;
-  padding:10px 16px;box-shadow:3px 3px 0 var(--ink);
-}
-.day-header h2{font-size:17px;color:var(--banana-deep);}
+.tips li{font-size:12px;color:var(--ink);line-height:1.7;padding-left:14px;position:relative;}
+.tips li::before{content:'✦';position:absolute;left:0;color:var(--warm);font-size:9px;top:4px;}
+.alert-box{background:var(--alert-bg);border:1px solid #f0b0b0;border-left:3px solid var(--red);padding:11px 15px;border-radius:2px;margin:8px 0;}
+.alert-box p{font-size:13px;color:var(--red);font-weight:500;line-height:1.6;}
+.day-tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:22px;}
+.day-tab{padding:7px 12px;font-size:11px;background:var(--white);border:1px solid var(--border);cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif;color:var(--muted);border-radius:2px;line-height:1.4;text-align:center;}
+.day-tab:hover{border-color:var(--warm);color:var(--ink);}
+.day-tab.active{background:var(--ink);color:var(--warm);border-color:var(--ink);}
+.day-tab small{display:block;font-size:9px;opacity:.7;}
+.day-header{margin-bottom:18px;}
+.day-header h2{font-family:'Shippori Mincho',serif;font-size:20px;font-weight:400;}
 .day-header p{font-size:12px;color:var(--muted);margin-top:2px;}
-
-/* ── TIMELINE ── */
 .timeline{position:relative;}
-.timeline::before{content:'';position:absolute;left:52px;top:0;bottom:0;width:3px;background:repeating-linear-gradient(to bottom,var(--banana-dark) 0px,var(--banana-dark) 8px,transparent 8px,transparent 14px);border-radius:2px;}
-.tl-item{display:flex;gap:14px;margin-bottom:12px;position:relative;}
-.time-col{width:42px;flex-shrink:0;text-align:right;padding-top:5px;}
-.time-lbl{font-size:10px;color:var(--muted);font-weight:bold;line-height:1.3;font-family:'DM Sans',sans-serif;}
-.tl-dot{position:absolute;left:47px;top:9px;width:13px;height:13px;border-radius:50%;background:var(--banana-dark);border:3px solid white;box-shadow:0 0 0 2px var(--ink);}
-.tl-dot.transport{background:var(--muted);}
-.tl-dot.food{background:var(--sakura);}
-.tl-dot.hotel{background:var(--matcha);}
+.timeline::before{content:'';position:absolute;left:58px;top:0;bottom:0;width:1px;background:var(--border);}
+.tl-item{display:flex;gap:18px;margin-bottom:16px;position:relative;animation:fadeUp .35s ease both;}
+.time-col{width:48px;flex-shrink:0;text-align:right;padding-top:4px;}
+.time-lbl{font-size:10px;color:var(--muted);font-weight:500;line-height:1.3;}
+.tl-dot{position:absolute;left:53px;top:9px;width:10px;height:10px;border-radius:50%;background:var(--warm);border:2px solid var(--paper);flex-shrink:0;}
+.tl-dot.transport{background:#8c7b6b;}
+.tl-dot.food{background:var(--red);}
+.tl-dot.hotel{background:var(--green);}
 .tl-dot.alert{background:var(--red);}
-.tl-card{
-  flex:1;background:white;
-  border:2px solid var(--ink);
-  padding:10px 13px;border-radius:8px 28px 10px 24px;
-  margin-left:13px;transition:all .2s;
-  box-shadow:3px 3px 0 var(--ink);
-}
-.tl-card:hover{transform:translateX(3px) rotate(.3deg);box-shadow:4px 4px 0 var(--banana-dark);}
-.tl-card.is-alert{border-color:var(--sakura);border-style:dashed;background:#fff5f5;}
-.tl-card.is-hi{border-color:var(--banana-dark);background:var(--banana);}
-.card-type{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;font-family:'DM Sans',sans-serif;}
-.card-type.food{color:var(--sakura);}
-.card-type.hotel{color:var(--mint);}
+.tl-card{flex:1;background:var(--white);border:1px solid var(--border);padding:11px 15px;border-radius:2px;margin-left:13px;transition:border-color .15s;}
+.tl-card:hover{border-color:var(--warm);}
+.tl-card.is-alert{border-color:#f0b0b0;background:var(--alert-bg);}
+.tl-card.is-hi{border-color:#e6c97a;background:#fffbf0;}
+.card-type{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.card-type.food{color:var(--red);}
+.card-type.transport{color:#8c7b6b;}
+.card-type.hotel{color:var(--green);}
 .card-type.alert{color:var(--red);}
-.card-title{font-size:14px;font-weight:bold;line-height:1.4;}
-.card-note{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5;white-space:pre-line;display:none;}
-.expand-btn{font-size:10px;color:var(--banana-deep);cursor:pointer;margin-top:4px;display:inline-block;background:none;border:none;font-family:'ZCOOL KuaiLe',cursive;padding:0;font-weight:bold;}
-.card-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px;}
-.ctag{font-size:10px;padding:2px 9px;background:var(--light);color:var(--muted);border-radius:50px;border:1.5px solid var(--ink);font-weight:bold;}
-.ctag.red{background:#ffe8e8;color:var(--red);}
-.ctag.gold{background:var(--banana);color:var(--banana-deep);}
-
-/* ── FOOD ── */
-.food-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;margin-bottom:24px;}
-.food-card{background:white;border:2px solid var(--ink);padding:14px;border-radius:8px 30px 10px 28px;transition:all .2s;box-shadow:3px 3px 0 var(--ink);}
-.food-card:hover{transform:translateY(-4px) rotate(-1deg);box-shadow:5px 5px 0 var(--banana-dark);}
-.food-emoji{font-size:28px;margin-bottom:7px;}
-.food-type{font-size:9px;text-transform:uppercase;color:var(--banana-deep);margin-bottom:3px;font-weight:bold;letter-spacing:.1em;font-family:'DM Sans',sans-serif;}
-.food-name{font-size:13px;font-weight:bold;margin-bottom:3px;}
-.food-note{font-size:11px;color:var(--muted);line-height:1.4;}
-
-/* ── SPOTS ── */
-.map-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:18px;}
-.spot-card{background:white;border:2px solid var(--ink);padding:14px;border-radius:8px 30px 10px 28px;transition:all .2s;box-shadow:3px 3px 0 var(--ink);}
-.spot-card:hover{transform:translateY(-4px) rotate(.5deg);box-shadow:5px 5px 0 var(--banana-dark);}
-.spot-city{font-size:9px;text-transform:uppercase;color:var(--banana-deep);margin-bottom:4px;font-weight:bold;font-family:'DM Sans',sans-serif;}
-.spot-name{font-size:13px;font-weight:bold;margin-bottom:2px;}
+.card-title{font-size:14px;font-weight:500;line-height:1.4;}
+.card-note{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5;}
+.card-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px;}
+.ctag{font-size:10px;padding:2px 7px;background:var(--light);color:var(--muted);border-radius:2px;}
+.ctag.red{background:var(--alert-bg);color:var(--red);}
+.ctag.gold{background:#fdf3e2;color:#a0732a;}
+.food-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:11px;margin-bottom:28px;}
+.food-card{background:var(--white);border:1px solid var(--border);padding:15px;border-radius:2px;transition:all .2s;}
+.food-card:hover{border-color:var(--warm);transform:translateY(-2px);}
+.food-emoji{font-size:22px;margin-bottom:7px;}
+.food-type{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--warm);margin-bottom:3px;}
+.food-name{font-size:14px;font-weight:500;margin-bottom:3px;}
+.food-note{font-size:12px;color:var(--muted);line-height:1.4;}
+.map-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:11px;margin-bottom:20px;}
+.spot-card{background:var(--white);border:1px solid var(--border);padding:15px;border-radius:2px;cursor:pointer;transition:all .2s;}
+.spot-card:hover{border-color:var(--warm);transform:translateY(-2px);}
+.spot-city{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--warm);margin-bottom:4px;}
+.spot-name{font-size:14px;font-weight:500;margin-bottom:2px;}
 .spot-jp{font-family:'Shippori Mincho',serif;font-size:12px;color:var(--muted);margin-bottom:5px;}
-.spot-desc{font-size:11px;color:var(--muted);line-height:1.4;}
-.spot-tags{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;}
-.stag{font-size:10px;padding:2px 8px;background:var(--light);color:var(--muted);border-radius:50px;border:1.5px solid var(--ink);font-weight:bold;}
-.map-filter{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;}
-.filter-btn{padding:6px 14px;font-size:11px;background:white;border:2px solid var(--ink);cursor:pointer;transition:all .2s;border-radius:50px;color:var(--muted);font-family:'ZCOOL KuaiLe',cursive;font-weight:bold;box-shadow:2px 2px 0 var(--ink);}
-.filter-btn:hover{background:var(--matcha);}
-.filter-btn.active{background:var(--banana-deep);color:white;border-color:var(--banana-deep);box-shadow:3px 3px 0 var(--ink);}
-
-/* ── HOTEL ── */
-.hotel-card{background:white;border:2px solid var(--ink);padding:18px;margin-bottom:12px;border-radius:8px 30px 10px 28px;box-shadow:4px 4px 0 var(--ink);}
-.hotel-nights{font-size:10px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;font-family:'DM Sans',sans-serif;}
-.hotel-name{font-size:17px;font-weight:bold;margin-bottom:2px;}
+.spot-desc{font-size:12px;color:var(--muted);line-height:1.4;}
+.spot-tags{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap;}
+.stag{font-size:10px;padding:2px 7px;background:var(--light);color:var(--muted);border-radius:2px;}
+.map-filter{display:flex;gap:5px;margin-bottom:14px;flex-wrap:wrap;}
+.filter-btn{padding:5px 11px;font-size:11px;background:var(--white);border:1px solid var(--border);cursor:pointer;transition:all .15s;border-radius:2px;color:var(--muted);font-family:'DM Sans',sans-serif;}
+.filter-btn.active{background:var(--ink);color:var(--warm);border-color:var(--ink);}
+.map-embed{width:100%;height:360px;border:1px solid var(--border);border-radius:2px;}
+.hotel-card{background:var(--white);border:1px solid var(--border);padding:20px;margin-bottom:12px;border-radius:2px;}
+.hotel-nights{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.hotel-name{font-size:18px;font-weight:500;margin-bottom:2px;}
 .hotel-jp{font-family:'Shippori Mincho',serif;font-size:12px;color:var(--muted);margin-bottom:9px;}
-.hotel-info{font-size:13px;color:var(--muted);line-height:1.9;}
-.hotel-badge{display:inline-block;padding:5px 14px;font-size:11px;background:var(--mint);color:white;border:2px solid var(--ink);border-radius:50px;margin-top:10px;font-weight:bold;box-shadow:2px 2px 0 var(--ink);}
-
-/* ── TRANSPORT ── */
-.tr-card{background:white;border:2px solid var(--ink);padding:14px 16px;margin-bottom:8px;border-radius:8px 28px 10px 24px;display:flex;align-items:center;gap:12px;box-shadow:3px 3px 0 var(--ink);transition:all .2s;}
-.tr-card:hover{transform:translateX(3px);box-shadow:4px 4px 0 var(--banana-dark);}
-.tr-icon{font-size:22px;width:36px;text-align:center;flex-shrink:0;}
+.hotel-info{font-size:13px;color:var(--muted);line-height:1.8;}
+.hotel-badge{display:inline-block;padding:3px 9px;font-size:10px;border:1px solid var(--green);color:var(--green);border-radius:2px;margin-top:9px;}
+.tr-card{background:var(--white);border:1px solid var(--border);padding:16px 18px;margin-bottom:9px;border-radius:2px;display:flex;align-items:center;gap:14px;}
+.tr-icon{font-size:20px;width:40px;text-align:center;flex-shrink:0;}
 .tr-route{flex:1;}
-.tr-name{font-size:13px;font-weight:bold;margin-bottom:3px;}
-.tr-detail{font-size:12px;color:var(--muted);line-height:1.5;font-family:'DM Sans',sans-serif;}
-.tr-cost{font-size:13px;font-weight:bold;color:var(--banana-deep);white-space:nowrap;}
-
-/* ── CHECKLIST ── */
-.cl-section{margin-bottom:20px;}
-.cl-title{font-size:14px;font-weight:bold;margin-bottom:9px;color:var(--ink);display:flex;align-items:center;gap:6px;}
-.cl-title::before{content:'🍌';font-size:14px;}
-.cl-item{display:flex;align-items:center;gap:10px;padding:10px 13px;background:white;border:2px solid var(--ink);border-radius:50px;margin-bottom:6px;cursor:pointer;transition:all .2s;box-shadow:2px 2px 0 var(--ink);}
-.cl-item:hover{background:var(--banana);transform:translateX(4px);}
-.cl-item.done{opacity:.5;background:var(--light);}
+.tr-name{font-size:13px;font-weight:500;margin-bottom:3px;}
+.tr-detail{font-size:12px;color:var(--muted);line-height:1.5;}
+.tr-cost{font-size:13px;font-weight:500;text-align:right;flex-shrink:0;white-space:nowrap;}
+.cl-section{margin-bottom:24px;}
+.cl-title{font-size:12px;font-weight:500;letter-spacing:.07em;margin-bottom:10px;color:var(--ink);}
+.cl-item{display:flex;align-items:center;gap:9px;padding:9px 13px;background:var(--white);border:1px solid var(--border);border-radius:2px;margin-bottom:5px;cursor:pointer;transition:all .15s;}
+.cl-item:hover{border-color:var(--warm);}
+.cl-item.done{opacity:.45;}
 .cl-item.done .cl-label{text-decoration:line-through;}
-.cl-box{width:18px;height:18px;border:2px solid var(--ink);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;background:white;}
-.cl-item.done .cl-box{background:var(--mint);border-color:var(--mint);}
-.cl-tick{color:#fff;font-size:11px;display:none;}
+.cl-box{width:15px;height:15px;border:1.5px solid var(--border);border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.cl-item.done .cl-box{background:var(--green);border-color:var(--green);}
+.cl-tick{color:#fff;font-size:10px;display:none;}
 .cl-item.done .cl-tick{display:block;}
-.cl-label{font-size:13px;font-weight:bold;}
-
-/* ── EXPENSE ── */
-.exp-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;margin-bottom:18px;}
-.sum-card{background:white;border:2px solid var(--ink);padding:13px 15px;border-radius:8px 28px 10px 24px;box-shadow:3px 3px 0 var(--ink);}
-.sum-card.over-budget{border-color:var(--red);border-style:dashed;background:#fff5f5;}
-.sum-lbl{font-size:10px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;font-family:'DM Sans',sans-serif;}
-.sum-amt{font-size:20px;font-weight:bold;}
-.sum-amt.total{color:var(--banana-deep);}
+.cl-label{font-size:12px;}
+.exp-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:9px;margin-bottom:24px;}
+.sum-card{background:var(--white);border:1px solid var(--border);padding:13px 15px;border-radius:2px;}
+.sum-card.over-budget{border-color:var(--red);background:var(--alert-bg);}
+.sum-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.sum-amt{font-size:20px;font-weight:500;}
+.sum-amt.total{color:var(--warm);}
 .sum-amt.over{color:var(--red);}
-.sum-sub{font-size:11px;color:var(--muted);margin-top:2px;font-family:'DM Sans',sans-serif;}
-.budget-bar-wrap{margin:0 0 18px;background:white;border:2px solid var(--ink);padding:13px 15px;border-radius:8px 28px 10px 24px;box-shadow:3px 3px 0 var(--ink);}
-.budget-bar-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
-.budget-bar-label{font-size:12px;color:var(--muted);font-family:'DM Sans',sans-serif;}
-.budget-bar-pct{font-size:12px;font-weight:bold;}
-.budget-track{width:100%;height:12px;background:var(--light);border-radius:50px;overflow:hidden;border:2px solid var(--ink);}
-.budget-fill{height:100%;border-radius:50px;transition:width .5s ease;background:var(--mint);}
-.budget-fill.warn{background:var(--banana-dark);}
+.sum-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+.budget-bar-wrap{margin:0 0 20px;background:var(--white);border:1px solid var(--border);padding:14px 16px;border-radius:2px;}
+.budget-bar-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.budget-bar-label{font-size:11px;color:var(--muted);}
+.budget-bar-pct{font-size:12px;font-weight:500;}
+.budget-track{width:100%;height:8px;background:var(--light);border-radius:4px;overflow:hidden;}
+.budget-fill{height:100%;border-radius:4px;transition:width .5s ease;background:var(--green);}
+.budget-fill.warn{background:#e6a817;}
 .budget-fill.over{background:var(--red);}
 .budget-set-row{display:flex;gap:8px;align-items:center;margin-top:10px;}
-.budget-set-row input{flex:1;padding:8px 14px;font-size:12px;background:var(--paper);border:2px solid var(--ink);color:var(--ink);border-radius:50px;font-family:'DM Sans',sans-serif;outline:none;}
-.budget-set-row input:focus{border-color:var(--banana-dark);}
-.budget-set-btn{padding:8px 18px;background:var(--banana-deep);color:white;border:2px solid var(--ink);font-size:12px;cursor:pointer;border-radius:50px;font-family:'ZCOOL KuaiLe',cursive;font-weight:bold;box-shadow:2px 2px 0 var(--ink);}
-.budget-set-btn:hover{background:var(--banana-dark);}
-.add-exp{background:white;border:2px solid var(--ink);padding:18px;border-radius:8px 28px 10px 24px;margin-bottom:18px;box-shadow:4px 4px 0 var(--ink);}
-.add-exp h3{font-size:14px;font-weight:bold;margin-bottom:12px;}
-.form-row{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px;align-items:end;}
-.form-group label{display:block;font-size:10px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;font-family:'DM Sans',sans-serif;}
-.form-group input,.form-group select{width:100%;padding:8px 12px;font-size:12px;background:var(--paper);border:2px solid var(--ink);color:var(--ink);border-radius:50px;font-family:'DM Sans',sans-serif;outline:none;}
-.form-group input:focus,.form-group select:focus{border-color:var(--banana-dark);}
-.add-btn{padding:9px 18px;background:var(--banana-deep);color:white;border:2px solid var(--ink);font-size:12px;cursor:pointer;border-radius:50px;font-family:'ZCOOL KuaiLe',cursive;font-weight:bold;box-shadow:3px 3px 0 var(--ink);transition:all .2s;}
-.add-btn:hover{transform:translateY(-2px) rotate(2deg);}
-.exp-wrap{background:white;border:2px solid var(--ink);border-radius:10px;overflow:hidden;box-shadow:3px 3px 0 var(--ink);}
+.budget-set-row input{flex:1;padding:7px 9px;font-size:12px;background:var(--paper);border:1px solid var(--border);color:var(--ink);border-radius:2px;font-family:'DM Sans',sans-serif;outline:none;}
+.budget-set-row input:focus{border-color:var(--warm);}
+.budget-set-btn{padding:7px 13px;background:var(--ink);color:var(--warm);border:none;font-size:12px;cursor:pointer;border-radius:2px;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.add-exp{background:var(--white);border:1px solid var(--border);padding:18px;border-radius:2px;margin-bottom:20px;}
+.add-exp h3{font-size:12px;font-weight:500;margin-bottom:12px;letter-spacing:.06em;}
+.form-row{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:7px;align-items:end;}
+.form-group label{display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.form-group input,.form-group select{width:100%;padding:8px 9px;font-size:12px;background:var(--paper);border:1px solid var(--border);color:var(--ink);border-radius:2px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .15s;}
+.form-group input:focus,.form-group select:focus{border-color:var(--warm);}
+.add-btn{padding:8px 16px;background:var(--ink);color:var(--warm);border:none;font-size:12px;cursor:pointer;border-radius:2px;font-family:'DM Sans',sans-serif;transition:all .15s;white-space:nowrap;}
+.add-btn:hover{background:#2d1f14;}
+.exp-wrap{background:var(--white);border:1px solid var(--border);border-radius:2px;overflow:hidden;}
 .exp-table{width:100%;border-collapse:collapse;}
-.exp-table th{text-align:left;font-size:9px;text-transform:uppercase;color:var(--muted);padding:10px 12px;border-bottom:2px solid var(--ink);font-weight:bold;background:var(--banana);font-family:'DM Sans',sans-serif;}
-.exp-table td{padding:10px 12px;font-size:12px;border-bottom:1px dashed #ddd;vertical-align:middle;font-family:'DM Sans',sans-serif;}
+.exp-table th{text-align:left;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:9px 11px;border-bottom:1px solid var(--border);font-weight:400;}
+.exp-table td{padding:10px 11px;font-size:12px;border-bottom:1px solid var(--light);vertical-align:middle;}
 .exp-table tr:last-child td{border-bottom:none;}
-.cbadge{display:inline-block;padding:3px 10px;font-size:10px;border-radius:50px;font-weight:bold;border:1.5px solid var(--ink);}
-.cat-food{background:#ffe8e8;color:#c04040;}
+.cbadge{display:inline-block;padding:2px 6px;font-size:10px;border-radius:2px;}
+.cat-food{background:#fdeaea;color:var(--red);}
 .cat-transport{background:var(--light);color:var(--muted);}
-.cat-hotel{background:#e0f8f4;color:var(--mint);}
-.cat-ticket{background:var(--banana);color:var(--banana-deep);}
-.cat-shop{background:#f0e8ff;color:var(--lavender);}
+.cat-hotel{background:#e8f0eb;color:var(--green);}
+.cat-ticket{background:#fdf3e2;color:#a0732a;}
+.cat-shop{background:#eef0fd;color:#4a52b7;}
 .cat-other{background:var(--light);color:var(--muted);}
-.del-btn{background:none;border:none;color:#ddd;cursor:pointer;font-size:16px;}
+.del-btn{background:none;border:none;color:var(--border);cursor:pointer;font-size:15px;transition:color .15s;}
 .del-btn:hover{color:var(--red);}
-.empty-state{text-align:center;padding:32px;color:var(--muted);font-size:14px;}
-.chart-wrap{margin-top:16px;}
-.chart-lbl{font-size:10px;color:var(--muted);margin-bottom:9px;text-transform:uppercase;font-weight:bold;font-family:'DM Sans',sans-serif;}
-.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
-.bar-name{font-size:11px;color:var(--muted);width:50px;text-align:right;flex-shrink:0;font-family:'DM Sans',sans-serif;}
-.bar-track{flex:1;height:12px;background:var(--light);border-radius:50px;overflow:hidden;border:2px solid var(--ink);}
-.bar-fill{height:100%;border-radius:50px;transition:width .6s ease;}
-.bar-val{font-size:11px;color:var(--ink);width:62px;flex-shrink:0;font-weight:bold;font-family:'DM Sans',sans-serif;}
-.pie-wrap{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:12px;}
-.pie-canvas-wrap{width:130px;height:130px;flex-shrink:0;}
-.pie-legend{flex:1;min-width:150px;}
-.pie-leg-row{display:flex;align-items:center;gap:6px;margin-bottom:5px;}
+.empty-state{text-align:center;padding:32px;color:var(--muted);font-size:13px;}
+.chart-wrap{margin-top:18px;}
+.chart-lbl{font-size:10px;color:var(--muted);margin-bottom:10px;letter-spacing:.05em;text-transform:uppercase;}
+.bar-row{display:flex;align-items:center;gap:9px;margin-bottom:7px;}
+.bar-name{font-size:11px;color:var(--muted);width:52px;text-align:right;flex-shrink:0;}
+.bar-track{flex:1;height:6px;background:var(--light);border-radius:4px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:4px;transition:width .5s ease;}
+.bar-val{font-size:11px;color:var(--ink);width:64px;flex-shrink:0;}
+.pie-wrap{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-top:14px;}
+.pie-canvas-wrap{position:relative;width:140px;height:140px;flex-shrink:0;}
+.pie-canvas-wrap canvas{border-radius:50%;}
+.pie-legend{flex:1;min-width:160px;}
+.pie-leg-row{display:flex;align-items:center;gap:7px;margin-bottom:6px;}
 .pie-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
-.pie-leg-name{font-size:11px;flex:1;font-family:'DM Sans',sans-serif;}
-.pie-leg-val{font-size:11px;color:var(--muted);font-family:'DM Sans',sans-serif;}
-
-/* ── FLIGHT ── */
-.flight-calc{background:white;border:2px solid var(--ink);border-radius:8px 30px 10px 28px;padding:18px;margin-bottom:20px;box-shadow:4px 4px 0 var(--ink);}
-.flight-calc-title{font-size:16px;font-weight:bold;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
-.flight-rows{display:flex;flex-direction:column;gap:9px;margin-bottom:12px;}
-.flight-row{display:grid;grid-template-columns:auto 1fr 1fr;gap:8px;align-items:center;}
-.flight-row-label{font-size:13px;color:var(--muted);font-weight:bold;min-width:60px;}
-.flight-input{padding:8px 12px;font-size:12px;background:var(--paper);border:2px solid var(--ink);color:var(--ink);border-radius:50px;font-family:'DM Sans',sans-serif;outline:none;width:100%;}
-.flight-input:focus{border-color:var(--banana-dark);}
-.flight-calc-btn{width:100%;padding:12px;background:var(--banana-deep);color:white;border:2px solid var(--ink);font-size:14px;cursor:pointer;border-radius:50px;font-family:'ZCOOL KuaiLe',cursive;font-weight:bold;box-shadow:4px 4px 0 var(--ink);transition:all .2s;margin-top:4px;}
-.flight-calc-btn:hover{transform:translateY(-2px);box-shadow:5px 5px 0 var(--ink);}
-.flight-result{background:var(--banana);border:2px solid var(--ink);border-radius:10px;padding:14px;margin-top:12px;display:none;box-shadow:3px 3px 0 var(--ink);}
-.flight-result-title{font-size:12px;text-transform:uppercase;color:var(--banana-deep);margin-bottom:11px;font-weight:bold;font-family:'DM Sans',sans-serif;}
-.flight-result-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:11px;}
-.flight-result-item{background:white;border:2px solid var(--ink);padding:10px 12px;border-radius:8px;}
-.flight-result-lbl{font-size:10px;color:var(--muted);margin-bottom:3px;font-family:'DM Sans',sans-serif;}
-.flight-result-val{font-size:15px;font-weight:bold;}
-.flight-result-val.total{color:var(--banana-deep);font-size:22px;}
-.flight-result-sub{font-size:11px;color:var(--muted);margin-top:2px;font-family:'DM Sans',sans-serif;}
-.flight-sub{font-size:13px;font-weight:bold;padding-top:7px;}
-.flight-history-item{background:white;border:2px solid var(--ink);border-radius:8px;padding:10px 13px;margin-bottom:7px;box-shadow:2px 2px 0 var(--ink);}
-.flight-history-time{font-size:10px;color:var(--muted);margin-bottom:5px;font-family:'DM Sans',sans-serif;}
-.flight-history-row{display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;font-family:'DM Sans',sans-serif;}
-.flight-history-label{color:var(--muted);}
-.flight-history-val{font-weight:bold;}
-.flight-history-total{font-size:14px;font-weight:bold;color:var(--banana-deep);margin-top:6px;padding-top:6px;border-top:2px dashed var(--ink);display:flex;justify-content:space-between;align-items:center;}
-.flight-del-btn{background:none;border:none;color:#ddd;cursor:pointer;font-size:14px;padding:0;}
-.flight-del-btn:hover{color:var(--red);}
-
-/* ── REMINDER ── */
-.reminder-overlay{position:fixed;inset:0;background:rgba(45,52,54,.6);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .2s ease;}
-.reminder-box{background:white;border:3px solid var(--ink);max-width:440px;width:100%;border-radius:15px 50px 20px 45px;overflow:hidden;animation:slideUp .25s ease;box-shadow:6px 6px 0 var(--ink);}
-.reminder-header{background:var(--banana);padding:14px 18px;display:flex;align-items:center;gap:10px;border-bottom:3px solid var(--ink);}
-.reminder-header h3{font-size:16px;color:var(--banana-deep);flex:1;}
-.reminder-close{background:white;border:2px solid var(--ink);color:var(--ink);font-size:14px;cursor:pointer;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;}
-.reminder-body{padding:15px 18px;max-height:70vh;overflow-y:auto;}
-.reminder-item{display:flex;gap:12px;padding:10px 0;border-bottom:2px dashed #eee;}
+.pie-leg-name{font-size:11px;color:var(--ink);flex:1;}
+.pie-leg-val{font-size:11px;color:var(--muted);}
+/* Reminder modal */
+.reminder-overlay{position:fixed;inset:0;background:rgba(26,20,16,.55);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .2s ease;}
+.reminder-box{background:var(--white);border:1px solid var(--border);max-width:440px;width:100%;border-radius:4px;overflow:hidden;animation:slideUp .25s ease;}
+.reminder-header{background:var(--ink);padding:16px 18px;display:flex;align-items:center;gap:10px;}
+.reminder-header h3{font-family:'Shippori Mincho',serif;font-size:16px;color:var(--warm);flex:1;}
+.reminder-close{background:none;border:none;color:rgba(200,169,110,.5);font-size:18px;cursor:pointer;line-height:1;}
+.reminder-body{padding:16px 18px;max-height:70vh;overflow-y:auto;}
+.reminder-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--light);}
 .reminder-item:last-child{border-bottom:none;}
 .reminder-icon{font-size:20px;width:28px;text-align:center;flex-shrink:0;}
-.reminder-title{font-size:13px;font-weight:bold;margin-bottom:2px;}
-.reminder-note{font-size:12px;color:var(--muted);line-height:1.5;font-family:'DM Sans',sans-serif;}
-.reminder-tag{display:inline-block;padding:3px 10px;font-size:10px;border-radius:50px;margin-top:4px;font-weight:bold;border:1.5px solid var(--ink);}
-.reminder-tag.urgent{background:#ffe8e8;color:var(--red);}
-.reminder-tag.info{background:var(--banana);color:var(--banana-deep);}
-.reminder-tag.ok{background:#e0f8f4;color:var(--mint);}
-.reminder-footer{padding:11px 18px;border-top:2px solid var(--ink);display:flex;justify-content:flex-end;gap:8px;}
-.reminder-btn{padding:9px 18px;font-size:12px;border-radius:50px;cursor:pointer;font-family:'ZCOOL KuaiLe',cursive;border:2px solid var(--ink);font-weight:bold;box-shadow:2px 2px 0 var(--ink);}
-.reminder-btn.primary{background:var(--banana-deep);color:white;}
-.reminder-section-label{font-size:10px;text-transform:uppercase;color:var(--banana-deep);margin:11px 0 5px;font-weight:bold;font-family:'DM Sans',sans-serif;}
-.bell-btn{position:fixed;bottom:22px;right:22px;width:54px;height:54px;border-radius:50%;background:var(--banana);border:3px solid var(--ink);color:var(--ink);font-size:22px;cursor:pointer;box-shadow:4px 4px 0 var(--ink);z-index:200;transition:transform .15s;display:flex;align-items:center;justify-content:center;}
-.bell-btn:hover{transform:scale(1.1) rotate(15deg);}
-.bell-badge{position:absolute;top:4px;right:4px;width:12px;height:12px;background:var(--red);border-radius:50%;border:2px solid white;}
-
-/* ── ANIMATIONS ── */
-@keyframes popIn{from{opacity:0;transform:scale(.96) translateY(10px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.reminder-content{}
+.reminder-title{font-size:13px;font-weight:500;margin-bottom:2px;}
+.reminder-note{font-size:12px;color:var(--muted);line-height:1.5;}
+.reminder-tag{display:inline-block;padding:2px 7px;font-size:10px;border-radius:2px;margin-top:4px;}
+.reminder-tag.urgent{background:var(--alert-bg);color:var(--red);}
+.reminder-tag.info{background:#fdf3e2;color:#a0732a;}
+.reminder-tag.ok{background:#e8f0eb;color:var(--green);}
+.reminder-footer{padding:12px 18px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px;}
+.reminder-btn{padding:8px 16px;font-size:12px;border-radius:2px;cursor:pointer;font-family:'DM Sans',sans-serif;border:1px solid var(--border);}
+.reminder-btn.primary{background:var(--ink);color:var(--warm);border-color:var(--ink);}
+.reminder-section-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--warm);margin:12px 0 6px;font-weight:500;}
+/* Reminder bell button */
+.bell-btn{position:fixed;bottom:24px;right:24px;width:48px;height:48px;border-radius:50%;background:var(--ink);border:none;color:var(--warm);font-size:20px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.2);z-index:200;transition:transform .15s;display:flex;align-items:center;justify-content:center;}
+.bell-btn:hover{transform:scale(1.08);}
+.bell-badge{position:absolute;top:6px;right:6px;width:10px;height:10px;background:var(--red);border-radius:50%;border:2px solid var(--white);}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes slideUp{from{transform:translateY(18px);opacity:0}to{transform:translateY(0);opacity:1}}
-@keyframes wiggle{0%,100%{transform:rotate(-8deg);}50%{transform:rotate(8deg);}}
-@keyframes floatUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
-
-/* ── RESPONSIVE ── */
-@media(max-width:600px){
-  .form-row{grid-template-columns:1fr 1fr;}
-  .form-row .add-btn{grid-column:1/-1;}
-  .tr-card{flex-wrap:wrap;}
-  .pie-wrap{flex-direction:column;}
-  .flight-row{grid-template-columns:60px 1fr 1fr !important;}
-  .flight-result-grid{grid-template-columns:1fr;}
-  .day-visual{grid-template-columns:1fr;}
-  .day-photo-wrap,.day-map-wrap{height:130px;}
-}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(13px);}to{opacity:1;transform:translateY(0);}}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(7px);}}
+.flight-sub{font-size:13px;font-weight:500;color:var(--ink);padding-top:8px;}
+.flight-history-item{background:var(--white);border:1px solid var(--border);border-radius:2px;padding:11px 14px;margin-bottom:7px;}
+.flight-history-time{font-size:10px;color:var(--muted);margin-bottom:6px;letter-spacing:.03em;}
+.flight-history-row{display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;}
+.flight-history-label{color:var(--muted);}
+.flight-history-val{font-weight:500;}
+.flight-history-total{font-size:14px;font-weight:500;color:var(--warm);margin-top:7px;padding-top:7px;border-top:1px solid var(--light);display:flex;justify-content:space-between;align-items:center;}
+.flight-del-btn{background:none;border:none;color:var(--border);cursor:pointer;font-size:14px;padding:0;transition:color .15s;}
+.flight-del-btn:hover{color:var(--red);}
+@media(max-width:600px){.flight-row{grid-template-columns:80px 1fr 1fr !important;}.flight-result-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 
-<!-- NANO BANANA HERO -->
-<div class="hero">
-  <div class="hero-content">
-    <div class="hero-label">
-      <div class="hero-jp">京都之旅 2027</div>
-      <div class="hero-sub">Nano Banana 家族旅行計畫</div>
-      <div class="hero-meta">
-        <div class="hero-pill">✈️ <span>JX820</span> 07:40 TPE</div>
-        <div class="hero-pill">📅 <span>1/18–1/28</span> 11天</div>
-        <div class="hero-pill">👨‍👩‍👧‍👦 <span>6人</span> 家族旅行</div>
-      </div>
-    </div>
-    <div class="hero-deco">⛩️ 🍵 🎋 🦌 🍌</div>
-  </div>
-</div>
 
 <nav>
-  <button class="nav-btn active" onclick="showSec('itinerary',this)">每日行程</button>
-  <button class="nav-btn" onclick="showSec('spots',this)">景點</button>
-  <button class="nav-btn" onclick="showSec('food',this)">美食</button>
-  <button class="nav-btn" onclick="showSec('hotel',this)">住宿</button>
-  <button class="nav-btn" onclick="showSec('transport',this)">交通</button>
-  <button class="nav-btn" onclick="showSec('checklist',this)">待辦</button>
-  <button class="nav-btn" onclick="showSec('expense',this)">記帳</button>
+  <button class="nav-btn active" onclick="showSec('itinerary',this)">📅 每日行程</button>
+  <button class="nav-btn" onclick="showSec('spots',this)">🗺 景點</button>
+  <button class="nav-btn" onclick="showSec('food',this)">🍜 美食</button>
+  <button class="nav-btn" onclick="showSec('hotel',this)">🏨 住宿</button>
+  <button class="nav-btn" onclick="showSec('transport',this)">🚄 交通</button>
+  <button class="nav-btn" onclick="showSec('checklist',this)">✅ 待辦</button>
+  <button class="nav-btn" onclick="showSec('expense',this)">💴 記帳</button>
 </nav>
 
 <!-- ITINERARY -->
 <div id="section-itinerary" class="section active">
-  <div class="nb-page">
-  <div class="kawaii-banner">
-    <div class="kawaii-banner-icon">🗾</div>
-    <div class="kawaii-banner-text">
-      <div class="kawaii-banner-title">京都 11 天 10 夜家族旅行</div>
-      <div class="kawaii-banner-sub">1/18（一）出發 → 1/28（四）回台</div>
-    </div>
-  </div>
+  
   <div class="sec-title"><span>01</span>每日行程</div>
-  <div class="sec-desc">點選下方日期切換每天的行程安排 🌸</div>
+  <div class="sec-desc">1/18（一）出發 → 1/28（四）回台。共11天10夜。</div>
   <div class="day-tabs" id="day-tabs"></div>
   <div class="day-header" id="day-header"></div>
-  <div class="day-visual" id="day-visual"></div>
-  <div class="spot-chips" id="spot-chips"></div>
   <div class="timeline" id="timeline"></div>
-  </div>
 </div>
 
 <!-- SPOTS -->
 <div id="section-spots" class="section">
-  <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.5s ease-in-out infinite;">⛩️</div><div class="kawaii-banner-text"><div class="kawaii-banner-title">京都・大阪・奈良・神戶・天橋立</div><div class="kawaii-banner-sub">點擊景點卡片查看詳細資訊</div></div></div>
+  
   <div class="sec-title"><span>02</span>景點地圖</div>
   <div class="sec-desc">點擊景點卡片在下方地圖查看位置。</div>
   <div class="map-filter">
@@ -502,23 +275,19 @@ nav::-webkit-scrollbar{display:none;}
     <button class="filter-btn" onclick="filterSpots('宇治',this)">宇治</button>
   </div>
   <div class="map-grid" id="spots-grid"></div>
-  </div>
 </div>
 
 <!-- FOOD -->
 <div id="section-food" class="section">
-  <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2s ease-in-out infinite;">🍵</div><div class="kawaii-banner-text"><div class="kawaii-banner-title">這次一定要吃到的美食！</div><div class="kawaii-banner-sub">拉麵・抹茶・和菓子・海鮮・麵包</div></div></div>
+  
   <div class="sec-title"><span>03</span>美食清單</div>
   <div class="sec-desc">這次旅行一定要吃到的！</div>
   <div class="food-grid" id="food-grid"></div>
-  </div>
 </div>
 
 <!-- HOTEL -->
 <div id="section-hotel" class="section">
-  <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.8s ease-in-out infinite;">🏨</div><div class="kawaii-banner-text"><div class="kawaii-banner-title">三條格拉斯麗酒店</div><div class="kawaii-banner-sub">全程 10 晚，烏丸御池站步行 5 分鐘</div></div></div>
+  
   <div class="sec-title"><span>04</span>住宿資訊</div>
   <div class="sec-desc">全程住宿三條格拉斯麗酒店，記得帶訂房確認信。</div>
   <div class="hotel-card">
@@ -543,13 +312,10 @@ nav::-webkit-scrollbar{display:none;}
       <li>DAY8天橋立回來可能很晚，入住時確認門禁</li>
     </ul>
   </div>
-  </div>
 </div>
 
 <!-- TRANSPORT -->
 <div id="section-transport" class="section">
-  <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.6s ease-in-out infinite;">🚄</div><div class="kawaii-banner-text"><div class="kawaii-banner-title">交通資訊 ＆ 機票費用試算</div><div class="kawaii-banner-sub">抵達後優先購買 ICOCA 卡 🎫</div></div></div>
   <div class="sec-title"><span>05</span>交通資訊</div>
   <div class="sec-desc">主要票券與費用整理，抵達後優先購買 ICOCA。</div>
 
@@ -607,25 +373,19 @@ nav::-webkit-scrollbar{display:none;}
   </div>
 
   <div id="transport-list"></div>
-  </div>
 </div>
 
 <!-- CHECKLIST -->
 <div id="section-checklist" class="section">
-  <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.2s ease-in-out infinite;">🎒</div><div class="kawaii-banner-text"><div class="kawaii-banner-title">出發前別忘記！</div><div class="kawaii-banner-sub">點擊項目打勾，勾選狀態自動儲存</div></div></div>
   <div class="sec-title"><span>06</span>出發前待辦</div>
   <div class="sec-desc">點擊項目打勾，勾選狀態會自動儲存。</div>
   <div class="alert-box" style="margin-bottom:18px"><p>❗ DAY8 天橋立（1/25）預計下雪，務必準備雪靴！</p></div>
   <div class="cl-section"><div class="cl-title">行前必辦</div><div id="cl-before"></div></div>
   <div class="cl-section"><div class="cl-title">行李打包清單</div><div id="cl-pack"></div></div>
-  </div>
 </div>
 
 <!-- EXPENSE -->
 <div id="section-expense" class="section">
-  <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.4s ease-in-out infinite;">💴</div><div class="kawaii-banner-text"><div class="kawaii-banner-title">旅遊記帳</div><div class="kawaii-banner-sub">記錄每筆費用，自動換算台幣 💰</div></div></div>
   <div class="sec-title"><span>07</span>旅遊記帳</div>
   <div class="sec-desc">記錄每筆費用（日圓 ¥），自動換算台幣，資料儲存在此裝置。</div>
 
@@ -653,7 +413,7 @@ nav::-webkit-scrollbar{display:none;}
         <select id="exp-cat">
           <option value="food">🍜 餐飲</option>
           <option value="transport">🚃 交通</option>
-          <option value="hotel">住宿</option>
+          <option value="hotel">🏨 住宿</option>
           <option value="ticket">🎟 門票</option>
           <option value="shop">🛍 購物</option>
           <option value="other">📌 其他</option>
@@ -683,7 +443,6 @@ nav::-webkit-scrollbar{display:none;}
       <div class="empty-state" id="exp-empty">出發後在這裡記帳 ✈️</div>
     </div>
   </div>
-  </div>
 </div>
 
 <!-- Reminder modal -->
@@ -700,7 +459,6 @@ nav::-webkit-scrollbar{display:none;}
       <button class="reminder-btn primary" onclick="closeReminder()">知道了！</button>
     </div>
   </div>
-  </div>
 </div>
 
 <!-- Floating bell button -->
@@ -713,96 +471,96 @@ nav::-webkit-scrollbar{display:none;}
 <script>
 const days=[
   {label:'DAY 1',date:'1/18 一',title:'抵達京都',area:'關西機場 → 京都',items:[
-    {time:'07:40',type:'transport',title:'TPE 出發 JX820',note:'07:40 桃園 → 11:10 關西機場',tags:['JX820']},
+    {time:'07:40',type:'transport',title:'✈️ TPE 出發 JX820',note:'07:40 桃園 → 11:10 關西機場',tags:['JX820']},
     {time:'11:10',type:'transport',title:'抵達關西機場',note:'入境、領行李、換日圓、買 ICOCA'},
-    {time:'~12:30',type:'transport',title:'Haruka 特急 → 京都',note:'成人 ¥1,100 ／ 小孩 ¥550\n約75分鐘抵達京都車站',tags:['¥1,100 成人','¥550 小孩']},
-    {time:'~14:00',type:'hotel',title:'飯店 Check-in',note:'三條格拉斯麗酒店，放行李休息'},
-    {time:'下午',type:'sightseeing',title:'錦市場買手套',note:'到錦市場逛逛，可順便買手套',tags:['錦市場']},
-    {time:'18:00',type:'food',title:'晚餐 + 仁仁生日慶生！',note:'選擇：麵屋幽光 ／ 名代豬排 ／ 敘敘院游玄庭 ／ 富美家',isHighlight:true,tags:['生日慶生🎂']},
-    {time:'19:00前',type:'alert',title:'大丸百貨取貨 DEADLINE',note:'必須在 19:00 前到大丸百貨取貨！\nHarbs 草莓蛋糕在這裡取',isAlert:true,tags:['⚠️ 19:00截止']},
+    {time:'~12:30',type:'transport',title:'🚄 Haruka 特急 → 京都',note:'成人 ¥1,100 ／ 小孩 ¥550\n約75分鐘抵達京都車站',tags:['¥1,100 成人','¥550 小孩']},
+    {time:'~14:00',type:'hotel',title:'🏨 飯店 Check-in',note:'三條格拉斯麗酒店，放行李休息'},
+    {time:'下午',type:'sightseeing',title:'🧤 錦市場買手套',note:'到錦市場逛逛，可順便買手套',tags:['錦市場']},
+    {time:'18:00',type:'food',title:'🎂 晚餐 + 仁仁生日慶生！',note:'選擇：麵屋幽光 ／ 名代豬排 ／ 敘敘院游玄庭 ／ 富美家',isHighlight:true,tags:['生日慶生🎂']},
+    {time:'19:00前',type:'alert',title:'⚠️ 大丸百貨取貨 DEADLINE',note:'必須在 19:00 前到大丸百貨取貨！\nHarbs 草莓蛋糕在這裡取',isAlert:true,tags:['⚠️ 19:00截止']},
   ]},
   {label:'DAY 2',date:'1/19 二',title:'包車 — 大阪',area:'大阪',items:[
-    {time:'全天',type:'transport',title:'包車出發',note:'10人座 ¥52,000 ／ 14人座 ¥57,000',tags:['包車']},
-    {time:'上午',type:'sightseeing',title:'勝尾寺',note:'以勝利達摩聞名，祈求必勝'},
-    {time:'下午',type:'sightseeing',title:'天王寺動物園',note:'大阪市內動物園'},
-    {time:'下午',type:'sightseeing',title:'梅田逛街',note:'阪急百貨、Grand Front Osaka'},
-    {time:'下午',type:'sightseeing',title:'寶可夢中心 大阪',note:'梅田附近，備好荷包💸'},
-    {time:'傍晚',type:'sightseeing',title:'道頓堀',note:'格利科打卡、章魚燒、串炸',tags:['大阪必訪']},
+    {time:'全天',type:'transport',title:'🚌 包車出發',note:'10人座 ¥52,000 ／ 14人座 ¥57,000',tags:['包車']},
+    {time:'上午',type:'sightseeing',title:'⛩️ 勝尾寺',note:'以勝利達摩聞名，祈求必勝'},
+    {time:'下午',type:'sightseeing',title:'🦒 天王寺動物園',note:'大阪市內動物園'},
+    {time:'下午',type:'sightseeing',title:'🛍 梅田逛街',note:'阪急百貨、Grand Front Osaka'},
+    {time:'下午',type:'sightseeing',title:'🎮 寶可夢中心 大阪',note:'梅田附近，備好荷包💸'},
+    {time:'傍晚',type:'sightseeing',title:'🌉 道頓堀',note:'格利科打卡、章魚燒、串炸',tags:['大阪必訪']},
   ]},
   {label:'DAY 3',date:'1/20 三',title:'宇治 & 伏見稻荷',area:'宇治・伏見',items:[
-    {time:'上午',type:'transport',title:'前往宇治',note:'搭 JR 奈良線，約17分鐘'},
-    {time:'上午',type:'sightseeing',title:'平等院',note:'世界遺產！十圓硬幣的圖案',tags:['¥600','世界遺產']},
-    {time:'中午',type:'food',title:'中村藤吉本舖',note:'宇治最知名抹茶甜點老店，必吃',tags:['必吃']},
-    {time:'下午',type:'sightseeing',title:'任天堂博物館',note:'需提前線上預約！確認是否已預約',tags:['需預約']},
-    {time:'下午',type:'food',title:'麵屋豬一',note:'宇治人氣拉麵'},
-    {time:'下午',type:'food',title:'たま木亭',note:'排隊名店麵包，要早去排隊'},
-    {time:'傍晚',type:'sightseeing',title:'伏見稻荷大社',note:'千本鳥居，傍晚人較少\n記得買豆大福！',tags:['免費','豆大福']},
-    {time:'傍晚',type:'sightseeing',title:'建仁寺',note:'京都最古老禪寺，必看「風神雷神圖」屏風！伏見稻荷搭車約15分，祇園旁',tags:['¥600','京都最古禪寺']},
-    {time:'傍晚',type:'food',title:'無碍山房 Salon de Muge',note:'米其林三星菊乃井旗下甜點茶房！建仁寺步行約10分鐘，高台寺附近\n⚠️ 週二休息，1/20 三正常營業 ✅\n濃い抹茶パフェ必點！',isHighlight:true,tags:['必吃','抹茶芭菲','¥1,980']},
+    {time:'上午',type:'transport',title:'🚃 前往宇治',note:'搭 JR 奈良線，約17分鐘'},
+    {time:'上午',type:'sightseeing',title:'⛩️ 平等院',note:'世界遺產！十圓硬幣的圖案',tags:['¥600','世界遺產']},
+    {time:'中午',type:'food',title:'🍵 中村藤吉本舖',note:'宇治最知名抹茶甜點老店，必吃',tags:['必吃']},
+    {time:'下午',type:'sightseeing',title:'🎮 任天堂博物館',note:'需提前線上預約！確認是否已預約',tags:['需預約']},
+    {time:'下午',type:'food',title:'🍜 麵屋豬一',note:'宇治人氣拉麵'},
+    {time:'下午',type:'food',title:'🥐 たま木亭',note:'排隊名店麵包，要早去排隊'},
+    {time:'傍晚',type:'sightseeing',title:'⛩️ 伏見稻荷大社',note:'千本鳥居，傍晚人較少\n記得買豆大福！',tags:['免費','豆大福']},
+    {time:'傍晚',type:'sightseeing',title:'⛩️ 建仁寺',note:'京都最古老禪寺，必看「風神雷神圖」屏風！伏見稻荷搭車約15分，祇園旁',tags:['¥600','京都最古禪寺']},
+    {time:'傍晚',type:'food',title:'🍵 無碍山房 Salon de Muge',note:'米其林三星菊乃井旗下甜點茶房！建仁寺步行約10分鐘，高台寺附近\n⚠️ 週二休息，1/20 三正常營業 ✅\n濃い抹茶パフェ必點！',isHighlight:true,tags:['必吃','抹茶芭菲','¥1,980']},
   ]},
   {label:'DAY 4',date:'1/21 四',title:'東寺市集・梅小路公園',area:'京都市內・梅小路',items:[
-    {time:'早上',type:'sightseeing',title:'東寺弘法市集',note:'每月21日限定！早去人少撿好貨，骨董＋美食攤\n✅ 1/21（四）正常舉辦',isHighlight:true,tags:['每月21日限定','免費入場']},
-    {time:'上午',type:'sightseeing',title:'三十三間堂',note:'1001尊千手觀音像，震撼壯觀！東寺步行約15分鐘',tags:['¥600','必看']},
-    {time:'中午',type:'sightseeing',title:'梅小路公園',note:'水族館旁，可在公園野餐午休，環境舒適',tags:['免費']},
-    {time:'下午',type:'sightseeing',title:'京都水族館',note:'海豚表演場次：11:30 ／ 13:30 ／ 15:30\n✅ 年中無休，1/21 正常開館',tags:['可重複入場','✅已確認開館']},
-    {time:'下午',type:'sightseeing',title:'京都鐵道博物館',note:'梅小路公園內，親子必訪\n✅ 週四正常開館',tags:['親子','✅已確認開館']},
-    {time:'傍晚',type:'sightseeing',title:'東本願寺 ／ 西本願寺',note:'步行可達，免費參觀',tags:['免費']},
+    {time:'早上',type:'sightseeing',title:'🏛️ 東寺弘法市集',note:'每月21日限定！早去人少撿好貨，骨董＋美食攤\n✅ 1/21（四）正常舉辦',isHighlight:true,tags:['每月21日限定','免費入場']},
+    {time:'上午',type:'sightseeing',title:'🏛️ 三十三間堂',note:'1001尊千手觀音像，震撼壯觀！東寺步行約15分鐘',tags:['¥600','必看']},
+    {time:'中午',type:'sightseeing',title:'🌿 梅小路公園',note:'水族館旁，可在公園野餐午休，環境舒適',tags:['免費']},
+    {time:'下午',type:'sightseeing',title:'🪼 京都水族館',note:'海豚表演場次：11:30 ／ 13:30 ／ 15:30\n✅ 年中無休，1/21 正常開館',tags:['可重複入場','✅已確認開館']},
+    {time:'下午',type:'sightseeing',title:'🚂 京都鐵道博物館',note:'梅小路公園內，親子必訪\n✅ 週四正常開館',tags:['親子','✅已確認開館']},
+    {time:'傍晚',type:'sightseeing',title:'⛩️ 東本願寺 ／ 西本願寺',note:'步行可達，免費參觀',tags:['免費']},
   ]},
   {label:'DAY 5',date:'1/22 五',title:'嵐山',area:'嵐山',items:[
-    {time:'早上',type:'sightseeing',title:'嵐山竹林小徑',note:'越早越好，人少光線美'},
-    {time:'上午',type:'sightseeing',title:'天龍寺庭園',note:'世界遺產枯山水庭園',tags:['¥500']},
-    {time:'中午',type:'food',title:'嵐山蕎麥麵',note:'嵐山周邊多家蕎麥麵老店'},
-    {time:'下午',type:'sightseeing',title:'渡月橋散步',note:'嵐山標誌性景點'},
-    {time:'傍晚',type:'transport',title:'嵐電回市區',note:'搭嵐山路面電車體驗'},
+    {time:'早上',type:'sightseeing',title:'🎋 嵐山竹林小徑',note:'越早越好，人少光線美'},
+    {time:'上午',type:'sightseeing',title:'⛩️ 天龍寺庭園',note:'世界遺產枯山水庭園',tags:['¥500']},
+    {time:'中午',type:'food',title:'🍜 嵐山蕎麥麵',note:'嵐山周邊多家蕎麥麵老店'},
+    {time:'下午',type:'sightseeing',title:'🌉 渡月橋散步',note:'嵐山標誌性景點'},
+    {time:'傍晚',type:'transport',title:'🚋 嵐電回市區',note:'搭嵐山路面電車體驗'},
   ]},
   {label:'DAY 6',date:'1/23 六',title:'奈良 & 燒山祭',area:'奈良',items:[
-    {time:'上午',type:'transport',title:'前往奈良',note:'近鐵或 JR，約45分鐘'},
-    {time:'上午',type:'sightseeing',title:'奈良公園餵鹿',note:'鹿仙貝一份 ¥200，小心鹿搶東西 😅'},
-    {time:'上午',type:'sightseeing',title:'東大寺',note:'世界最大木造建築，奈良大佛超震撼',tags:['¥600']},
-    {time:'下午',type:'sightseeing',title:'春日大社',note:'千盞石燈籠，世界遺產',tags:['免費']},
-    {time:'下午',type:'food',title:'中谷堂',note:'奈良超高速現打麻糬，排隊也值得',tags:['必吃']},
-    {time:'下午',type:'food',title:'水谷茶屋',note:'奈良公園內茶屋，環境很美'},
-    {time:'傍晚',type:'sightseeing',title:'若草山燒山祭',note:'整座山點火！年度盛事，記得早點佔位',isHighlight:true,tags:['年度盛事🔥']},
+    {time:'上午',type:'transport',title:'🚃 前往奈良',note:'近鐵或 JR，約45分鐘'},
+    {time:'上午',type:'sightseeing',title:'🦌 奈良公園餵鹿',note:'鹿仙貝一份 ¥200，小心鹿搶東西 😅'},
+    {time:'上午',type:'sightseeing',title:'⛩️ 東大寺',note:'世界最大木造建築，奈良大佛超震撼',tags:['¥600']},
+    {time:'下午',type:'sightseeing',title:'⛩️ 春日大社',note:'千盞石燈籠，世界遺產',tags:['免費']},
+    {time:'下午',type:'food',title:'🍡 中谷堂',note:'奈良超高速現打麻糬，排隊也值得',tags:['必吃']},
+    {time:'下午',type:'food',title:'🍵 水谷茶屋',note:'奈良公園內茶屋，環境很美'},
+    {time:'傍晚',type:'sightseeing',title:'⛰️ 若草山燒山祭',note:'整座山點火！年度盛事，記得早點佔位',isHighlight:true,tags:['年度盛事🔥']},
   ]},
   {label:'DAY 7',date:'1/24 日',title:'出町柳・貴船・鞍馬',area:'出町柳・京都市北',items:[
-    {time:'早上',type:'food',title:'出町雙葉 豆大福',note:'京都超人氣名店！每天限量，建議 8:00 前排隊\n📍 出町柳站步行約5分鐘',isHighlight:true,tags:['必吃','早去排隊']},
-    {time:'上午',type:'food',title:'大黑屋餅舖',note:'明治30年老舖！鎌餅是名物，鎌刀形狀求肥麻糬超可愛\n📍 寺町通今出川，出町雙葉步行約10分鐘',tags:['老舖','限量']},
-    {time:'上午',type:'transport',title:'搭叡山電鐵前往貴船口',note:'從出町柳站搭叡電，約30分鐘'},
-    {time:'中午',type:'sightseeing',title:'貴船神社',note:'冬天石燈籠結冰超美！縁結び守護神',tags:['水神社']},
-    {time:'下午',type:'sightseeing',title:'鞍馬寺',note:'從貴船步行翻山可達，或搭纜車',tags:['纜車¥200']},
-    {time:'傍晚',type:'transport',title:'搭叡電回出町柳',note:'回市區，順路逛寺町通'},
+    {time:'早上',type:'food',title:'🍡 出町雙葉 豆大福',note:'京都超人氣名店！每天限量，建議 8:00 前排隊\n📍 出町柳站步行約5分鐘',isHighlight:true,tags:['必吃','早去排隊']},
+    {time:'上午',type:'food',title:'🍡 大黑屋餅舖',note:'明治30年老舖！鎌餅是名物，鎌刀形狀求肥麻糬超可愛\n📍 寺町通今出川，出町雙葉步行約10分鐘',tags:['老舖','限量']},
+    {time:'上午',type:'transport',title:'🚃 搭叡山電鐵前往貴船口',note:'從出町柳站搭叡電，約30分鐘'},
+    {time:'中午',type:'sightseeing',title:'⛩️ 貴船神社',note:'冬天石燈籠結冰超美！縁結び守護神',tags:['水神社']},
+    {time:'下午',type:'sightseeing',title:'⛰️ 鞍馬寺',note:'從貴船步行翻山可達，或搭纜車',tags:['纜車¥200']},
+    {time:'傍晚',type:'transport',title:'🚃 搭叡電回出町柳',note:'回市區，順路逛寺町通'},
     {time:'傍晚',type:'sightseeing',title:'回市區自由活動',note:'逛出町柳周邊，或鴨川散步'},
   ]},
   {label:'DAY 8',date:'1/25 一',title:'天橋立',area:'天橋立',items:[
-    {time:'出發前',type:'alert',title:'注意：今天可能下雪！',note:'天橋立冬天會下雪，確認已穿雪靴出門',isAlert:true,tags:['⚠️ 雪靴必備']},
-    {time:'上午早',type:'transport',title:'京都 → 天橋立（特急Hashidate）',note:'約2小時，建議早出發',tags:['特急','約¥3,110']},
-    {time:'中午',type:'sightseeing',title:'天橋立',note:'日本三景！可上觀景台看「飛龍觀」\n也可騎自行車穿越2公里松林沙洲',tags:['日本三景']},
-    {time:'中午',type:'food',title:'海鮮午餐',note:'天橋立當地新鮮海鮮丼、螃蟹料理'},
-    {time:'傍晚',type:'transport',title:'返回京都',note:'傍晚前搭車回京都，約2小時'},
+    {time:'出發前',type:'alert',title:'❄️ 注意：今天可能下雪！',note:'天橋立冬天會下雪，確認已穿雪靴出門',isAlert:true,tags:['⚠️ 雪靴必備']},
+    {time:'上午早',type:'transport',title:'🚃 京都 → 天橋立（特急Hashidate）',note:'約2小時，建議早出發',tags:['特急','約¥3,110']},
+    {time:'中午',type:'sightseeing',title:'🌉 天橋立',note:'日本三景！可上觀景台看「飛龍觀」\n也可騎自行車穿越2公里松林沙洲',tags:['日本三景']},
+    {time:'中午',type:'food',title:'🦞 海鮮午餐',note:'天橋立當地新鮮海鮮丼、螃蟹料理'},
+    {time:'傍晚',type:'transport',title:'🚃 返回京都',note:'傍晚前搭車回京都，約2小時'},
   ]},
   {label:'DAY 9',date:'1/26 二',title:'神戶',area:'神戶',items:[
-    {time:'上午',type:'transport',title:'京都 → 神戶（JR新快速）',note:'約55分鐘',tags:['約¥1,100']},
-    {time:'上午',type:'food',title:'神戶吐司',note:'神戶名物！ISUZU Bakery 推薦',tags:['必吃']},
-    {time:'上午',type:'sightseeing',title:'神戶動物王國',note:'室內動物園，可近距離接觸動物'},
-    {time:'下午',type:'sightseeing',title:'王子動物園',note:'免費入場！有大熊貓',tags:['免費']},
+    {time:'上午',type:'transport',title:'🚃 京都 → 神戶（JR新快速）',note:'約55分鐘',tags:['約¥1,100']},
+    {time:'上午',type:'food',title:'🍞 神戶吐司',note:'神戶名物！ISUZU Bakery 推薦',tags:['必吃']},
+    {time:'上午',type:'sightseeing',title:'🐘 神戶動物王國',note:'室內動物園，可近距離接觸動物'},
+    {time:'下午',type:'sightseeing',title:'🐼 王子動物園',note:'免費入場！有大熊貓',tags:['免費']},
     {time:'傍晚',type:'sightseeing',title:'神戶市區散步',note:'北野異人館、南京町中華街'},
   ]},
   {label:'DAY 10',date:'1/27 三',title:'京都最後一天',area:'京都',items:[
-    {time:'上午',type:'sightseeing',title:'藤森神社',note:'勝馬・學業守護神社，5月紫藤花超美！馬迷必拜',tags:['祈福','勝馬']},
-    {time:'上午',type:'sightseeing',title:'下鴨神社',note:'世界遺產！京都最古老神社之一，糺之森森林步道超療癒',tags:['世界遺產','免費']},
-    {time:'上午',type:'food',title:'村上開新堂',note:'明治40年創業，京都最古老洋菓子店！招牌俄羅斯蛋糕必買\n📍 寺町二條\n✅ 週三正常營業（10:00～17:30）',isHighlight:true,tags:['必買','俄羅斯蛋糕','老舖']},
-    {time:'中午',type:'sightseeing',title:'錦市場掃尾購物',note:'最後一次逛錦市場，醃菜、伴手禮補貨！'},
-    {time:'上午',type:'sightseeing',title:'市比賣神社',note:'女性守護神社，京都秘境',tags:['祈福']},
-    {time:'下午',type:'sightseeing',title:'京都寶可夢中心',note:'京都BAL百貨內，皮卡丘等著你！跟大阪不同限定商品，備好荷包💸',isHighlight:true,tags:['限定商品','購物']},
-    {time:'下午',type:'sightseeing',title:'teamLab（看票況）',note:'需提前線上購票，確認是否有票',tags:['需預約']},
-    {time:'傍晚',type:'food',title:'最後晚餐',note:'想吃什麼就吃什麼！旅程的最後一餐'},
+    {time:'上午',type:'sightseeing',title:'⛩️ 藤森神社',note:'勝馬・學業守護神社，5月紫藤花超美！馬迷必拜',tags:['祈福','勝馬']},
+    {time:'上午',type:'sightseeing',title:'⛩️ 下鴨神社',note:'世界遺產！京都最古老神社之一，糺之森森林步道超療癒',tags:['世界遺產','免費']},
+    {time:'上午',type:'food',title:'🍪 村上開新堂',note:'明治40年創業，京都最古老洋菓子店！招牌俄羅斯蛋糕必買\n📍 寺町二條\n✅ 週三正常營業（10:00～17:30）',isHighlight:true,tags:['必買','俄羅斯蛋糕','老舖']},
+    {time:'中午',type:'sightseeing',title:'🏙️ 錦市場掃尾購物',note:'最後一次逛錦市場，醃菜、伴手禮補貨！'},
+    {time:'上午',type:'sightseeing',title:'⛩️ 市比賣神社',note:'女性守護神社，京都秘境',tags:['祈福']},
+    {time:'下午',type:'sightseeing',title:'🎮 京都寶可夢中心',note:'京都BAL百貨內，皮卡丘等著你！跟大阪不同限定商品，備好荷包💸',isHighlight:true,tags:['限定商品','購物']},
+    {time:'下午',type:'sightseeing',title:'🌊 teamLab（看票況）',note:'需提前線上購票，確認是否有票',tags:['需預約']},
+    {time:'傍晚',type:'food',title:'🎉 最後晚餐',note:'想吃什麼就吃什麼！旅程的最後一餐'},
     {time:'晚上',type:'hotel',title:'整理行李',note:'明天 14:00 飛機，建議 11:00 前出發去機場'},
   ]},
   {label:'DAY 11',date:'1/28 四',title:'回台灣 🏠',area:'關西機場 → 桃園',items:[
-    {time:'11:00前',type:'hotel',title:'飯店退房',note:'11:00 退房，可先寄放行李'},
-    {time:'~11:00',type:'transport',title:'Haruka 特急 → 關西機場',note:'約75分鐘，最晚 11:30 前搭車',tags:['¥1,100']},
-    {time:'14:00',type:'transport',title:'KIX 出發 JX821',note:'14:00 關西機場 → 16:15 桃園',tags:['JX821']},
-    {time:'16:15',type:'transport',title:'抵達桃園，回家！',note:'旅行圓滿結束 🎉',isHighlight:true},
+    {time:'11:00前',type:'hotel',title:'🏨 飯店退房',note:'11:00 退房，可先寄放行李'},
+    {time:'~11:00',type:'transport',title:'🚄 Haruka 特急 → 關西機場',note:'約75分鐘，最晚 11:30 前搭車',tags:['¥1,100']},
+    {time:'14:00',type:'transport',title:'✈️ KIX 出發 JX821',note:'14:00 關西機場 → 16:15 桃園',tags:['JX821']},
+    {time:'16:15',type:'transport',title:'🏠 抵達桃園，回家！',note:'旅行圓滿結束 🎉',isHighlight:true},
   ]},
 ];
 
@@ -860,7 +618,7 @@ const clPack=['❗ 雪靴（DAY8天橋立會下雪！）','厚外套 + 保暖內
 let expenses=JSON.parse(localStorage.getItem('japan2027-exp')||'[]');
 let budget=parseInt(localStorage.getItem('japan2027-budget')||'0');
 const TWD_RATE=0.218; // 1 JPY ≈ 0.218 TWD
-const catInfo={food:{label:'🍜 餐飲',cls:'cat-food',color:'#c0392b'},transport:{label:'🚃 交通',cls:'cat-transport',color:'#8c7b6b'},hotel:{label:'住宿',cls:'cat-hotel',color:'#4a7c59'},ticket:{label:'🎟 門票',cls:'cat-ticket',color:'#a0732a'},shop:{label:'🛍 購物',cls:'cat-shop',color:'#4a52b7'},other:{label:'📌 其他',cls:'cat-other',color:'#8c7b6b'}};
+const catInfo={food:{label:'🍜 餐飲',cls:'cat-food',color:'#c0392b'},transport:{label:'🚃 交通',cls:'cat-transport',color:'#8c7b6b'},hotel:{label:'🏨 住宿',cls:'cat-hotel',color:'#4a7c59'},ticket:{label:'🎟 門票',cls:'cat-ticket',color:'#a0732a'},shop:{label:'🛍 購物',cls:'cat-shop',color:'#4a52b7'},other:{label:'📌 其他',cls:'cat-other',color:'#8c7b6b'}};
 
 function saveExp(){localStorage.setItem('japan2027-exp',JSON.stringify(expenses));}
 function setBudget(){
@@ -1021,77 +779,13 @@ function checkBadge(){
 function renderItinerary(di){
   const d=days[di];
   document.querySelectorAll('.day-tab').forEach((t,i)=>t.classList.toggle('active',i===di));
-
-  // Photo URLs per day (Unsplash curated)
-  const photos=[
-    'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80', // DAY1 京都
-    'https://images.unsplash.com/photo-1555652736-e92021d28a10?w=800&q=80', // DAY2 大阪
-    'https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?w=800&q=80', // DAY3 伏見稻荷
-    'https://images.unsplash.com/photo-1570459027562-4a916cc6113f?w=800&q=80', // DAY4 東寺
-    'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&q=80', // DAY5 嵐山
-    'https://images.unsplash.com/photo-1548872591-37a48c859d02?w=800&q=80', // DAY6 奈良鹿
-    'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=800&q=80', // DAY7 貴船
-    'https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=800&q=80', // DAY8 天橋立
-    'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=80', // DAY9 神戶
-    'https://images.unsplash.com/photo-1493997181344-712f2f19d87a?w=800&q=80', // DAY10 京都
-    'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80', // DAY11 飛機
-  ];
-
-  // Map queries per day
-  const mapQ=[
-    '錦市場+京都',
-    '道頓堀+大阪',
-    '伏見稲荷大社+京都',
-    '東寺+梅小路公園+京都',
-    '嵐山竹林+天龍寺+京都',
-    '東大寺+奈良公園',
-    '貴船神社+鞍馬寺+京都',
-    '天橋立+京都府',
-    '神戸動物王国+王子動物園+神戸',
-    '藤森神社+下鴨神社+京都',
-    '関西空港',
-  ];
-
-  const photo=photos[di]||photos[0];
-  const q=encodeURIComponent(mapQ[di]||d.area);
-  const mapSrc=`https://www.google.com/maps/search/?api=1&query=${q}`;
-
-  // Spot chips — only sightseeing + food + alert items, no transport
-  const chips=d.items.filter(it=>it.type!=='transport').map(it=>{
-    const cls=it.isAlert?'alert':it.isHighlight?'highlight':it.type==='food'?'food':'';
-    const ico={sightseeing:'📍',food:'🍽️',hotel:'🏨',alert:'⚠️'}[it.type]||'📌';
-    const shortTitle=it.title.replace(/^[^\s]+\s/,'').split('（')[0].split(' ')[0];
-    return `<div class="spot-chip ${cls}"><span class="spot-chip-icon">${ico}</span>${shortTitle}</div>`;
-  }).join('');
-
   document.getElementById('day-header').innerHTML=`
     <h2>${d.date} — ${d.title}</h2><p>📍 ${d.area}</p>`;
-
-  // Photo + map visual
-  document.getElementById('day-visual').innerHTML=`
-    <div class="day-photo-wrap">
-      <img class="day-photo-img" src="${photo}" alt="${d.title}" onerror="this.parentNode.style.background='#e8dece'">
-      <div class="day-photo-overlay"></div>
-      <div class="day-photo-label">📸 ${d.title}</div>
-    </div>
-    <div class="day-map-wrap">
-      <a href="${mapSrc}" target="_blank" style="display:block;width:100%;height:100%;position:relative;">
-        <img src="https://maps.googleapis.com/maps/api/staticmap?center=${q}&zoom=13&size=400x320&scale=2&maptype=roadmap&style=feature:poi|element:labels|visibility:simplified&style=feature:road|element:labels|visibility:simplified&markers=color:red|${q}&key=AIzaSyD-placeholder" 
-             onerror="this.style.display='none';this.parentNode.innerHTML='<div style=\'width:100%;height:100%;background:#f0e8d8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;\'><div style=\'font-size:28px;\'>🗺️</div><div style=\'font-size:11px;color:#9e8272;font-weight:600;\'>${d.area}</div><div style=\'font-size:10px;color:#b0a090;\'>點擊開啟 Google 地圖</div></div>'"
-             style="width:100%;height:100%;object-fit:cover;">
-      </a>
-    </div>`;
-
-  // Spot chips
-  document.getElementById('spot-chips').innerHTML=chips;
-
-  // Timeline — simplified, note hidden by default
   document.getElementById('timeline').innerHTML=d.items.map((item,i)=>{
-    const tl={sightseeing:'景點',food:'美食',transport:'交通',hotel:'住宿',alert:'注意'}[item.type]||item.type;
+    const tl={sightseeing:'景點',food:'美食',transport:'交通',hotel:'住宿',alert:'注意事項'}[item.type]||item.type;
     const cc=item.isAlert?'tl-card is-alert':item.isHighlight?'tl-card is-hi':'tl-card';
     const ts=(item.tags||[]).map(t=>`<span class="ctag ${item.isAlert?'red':item.isHighlight?'gold':''}">${t}</span>`).join('');
-    const noteHtml=item.note?`<div class="card-note">${item.note.replace(/\n/g,'<br>')}</div><button class="expand-btn" onclick="this.previousElementSibling.style.display=this.previousElementSibling.style.display==='block'?'none':'block';this.textContent=this.textContent==='▼ 詳細'?'▲ 收起':'▼ 詳細'">▼ 詳細</button>`:'';
-    return `<div class="tl-item" style="animation-delay:${i*.05}s"><div class="time-col"><div class="time-lbl">${item.time||''}</div></div><div class="tl-dot ${item.type}"></div><div class="${cc}"><div class="card-type ${item.type}">${tl}</div><div class="card-title">${item.title}</div>${noteHtml}${ts?`<div class="card-tags">${ts}</div>`:''}</div></div>`;
+    return `<div class="tl-item" style="animation-delay:${i*.06}s"><div class="time-col"><div class="time-lbl">${item.time||''}</div></div><div class="tl-dot ${item.type}"></div><div class="${cc}"><div class="card-type ${item.type}">${tl}</div><div class="card-title">${item.title}</div>${item.note?`<div class="card-note">${item.note.replace(/\n/g,'<br>')}</div>`:''}${ts?`<div class="card-tags">${ts}</div>`:''}</div></div>`;
   }).join('');
 }
 function buildTabs(){
