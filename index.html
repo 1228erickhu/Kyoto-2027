@@ -444,7 +444,7 @@ nav::-webkit-scrollbar{display:none;}
 <div class="hero">
   <div class="hero-content">
     <div class="hero-label">
-      <div class="hero-jp">🍌 京都之旅 2027 🍌</div>
+      <div class="hero-jp">京都之旅 2027</div>
       <div class="hero-sub">Nano Banana 家族旅行計畫</div>
       <div class="hero-meta">
         <div class="hero-pill">✈️ <span>JX820</span> 07:40 TPE</div>
@@ -457,13 +457,13 @@ nav::-webkit-scrollbar{display:none;}
 </div>
 
 <nav>
-  <button class="nav-btn active" onclick="showSec('itinerary',this)">📅 每日行程</button>
-  <button class="nav-btn" onclick="showSec('spots',this)">🗺 景點</button>
-  <button class="nav-btn" onclick="showSec('food',this)">🍜 美食</button>
-  <button class="nav-btn" onclick="showSec('hotel',this)">🏨 住宿</button>
-  <button class="nav-btn" onclick="showSec('transport',this)">🚄 交通</button>
-  <button class="nav-btn" onclick="showSec('checklist',this)">✅ 待辦</button>
-  <button class="nav-btn" onclick="showSec('expense',this)">💴 記帳</button>
+  <button class="nav-btn active" onclick="showSec('itinerary',this)">每日行程</button>
+  <button class="nav-btn" onclick="showSec('spots',this)">景點</button>
+  <button class="nav-btn" onclick="showSec('food',this)">美食</button>
+  <button class="nav-btn" onclick="showSec('hotel',this)">住宿</button>
+  <button class="nav-btn" onclick="showSec('transport',this)">交通</button>
+  <button class="nav-btn" onclick="showSec('checklist',this)">待辦</button>
+  <button class="nav-btn" onclick="showSec('expense',this)">記帳</button>
 </nav>
 
 <!-- ITINERARY -->
@@ -653,7 +653,7 @@ nav::-webkit-scrollbar{display:none;}
         <select id="exp-cat">
           <option value="food">🍜 餐飲</option>
           <option value="transport">🚃 交通</option>
-          <option value="hotel">🏨 住宿</option>
+          <option value="hotel">住宿</option>
           <option value="ticket">🎟 門票</option>
           <option value="shop">🛍 購物</option>
           <option value="other">📌 其他</option>
@@ -713,96 +713,96 @@ nav::-webkit-scrollbar{display:none;}
 <script>
 const days=[
   {label:'DAY 1',date:'1/18 一',title:'抵達京都',area:'關西機場 → 京都',items:[
-    {time:'07:40',type:'transport',title:'✈️ TPE 出發 JX820',note:'07:40 桃園 → 11:10 關西機場',tags:['JX820']},
+    {time:'07:40',type:'transport',title:'TPE 出發 JX820',note:'07:40 桃園 → 11:10 關西機場',tags:['JX820']},
     {time:'11:10',type:'transport',title:'抵達關西機場',note:'入境、領行李、換日圓、買 ICOCA'},
-    {time:'~12:30',type:'transport',title:'🚄 Haruka 特急 → 京都',note:'成人 ¥1,100 ／ 小孩 ¥550\n約75分鐘抵達京都車站',tags:['¥1,100 成人','¥550 小孩']},
-    {time:'~14:00',type:'hotel',title:'🏨 飯店 Check-in',note:'三條格拉斯麗酒店，放行李休息'},
-    {time:'下午',type:'sightseeing',title:'🧤 錦市場買手套',note:'到錦市場逛逛，可順便買手套',tags:['錦市場']},
-    {time:'18:00',type:'food',title:'🎂 晚餐 + 仁仁生日慶生！',note:'選擇：麵屋幽光 ／ 名代豬排 ／ 敘敘院游玄庭 ／ 富美家',isHighlight:true,tags:['生日慶生🎂']},
-    {time:'19:00前',type:'alert',title:'⚠️ 大丸百貨取貨 DEADLINE',note:'必須在 19:00 前到大丸百貨取貨！\nHarbs 草莓蛋糕在這裡取',isAlert:true,tags:['⚠️ 19:00截止']},
+    {time:'~12:30',type:'transport',title:'Haruka 特急 → 京都',note:'成人 ¥1,100 ／ 小孩 ¥550\n約75分鐘抵達京都車站',tags:['¥1,100 成人','¥550 小孩']},
+    {time:'~14:00',type:'hotel',title:'飯店 Check-in',note:'三條格拉斯麗酒店，放行李休息'},
+    {time:'下午',type:'sightseeing',title:'錦市場買手套',note:'到錦市場逛逛，可順便買手套',tags:['錦市場']},
+    {time:'18:00',type:'food',title:'晚餐 + 仁仁生日慶生！',note:'選擇：麵屋幽光 ／ 名代豬排 ／ 敘敘院游玄庭 ／ 富美家',isHighlight:true,tags:['生日慶生🎂']},
+    {time:'19:00前',type:'alert',title:'大丸百貨取貨 DEADLINE',note:'必須在 19:00 前到大丸百貨取貨！\nHarbs 草莓蛋糕在這裡取',isAlert:true,tags:['⚠️ 19:00截止']},
   ]},
   {label:'DAY 2',date:'1/19 二',title:'包車 — 大阪',area:'大阪',items:[
-    {time:'全天',type:'transport',title:'🚌 包車出發',note:'10人座 ¥52,000 ／ 14人座 ¥57,000',tags:['包車']},
-    {time:'上午',type:'sightseeing',title:'⛩️ 勝尾寺',note:'以勝利達摩聞名，祈求必勝'},
-    {time:'下午',type:'sightseeing',title:'🦒 天王寺動物園',note:'大阪市內動物園'},
-    {time:'下午',type:'sightseeing',title:'🛍 梅田逛街',note:'阪急百貨、Grand Front Osaka'},
-    {time:'下午',type:'sightseeing',title:'🎮 寶可夢中心 大阪',note:'梅田附近，備好荷包💸'},
-    {time:'傍晚',type:'sightseeing',title:'🌉 道頓堀',note:'格利科打卡、章魚燒、串炸',tags:['大阪必訪']},
+    {time:'全天',type:'transport',title:'包車出發',note:'10人座 ¥52,000 ／ 14人座 ¥57,000',tags:['包車']},
+    {time:'上午',type:'sightseeing',title:'勝尾寺',note:'以勝利達摩聞名，祈求必勝'},
+    {time:'下午',type:'sightseeing',title:'天王寺動物園',note:'大阪市內動物園'},
+    {time:'下午',type:'sightseeing',title:'梅田逛街',note:'阪急百貨、Grand Front Osaka'},
+    {time:'下午',type:'sightseeing',title:'寶可夢中心 大阪',note:'梅田附近，備好荷包💸'},
+    {time:'傍晚',type:'sightseeing',title:'道頓堀',note:'格利科打卡、章魚燒、串炸',tags:['大阪必訪']},
   ]},
   {label:'DAY 3',date:'1/20 三',title:'宇治 & 伏見稻荷',area:'宇治・伏見',items:[
-    {time:'上午',type:'transport',title:'🚃 前往宇治',note:'搭 JR 奈良線，約17分鐘'},
-    {time:'上午',type:'sightseeing',title:'⛩️ 平等院',note:'世界遺產！十圓硬幣的圖案',tags:['¥600','世界遺產']},
-    {time:'中午',type:'food',title:'🍵 中村藤吉本舖',note:'宇治最知名抹茶甜點老店，必吃',tags:['必吃']},
-    {time:'下午',type:'sightseeing',title:'🎮 任天堂博物館',note:'需提前線上預約！確認是否已預約',tags:['需預約']},
-    {time:'下午',type:'food',title:'🍜 麵屋豬一',note:'宇治人氣拉麵'},
-    {time:'下午',type:'food',title:'🥐 たま木亭',note:'排隊名店麵包，要早去排隊'},
-    {time:'傍晚',type:'sightseeing',title:'⛩️ 伏見稻荷大社',note:'千本鳥居，傍晚人較少\n記得買豆大福！',tags:['免費','豆大福']},
-    {time:'傍晚',type:'sightseeing',title:'⛩️ 建仁寺',note:'京都最古老禪寺，必看「風神雷神圖」屏風！伏見稻荷搭車約15分，祇園旁',tags:['¥600','京都最古禪寺']},
-    {time:'傍晚',type:'food',title:'🍵 無碍山房 Salon de Muge',note:'米其林三星菊乃井旗下甜點茶房！建仁寺步行約10分鐘，高台寺附近\n⚠️ 週二休息，1/20 三正常營業 ✅\n濃い抹茶パフェ必點！',isHighlight:true,tags:['必吃','抹茶芭菲','¥1,980']},
+    {time:'上午',type:'transport',title:'前往宇治',note:'搭 JR 奈良線，約17分鐘'},
+    {time:'上午',type:'sightseeing',title:'平等院',note:'世界遺產！十圓硬幣的圖案',tags:['¥600','世界遺產']},
+    {time:'中午',type:'food',title:'中村藤吉本舖',note:'宇治最知名抹茶甜點老店，必吃',tags:['必吃']},
+    {time:'下午',type:'sightseeing',title:'任天堂博物館',note:'需提前線上預約！確認是否已預約',tags:['需預約']},
+    {time:'下午',type:'food',title:'麵屋豬一',note:'宇治人氣拉麵'},
+    {time:'下午',type:'food',title:'たま木亭',note:'排隊名店麵包，要早去排隊'},
+    {time:'傍晚',type:'sightseeing',title:'伏見稻荷大社',note:'千本鳥居，傍晚人較少\n記得買豆大福！',tags:['免費','豆大福']},
+    {time:'傍晚',type:'sightseeing',title:'建仁寺',note:'京都最古老禪寺，必看「風神雷神圖」屏風！伏見稻荷搭車約15分，祇園旁',tags:['¥600','京都最古禪寺']},
+    {time:'傍晚',type:'food',title:'無碍山房 Salon de Muge',note:'米其林三星菊乃井旗下甜點茶房！建仁寺步行約10分鐘，高台寺附近\n⚠️ 週二休息，1/20 三正常營業 ✅\n濃い抹茶パフェ必點！',isHighlight:true,tags:['必吃','抹茶芭菲','¥1,980']},
   ]},
   {label:'DAY 4',date:'1/21 四',title:'東寺市集・梅小路公園',area:'京都市內・梅小路',items:[
-    {time:'早上',type:'sightseeing',title:'🏛️ 東寺弘法市集',note:'每月21日限定！早去人少撿好貨，骨董＋美食攤\n✅ 1/21（四）正常舉辦',isHighlight:true,tags:['每月21日限定','免費入場']},
-    {time:'上午',type:'sightseeing',title:'🏛️ 三十三間堂',note:'1001尊千手觀音像，震撼壯觀！東寺步行約15分鐘',tags:['¥600','必看']},
-    {time:'中午',type:'sightseeing',title:'🌿 梅小路公園',note:'水族館旁，可在公園野餐午休，環境舒適',tags:['免費']},
-    {time:'下午',type:'sightseeing',title:'🪼 京都水族館',note:'海豚表演場次：11:30 ／ 13:30 ／ 15:30\n✅ 年中無休，1/21 正常開館',tags:['可重複入場','✅已確認開館']},
-    {time:'下午',type:'sightseeing',title:'🚂 京都鐵道博物館',note:'梅小路公園內，親子必訪\n✅ 週四正常開館',tags:['親子','✅已確認開館']},
-    {time:'傍晚',type:'sightseeing',title:'⛩️ 東本願寺 ／ 西本願寺',note:'步行可達，免費參觀',tags:['免費']},
+    {time:'早上',type:'sightseeing',title:'東寺弘法市集',note:'每月21日限定！早去人少撿好貨，骨董＋美食攤\n✅ 1/21（四）正常舉辦',isHighlight:true,tags:['每月21日限定','免費入場']},
+    {time:'上午',type:'sightseeing',title:'三十三間堂',note:'1001尊千手觀音像，震撼壯觀！東寺步行約15分鐘',tags:['¥600','必看']},
+    {time:'中午',type:'sightseeing',title:'梅小路公園',note:'水族館旁，可在公園野餐午休，環境舒適',tags:['免費']},
+    {time:'下午',type:'sightseeing',title:'京都水族館',note:'海豚表演場次：11:30 ／ 13:30 ／ 15:30\n✅ 年中無休，1/21 正常開館',tags:['可重複入場','✅已確認開館']},
+    {time:'下午',type:'sightseeing',title:'京都鐵道博物館',note:'梅小路公園內，親子必訪\n✅ 週四正常開館',tags:['親子','✅已確認開館']},
+    {time:'傍晚',type:'sightseeing',title:'東本願寺 ／ 西本願寺',note:'步行可達，免費參觀',tags:['免費']},
   ]},
   {label:'DAY 5',date:'1/22 五',title:'嵐山',area:'嵐山',items:[
-    {time:'早上',type:'sightseeing',title:'🎋 嵐山竹林小徑',note:'越早越好，人少光線美'},
-    {time:'上午',type:'sightseeing',title:'⛩️ 天龍寺庭園',note:'世界遺產枯山水庭園',tags:['¥500']},
-    {time:'中午',type:'food',title:'🍜 嵐山蕎麥麵',note:'嵐山周邊多家蕎麥麵老店'},
-    {time:'下午',type:'sightseeing',title:'🌉 渡月橋散步',note:'嵐山標誌性景點'},
-    {time:'傍晚',type:'transport',title:'🚋 嵐電回市區',note:'搭嵐山路面電車體驗'},
+    {time:'早上',type:'sightseeing',title:'嵐山竹林小徑',note:'越早越好，人少光線美'},
+    {time:'上午',type:'sightseeing',title:'天龍寺庭園',note:'世界遺產枯山水庭園',tags:['¥500']},
+    {time:'中午',type:'food',title:'嵐山蕎麥麵',note:'嵐山周邊多家蕎麥麵老店'},
+    {time:'下午',type:'sightseeing',title:'渡月橋散步',note:'嵐山標誌性景點'},
+    {time:'傍晚',type:'transport',title:'嵐電回市區',note:'搭嵐山路面電車體驗'},
   ]},
   {label:'DAY 6',date:'1/23 六',title:'奈良 & 燒山祭',area:'奈良',items:[
-    {time:'上午',type:'transport',title:'🚃 前往奈良',note:'近鐵或 JR，約45分鐘'},
-    {time:'上午',type:'sightseeing',title:'🦌 奈良公園餵鹿',note:'鹿仙貝一份 ¥200，小心鹿搶東西 😅'},
-    {time:'上午',type:'sightseeing',title:'⛩️ 東大寺',note:'世界最大木造建築，奈良大佛超震撼',tags:['¥600']},
-    {time:'下午',type:'sightseeing',title:'⛩️ 春日大社',note:'千盞石燈籠，世界遺產',tags:['免費']},
-    {time:'下午',type:'food',title:'🍡 中谷堂',note:'奈良超高速現打麻糬，排隊也值得',tags:['必吃']},
-    {time:'下午',type:'food',title:'🍵 水谷茶屋',note:'奈良公園內茶屋，環境很美'},
-    {time:'傍晚',type:'sightseeing',title:'⛰️ 若草山燒山祭',note:'整座山點火！年度盛事，記得早點佔位',isHighlight:true,tags:['年度盛事🔥']},
+    {time:'上午',type:'transport',title:'前往奈良',note:'近鐵或 JR，約45分鐘'},
+    {time:'上午',type:'sightseeing',title:'奈良公園餵鹿',note:'鹿仙貝一份 ¥200，小心鹿搶東西 😅'},
+    {time:'上午',type:'sightseeing',title:'東大寺',note:'世界最大木造建築，奈良大佛超震撼',tags:['¥600']},
+    {time:'下午',type:'sightseeing',title:'春日大社',note:'千盞石燈籠，世界遺產',tags:['免費']},
+    {time:'下午',type:'food',title:'中谷堂',note:'奈良超高速現打麻糬，排隊也值得',tags:['必吃']},
+    {time:'下午',type:'food',title:'水谷茶屋',note:'奈良公園內茶屋，環境很美'},
+    {time:'傍晚',type:'sightseeing',title:'若草山燒山祭',note:'整座山點火！年度盛事，記得早點佔位',isHighlight:true,tags:['年度盛事🔥']},
   ]},
   {label:'DAY 7',date:'1/24 日',title:'出町柳・貴船・鞍馬',area:'出町柳・京都市北',items:[
-    {time:'早上',type:'food',title:'🍡 出町雙葉 豆大福',note:'京都超人氣名店！每天限量，建議 8:00 前排隊\n📍 出町柳站步行約5分鐘',isHighlight:true,tags:['必吃','早去排隊']},
-    {time:'上午',type:'food',title:'🍡 大黑屋餅舖',note:'明治30年老舖！鎌餅是名物，鎌刀形狀求肥麻糬超可愛\n📍 寺町通今出川，出町雙葉步行約10分鐘',tags:['老舖','限量']},
-    {time:'上午',type:'transport',title:'🚃 搭叡山電鐵前往貴船口',note:'從出町柳站搭叡電，約30分鐘'},
-    {time:'中午',type:'sightseeing',title:'⛩️ 貴船神社',note:'冬天石燈籠結冰超美！縁結び守護神',tags:['水神社']},
-    {time:'下午',type:'sightseeing',title:'⛰️ 鞍馬寺',note:'從貴船步行翻山可達，或搭纜車',tags:['纜車¥200']},
-    {time:'傍晚',type:'transport',title:'🚃 搭叡電回出町柳',note:'回市區，順路逛寺町通'},
+    {time:'早上',type:'food',title:'出町雙葉 豆大福',note:'京都超人氣名店！每天限量，建議 8:00 前排隊\n📍 出町柳站步行約5分鐘',isHighlight:true,tags:['必吃','早去排隊']},
+    {time:'上午',type:'food',title:'大黑屋餅舖',note:'明治30年老舖！鎌餅是名物，鎌刀形狀求肥麻糬超可愛\n📍 寺町通今出川，出町雙葉步行約10分鐘',tags:['老舖','限量']},
+    {time:'上午',type:'transport',title:'搭叡山電鐵前往貴船口',note:'從出町柳站搭叡電，約30分鐘'},
+    {time:'中午',type:'sightseeing',title:'貴船神社',note:'冬天石燈籠結冰超美！縁結び守護神',tags:['水神社']},
+    {time:'下午',type:'sightseeing',title:'鞍馬寺',note:'從貴船步行翻山可達，或搭纜車',tags:['纜車¥200']},
+    {time:'傍晚',type:'transport',title:'搭叡電回出町柳',note:'回市區，順路逛寺町通'},
     {time:'傍晚',type:'sightseeing',title:'回市區自由活動',note:'逛出町柳周邊，或鴨川散步'},
   ]},
   {label:'DAY 8',date:'1/25 一',title:'天橋立',area:'天橋立',items:[
-    {time:'出發前',type:'alert',title:'❄️ 注意：今天可能下雪！',note:'天橋立冬天會下雪，確認已穿雪靴出門',isAlert:true,tags:['⚠️ 雪靴必備']},
-    {time:'上午早',type:'transport',title:'🚃 京都 → 天橋立（特急Hashidate）',note:'約2小時，建議早出發',tags:['特急','約¥3,110']},
-    {time:'中午',type:'sightseeing',title:'🌉 天橋立',note:'日本三景！可上觀景台看「飛龍觀」\n也可騎自行車穿越2公里松林沙洲',tags:['日本三景']},
-    {time:'中午',type:'food',title:'🦞 海鮮午餐',note:'天橋立當地新鮮海鮮丼、螃蟹料理'},
-    {time:'傍晚',type:'transport',title:'🚃 返回京都',note:'傍晚前搭車回京都，約2小時'},
+    {time:'出發前',type:'alert',title:'注意：今天可能下雪！',note:'天橋立冬天會下雪，確認已穿雪靴出門',isAlert:true,tags:['⚠️ 雪靴必備']},
+    {time:'上午早',type:'transport',title:'京都 → 天橋立（特急Hashidate）',note:'約2小時，建議早出發',tags:['特急','約¥3,110']},
+    {time:'中午',type:'sightseeing',title:'天橋立',note:'日本三景！可上觀景台看「飛龍觀」\n也可騎自行車穿越2公里松林沙洲',tags:['日本三景']},
+    {time:'中午',type:'food',title:'海鮮午餐',note:'天橋立當地新鮮海鮮丼、螃蟹料理'},
+    {time:'傍晚',type:'transport',title:'返回京都',note:'傍晚前搭車回京都，約2小時'},
   ]},
   {label:'DAY 9',date:'1/26 二',title:'神戶',area:'神戶',items:[
-    {time:'上午',type:'transport',title:'🚃 京都 → 神戶（JR新快速）',note:'約55分鐘',tags:['約¥1,100']},
-    {time:'上午',type:'food',title:'🍞 神戶吐司',note:'神戶名物！ISUZU Bakery 推薦',tags:['必吃']},
-    {time:'上午',type:'sightseeing',title:'🐘 神戶動物王國',note:'室內動物園，可近距離接觸動物'},
-    {time:'下午',type:'sightseeing',title:'🐼 王子動物園',note:'免費入場！有大熊貓',tags:['免費']},
+    {time:'上午',type:'transport',title:'京都 → 神戶（JR新快速）',note:'約55分鐘',tags:['約¥1,100']},
+    {time:'上午',type:'food',title:'神戶吐司',note:'神戶名物！ISUZU Bakery 推薦',tags:['必吃']},
+    {time:'上午',type:'sightseeing',title:'神戶動物王國',note:'室內動物園，可近距離接觸動物'},
+    {time:'下午',type:'sightseeing',title:'王子動物園',note:'免費入場！有大熊貓',tags:['免費']},
     {time:'傍晚',type:'sightseeing',title:'神戶市區散步',note:'北野異人館、南京町中華街'},
   ]},
   {label:'DAY 10',date:'1/27 三',title:'京都最後一天',area:'京都',items:[
-    {time:'上午',type:'sightseeing',title:'⛩️ 藤森神社',note:'勝馬・學業守護神社，5月紫藤花超美！馬迷必拜',tags:['祈福','勝馬']},
-    {time:'上午',type:'sightseeing',title:'⛩️ 下鴨神社',note:'世界遺產！京都最古老神社之一，糺之森森林步道超療癒',tags:['世界遺產','免費']},
-    {time:'上午',type:'food',title:'🍪 村上開新堂',note:'明治40年創業，京都最古老洋菓子店！招牌俄羅斯蛋糕必買\n📍 寺町二條\n✅ 週三正常營業（10:00～17:30）',isHighlight:true,tags:['必買','俄羅斯蛋糕','老舖']},
-    {time:'中午',type:'sightseeing',title:'🏙️ 錦市場掃尾購物',note:'最後一次逛錦市場，醃菜、伴手禮補貨！'},
-    {time:'上午',type:'sightseeing',title:'⛩️ 市比賣神社',note:'女性守護神社，京都秘境',tags:['祈福']},
-    {time:'下午',type:'sightseeing',title:'🎮 京都寶可夢中心',note:'京都BAL百貨內，皮卡丘等著你！跟大阪不同限定商品，備好荷包💸',isHighlight:true,tags:['限定商品','購物']},
-    {time:'下午',type:'sightseeing',title:'🌊 teamLab（看票況）',note:'需提前線上購票，確認是否有票',tags:['需預約']},
-    {time:'傍晚',type:'food',title:'🎉 最後晚餐',note:'想吃什麼就吃什麼！旅程的最後一餐'},
+    {time:'上午',type:'sightseeing',title:'藤森神社',note:'勝馬・學業守護神社，5月紫藤花超美！馬迷必拜',tags:['祈福','勝馬']},
+    {time:'上午',type:'sightseeing',title:'下鴨神社',note:'世界遺產！京都最古老神社之一，糺之森森林步道超療癒',tags:['世界遺產','免費']},
+    {time:'上午',type:'food',title:'村上開新堂',note:'明治40年創業，京都最古老洋菓子店！招牌俄羅斯蛋糕必買\n📍 寺町二條\n✅ 週三正常營業（10:00～17:30）',isHighlight:true,tags:['必買','俄羅斯蛋糕','老舖']},
+    {time:'中午',type:'sightseeing',title:'錦市場掃尾購物',note:'最後一次逛錦市場，醃菜、伴手禮補貨！'},
+    {time:'上午',type:'sightseeing',title:'市比賣神社',note:'女性守護神社，京都秘境',tags:['祈福']},
+    {time:'下午',type:'sightseeing',title:'京都寶可夢中心',note:'京都BAL百貨內，皮卡丘等著你！跟大阪不同限定商品，備好荷包💸',isHighlight:true,tags:['限定商品','購物']},
+    {time:'下午',type:'sightseeing',title:'teamLab（看票況）',note:'需提前線上購票，確認是否有票',tags:['需預約']},
+    {time:'傍晚',type:'food',title:'最後晚餐',note:'想吃什麼就吃什麼！旅程的最後一餐'},
     {time:'晚上',type:'hotel',title:'整理行李',note:'明天 14:00 飛機，建議 11:00 前出發去機場'},
   ]},
   {label:'DAY 11',date:'1/28 四',title:'回台灣 🏠',area:'關西機場 → 桃園',items:[
-    {time:'11:00前',type:'hotel',title:'🏨 飯店退房',note:'11:00 退房，可先寄放行李'},
-    {time:'~11:00',type:'transport',title:'🚄 Haruka 特急 → 關西機場',note:'約75分鐘，最晚 11:30 前搭車',tags:['¥1,100']},
-    {time:'14:00',type:'transport',title:'✈️ KIX 出發 JX821',note:'14:00 關西機場 → 16:15 桃園',tags:['JX821']},
-    {time:'16:15',type:'transport',title:'🏠 抵達桃園，回家！',note:'旅行圓滿結束 🎉',isHighlight:true},
+    {time:'11:00前',type:'hotel',title:'飯店退房',note:'11:00 退房，可先寄放行李'},
+    {time:'~11:00',type:'transport',title:'Haruka 特急 → 關西機場',note:'約75分鐘，最晚 11:30 前搭車',tags:['¥1,100']},
+    {time:'14:00',type:'transport',title:'KIX 出發 JX821',note:'14:00 關西機場 → 16:15 桃園',tags:['JX821']},
+    {time:'16:15',type:'transport',title:'抵達桃園，回家！',note:'旅行圓滿結束 🎉',isHighlight:true},
   ]},
 ];
 
@@ -860,7 +860,7 @@ const clPack=['❗ 雪靴（DAY8天橋立會下雪！）','厚外套 + 保暖內
 let expenses=JSON.parse(localStorage.getItem('japan2027-exp')||'[]');
 let budget=parseInt(localStorage.getItem('japan2027-budget')||'0');
 const TWD_RATE=0.218; // 1 JPY ≈ 0.218 TWD
-const catInfo={food:{label:'🍜 餐飲',cls:'cat-food',color:'#c0392b'},transport:{label:'🚃 交通',cls:'cat-transport',color:'#8c7b6b'},hotel:{label:'🏨 住宿',cls:'cat-hotel',color:'#4a7c59'},ticket:{label:'🎟 門票',cls:'cat-ticket',color:'#a0732a'},shop:{label:'🛍 購物',cls:'cat-shop',color:'#4a52b7'},other:{label:'📌 其他',cls:'cat-other',color:'#8c7b6b'}};
+const catInfo={food:{label:'🍜 餐飲',cls:'cat-food',color:'#c0392b'},transport:{label:'🚃 交通',cls:'cat-transport',color:'#8c7b6b'},hotel:{label:'住宿',cls:'cat-hotel',color:'#4a7c59'},ticket:{label:'🎟 門票',cls:'cat-ticket',color:'#a0732a'},shop:{label:'🛍 購物',cls:'cat-shop',color:'#4a52b7'},other:{label:'📌 其他',cls:'cat-other',color:'#8c7b6b'}};
 
 function saveExp(){localStorage.setItem('japan2027-exp',JSON.stringify(expenses));}
 function setBudget(){
