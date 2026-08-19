@@ -1155,40 +1155,57 @@ function clearFlightHistory(){
 let kyotoMap = null;
 function initMap(){
   if(kyotoMap) return;
-  kyotoMap = L.map('kyoto-map').setView([35.0037, 135.7772], 13);
+  kyotoMap = L.map('kyoto-map').setView([35.0116, 135.7681], 12);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
     attribution:'&copy; OpenStreetMap contributors'
   }).addTo(kyotoMap);
 
   const mapSpots=[
-    {name:'東寺（弘法市集）',lat:34.9807,lng:135.7478},
-    {name:'三十三間堂',lat:34.9878,lng:135.7717},
-    {name:'建仁寺',lat:35.0011,lng:135.7735},
-    {name:'伏見稻荷大社',lat:34.9671,lng:135.7727},
-    {name:'平等院（宇治）',lat:34.8893,lng:135.8074},
-    {name:'下鴨神社',lat:35.0354,lng:135.7722},
-    {name:'藤森神社',lat:34.9516,lng:135.7727},
-    {name:'市比賣神社',lat:34.9953,lng:135.7603},
-    {name:'貴船神社',lat:35.1133,lng:135.7617},
-    {name:'鞍馬寺',lat:35.1263,lng:135.7680},
-    {name:'嵐山竹林',lat:35.0170,lng:135.6727},
-    {name:'天龍寺',lat:35.0167,lng:135.6744},
-    {name:'京都水族館',lat:34.9867,lng:135.7404},
-    {name:'京都鐵道博物館',lat:34.9875,lng:135.7375},
-    {name:'京都寶可夢中心',lat:35.0035,lng:135.7680},
+    // 京都市內
+    {name:'東寺（弘法市集）',lat:34.9807,lng:135.7478,city:'京都'},
+    {name:'三十三間堂',lat:34.9879,lng:135.7717,city:'京都'},
+    {name:'建仁寺',lat:35.0011,lng:135.7735,city:'京都'},
+    {name:'伏見稻荷大社',lat:34.9671,lng:135.7727,city:'京都'},
+    {name:'下鴨神社',lat:35.0369,lng:135.7738,city:'京都'},
+    {name:'藤森神社',lat:34.9516,lng:135.7727,city:'京都'},
+    {name:'市比賣神社',lat:34.9964,lng:135.7591,city:'京都'},
+    {name:'貴船神社',lat:35.1133,lng:135.7578,city:'京都'},
+    {name:'鞍馬寺',lat:35.1263,lng:135.7700,city:'京都'},
+    {name:'嵐山竹林・天龍寺',lat:35.0170,lng:135.6727,city:'京都'},
+    {name:'京都水族館',lat:34.9876,lng:135.7398,city:'京都'},
+    {name:'京都鐵道博物館',lat:34.9875,lng:135.7375,city:'京都'},
+    {name:'京都寶可夢中心（BAL）',lat:35.0032,lng:135.7678,city:'京都'},
+    {name:'錦市場',lat:35.0049,lng:135.7646,city:'京都'},
+    // 宇治
+    {name:'平等院',lat:34.8893,lng:135.8074,city:'宇治'},
+    {name:'任天堂博物館',lat:34.8740,lng:135.7833,city:'宇治'},
+    // 奈良
+    {name:'東大寺',lat:34.6890,lng:135.8398,city:'奈良'},
+    {name:'奈良公園・春日大社',lat:34.6813,lng:135.8449,city:'奈良'},
+    {name:'若草山',lat:34.6892,lng:135.8460,city:'奈良'},
+    // 大阪
+    {name:'道頓堀',lat:34.6686,lng:135.5022,city:'大阪'},
+    {name:'寶可夢中心大阪',lat:34.7051,lng:135.4986,city:'大阪'},
+    {name:'勝尾寺',lat:34.8471,lng:135.5369,city:'大阪'},
+    // 神戶
+    {name:'王子動物園',lat:34.7078,lng:135.1939,city:'神戶'},
+    {name:'北野異人館',lat:34.6985,lng:135.1869,city:'神戶'},
+    // 天橋立
+    {name:'天橋立',lat:35.5833,lng:135.1833,city:'天橋立'},
   ];
 
-  const colors={
-    '東寺':'#e17055','三十三':'#d4a373','建仁':'#a3b18a',
-    '伏見':'#b8a8c8','下鴨':'#a3b18a','貴船':'#6fb3d2',
+  const cityColors={
+    '京都':'#d4a373','宇治':'#a3b18a','奈良':'#95e1d3',
+    '大阪':'#f38181','神戶':'#a29bfe','天橋立':'#6fb3d2'
   };
 
   mapSpots.forEach(s=>{
+    const color=cityColors[s.city]||'#d4a373';
     const marker=L.circleMarker([s.lat,s.lng],{
-      radius:8,fillColor:'#d4a373',color:'#2d3436',
-      weight:2,opacity:1,fillOpacity:.85
+      radius:8,fillColor:color,color:'#2d3436',
+      weight:2,opacity:1,fillOpacity:.9
     }).addTo(kyotoMap);
-    marker.bindPopup(`<b style="font-size:13px">${s.name}</b>`);
+    marker.bindPopup(`<b style="font-size:13px;font-family:serif">${s.name}</b><br><small style="color:#888">${s.city}</small>`);
   });
 }
 
