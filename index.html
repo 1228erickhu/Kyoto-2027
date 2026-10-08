@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🍌 Nano Banana 陪你遊京都 2027</title>
+<title>我們的家族京都之旅 2027</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -133,7 +133,7 @@ body{
 .hero-content{position:relative;z-index:2;}
 .hero-label{display:inline-block;}
 .hero-label::before{
-  content:'✈️ Kyoto Family Trip 2027 ✈️';
+  content:'Kyoto Family Trip 2027';
   display:block;font-size:12px;letter-spacing:.2em;
   color:var(--peach-dark);margin-bottom:10px;
   font-family:'ZCOOL KuaiLe',cursive;
@@ -237,7 +237,7 @@ nav::-webkit-scrollbar{display:none;}
 .tips-t{font-size:11px;color:#b8860b;margin-bottom:8px;font-weight:bold;letter-spacing:.08em;font-family:'ZCOOL KuaiLe',cursive;}
 .tips ul{list-style:none;}
 .tips li{font-size:13px;color:var(--ink);line-height:1.9;padding-left:16px;position:relative;}
-.tips li::before{content:'🌸';position:absolute;left:0;font-size:10px;}
+.tips li::before{content:'';position:absolute;left:0;}
 
 /* ── ALERT ── */
 .alert-box{
@@ -862,7 +862,42 @@ nav{background:rgba(255,255,255,.82);backdrop-filter:saturate(180%) blur(14px);-
   .sec-title{font-size:24px;}
 }
 body *:not(svg):not(svg *){font-family:var(--font) !important;}
+
+/* ══ Lucide 圖示 ══ */
+.ic{width:1.05em;height:1.05em;flex-shrink:0;vertical-align:-.17em;stroke-width:1.75;margin-right:.35em;color:inherit;}
+.ic-lg{width:20px;height:20px;margin:0;}
+button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .ic,.sum-sub .ic{vertical-align:-.15em;}
+.gm-btn,.flight-calc-btn,.hotel-badge,.cbadge,.reminder-tag,.mv-pill,.rail-hint,.flight-calc-title,.reminder-section-label,.flight-history-time,.day-hero-area,.tl2-tap{display:inline-flex;align-items:center;justify-content:center;}
+.flight-calc-btn{display:flex;}
+.rail-hint{display:flex;gap:2px;color:var(--faint);}
+.mv-pill .ic{width:12px;height:12px;margin-right:4px;}
+.kawaii-banner-icon{color:var(--accent);}
+.kawaii-banner-icon .ic{width:20px;height:20px;margin:0;}
+.food-emoji{width:44px;height:44px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+.food-emoji .ic{width:22px;height:22px;margin:0;}
+.tr-icon{color:var(--ink-2);}
+.tr-icon .ic{width:20px;height:20px;margin:0;}
+.reminder-icon{color:var(--accent);display:flex;justify-content:center;padding-top:2px;}
+.reminder-icon .ic{width:18px;height:18px;margin:0;}
+.reminder-close{display:flex;align-items:center;color:var(--muted);}
+.reminder-close .ic{width:18px;height:18px;margin:0;}
+.bell-btn .ic{width:20px;height:20px;margin:0;}
+.day-hero-ill{color:var(--accent);}
+.day-hero-ill .ic{width:26px;height:26px;margin:0;}
+.day-hero-area .ic{width:14px;height:14px;color:var(--faint);}
+.tl2-title .star{display:inline-flex;color:var(--warm);}
+.tl2-title .star .ic{width:13px;height:13px;margin:0;fill:currentColor;}
+.tl2-tap .ic{width:12px;height:12px;margin-right:3px;}
+.hotel-info .ic-line{display:flex;align-items:center;gap:10px;line-height:2.1;}
+.hotel-info .ic{width:16px;height:16px;margin:0;color:var(--faint);}
+.cl-tick{display:none;align-items:center;justify-content:center;}
+.cl-item.done .cl-tick{display:flex;}
+.cl-tick .ic{width:12px;height:12px;margin:0;stroke-width:3;color:#fff;}
+.alert-box p{display:flex;align-items:center;gap:6px;}
+.alert-box .ic{margin:0;}
+.empty-state .ic{display:block;margin:0 auto 8px;width:24px;height:24px;color:var(--faint);}
 </style>
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 
@@ -898,7 +933,7 @@ body *:not(svg):not(svg *){font-family:var(--font) !important;}
 <div id="section-itinerary" class="section active">
   <div class="nb-page">
   <div class="kawaii-banner">
-    <div class="kawaii-banner-icon">🗾</div>
+    <div class="kawaii-banner-icon"><i data-lucide="map" class="ic"></i></div>
     <div class="kawaii-banner-text">
       <div class="kawaii-banner-title">京都・名古屋 11 天 10 夜家族旅行</div>
       <div class="kawaii-banner-sub">1/18（一）出發 → 1/28（四）回台</div>
@@ -906,7 +941,7 @@ body *:not(svg):not(svg *){font-family:var(--font) !important;}
   </div>
   <div class="sec-title"><span>01</span>每日行程</div>
   <div class="rail" id="rail"><div class="rail-inner" id="rail-inner"></div></div>
-  <div class="rail-hint">← 左右滑動或點日期切換 →</div>
+  <div class="rail-hint"><i data-lucide="move-horizontal" class="ic"></i>左右滑動或點日期切換</div>
   <div id="day-hero"></div>
   <div class="tl2" id="timeline"></div>
   </div>
@@ -915,7 +950,7 @@ body *:not(svg):not(svg *){font-family:var(--font) !important;}
 <!-- SPOTS -->
 <div id="section-spots" class="section">
   <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.5s ease-in-out infinite;">⛩️</div><div class="kawaii-banner-text"><div class="kawaii-banner-title">京都・大阪・奈良・神戶・天橋立</div><div class="kawaii-banner-sub">點擊景點卡片查看詳細資訊</div></div></div>
+  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.5s ease-in-out infinite;"><i data-lucide="landmark" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">京都・大阪・奈良・神戶・天橋立</div><div class="kawaii-banner-sub">點擊景點卡片查看詳細資訊</div></div></div>
   <div class="sec-title"><span>02</span>景點地圖</div>
   <div class="sec-desc">點擊景點卡片在下方地圖查看位置。</div>
   <div class="map-filter">
@@ -935,7 +970,7 @@ body *:not(svg):not(svg *){font-family:var(--font) !important;}
 <!-- FOOD -->
 <div id="section-food" class="section">
   <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2s ease-in-out infinite;">🍵</div><div class="kawaii-banner-text"><div class="kawaii-banner-title">這次一定要吃到的美食！</div><div class="kawaii-banner-sub">拉麵・抹茶・和菓子・海鮮・麵包</div></div></div>
+  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2s ease-in-out infinite;"><i data-lucide="coffee" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">這次一定要吃到的美食！</div><div class="kawaii-banner-sub">拉麵・抹茶・和菓子・海鮮・麵包</div></div></div>
   <div class="sec-title"><span>03</span>美食清單</div>
   <div class="sec-desc">這次旅行一定要吃到的！</div>
   <div class="food-grid" id="food-grid"></div>
@@ -945,7 +980,7 @@ body *:not(svg):not(svg *){font-family:var(--font) !important;}
 <!-- HOTEL -->
 <div id="section-hotel" class="section">
   <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.8s ease-in-out infinite;">🏨</div><div class="kawaii-banner-text"><div class="kawaii-banner-title">三條格拉斯麗酒店</div><div class="kawaii-banner-sub">全程 10 晚，烏丸御池站步行 5 分鐘</div></div></div>
+  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.8s ease-in-out infinite;"><i data-lucide="hotel" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">三條格拉斯麗酒店</div><div class="kawaii-banner-sub">全程 10 晚，烏丸御池站步行 5 分鐘</div></div></div>
   <div class="sec-title"><span>04</span>住宿資訊</div>
   <div class="sec-desc">全程住宿三條格拉斯麗酒店，記得帶訂房確認信。</div>
   <div class="hotel-card">
@@ -953,14 +988,14 @@ body *:not(svg):not(svg *){font-family:var(--font) !important;}
     <div class="hotel-name">三條格拉斯麗酒店</div>
     <div class="hotel-jp">ホテルグラスリー三条</div>
     <div class="hotel-info">
-      📍 京都市中京區三条通<br>
-      🚇 地鐵烏丸御池站步行約5分鐘<br>
-      🕐 入住 15:00 ／ 退房 11:00<br>
-      📡 免費 Wi-Fi（全館）<br>
-      🛍 錦市場步行約10分鐘<br>
-      🧳 退房後可寄放行李
+      <div class="ic-line"><i data-lucide="map-pin" class="ic"></i>京都市中京區三条通</div>
+      <div class="ic-line"><i data-lucide="train-front-tunnel" class="ic"></i>地鐵烏丸御池站步行約5分鐘</div>
+      <div class="ic-line"><i data-lucide="clock" class="ic"></i>入住 15:00 ／ 退房 11:00</div>
+      <div class="ic-line"><i data-lucide="wifi" class="ic"></i>免費 Wi-Fi（全館）</div>
+      <div class="ic-line"><i data-lucide="shopping-bag" class="ic"></i>錦市場步行約10分鐘</div>
+      <div class="ic-line"><i data-lucide="luggage" class="ic"></i>退房後可寄放行李</div>
     </div>
-    <div class="hotel-badge">✓ 記得帶確認信</div>
+    <div class="hotel-badge"><i data-lucide="check" class="ic"></i>記得帶確認信</div>
   </div>
   <div class="tips" style="margin-top:14px">
     <div class="tips-t">住宿小提醒</div>
@@ -976,13 +1011,13 @@ body *:not(svg):not(svg *){font-family:var(--font) !important;}
 <!-- TRANSPORT -->
 <div id="section-transport" class="section">
   <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.6s ease-in-out infinite;">🚄</div><div class="kawaii-banner-text"><div class="kawaii-banner-title">交通資訊 ＆ 機票費用試算</div><div class="kawaii-banner-sub">抵達後優先購買 ICOCA 卡 🎫</div></div></div>
+  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.6s ease-in-out infinite;"><i data-lucide="train-front" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">交通資訊 ＆ 機票費用試算</div><div class="kawaii-banner-sub">抵達後優先購買 ICOCA 卡</div></div></div>
   <div class="sec-title"><span>05</span>交通資訊</div>
   <div class="sec-desc">主要票券與費用整理，抵達後優先購買 ICOCA。</div>
 
   <!-- Flight Calculator -->
   <div class="flight-calc">
-    <div class="flight-calc-title">✈️ 機票費用試算</div>
+    <div class="flight-calc-title"><i data-lucide="plane" class="ic"></i>機票費用試算</div>
     <div style="display:grid;grid-template-columns:88px 1fr 1fr;gap:8px;align-items:end;margin-bottom:8px;">
       <div></div>
       <div style="font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);">來回票價（NT$）</div>
@@ -1000,7 +1035,7 @@ body *:not(svg):not(svg *){font-family:var(--font) !important;}
         <input class="flight-input" type="number" id="f-child-count" placeholder="人數" min="0" value="0">
       </div>
     </div>
-    <button class="flight-calc-btn" onclick="calcFlight()">✈️ 確認計算並記錄</button>
+    <button class="flight-calc-btn" onclick="calcFlight()"><i data-lucide="calculator" class="ic"></i>確認計算並記錄</button>
     <div class="flight-result" id="flight-result">
       <div class="flight-result-title">費用總結</div>
       <div class="flight-result-grid">
@@ -1026,7 +1061,7 @@ body *:not(svg):not(svg *){font-family:var(--font) !important;}
     <!-- History -->
     <div id="flight-history-wrap" style="margin-top:18px;display:none;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-        <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;">📋 歷史紀錄</div>
+        <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;"><i data-lucide="clipboard-list" class="ic"></i>歷史紀錄</div>
         <button onclick="clearFlightHistory()" style="font-size:11px;padding:4px 10px;background:none;border:1px solid var(--border);border-radius:2px;cursor:pointer;color:var(--muted);font-family:'DM Sans',sans-serif;">清除全部</button>
       </div>
       <div id="flight-history-list"></div>
@@ -1040,10 +1075,10 @@ body *:not(svg):not(svg *){font-family:var(--font) !important;}
 <!-- CHECKLIST -->
 <div id="section-checklist" class="section">
   <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.2s ease-in-out infinite;">🎒</div><div class="kawaii-banner-text"><div class="kawaii-banner-title">出發前別忘記！</div><div class="kawaii-banner-sub">點擊項目打勾，勾選狀態自動儲存</div></div></div>
+  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.2s ease-in-out infinite;"><i data-lucide="backpack" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">出發前別忘記！</div><div class="kawaii-banner-sub">點擊項目打勾，勾選狀態自動儲存</div></div></div>
   <div class="sec-title"><span>06</span>出發前待辦</div>
   <div class="sec-desc">點擊項目打勾，勾選狀態會自動儲存。</div>
-  <div class="alert-box" style="margin-bottom:18px"><p>❗ DAY8 天橋立（1/25）預計下雪，務必準備雪靴！</p></div>
+  <div class="alert-box" style="margin-bottom:18px"><p><i data-lucide="triangle-alert" class="ic"></i>DAY8 天橋立（1/25）預計下雪，務必準備雪靴！</p></div>
   <div class="cl-section"><div class="cl-title">行前必辦</div><div id="cl-before"></div></div>
   <div class="cl-section"><div class="cl-title">行李打包清單</div><div id="cl-pack"></div></div>
   </div>
@@ -1052,7 +1087,7 @@ body *:not(svg):not(svg *){font-family:var(--font) !important;}
 <!-- EXPENSE -->
 <div id="section-expense" class="section">
   <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.4s ease-in-out infinite;">💴</div><div class="kawaii-banner-text"><div class="kawaii-banner-title">旅遊記帳</div><div class="kawaii-banner-sub">記錄每筆費用，自動換算台幣 💰</div></div></div>
+  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.4s ease-in-out infinite;"><i data-lucide="wallet" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">旅遊記帳</div><div class="kawaii-banner-sub">記錄每筆費用，自動換算台幣</div></div></div>
   <div class="sec-title"><span>07</span>旅遊記帳</div>
   <div class="sec-desc">記錄每筆費用（日圓 ¥），自動換算台幣，資料儲存在此裝置。</div>
 
@@ -1078,12 +1113,12 @@ body *:not(svg):not(svg *){font-family:var(--font) !important;}
       <div class="form-group"><label>金額（¥）</label><input type="number" id="exp-amount" placeholder="0"></div>
       <div class="form-group"><label>類別</label>
         <select id="exp-cat">
-          <option value="food">🍜 餐飲</option>
-          <option value="transport">🚃 交通</option>
+          <option value="food">餐飲</option>
+          <option value="transport">交通</option>
           <option value="hotel">住宿</option>
-          <option value="ticket">🎟 門票</option>
-          <option value="shop">🛍 購物</option>
-          <option value="other">📌 其他</option>
+          <option value="ticket">門票</option>
+          <option value="shop">購物</option>
+          <option value="other">其他</option>
         </select>
       </div>
       <button class="add-btn" onclick="addExp()">新增</button>
@@ -1107,7 +1142,7 @@ body *:not(svg):not(svg *){font-family:var(--font) !important;}
         <thead><tr><th>項目</th><th>類別</th><th style="text-align:right">金額（¥）</th><th style="text-align:right">台幣（NT$）</th><th></th></tr></thead>
         <tbody id="exp-list"></tbody>
       </table>
-      <div class="empty-state" id="exp-empty">出發後在這裡記帳 ✈️</div>
+      <div class="empty-state" id="exp-empty">出發後在這裡記帳</div>
     </div>
   </div>
   </div>
@@ -1117,9 +1152,9 @@ body *:not(svg):not(svg *){font-family:var(--font) !important;}
 <div class="reminder-overlay" id="reminder-overlay" style="display:none">
   <div class="reminder-box">
     <div class="reminder-header">
-      <span style="font-size:18px">🔔</span>
+      <i data-lucide="bell" class="ic ic-lg"></i>
       <h3 id="reminder-title">今日提醒</h3>
-      <button class="reminder-close" onclick="closeReminder()">✕</button>
+      <button class="reminder-close" onclick="closeReminder()"><i data-lucide="x" class="ic"></i></button>
     </div>
     <div class="reminder-body" id="reminder-body"></div>
     <div class="reminder-footer">
@@ -1132,12 +1167,14 @@ body *:not(svg):not(svg *){font-family:var(--font) !important;}
 
 <!-- Floating bell button -->
 <button class="bell-btn" id="bell-btn" onclick="showReminder()" title="查看行程提醒">
-  🔔
+  <i data-lucide="bell" class="ic"></i>
   <span class="bell-badge" id="bell-badge" style="display:none"></span>
 </button>
 
 
 <script>
+const ic=(n,cls='')=>`<i data-lucide="${n}" class="ic${cls?' '+cls:''}"></i>`;
+
 const days=[
   {label:'DAY 1',date:'1/18 一',title:'抵達神戶→京都',area:'台中 → 神戶 → 京都',items:[
     {time:'08:45',type:'transport',title:'台中出發 JX306',note:'08:45 台中 RMQ → 12:30 神戶 UKB',tags:['JX306','星宇航空'],isHighlight:true},
@@ -1192,7 +1229,7 @@ const days=[
     {time:'13:30',type:'spot',title:'春日大社',note:'世界遺產，朱紅色神社，春日大社境內萬盞燈籠',isHighlight:true},
     {time:'15:30',type:'spot',title:'ならまち散策',note:'古老町家街道，雜貨小店、咖啡廳'},
     {time:'17:30',type:'transport',title:'返回京都',note:'近鐵回京都，傍晚抵達'},
-    {time:'20:00',type:'spot',title:'若草山燒山祭',note:'★ 1/23 限定！奈良山頂點火，從京都可能遠眺，建議當天確認',isHighlight:true},
+    {time:'20:00',type:'spot',title:'若草山燒山祭',note:'1/23 限定！奈良山頂點火，從京都可能遠眺，建議當天確認',isHighlight:true},
   ]},
   {label:'DAY 7',date:'1/24 日',title:'叡電・貴船神社',area:'出町柳 → 貴船',items:[
     {time:'09:00',type:'food',title:'出町雙葉豆餅',note:'百年名店，週日開店，早到排隊買豆餅早餐',isHighlight:true},
@@ -1214,7 +1251,7 @@ const days=[
   ]},
   {label:'DAY 9',date:'1/26 二',title:'LEGOLAND Japan',area:'名古屋・金城ふ頭',items:[
     {time:'09:00',type:'transport',title:'前往 LEGOLAND',note:'搭あおなみ線至金城ふ頭站，步行即到'},
-    {time:'10:00',type:'spot',title:'LEGOLAND Japan 全天',note:'★ 全天體驗！積木樂園、MINILAND 縮小世界、各主題區',isHighlight:true},
+    {time:'10:00',type:'spot',title:'LEGOLAND Japan 全天',note:'全天體驗！積木樂園、MINILAND 縮小世界、各主題區',isHighlight:true},
     {time:'10:30',type:'spot',title:'MINILAND',note:'用樂高重現日本各城市地標，超精細'},
     {time:'12:00',type:'food',title:'園內午餐',note:'LEGOLAND 餐廳，或自帶便當（確認園區規定）'},
     {time:'13:00',type:'spot',title:'各主題遊樂設施',note:'忍者道場、海盜海岸、城堡、探險世界'},
@@ -1258,44 +1295,44 @@ const spots=[
   {city:'奈良',name:'東大寺',jp:'東大寺',desc:'世界最大木造建築，奈良大佛',tags:['神社','¥600'],q:'東大寺 奈良'},
   {city:'奈良',name:'若草山',jp:'若草山',desc:'燒山祭！整座山點火，年度壯觀盛事',tags:['活動','自然'],q:'若草山 奈良'},
   {city:'大阪',name:'道頓堀',jp:'道頓堀',desc:'格利科跑步人、章魚燒、串炸',tags:['美食','夜景'],q:'道頓堀 大阪'},
-  {city:'大阪',name:'寶可夢中心',jp:'ポケモンセンターオーサカ',desc:'大阪梅田，皮卡丘等著你 💸',tags:['購物'],q:'ポケモンセンターオーサカ'},
+  {city:'大阪',name:'寶可夢中心',jp:'ポケモンセンターオーサカ',desc:'大阪梅田，皮卡丘等著你',tags:['購物'],q:'ポケモンセンターオーサカ'},
   {city:'神戶',name:'王子動物園',jp:'王子動物園',desc:'免費入場，有大熊貓！',tags:['動物園','免費'],q:'王子動物園 神戸'},
   {city:'天橋立',name:'天橋立',jp:'天橋立',desc:'日本三景，冬天可能下雪，雪靴備好',tags:['自然','日本三景'],q:'天橋立'},
 ];
 
 const foods=[
-  {emoji:'🍜',name:'一蘭拉麵',type:'拉麵',note:'獨立隔間專注享受，豚骨湯頭'},
-  {emoji:'🍩',name:"I'm donuts",type:'甜點',note:'排隊名店甜甜圈，蓬鬆綿密'},
-  {emoji:'☕️',name:'藍瓶咖啡（愛心拉花）',type:'咖啡',note:'京都藍瓶，打卡心形拉花'},
-  {emoji:'🥢',name:'錦市場',type:'市場美食',note:'京都廚房，醃菜、串燒、豆腐'},
-  {emoji:'🍜',name:'麵屋優光',type:'拉麵',note:'行程多次提到的人氣拉麵'},
-  {emoji:'🍵',name:'中村藤吉本舖',type:'抹茶甜點',note:'宇治本店，抹茶聖代必點'},
-  {emoji:'🍡',name:'中谷堂麻糬',type:'和菓子',note:'奈良超高速現打，排隊也值得'},
-  {emoji:'🎂',name:'Harbs 草莓蛋糕',type:'蛋糕',note:'仁仁生日！大丸百貨19:00前取貨'},
-  {emoji:'🥐',name:'たま木亭麵包',type:'麵包',note:'宇治排隊名店，早去才買得到'},
-  {emoji:'🍞',name:'神戶名物吐司',type:'麵包',note:'ISUZU Bakery，神戶特產'},
-  {emoji:'🦞',name:'天橋立海鮮丼',type:'海鮮',note:'新鮮螃蟹、海鮮丼，天橋立必吃'},
-  {emoji:'🍡',name:'伏見稻荷豆大福',type:'和菓子',note:'稻荷大社附近攤販，熱騰騰'},
+  {emoji:'soup',name:'一蘭拉麵',type:'拉麵',note:'獨立隔間專注享受，豚骨湯頭'},
+  {emoji:'donut',name:"I'm donuts",type:'甜點',note:'排隊名店甜甜圈，蓬鬆綿密'},
+  {emoji:'coffee',name:'藍瓶咖啡（愛心拉花）',type:'咖啡',note:'京都藍瓶，打卡心形拉花'},
+  {emoji:'utensils',name:'錦市場',type:'市場美食',note:'京都廚房，醃菜、串燒、豆腐'},
+  {emoji:'soup',name:'麵屋優光',type:'拉麵',note:'行程多次提到的人氣拉麵'},
+  {emoji:'leaf',name:'中村藤吉本舖',type:'抹茶甜點',note:'宇治本店，抹茶聖代必點'},
+  {emoji:'candy',name:'中谷堂麻糬',type:'和菓子',note:'奈良超高速現打，排隊也值得'},
+  {emoji:'cake',name:'Harbs 草莓蛋糕',type:'蛋糕',note:'仁仁生日！大丸百貨19:00前取貨'},
+  {emoji:'croissant',name:'たま木亭麵包',type:'麵包',note:'宇治排隊名店，早去才買得到'},
+  {emoji:'wheat',name:'神戶名物吐司',type:'麵包',note:'ISUZU Bakery，神戶特產'},
+  {emoji:'fish',name:'天橋立海鮮丼',type:'海鮮',note:'新鮮螃蟹、海鮮丼，天橋立必吃'},
+  {emoji:'candy',name:'伏見稻荷豆大福',type:'和菓子',note:'稻荷大社附近攤販，熱騰騰'},
 ];
 
 const transports=[
-  {icon:'✈️',name:'去程：台中 RMQ → 神戶 UKB（JX306）',detail:'出發 08:45 台中 ／ 抵達 12:30 神戶神戶機場\n建議 06:30 前到台中機場',cost:'已購票'},
-  {icon:'✈️',name:'回程：名古屋 NGO → 桃園 TPE（JX839）',detail:'出發 21:20 名古屋 ／ 抵達 23:25 桃園\n建議 18:00 前到中部國際機場',cost:'已購票'},
-  {icon:'🚄',name:'神戶→京都（電車）',detail:'神戶機場→三宮→阪急or神戶市営地鉄→大阪→京都\n或巴士直達，約 1.5 小時',cost:'約 ¥1,500/人'},
-  {icon:'🚄',name:'京都→名古屋（新幹線）',detail:'京都站 のぞみ → 名古屋 約 35 分鐘',cost:'¥3,640/人'},
-  {icon:'🚃',name:'名古屋→中部國際機場',detail:'名鐵 ミュースカイ 特急，名古屋→空港約 28 分鐘',cost:'¥1,250/人'},
-  {icon:'💳',name:'ICOCA IC 交通卡',detail:'關西地區通用，便利店也可使用\n每人各一張，大阪・京都・奈良・神戶皆適用',cost:'¥2,000（含¥500押金）'},
-  {icon:'🚗',name:'大阪租車自駕',detail:'DAY 2 大阪一日租車，可至勝尾寺等不便搭車景點',cost:'依車型'},
-  {icon:'🚌',name:'市巴士一日券',detail:'京都市巴士 230 円/次，一日券 700 円\n平安神宮・嵐山・金閣寺等景點適用',cost:'¥700/人/日'},
+  {icon:'plane',name:'去程：台中 RMQ → 神戶 UKB（JX306）',detail:'出發 08:45 台中 ／ 抵達 12:30 神戶神戶機場\n建議 06:30 前到台中機場',cost:'已購票'},
+  {icon:'plane',name:'回程：名古屋 NGO → 桃園 TPE（JX839）',detail:'出發 21:20 名古屋 ／ 抵達 23:25 桃園\n建議 18:00 前到中部國際機場',cost:'已購票'},
+  {icon:'train-front',name:'神戶→京都（電車）',detail:'神戶機場→三宮→阪急or神戶市営地鉄→大阪→京都\n或巴士直達，約 1.5 小時',cost:'約 ¥1,500/人'},
+  {icon:'train-front',name:'京都→名古屋（新幹線）',detail:'京都站 のぞみ → 名古屋 約 35 分鐘',cost:'¥3,640/人'},
+  {icon:'tram-front',name:'名古屋→中部國際機場',detail:'名鐵 ミュースカイ 特急，名古屋→空港約 28 分鐘',cost:'¥1,250/人'},
+  {icon:'credit-card',name:'ICOCA IC 交通卡',detail:'關西地區通用，便利店也可使用\n每人各一張，大阪・京都・奈良・神戶皆適用',cost:'¥2,000（含¥500押金）'},
+  {icon:'car',name:'大阪租車自駕',detail:'DAY 2 大阪一日租車，可至勝尾寺等不便搭車景點',cost:'依車型'},
+  {icon:'bus',name:'市巴士一日券',detail:'京都市巴士 230 円/次，一日券 700 円\n平安神宮・嵐山・金閣寺等景點適用',cost:'¥700/人/日'},
 ];;
 
 const clBefore=['確認護照有效期限（6個月以上）','購買旅遊保險','換日圓現金備用','確認任天堂博物館預約（DAY3）','確認 teamLab 預約（DAY10）','下載 Google Maps 離線地圖（京都/大阪/奈良/神戶）','確認飯店訂房確認信','確認包車聯絡方式（DAY4）','通知大丸百貨取貨時間（Harbs蛋糕）'];
-const clPack=['❗ 雪靴（DAY8天橋立會下雪！）','厚外套 + 保暖內搭','🧤 手套（也可錦市場買）','暖暖包','口罩','充電器 + 行動電源','相機 / 記憶卡','小背包（白天出門用）','藥品（感冒藥、腸胃藥）'];
+const clPack=['雪靴（DAY8天橋立會下雪！）','厚外套 + 保暖內搭','手套（也可錦市場買）','暖暖包','口罩','充電器 + 行動電源','相機 / 記憶卡','小背包（白天出門用）','藥品（感冒藥、腸胃藥）'];
 
 let expenses=JSON.parse(localStorage.getItem('japan2027-exp')||'[]');
 let budget=parseInt(localStorage.getItem('japan2027-budget')||'0');
 const TWD_RATE=0.218; // 1 JPY ≈ 0.218 TWD
-const catInfo={food:{label:'🍜 餐飲',cls:'cat-food',color:'#c0392b'},transport:{label:'🚃 交通',cls:'cat-transport',color:'#8c7b6b'},hotel:{label:'住宿',cls:'cat-hotel',color:'#4a7c59'},ticket:{label:'🎟 門票',cls:'cat-ticket',color:'#a0732a'},shop:{label:'🛍 購物',cls:'cat-shop',color:'#4a52b7'},other:{label:'📌 其他',cls:'cat-other',color:'#8c7b6b'}};
+const catInfo={food:{icon:'utensils',label:'餐飲',cls:'cat-food',color:'#c0392b'},transport:{icon:'tram-front',label:'交通',cls:'cat-transport',color:'#8c7b6b'},hotel:{icon:'bed-double',label:'住宿',cls:'cat-hotel',color:'#4a7c59'},ticket:{icon:'ticket',label:'門票',cls:'cat-ticket',color:'#a0732a'},shop:{icon:'shopping-bag',label:'購物',cls:'cat-shop',color:'#4a52b7'},other:{icon:'pin',label:'其他',cls:'cat-other',color:'#8c7b6b'}};
 
 function saveExp(){localStorage.setItem('japan2027-exp',JSON.stringify(expenses));}
 function setBudget(){
@@ -1322,7 +1359,7 @@ function drawPie(ct){
     start+=angle;
   });
   // legend
-  document.getElementById('pie-legend').innerHTML=entries.map(([c,a])=>`<div class="pie-leg-row"><div class="pie-dot" style="background:${catInfo[c].color}"></div><div class="pie-leg-name">${catInfo[c].label.split(' ')[1]}</div><div class="pie-leg-val">¥${a.toLocaleString()} (${Math.round(a/total*100)}%)</div></div>`).join('');
+  document.getElementById('pie-legend').innerHTML=entries.map(([c,a])=>`<div class="pie-leg-row"><div class="pie-dot" style="background:${catInfo[c].color}"></div><div class="pie-leg-name">${catInfo[c].label}</div><div class="pie-leg-val">¥${a.toLocaleString()} (${Math.round(a/total*100)}%)</div></div>`).join('');
 }
 function renderExp(){
   const total=expenses.reduce((s,e)=>s+e.amount,0);
@@ -1348,14 +1385,14 @@ function renderExp(){
     `<div class="sum-card ${isOver?'over-budget':''}"><div class="sum-lbl">總計（¥）</div><div class="sum-amt total ${isOver?'over':''}">¥${total.toLocaleString()}</div><div class="sum-sub">約 NT$${Math.round(total/4.5).toLocaleString()}</div></div>`+
     `<div class="sum-card"><div class="sum-lbl">換算台幣</div><div class="sum-amt">NT$${Math.round(total/4.5).toLocaleString()}</div><div class="sum-sub">匯率 ¥1 ≈ NT$0.22</div></div>`+
     `<div class="sum-card"><div class="sum-lbl">筆數</div><div class="sum-amt">${expenses.length}</div><div class="sum-sub">筆費用</div></div>`+
-    (budget>0?`<div class="sum-card ${isOver?'over-budget':''}"><div class="sum-lbl">剩餘預算</div><div class="sum-amt ${isOver?'over':''}">${isOver?'-':''}¥${Math.abs(budget-total).toLocaleString()}</div><div class="sum-sub">${isOver?'⚠️ 超出預算！':'預算 ¥'+budget.toLocaleString()}</div></div>`:'');
+    (budget>0?`<div class="sum-card ${isOver?'over-budget':''}"><div class="sum-lbl">剩餘預算</div><div class="sum-amt ${isOver?'over':''}">${isOver?'-':''}¥${Math.abs(budget-total).toLocaleString()}</div><div class="sum-sub">${isOver?ic('triangle-alert')+'超出預算！':'預算 ¥'+budget.toLocaleString()}</div></div>`:'');
   const list=document.getElementById('exp-list'),empty=document.getElementById('exp-empty');
   if(!expenses.length){list.innerHTML='';empty.style.display='';document.getElementById('chart-wrap').style.display='none';return;}
   empty.style.display='none';document.getElementById('chart-wrap').style.display='';
-  list.innerHTML=expenses.map((e,i)=>`<tr><td>${e.name}</td><td><span class="cbadge ${catInfo[e.cat].cls}">${catInfo[e.cat].label}</span></td><td style="text-align:right;font-weight:500">¥${e.amount.toLocaleString()}</td><td style="text-align:right;color:var(--muted)">NT$${Math.round(e.amount/4.5).toLocaleString()}</td><td><button class="del-btn" onclick="delExp(${i})">×</button></td></tr>`).join('');
+  list.innerHTML=expenses.map((e,i)=>`<tr><td>${e.name}</td><td><span class="cbadge ${catInfo[e.cat].cls}">${ic(catInfo[e.cat].icon)}${catInfo[e.cat].label}</span></td><td style="text-align:right;font-weight:500">¥${e.amount.toLocaleString()}</td><td style="text-align:right;color:var(--muted)">NT$${Math.round(e.amount/4.5).toLocaleString()}</td><td><button class="del-btn" onclick="delExp(${i})">×</button></td></tr>`).join('');
   const ct={};expenses.forEach(e=>{ct[e.cat]=(ct[e.cat]||0)+e.amount;});
   const mx=Math.max(...Object.values(ct));
-  document.getElementById('chart-bars').innerHTML=Object.entries(ct).map(([c,a])=>`<div class="bar-row"><div class="bar-name">${catInfo[c].label.split(' ')[1]}</div><div class="bar-track"><div class="bar-fill" style="width:${Math.round(a/mx*100)}%;background:${catInfo[c].color}"></div></div><div class="bar-val">¥${a.toLocaleString()}</div></div>`).join('');
+  document.getElementById('chart-bars').innerHTML=Object.entries(ct).map(([c,a])=>`<div class="bar-row"><div class="bar-name">${catInfo[c].label}</div><div class="bar-track"><div class="bar-fill" style="width:${Math.round(a/mx*100)}%;background:${catInfo[c].color}"></div></div><div class="bar-val">¥${a.toLocaleString()}</div></div>`).join('');
   setTimeout(()=>drawPie(ct),50);
 }
 function addExp(){
@@ -1366,8 +1403,8 @@ function addExp(){
   renderExp();
   // check budget
   const total=expenses.reduce((s,e)=>s+e.amount,0);
-  if(budget>0&&total>budget){alert('⚠️ 注意：已超出設定的預算上限！');}
-  else if(budget>0&&total/budget>=0.8){alert('💡 提醒：已使用 '+Math.round(total/budget*100)+'% 預算，快超標囉！');}
+  if(budget>0&&total>budget){alert('注意：已超出設定的預算上限！');}
+  else if(budget>0&&total/budget>=0.8){alert('提醒：已使用 '+Math.round(total/budget*100)+'% 預算，快超標囉！');}
 }
 function delExp(i){expenses.splice(i,1);saveExp();renderExp();}
 
@@ -1377,22 +1414,22 @@ const TRIP_END=new Date('2027-01-28');
 
 const reminders=[
   // 出發前提醒
-  {type:'pre',daysBeforeStart:7,icon:'🛂',title:'護照確認',note:'確認護照有效期限超過6個月！',tag:'urgent'},
-  {type:'pre',daysBeforeStart:7,icon:'💴',title:'換日圓',note:'建議出發前換好日圓現金備用。',tag:'info'},
-  {type:'pre',daysBeforeStart:3,icon:'🎮',title:'任天堂博物館預約',note:'確認 DAY3 任天堂博物館預約是否完成！需提前線上預約。',tag:'urgent'},
-  {type:'pre',daysBeforeStart:3,icon:'🌊',title:'teamLab 購票',note:'確認 DAY10 teamLab 是否已購票，票很快就售完。',tag:'urgent'},
-  {type:'pre',daysBeforeStart:1,icon:'🧳',title:'行李確認',note:'雪靴（DAY8天橋立必備）、厚外套、手套、暖暖包都打包了嗎？',tag:'urgent'},
+  {type:'pre',daysBeforeStart:7,icon:'id-card',title:'護照確認',note:'確認護照有效期限超過6個月！',tag:'urgent'},
+  {type:'pre',daysBeforeStart:7,icon:'japanese-yen',title:'換日圓',note:'建議出發前換好日圓現金備用。',tag:'info'},
+  {type:'pre',daysBeforeStart:3,icon:'gamepad-2',title:'任天堂博物館預約',note:'確認 DAY3 任天堂博物館預約是否完成！需提前線上預約。',tag:'urgent'},
+  {type:'pre',daysBeforeStart:3,icon:'waves',title:'teamLab 購票',note:'確認 DAY10 teamLab 是否已購票，票很快就售完。',tag:'urgent'},
+  {type:'pre',daysBeforeStart:1,icon:'luggage',title:'行李確認',note:'雪靴（DAY8天橋立必備）、厚外套、手套、暖暖包都打包了嗎？',tag:'urgent'},
   // 行程當天
-  {type:'day',dayIndex:0,icon:'💴',title:'抵達後：先換日圓＋買ICOCA',note:'入境後先去換日圓，再到 JR 售票機購買 ICOCA 悠遊卡。',tag:'info'},
-  {type:'day',dayIndex:0,icon:'⏰',title:'大丸百貨取貨截止 19:00',note:'今天必須在 19:00 前到大丸百貨取 Harbs 草莓蛋糕！千萬別忘記！',tag:'urgent'},
-  {type:'day',dayIndex:2,icon:'🎮',title:'任天堂博物館預約確認',note:'今天去宇治！記得帶任天堂博物館預約確認信。',tag:'info'},
-  {type:'day',dayIndex:3,icon:'🏛️',title:'東寺弘法市集',note:'今天是21日！東寺弘法市集舉辦，建議早上先去逛再去水族館。',tag:'ok'},
-  {type:'day',dayIndex:5,icon:'🔥',title:'若草山燒山祭',note:'今晚是奈良燒山祭！整座山點火，記得提早佔位，帶厚外套禦寒。',tag:'urgent'},
-  {type:'day',dayIndex:7,icon:'❄️',title:'天橋立⚠️ 可能下雪',note:'今天前往天橋立，預計會下雪！確認已穿雪靴出門，攜帶暖暖包。',tag:'urgent'},
-  {type:'day',dayIndex:10,icon:'✈️',title:'今日回台！退房前準備',note:'11:00 前退房，搭 Haruka 前往關西機場，14:00 JX821 起飛，最晚 11:30 前到機場。',tag:'urgent'},
+  {type:'day',dayIndex:0,icon:'japanese-yen',title:'抵達後：先換日圓＋買ICOCA',note:'入境後先去換日圓，再到 JR 售票機購買 ICOCA 悠遊卡。',tag:'info'},
+  {type:'day',dayIndex:0,icon:'alarm-clock',title:'大丸百貨取貨截止 19:00',note:'今天必須在 19:00 前到大丸百貨取 Harbs 草莓蛋糕！千萬別忘記！',tag:'urgent'},
+  {type:'day',dayIndex:2,icon:'gamepad-2',title:'任天堂博物館預約確認',note:'今天去宇治！記得帶任天堂博物館預約確認信。',tag:'info'},
+  {type:'day',dayIndex:3,icon:'landmark',title:'東寺弘法市集',note:'今天是21日！東寺弘法市集舉辦，建議早上先去逛再去水族館。',tag:'ok'},
+  {type:'day',dayIndex:5,icon:'flame',title:'若草山燒山祭',note:'今晚是奈良燒山祭！整座山點火，記得提早佔位，帶厚外套禦寒。',tag:'urgent'},
+  {type:'day',dayIndex:7,icon:'snowflake',title:'天橋立 可能下雪',note:'今天前往天橋立，預計會下雪！確認已穿雪靴出門，攜帶暖暖包。',tag:'urgent'},
+  {type:'day',dayIndex:10,icon:'plane-takeoff',title:'今日回台！退房前準備',note:'11:00 前退房，搭 Haruka 前往關西機場，14:00 JX821 起飛，最晚 11:30 前到機場。',tag:'urgent'},
   // 天氣/注意
-  {type:'weather',icon:'🌡️',title:'京都1月氣溫提醒',note:'京都1月氣溫約 2–10°C，早晚很冷。保暖內搭、手套、圍巾都帶好！',tag:'info'},
-  {type:'weather',icon:'🧤',title:'手套可在錦市場購買',note:'DAY1 抵達後可到錦市場補買手套，種類多又便宜。',tag:'ok'},
+  {type:'weather',icon:'thermometer',title:'京都1月氣溫提醒',note:'京都1月氣溫約 2–10°C，早晚很冷。保暖內搭、手套、圍巾都帶好！',tag:'info'},
+  {type:'weather',icon:'hand',title:'手套可在錦市場購買',note:'DAY1 抵達後可到錦市場補買手套，種類多又便宜。',tag:'ok'},
 ];
 
 function getTodayReminders(){
@@ -1427,14 +1464,14 @@ function showReminder(showAll){
   document.getElementById('reminder-title').textContent=showAll?'所有提醒':titleText;
 
   if(!items.length&&!showAll){
-    document.getElementById('reminder-body').innerHTML='<div style="text-align:center;padding:28px;color:var(--muted);font-size:13px">今天沒有特別提醒 ✅<br><br><button onclick="showReminder(true)" style="margin-top:8px;padding:7px 14px;background:var(--ink);color:var(--warm);border:none;border-radius:2px;cursor:pointer;font-size:12px;font-family:DM Sans,sans-serif">查看所有提醒</button></div>';
+    document.getElementById('reminder-body').innerHTML='<div style="text-align:center;padding:28px;color:var(--muted);font-size:13px">今天沒有特別提醒<br><br><button onclick="showReminder(true)" style="margin-top:8px;padding:7px 14px;background:var(--ink);color:var(--warm);border:none;border-radius:2px;cursor:pointer;font-size:12px;font-family:DM Sans,sans-serif">查看所有提醒</button></div>';
   } else {
     const grouped={urgent:[],info:[],ok:[]};
     items.forEach(r=>{grouped[r.tag||'info'].push(r);});
     let html='';
-    if(grouped.urgent.length){html+='<div class="reminder-section-label">⚠️ 重要／截止時間</div>';grouped.urgent.forEach(r=>{html+=reminderItem(r);});}
-    if(grouped.info.length){html+='<div class="reminder-section-label">📌 今日注意事項</div>';grouped.info.forEach(r=>{html+=reminderItem(r);});}
-    if(grouped.ok.length){html+='<div class="reminder-section-label">✅ 好消息</div>';grouped.ok.forEach(r=>{html+=reminderItem(r);});}
+    if(grouped.urgent.length){html+='<div class="reminder-section-label">'+ic('triangle-alert')+'重要／截止時間</div>';grouped.urgent.forEach(r=>{html+=reminderItem(r);});}
+    if(grouped.info.length){html+='<div class="reminder-section-label">'+ic('pin')+'今日注意事項</div>';grouped.info.forEach(r=>{html+=reminderItem(r);});}
+    if(grouped.ok.length){html+='<div class="reminder-section-label">'+ic('circle-check')+'好消息</div>';grouped.ok.forEach(r=>{html+=reminderItem(r);});}
     if(!showAll) html+=`<div style="text-align:center;padding-top:12px"><button onclick="showReminder(true)" style="padding:6px 13px;background:none;border:1px solid var(--border);border-radius:2px;cursor:pointer;font-size:11px;font-family:DM Sans,sans-serif;color:var(--muted)">查看所有提醒</button></div>`;
     document.getElementById('reminder-body').innerHTML=html;
   }
@@ -1442,8 +1479,8 @@ function showReminder(showAll){
 }
 function reminderItem(r){
   const tagClass={urgent:'red',info:'info',ok:'ok'}[r.tag||'info'];
-  const tagLabel={urgent:'⚠️ 重要',info:'📌 注意',ok:'✅ OK'}[r.tag||'info'];
-  return`<div class="reminder-item"><div class="reminder-icon">${r.icon}</div><div class="reminder-content"><div class="reminder-title">${r.title}</div><div class="reminder-note">${r.note}</div><span class="reminder-tag ${tagClass}">${tagLabel}</span></div></div>`;
+  const tagLabel={urgent:ic('triangle-alert')+'重要',info:ic('pin')+'注意',ok:ic('circle-check')+'OK'}[r.tag||'info'];
+  return`<div class="reminder-item"><div class="reminder-icon">${ic(r.icon)}</div><div class="reminder-content"><div class="reminder-title">${r.title}</div><div class="reminder-note">${r.note}</div><span class="reminder-tag ${tagClass}">${tagLabel}</span></div></div>`;
 }
 function closeReminder(){document.getElementById('reminder-overlay').style.display='none';}
 
@@ -1454,17 +1491,17 @@ function checkBadge(){
 }
 
 const dayTheme=[
-  {ill:'✈️',bg:'#e3f0ff',wave:'#a6d1ff'},
-  {ill:'🐙',bg:'#ffe9e0',wave:'#ffc2a8'},
-  {ill:'🍵',bg:'#e4f5e1',wave:'#a8e6b8'},
-  {ill:'🚂',bg:'#fff3d6',wave:'#ffd93d'},
-  {ill:'🎋',bg:'#e6f4ea',wave:'#a8e6b8'},
-  {ill:'🦌',bg:'#f6ebdf',wave:'#e8c9a0'},
-  {ill:'⛩️',bg:'#ffe5e5',wave:'#ffb3b3'},
-  {ill:'🚄',bg:'#ece6ff',wave:'#d7c8ff'},
-  {ill:'🧱',bg:'#fff1c9',wave:'#ffd93d'},
-  {ill:'🏯',bg:'#e8eefc',wave:'#b9c9f5'},
-  {ill:'🏠',bg:'#efe6f7',wave:'#d7c8ff'},
+  {ill:'plane-landing',bg:'#e3f0ff',wave:'#a6d1ff'},
+  {ill:'building-2',bg:'#ffe9e0',wave:'#ffc2a8'},
+  {ill:'leaf',bg:'#e4f5e1',wave:'#a8e6b8'},
+  {ill:'train-track',bg:'#fff3d6',wave:'#ffd93d'},
+  {ill:'trees',bg:'#e6f4ea',wave:'#a8e6b8'},
+  {ill:'paw-print',bg:'#f6ebdf',wave:'#e8c9a0'},
+  {ill:'mountain-snow',bg:'#ffe5e5',wave:'#ffb3b3'},
+  {ill:'train-front',bg:'#ece6ff',wave:'#d7c8ff'},
+  {ill:'toy-brick',bg:'#fff1c9',wave:'#ffd93d'},
+  {ill:'castle',bg:'#e8eefc',wave:'#b9c9f5'},
+  {ill:'plane-takeoff',bg:'#efe6f7',wave:'#d7c8ff'},
 ];
 const MASCOT_SVG=`<svg viewBox="0 0 28 28"><path d="M14 26s-8-8.2-8-14a8 8 0 0 1 16 0c0 5.8-8 14-8 14z" fill="#0f1729"/><circle cx="14" cy="12" r="3.2" fill="#fff"/></svg>`;
 let curDay=0;
@@ -1501,21 +1538,21 @@ function openPlace(card){
   const box=card.querySelector('.gm-slot');
   box.innerHTML=`<div class="gm-box"><iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=${e}&hl=zh-TW&z=15&output=embed"></iframe></div>
     <div class="gm-btns">
-      <a class="gm-btn main" href="https://www.google.com/maps/search/?api=1&query=${e}" target="_blank" rel="noopener">📷 照片・評價</a>
-      <a class="gm-btn" href="https://www.google.com/maps/dir/?api=1&destination=${e}" target="_blank" rel="noopener">🧭 導航</a>
+      <a class="gm-btn main" href="https://www.google.com/maps/search/?api=1&query=${e}" target="_blank" rel="noopener">${ic('camera')}照片・評價</a>
+      <a class="gm-btn" href="https://www.google.com/maps/dir/?api=1&destination=${e}" target="_blank" rel="noopener">${ic('navigation')}導航</a>
     </div>`;
 }
 
 
 function moveKind(it){
   const t=(it.title+' '+(it.note||''));
-  if(/JX|航班|飛|機場報到|啟程|抵達.*機場/.test(t)&&/JX|機場/.test(t)) return ['mv-plane','✈ 飛機'];
-  if(/新幹線|のぞみ/.test(t)) return ['mv-shink','🚄 新幹線'];
-  if(/租車|開車|自駕/.test(t)) return ['mv-car','🚗 開車'];
-  if(/電車|JR|近鐵|叡電|叡山|嵐電|名鐵|あおなみ|地鐵|特急|線/.test(t)) return ['mv-train','🚃 電車'];
-  if(/巴士|バス/.test(t)) return ['mv-bus','🚌 巴士'];
-  if(/步行|走路/.test(t)) return ['mv-walk','🚶 步行'];
-  return ['mv-walk','🚶 移動'];
+  if(/JX|航班|飛|機場報到|啟程|抵達.*機場/.test(t)&&/JX|機場/.test(t)) return ['mv-plane',ic('plane')+'飛機'];
+  if(/新幹線|のぞみ/.test(t)) return ['mv-shink',ic('train-front')+'新幹線'];
+  if(/租車|開車|自駕/.test(t)) return ['mv-car',ic('car')+'開車'];
+  if(/電車|JR|近鐵|叡電|叡山|嵐電|名鐵|あおなみ|地鐵|特急|線/.test(t)) return ['mv-train',ic('tram-front')+'電車'];
+  if(/巴士|バス/.test(t)) return ['mv-bus',ic('bus')+'巴士'];
+  if(/步行|走路/.test(t)) return ['mv-walk',ic('footprints')+'步行'];
+  return ['mv-walk',ic('footprints')+'移動'];
 }
 
 function buildTabs(){
@@ -1553,8 +1590,8 @@ function renderItinerary(di){
   }
 
   document.getElementById('day-hero').innerHTML=`<div class="day-hero" style="--tile:${th.bg}">
-    <div class="day-hero-ill"><span>${th.ill}</span></div>
-    <div class="day-hero-txt"><div class="day-hero-no">Day ${di+1} · ${d.date}</div><div class="day-hero-title">${d.title}</div><div class="day-hero-area">📍 ${d.area}</div></div></div>`;
+    <div class="day-hero-ill">${ic(th.ill)}</div>
+    <div class="day-hero-txt"><div class="day-hero-no">Day ${di+1} · ${d.date}</div><div class="day-hero-title">${d.title}</div><div class="day-hero-area">${ic("map-pin")}${d.area}</div></div></div>`;
 
   document.getElementById('timeline').innerHTML=d.items.map((it,i)=>{
     const delay=`style="animation-delay:${i*.04}s"`;
@@ -1566,7 +1603,7 @@ function renderItinerary(di){
     const q=placeQuery(it.title,di);
     return `<div class="tl2-row" ${delay}><div class="tl2-time">${it.time||''}</div><div class="tl2-dot"></div>
       <div class="tl2-card ${it.isHighlight?'hi':''}" data-q="${q?q.replace(/"/g,''):''}" onclick="if(!event.target.closest('.gm-slot'))openPlace(this)">
-        <div class="tl2-title">${it.isHighlight?'<span class="star">★</span>':''}${it.title}${q?'<span class="tl2-tap">📍 點我看評價</span>':''}</div>
+        <div class="tl2-title">${it.isHighlight?'<span class="star">'+ic('star')+'</span>':''}${it.title}${q?'<span class="tl2-tap">'+ic('map-pin')+'看評價</span>':''}</div>
         <div class="tl2-note">${it.note?it.note.replace(/\n/g,'<br>'):''}<div class="gm-slot"></div></div></div></div>`;
   }).join('');
 }
@@ -1577,15 +1614,15 @@ function renderSpots(f){
 }
 function filterSpots(f,btn){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderSpots(f);}
 
-function renderFood(){document.getElementById('food-grid').innerHTML=foods.map(f=>`<div class="food-card"><div class="food-emoji">${f.emoji}</div><div class="food-type">${f.type}</div><div class="food-name">${f.name}</div><div class="food-note">${f.note}</div></div>`).join('');}
+function renderFood(){document.getElementById('food-grid').innerHTML=foods.map(f=>`<div class="food-card"><div class="food-emoji">${ic(f.emoji)}</div><div class="food-type">${f.type}</div><div class="food-name">${f.name}</div><div class="food-note">${f.note}</div></div>`).join('');}
 
-function renderTransport(){document.getElementById('transport-list').innerHTML=transports.map(t=>`<div class="tr-card"><div class="tr-icon">${t.icon}</div><div class="tr-route"><div class="tr-name">${t.name}</div><div class="tr-detail">${t.detail.replace(/\n/g,'<br>')}</div></div><div class="tr-cost">${t.cost}</div></div>`).join('');}
+function renderTransport(){document.getElementById('transport-list').innerHTML=transports.map(t=>`<div class="tr-card"><div class="tr-icon">${ic(t.icon)}</div><div class="tr-route"><div class="tr-name">${t.name}</div><div class="tr-detail">${t.detail.replace(/\n/g,'<br>')}</div></div><div class="tr-cost">${t.cost}</div></div>`).join('');}
 
 let chkStates=JSON.parse(localStorage.getItem('japan2027-chk')||'{}');
 function toggleChk(k){chkStates[k]=!chkStates[k];localStorage.setItem('japan2027-chk',JSON.stringify(chkStates));renderChecklist();}
 function renderChecklist(){
-  document.getElementById('cl-before').innerHTML=clBefore.map((item,i)=>{const k='b'+i,done=!!chkStates[k];return`<div class="cl-item ${done?'done':''}" onclick="toggleChk('${k}')"><div class="cl-box"><span class="cl-tick">✓</span></div><div class="cl-label">${item}</div></div>`;}).join('');
-  document.getElementById('cl-pack').innerHTML=clPack.map((item,i)=>{const k='p'+i,done=!!chkStates[k];return`<div class="cl-item ${done?'done':''}" onclick="toggleChk('${k}')"><div class="cl-box"><span class="cl-tick">✓</span></div><div class="cl-label">${item}</div></div>`;}).join('');
+  document.getElementById('cl-before').innerHTML=clBefore.map((item,i)=>{const k='b'+i,done=!!chkStates[k];return`<div class="cl-item ${done?'done':''}" onclick="toggleChk('${k}')"><div class="cl-box"><span class="cl-tick"><i data-lucide="check" class="ic"></i></span></div><div class="cl-label">${item}</div></div>`;}).join('');
+  document.getElementById('cl-pack').innerHTML=clPack.map((item,i)=>{const k='p'+i,done=!!chkStates[k];return`<div class="cl-item ${done?'done':''}" onclick="toggleChk('${k}')"><div class="cl-box"><span class="cl-tick"><i data-lucide="check" class="ic"></i></span></div><div class="cl-label">${item}</div></div>`;}).join('');
 }
 
 function showSec(id,btn){
@@ -1652,7 +1689,7 @@ function renderFlightHistory(){
   wrap.style.display='';
   list.innerHTML=flightHistory.map((r,i)=>`
     <div class="flight-history-item">
-      <div class="flight-history-time">🕐 ${r.time}</div>
+      <div class="flight-history-time">${ic("clock")}${r.time}</div>
       ${r.adultN>0?`<div class="flight-history-row"><span class="flight-history-label">成人 ${r.adultN} 人 × NT$${r.adultP.toLocaleString()}</span><span class="flight-history-val">NT$ ${r.adultSub.toLocaleString()}</span></div>`:''}
       ${r.childN>0?`<div class="flight-history-row"><span class="flight-history-label">小孩 ${r.childN} 人 × NT$${r.childP.toLocaleString()}</span><span class="flight-history-val">NT$ ${r.childSub.toLocaleString()}</span></div>`:''}
       <div class="flight-history-total">
@@ -1774,6 +1811,18 @@ function createSnow(){
 }
 setInterval(createSnow,250);
 
+</script>
+
+<script>
+// ── Lucide 圖示初始化（含動態渲染後自動補畫）──
+(function(){
+  function draw(){ if(window.lucide&&document.querySelector('i[data-lucide]')) lucide.createIcons({attrs:{'stroke-width':1.75}}); }
+  let q=false;
+  new MutationObserver(()=>{ if(q) return; q=true; requestAnimationFrame(()=>{q=false;draw();}); })
+    .observe(document.body,{childList:true,subtree:true});
+  draw();
+})();
+if(window.lucide) lucide.createIcons({attrs:{'stroke-width':1.75}});
 </script>
 </body>
 </html>
