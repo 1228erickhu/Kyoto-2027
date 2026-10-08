@@ -627,6 +627,16 @@ nav::-webkit-scrollbar{display:none;}
 @keyframes slideUp{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
 @keyframes wiggle{0%,100%{transform:rotate(-8deg);}50%{transform:rotate(8deg);}}
 
+
+/* ══ Google 地點資訊 ══ */
+.gm-box{margin-top:10px;border:2px solid var(--ink);border-radius:12px;overflow:hidden;background:#f3f3f3;}
+.gm-box iframe{display:block;width:100%;height:230px;border:0;}
+.gm-btns{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+.gm-btn{flex:1;min-width:120px;text-align:center;text-decoration:none;font-size:12px;font-weight:bold;color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:50px;padding:7px 10px;box-shadow:0 2px 0 var(--ink);font-family:'ZCOOL KuaiLe',cursive;}
+.gm-btn.main{background:#ffd93d;}
+.gm-btn:active{transform:translateY(2px);box-shadow:none;}
+.tl2-tap{font-size:10px;color:var(--muted);margin-left:auto;font-weight:normal;white-space:nowrap;}
+.tl2-card.open .tl2-tap{display:none;}
 /* ── RESPONSIVE ── */
 @media(max-width:600px){
   .form-row{grid-template-columns:1fr 1fr;}
@@ -1242,6 +1252,44 @@ const dayTheme=[
 ];
 const MASCOT_SVG=`<svg viewBox="0 0 48 48"><rect x="18" y="3" width="12" height="7" rx="3" fill="none" stroke="#2d2d2d" stroke-width="2.5"/><rect x="6" y="9" width="36" height="31" rx="9" fill="#e8584f" stroke="#2d2d2d" stroke-width="2.5"/><path d="M10 9 Q24 15 38 9" fill="none" stroke="#2d2d2d" stroke-width="2"/><circle cx="18" cy="24" r="2.6" fill="#2d2d2d"/><circle cx="30" cy="24" r="2.6" fill="#2d2d2d"/><circle cx="14" cy="29" r="2.2" fill="#ffb3a8"/><circle cx="34" cy="29" r="2.2" fill="#ffb3a8"/><path d="M21 29 Q24 32 27 29" fill="none" stroke="#2d2d2d" stroke-width="2" stroke-linecap="round"/><circle cx="13" cy="43" r="3" fill="#2d2d2d"/><circle cx="35" cy="43" r="3" fill="#2d2d2d"/></svg>`;
 let curDay=0;
+// 每天所在城市（讓 Google 搜尋更準）
+const dayCity=['京都','大阪','京都','京都','京都 嵐山','奈良','京都','名古屋','名古屋','名古屋','名古屋'];
+// 特別指定的搜尋關鍵字
+const placeQ={
+  '台中出發 JX306':'台中國際機場','抵達神戶機場':'神戶機場',
+  'Check-in 三條格拉斯麗酒店':'Hotel Gracery Kyoto Sanjo',
+  '勝尾寺':'勝尾寺 箕面','寶可夢中心 大阪':'Pokémon Center Osaka DX','道頓堀晚餐':'道頓堀',
+  '天王寺・阿倍野':'あべのハルカス','梅田・大阪駅':'グランフロント大阪',
+  '任天堂博物館':'Nintendo Museum 宇治','平等院鳳凰堂':'平等院 宇治','中村藤吉本店':'中村藤吉本店 宇治','無碍山房 Salon de Muge':'無碍山房 Salon de Muge',
+  '東寺弘法市集':'東寺','梅小路水族館':'京都水族館','梅小路公園散步':'梅小路公園',
+  '竹林小徑':'嵐山 竹林の小径','渡月橋散步':'渡月橋','奈良公園餵鹿':'奈良公園',
+  'ならまち散策':'ならまち','若草山燒山祭':'若草山','出町雙葉豆餅':'出町ふたば',
+  '貴船川床料理':'貴船 料理旅館','LEGOLAND Japan 全天':'LEGOLAND Japan',
+  'MINILAND':'LEGOLAND Japan','SEA LIFE 名古屋':'SEA LIFE Nagoya',
+  '矢場とん 矢場店':'矢場とん 矢場町本店','榮・栄地區夜逛':'栄 名古屋',
+  '名古屋城':'名古屋城','名城公園':'名城公園','熱田神宮':'熱田神宮','大須商店街':'大須商店街',
+};
+// 不是特定地點的項目就不顯示地圖
+const noPlace=/^(園內午餐|午餐|晚餐|收拾行李|名古屋市區|購買伴手禮|各主題遊樂設施)$|周邊|附近|市區探索|名物晚餐|四条|河原町|西院/;
+function placeQuery(title,di){
+  if(placeQ[title]) return placeQ[title];
+  if(noPlace.test(title)) return null;
+  return title.replace(/[（(].*?[)）]/g,'')+' '+(dayCity[di]||'');
+}
+function openPlace(card){
+  card.classList.toggle('open');
+  if(!card.classList.contains('open')||card.dataset.loaded) return;
+  const q=card.dataset.q; if(!q) return;
+  card.dataset.loaded='1';
+  const e=encodeURIComponent(q);
+  const box=card.querySelector('.gm-slot');
+  box.innerHTML=`<div class="gm-box"><iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=${e}&hl=zh-TW&z=15&output=embed"></iframe></div>
+    <div class="gm-btns">
+      <a class="gm-btn main" href="https://www.google.com/maps/search/?api=1&query=${e}" target="_blank" rel="noopener">📷 照片・評價</a>
+      <a class="gm-btn" href="https://www.google.com/maps/dir/?api=1&destination=${e}" target="_blank" rel="noopener">🧭 導航</a>
+    </div>`;
+}
+
 
 function moveKind(it){
   const t=(it.title+' '+(it.note||''));
@@ -1299,10 +1347,11 @@ function renderItinerary(di){
       return `<div class="tl2-row tl2-move" ${delay}><div class="tl2-time">${it.time||''}</div><div class="tl2-dot"></div>
         <div class="mv-line"><span class="mv-pill ${cls}">${lbl}</span><span>${it.title}</span></div>${it.note?`<div class="mv-sub">${it.note.replace(/\n/g,'<br>')}</div>`:''}</div>`;
     }
+    const q=placeQuery(it.title,di);
     return `<div class="tl2-row" ${delay}><div class="tl2-time">${it.time||''}</div><div class="tl2-dot"></div>
-      <div class="tl2-card ${it.isHighlight?'hi':''}" onclick="this.classList.toggle('open')">
-        <div class="tl2-title">${it.isHighlight?'<span class="star">★</span>':''}${it.title}</div>
-        ${it.note?`<div class="tl2-note">${it.note.replace(/\n/g,'<br>')}</div>`:''}</div></div>`;
+      <div class="tl2-card ${it.isHighlight?'hi':''}" data-q="${q?q.replace(/"/g,''):''}" onclick="if(!event.target.closest('.gm-slot'))openPlace(this)">
+        <div class="tl2-title">${it.isHighlight?'<span class="star">★</span>':''}${it.title}${q?'<span class="tl2-tap">📍 點我看評價</span>':''}</div>
+        <div class="tl2-note">${it.note?it.note.replace(/\n/g,'<br>'):''}<div class="gm-slot"></div></div></div></div>`;
   }).join('');
 }
 
