@@ -8,7 +8,59 @@
 <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Shippori+Mincho:wght@300;400;600&family=Noto+Serif+TC:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<style>#kyoto-map{height:360px;width:100%;margin-top:16px;border-radius:4px;overflow:hidden;}</style>
+<style>#kyoto-map{height:360px;width:100%;margin-top:16px;border-radius:4px;overflow:hidden;}
+/* ══ 軌道式日期選擇（仿影片）══ */
+.rail{position:relative;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin:0 -20px 14px;padding:0 20px;}
+.rail::-webkit-scrollbar{display:none;}
+.rail-inner{position:relative;display:flex;width:max-content;padding:46px 4px 6px;}
+.rail-line{position:absolute;left:36px;right:36px;top:60px;height:3px;background:var(--ink);border-radius:2px;}
+.rail-stop{position:relative;width:64px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;cursor:pointer;background:none;border:none;font-family:'ZCOOL KuaiLe',cursive;color:var(--ink);padding:0;-webkit-tap-highlight-color:transparent;}
+.rail-dot{width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--ink);position:relative;z-index:1;transition:transform .2s;}
+.rail-stop:hover .rail-dot{transform:scale(1.15);}
+.rail-date{margin-top:10px;font-size:13px;font-weight:bold;padding:2px 8px;border-radius:50px;transition:all .25s;line-height:1.4;}
+.rail-wd{font-size:10px;color:var(--muted);margin-top:2px;}
+.rail-stop.active .rail-date{background:#e8584f;color:#fff;}
+.rail-stop.active .rail-wd{color:#e8584f;font-weight:bold;}
+.rail-stop.past .rail-dot{background:var(--ink);}
+.mascot{position:absolute;top:6px;left:0;width:46px;height:46px;z-index:3;pointer-events:none;transition:transform .55s cubic-bezier(.34,1.56,.64,1);}
+.mascot svg{width:100%;height:100%;display:block;}
+.mascot.hop svg{animation:hop .55s ease;}
+@keyframes hop{0%{transform:translateY(0) rotate(0)}35%{transform:translateY(-14px) rotate(-8deg)}70%{transform:translateY(0) rotate(4deg)}100%{transform:translateY(0) rotate(0)}}
+.rail-hint{text-align:center;font-size:11px;color:var(--muted);margin:-4px 0 14px;}
+
+/* ══ 每日主題卡 ══ */
+.day-hero{display:flex;align-items:center;gap:14px;border:2.5px solid var(--ink);border-radius:20px;padding:14px;margin-bottom:22px;box-shadow:0 3px 0 var(--ink);animation:fadeUp .35s ease both;}
+.day-hero-ill{width:72px;height:72px;flex-shrink:0;border:2.5px solid var(--ink);border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;position:relative;overflow:hidden;}
+.day-hero-ill::after{content:'';position:absolute;left:0;right:0;bottom:0;height:22px;background:var(--wave,#cfe6ff);opacity:.7;border-top:2px solid var(--ink);border-radius:50% 50% 0 0/40% 40% 0 0;}
+.day-hero-ill span{position:relative;z-index:1;}
+.day-hero-txt{flex:1;min-width:0;}
+.day-hero-no{font-size:12px;color:var(--muted);}
+.day-hero-title{font-size:19px;font-weight:bold;line-height:1.35;margin:1px 0 4px;}
+.day-hero-area{font-size:11px;color:var(--muted);}
+
+/* ══ 新時間軸 ══ */
+.tl2{position:relative;padding-left:62px;}
+.tl2::before{content:'';position:absolute;left:52px;top:8px;bottom:8px;width:2.5px;background:var(--ink);border-radius:2px;}
+.tl2-row{position:relative;margin-bottom:14px;animation:fadeUp .3s ease both;}
+.tl2-time{position:absolute;left:-62px;width:42px;text-align:right;top:12px;font-size:12px;color:var(--muted);}
+.tl2-dot{position:absolute;left:-16px;top:14px;width:12px;height:12px;border-radius:50%;background:#fff;border:2.5px solid var(--ink);}
+.tl2-card{border:2.5px solid var(--ink);border-radius:14px;background:#fff;padding:10px 14px;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 2px 0 var(--ink);}
+.tl2-card:active{transform:translateY(2px);box-shadow:none;}
+.tl2-card.hi{background:#fff6e9;}
+.tl2-title{font-size:14px;font-weight:bold;line-height:1.5;display:flex;align-items:center;gap:6px;}
+.tl2-title .star{color:#e8584f;font-size:12px;}
+.tl2-note{display:none;font-size:12px;color:var(--muted);line-height:1.7;margin-top:6px;padding-top:6px;border-top:1.5px dashed var(--border);}
+.tl2-card.open .tl2-note{display:block;}
+.tl2-move{padding:8px 0 4px;}
+.tl2-move .tl2-dot{top:10px;}
+.tl2-move .tl2-time{top:8px;}
+.mv-line{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;}
+.mv-pill{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:bold;padding:2px 10px;border-radius:50px;border:2px solid var(--ink);white-space:nowrap;}
+.mv-walk{background:#ffd93d;}.mv-train{background:#a8e6b8;}.mv-plane{background:#a6d1ff;}.mv-car{background:#ffc2a8;}.mv-shink{background:#d7c8ff;}.mv-bus{background:#c9f0ee;}
+.mv-sub{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.6;}
+.spot-chips{display:none !important;}
+
+</style>
 <style>
 :root{
   --ink:#1a1a2e;
@@ -622,16 +674,15 @@ nav::-webkit-scrollbar{display:none;}
   <div class="kawaii-banner">
     <div class="kawaii-banner-icon">🗾</div>
     <div class="kawaii-banner-text">
-      <div class="kawaii-banner-title">京都 11 天 10 夜家族旅行</div>
+      <div class="kawaii-banner-title">京都・名古屋 11 天 10 夜家族旅行</div>
       <div class="kawaii-banner-sub">1/18（一）出發 → 1/28（四）回台</div>
     </div>
   </div>
   <div class="sec-title"><span>01</span>每日行程</div>
-  <div class="sec-desc">點選下方日期切換每天的行程安排 🌸</div>
-  <div class="day-tabs" id="day-tabs"></div>
-  <div class="day-header" id="day-header"></div>
-  <div class="spot-chips" id="spot-chips"></div>
-  <div class="timeline" id="timeline"></div>
+  <div class="rail" id="rail"><div class="rail-inner" id="rail-inner"></div></div>
+  <div class="rail-hint">← 左右滑動或點日期切換 →</div>
+  <div id="day-hero"></div>
+  <div class="tl2" id="timeline"></div>
   </div>
 </div>
 
@@ -1176,69 +1227,83 @@ function checkBadge(){
   if(items.length){badge.style.display='';} else {badge.style.display='none';}
 }
 
-function renderItinerary(di){
-  const d=days[di];
-  document.querySelectorAll('.day-tab').forEach((t,i)=>t.classList.toggle('active',i===di));
+const dayTheme=[
+  {ill:'✈️',bg:'#e3f0ff',wave:'#a6d1ff'},
+  {ill:'🐙',bg:'#ffe9e0',wave:'#ffc2a8'},
+  {ill:'🍵',bg:'#e4f5e1',wave:'#a8e6b8'},
+  {ill:'🚂',bg:'#fff3d6',wave:'#ffd93d'},
+  {ill:'🎋',bg:'#e6f4ea',wave:'#a8e6b8'},
+  {ill:'🦌',bg:'#f6ebdf',wave:'#e8c9a0'},
+  {ill:'⛩️',bg:'#ffe5e5',wave:'#ffb3b3'},
+  {ill:'🚄',bg:'#ece6ff',wave:'#d7c8ff'},
+  {ill:'🧱',bg:'#fff1c9',wave:'#ffd93d'},
+  {ill:'🏯',bg:'#e8eefc',wave:'#b9c9f5'},
+  {ill:'🏠',bg:'#efe6f7',wave:'#d7c8ff'},
+];
+const MASCOT_SVG=`<svg viewBox="0 0 48 48"><rect x="18" y="3" width="12" height="7" rx="3" fill="none" stroke="#2d2d2d" stroke-width="2.5"/><rect x="6" y="9" width="36" height="31" rx="9" fill="#e8584f" stroke="#2d2d2d" stroke-width="2.5"/><path d="M10 9 Q24 15 38 9" fill="none" stroke="#2d2d2d" stroke-width="2"/><circle cx="18" cy="24" r="2.6" fill="#2d2d2d"/><circle cx="30" cy="24" r="2.6" fill="#2d2d2d"/><circle cx="14" cy="29" r="2.2" fill="#ffb3a8"/><circle cx="34" cy="29" r="2.2" fill="#ffb3a8"/><path d="M21 29 Q24 32 27 29" fill="none" stroke="#2d2d2d" stroke-width="2" stroke-linecap="round"/><circle cx="13" cy="43" r="3" fill="#2d2d2d"/><circle cx="35" cy="43" r="3" fill="#2d2d2d"/></svg>`;
+let curDay=0;
 
-  // Photo URLs per day (Unsplash curated)
-  const photos=[
-    'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80', // DAY1 京都
-    'https://images.unsplash.com/photo-1555652736-e92021d28a10?w=800&q=80', // DAY2 大阪
-    'https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?w=800&q=80', // DAY3 伏見稻荷
-    'https://images.unsplash.com/photo-1570459027562-4a916cc6113f?w=800&q=80', // DAY4 東寺
-    'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&q=80', // DAY5 嵐山
-    'https://images.unsplash.com/photo-1548872591-37a48c859d02?w=800&q=80', // DAY6 奈良鹿
-    'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=800&q=80', // DAY7 貴船
-    'https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=800&q=80', // DAY8 天橋立
-    'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=80', // DAY9 神戶
-    'https://images.unsplash.com/photo-1493997181344-712f2f19d87a?w=800&q=80', // DAY10 京都
-    'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80', // DAY11 飛機
-  ];
-
-  // Map queries per day
-  const mapQ=[
-    '錦市場+京都',
-    '道頓堀+大阪',
-    '伏見稲荷大社+京都',
-    '東寺+梅小路公園+京都',
-    '嵐山竹林+天龍寺+京都',
-    '東大寺+奈良公園',
-    '貴船神社+鞍馬寺+京都',
-    '天橋立+京都府',
-    '神戸動物王国+王子動物園+神戸',
-    '藤森神社+下鴨神社+京都',
-    '関西空港',
-  ];
-
-  const photo=photos[di]||photos[0];
-  const q=encodeURIComponent(mapQ[di]||d.area);
-  const mapSrc=`https://www.google.com/maps/search/?api=1&query=${q}`;
-
-  // Spot chips — only sightseeing + food + alert items, no transport
-  const chips=d.items.filter(it=>it.type!=='transport').map(it=>{
-    const cls=it.isAlert?'alert':it.isHighlight?'highlight':it.type==='food'?'food':'';
-    const ico={sightseeing:'📍',food:'🍽️',hotel:'🏨',alert:'⚠️'}[it.type]||'📌';
-    const shortTitle=it.title.replace(/^[^\s]+\s/,'').split('（')[0].split(' ')[0];
-    return `<div class="spot-chip ${cls}"><span class="spot-chip-icon">${ico}</span>${shortTitle}</div>`;
-  }).join('');
-
-  document.getElementById('day-header').innerHTML=`
-    <h2>${d.date} — ${d.title}</h2><p>📍 ${d.area}</p>`;
-
-  // Spot chips
-  document.getElementById('spot-chips').innerHTML=chips;
-
-  // Timeline — simplified, note hidden by default
-  document.getElementById('timeline').innerHTML=d.items.map((item,i)=>{
-    const tl={sightseeing:'景點',food:'美食',transport:'交通',hotel:'住宿',alert:'注意'}[item.type]||item.type;
-    const cc=item.isAlert?'tl-card is-alert':item.isHighlight?'tl-card is-hi':'tl-card';
-    const ts=(item.tags||[]).map(t=>`<span class="ctag ${item.isAlert?'red':item.isHighlight?'gold':''}">${t}</span>`).join('');
-    const noteHtml=item.note?`<div class="card-note">${item.note.replace(/\n/g,'<br>')}</div><button class="expand-btn" onclick="this.previousElementSibling.style.display=this.previousElementSibling.style.display==='block'?'none':'block';this.textContent=this.textContent==='▼ 詳細'?'▲ 收起':'▼ 詳細'">▼ 詳細</button>`:'';
-    return `<div class="tl-item" style="animation-delay:${i*.05}s"><div class="time-col"><div class="time-lbl">${item.time||''}</div></div><div class="tl-dot ${item.type}"></div><div class="${cc}"><div class="card-type ${item.type}">${tl}</div><div class="card-title">${item.title}</div>${noteHtml}${ts?`<div class="card-tags">${ts}</div>`:''}</div></div>`;
-  }).join('');
+function moveKind(it){
+  const t=(it.title+' '+(it.note||''));
+  if(/JX|航班|飛|機場報到|啟程|抵達.*機場/.test(t)&&/JX|機場/.test(t)) return ['mv-plane','✈ 飛機'];
+  if(/新幹線|のぞみ/.test(t)) return ['mv-shink','🚄 新幹線'];
+  if(/租車|開車|自駕/.test(t)) return ['mv-car','🚗 開車'];
+  if(/電車|JR|近鐵|叡電|叡山|嵐電|名鐵|あおなみ|地鐵|特急|線/.test(t)) return ['mv-train','🚃 電車'];
+  if(/巴士|バス/.test(t)) return ['mv-bus','🚌 巴士'];
+  if(/步行|走路/.test(t)) return ['mv-walk','🚶 步行'];
+  return ['mv-walk','🚶 移動'];
 }
+
 function buildTabs(){
-  document.getElementById('day-tabs').innerHTML=days.map((d,i)=>`<button class="day-tab ${i===0?'active':''}" onclick="renderItinerary(${i})">${d.label}<small>${d.date}</small></button>`).join('');
+  const wd=['日','一','二','三','四','五','六'];
+  document.getElementById('rail-inner').innerHTML='<div class="rail-line"></div><div class="mascot" id="mascot">'+MASCOT_SVG+'</div>'+
+    days.map((d,i)=>{
+      const [md,w]=d.date.split(' ');
+      return `<button class="rail-stop" onclick="renderItinerary(${i})"><div class="rail-dot"></div><div class="rail-date">${md}</div><div class="rail-wd">${w?'週'+w:''}</div></button>`;
+    }).join('');
+  // 左右滑動切換
+  const tl=document.getElementById('timeline');
+  let sx=0,sy=0;
+  const area=document.getElementById('section-itinerary');
+  area.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+  area.addEventListener('touchend',e=>{
+    if(e.target.closest('.rail')) return;
+    const dx=e.changedTouches[0].clientX-sx, dy=e.changedTouches[0].clientY-sy;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){
+      const n=curDay+(dx<0?1:-1);
+      if(n>=0&&n<days.length) renderItinerary(n);
+    }
+  },{passive:true});
+}
+
+function renderItinerary(di){
+  curDay=di;
+  const d=days[di], th=dayTheme[di]||dayTheme[0];
+  const stops=document.querySelectorAll('.rail-stop');
+  stops.forEach((t,i)=>{t.classList.toggle('active',i===di);t.classList.toggle('past',i<di);});
+  const st=stops[di], m=document.getElementById('mascot'), rail=document.getElementById('rail');
+  if(st&&m){
+    m.style.transform=`translateX(${st.offsetLeft+st.offsetWidth/2-23}px)`;
+    m.classList.remove('hop');void m.offsetWidth;m.classList.add('hop');
+    rail.scrollTo({left:st.offsetLeft-rail.clientWidth/2+st.offsetWidth/2,behavior:'smooth'});
+  }
+
+  document.getElementById('day-hero').innerHTML=`<div class="day-hero" style="background:${th.bg};--wave:${th.wave}">
+    <div class="day-hero-ill"><span>${th.ill}</span></div>
+    <div class="day-hero-txt"><div class="day-hero-no">Day ${di+1} · ${d.date}</div><div class="day-hero-title">${d.title}</div><div class="day-hero-area">📍 ${d.area}</div></div></div>`;
+
+  document.getElementById('timeline').innerHTML=d.items.map((it,i)=>{
+    const delay=`style="animation-delay:${i*.04}s"`;
+    if(it.type==='transport'){
+      const [cls,lbl]=moveKind(it);
+      return `<div class="tl2-row tl2-move" ${delay}><div class="tl2-time">${it.time||''}</div><div class="tl2-dot"></div>
+        <div class="mv-line"><span class="mv-pill ${cls}">${lbl}</span><span>${it.title}</span></div>${it.note?`<div class="mv-sub">${it.note.replace(/\n/g,'<br>')}</div>`:''}</div>`;
+    }
+    return `<div class="tl2-row" ${delay}><div class="tl2-time">${it.time||''}</div><div class="tl2-dot"></div>
+      <div class="tl2-card ${it.isHighlight?'hi':''}" onclick="this.classList.toggle('open')">
+        <div class="tl2-title">${it.isHighlight?'<span class="star">★</span>':''}${it.title}</div>
+        ${it.note?`<div class="tl2-note">${it.note.replace(/\n/g,'<br>')}</div>`:''}</div></div>`;
+  }).join('');
 }
 
 function renderSpots(f){
