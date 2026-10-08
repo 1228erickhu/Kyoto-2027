@@ -408,12 +408,13 @@ nav::-webkit-scrollbar{display:none;}
       <div class="hero-jp">我們的家族京都之旅</div>
       <div class="hero-sub">Kyoto Family Trip · 2027 · 六人同行</div>
       <div class="hero-meta">
-        <div class="hero-pill">航班 <span>JX820</span> 07:40 TPE</div>
-        <div class="hero-pill">日期 <span>1/18 — 1/28</span> 11天</div>
+        <div class="hero-pill">去程 <span>JX306</span> 台中→神戶</div>
+        <div class="hero-pill">回程 <span>JX839</span> 名古屋→桃園</div>
+        <div class="hero-pill">日期 <span>1/18–1/28</span> 11天</div>
         <div class="hero-pill">成員 <span>大人 2 · 小孩 4</span></div>
       </div>
     </div>
-    <div class="hero-deco">— 京都 · 大阪 · 奈良 · 神戶 · 天橋立 —</div>
+    <div class="hero-deco">— 神戶 · 京都 · 大阪 · 奈良 · 名古屋 —</div>
   </div>
 </div>
 
@@ -673,99 +674,108 @@ nav::-webkit-scrollbar{display:none;}
 
 <script>
 const days=[
-  {label:'DAY 1',date:'1/18 一',title:'抵達京都',area:'關西機場 → 京都',items:[
-    {time:'07:40',type:'transport',title:'TPE 出發 JX820',note:'07:40 桃園 → 11:10 關西機場',tags:['JX820']},
-    {time:'11:10',type:'transport',title:'抵達關西機場',note:'入境、領行李、換日圓、買 ICOCA'},
-    {time:'~12:30',type:'transport',title:'Haruka 特急 → 京都',note:'成人 ¥1,100 ／ 小孩 ¥550\n約75分鐘抵達京都車站',tags:['¥1,100 成人','¥550 小孩']},
-    {time:'~14:00',type:'hotel',title:'飯店 Check-in',note:'三條格拉斯麗酒店，放行李休息'},
-    {time:'下午',type:'sightseeing',title:'錦市場買手套',note:'到錦市場逛逛，可順便買手套',tags:['錦市場']},
-    {time:'18:00',type:'food',title:'晚餐 + 仁仁生日慶生！',note:'選擇：麵屋幽光 ／ 名代豬排 ／ 敘敘院游玄庭 ／ 富美家',isHighlight:true,tags:['生日慶生🎂']},
-    {time:'19:00前',type:'alert',title:'大丸百貨取貨 DEADLINE',note:'必須在 19:00 前到大丸百貨取貨！\nHarbs 草莓蛋糕在這裡取',isAlert:true,tags:['⚠️ 19:00截止']},
+  {label:'DAY 1',date:'1/18 一',title:'抵達神戶→京都',area:'台中 → 神戶 → 京都',items:[
+    {time:'08:45',type:'transport',title:'台中出發 JX306',note:'08:45 台中 RMQ → 12:30 神戶 UKB',tags:['JX306','星宇航空'],isHighlight:true},
+    {time:'12:30',type:'transport',title:'抵達神戶機場',note:'辦理入境手續、領取行李'},
+    {time:'13:30',type:'transport',title:'神戶→京都',note:'搭乘電車或高速巴士前往京都市區，約 1.5 小時'},
+    {time:'15:30',type:'hotel',title:'Check-in 三條格拉斯麗酒店',note:'15:00 起可 Check-in，烏丸御池站步行 5 分鐘',isHighlight:true},
+    {time:'17:00',type:'food',title:'三條附近晚餐',note:'周邊探索，超市採購隔天早餐'},
   ]},
-  {label:'DAY 2',date:'1/19 二',title:'包車 — 大阪',area:'大阪',items:[
-    {time:'全天',type:'transport',title:'包車出發',note:'10人座 ¥52,000 ／ 14人座 ¥57,000',tags:['包車']},
-    {time:'上午',type:'sightseeing',title:'勝尾寺',note:'以勝利達摩聞名，祈求必勝'},
-    {time:'下午',type:'sightseeing',title:'天王寺動物園',note:'大阪市內動物園'},
-    {time:'下午',type:'sightseeing',title:'梅田逛街',note:'阪急百貨、Grand Front Osaka'},
-    {time:'下午',type:'sightseeing',title:'寶可夢中心 大阪',note:'梅田附近，備好荷包💸'},
-    {time:'傍晚',type:'sightseeing',title:'道頓堀',note:'格利科打卡、章魚燒、串炸',tags:['大阪必訪']},
+  {label:'DAY 2',date:'1/19 二',title:'大阪一日遊',area:'京都 ⇄ 大阪',items:[
+    {time:'09:00',type:'transport',title:'租車出發',note:'開車前往大阪，全程使用租車自駕'},
+    {time:'10:00',type:'spot',title:'勝尾寺',note:'以「勝」為主題的古剎，達摩不倒翁聞名，停車方便',isHighlight:true},
+    {time:'12:00',type:'food',title:'天王寺午餐',note:'阿倍野地區商業街用餐'},
+    {time:'13:30',type:'spot',title:'天王寺・阿倍野',note:'展望台 Harukas 300 可選，逛街購物'},
+    {time:'16:00',type:'spot',title:'梅田・大阪駅',note:'Grand Front Osaka、LUCUA 購物商場'},
+    {time:'17:00',type:'spot',title:'寶可夢中心 大阪',note:'位於梅田 LUCUA，Pikachu 迷必訪！',isHighlight:true},
+    {time:'19:00',type:'food',title:'道頓堀晚餐',note:'章魚燒、大阪燒、螃蟹道樂，盡享大阪美食',isHighlight:true},
+    {time:'21:00',type:'transport',title:'返回京都',note:'開車約 45 分鐘返回飯店'},
   ]},
-  {label:'DAY 3',date:'1/20 三',title:'宇治 & 伏見稻荷',area:'宇治・伏見',items:[
-    {time:'上午',type:'transport',title:'前往宇治',note:'搭 JR 奈良線，約17分鐘'},
-    {time:'上午',type:'sightseeing',title:'平等院',note:'世界遺產！十圓硬幣的圖案',tags:['¥600','世界遺產']},
-    {time:'中午',type:'food',title:'中村藤吉本舖',note:'宇治最知名抹茶甜點老店，必吃',tags:['必吃']},
-    {time:'下午',type:'sightseeing',title:'任天堂博物館',note:'需提前線上預約！確認是否已預約',tags:['需預約']},
-    {time:'下午',type:'food',title:'麵屋豬一',note:'宇治人氣拉麵'},
-    {time:'下午',type:'food',title:'たま木亭',note:'排隊名店麵包，要早去排隊'},
-    {time:'傍晚',type:'sightseeing',title:'伏見稻荷大社',note:'千本鳥居，傍晚人較少\n記得買豆大福！',tags:['免費','豆大福']},
-    {time:'傍晚',type:'sightseeing',title:'建仁寺',note:'京都最古老禪寺，必看「風神雷神圖」屏風！伏見稻荷搭車約15分，祇園旁',tags:['¥600','京都最古禪寺']},
-    {time:'傍晚',type:'food',title:'無碍山房 Salon de Muge',note:'米其林三星菊乃井旗下甜點茶房！建仁寺步行約10分鐘，高台寺附近\n⚠️ 週二休息，1/20 三正常營業 ✅\n濃い抹茶パフェ必點！',isHighlight:true,tags:['必吃','抹茶芭菲','¥1,980']},
+  {label:'DAY 3',date:'1/20 三',title:'宇治・伏見・祇園',area:'宇治 → 伏見 → 京都市區',items:[
+    {time:'09:00',type:'transport',title:'前往宇治',note:'搭 JR 奈良線，京都→宇治約 17 分鐘'},
+    {time:'09:30',type:'spot',title:'平等院鳳凰堂',note:'世界遺產，10 元硬幣上的圖案，早到人少',isHighlight:true},
+    {time:'11:00',type:'food',title:'中村藤吉本店',note:'宇治老舗抹茶甜點，生茶凍人氣第一',isHighlight:true},
+    {time:'13:00',type:'spot',title:'任天堂博物館',note:'需事先預約，體驗各時代任天堂遊戲機',isHighlight:true},
+    {time:'15:30',type:'spot',title:'伏見稻荷大社',note:'千本鳥居，傍晚光線最美，可爬至三ツ辻觀景'},
+    {time:'17:30',type:'spot',title:'建仁寺',note:'京都最古老禪寺，雙龍圖壯觀（17:00 閉門，早些進入）'},
+    {time:'19:00',type:'food',title:'無碍山房 Salon de Muge',note:'百年町家改建，精緻日式晚餐，需預約',isHighlight:true},
   ]},
-  {label:'DAY 4',date:'1/21 四',title:'東寺市集・梅小路公園',area:'京都市內・梅小路',items:[
-    {time:'早上',type:'sightseeing',title:'東寺弘法市集',note:'每月21日限定！早去人少撿好貨，骨董＋美食攤\n✅ 1/21（四）正常舉辦',isHighlight:true,tags:['每月21日限定','免費入場']},
-    {time:'上午',type:'sightseeing',title:'三十三間堂',note:'1001尊千手觀音像，震撼壯觀！東寺步行約15分鐘',tags:['¥600','必看']},
-    {time:'中午',type:'sightseeing',title:'梅小路公園',note:'水族館旁，可在公園野餐午休，環境舒適',tags:['免費']},
-    {time:'下午',type:'sightseeing',title:'京都水族館',note:'海豚表演場次：11:30 ／ 13:30 ／ 15:30\n✅ 年中無休，1/21 正常開館',tags:['可重複入場','✅已確認開館']},
-    {time:'下午',type:'sightseeing',title:'京都鐵道博物館',note:'梅小路公園內，親子必訪\n✅ 週四正常開館',tags:['親子','✅已確認開館']},
-    {time:'傍晚',type:'sightseeing',title:'東本願寺 ／ 西本願寺',note:'步行可達，免費參觀',tags:['免費']},
+  {label:'DAY 4',date:'1/21 四',title:'梅小路・三十三間堂',area:'梅小路公園周邊',items:[
+    {time:'09:00',type:'spot',title:'東寺弘法市集',note:'每月 21 日限定！古董跳蚤市場，尋寶好去處',isHighlight:true},
+    {time:'11:00',type:'spot',title:'三十三間堂',note:'1001 尊千手觀音像，氣勢震撼，步行可達',isHighlight:true},
+    {time:'12:30',type:'food',title:'梅小路公園周邊午餐',note:'鐵道博物館附近餐廳或便當'},
+    {time:'13:30',type:'spot',title:'梅小路水族館',note:'京都市區水族館，有可愛企鵝',isHighlight:true},
+    {time:'15:30',type:'spot',title:'京都鐵道博物館',note:'小朋友最愛！實際火車展示與模擬駕駛',isHighlight:true},
+    {time:'17:30',type:'spot',title:'梅小路公園散步',note:'公園漫步，朱雀之庭日式庭園'},
+    {time:'19:00',type:'food',title:'西院・四条附近晚餐',note:'返回市區享用晚餐'},
   ]},
-  {label:'DAY 5',date:'1/22 五',title:'嵐山',area:'嵐山',items:[
-    {time:'早上',type:'sightseeing',title:'嵐山竹林小徑',note:'越早越好，人少光線美'},
-    {time:'上午',type:'sightseeing',title:'天龍寺庭園',note:'世界遺產枯山水庭園',tags:['¥500']},
-    {time:'中午',type:'food',title:'嵐山蕎麥麵',note:'嵐山周邊多家蕎麥麵老店'},
-    {time:'下午',type:'sightseeing',title:'渡月橋散步',note:'嵐山標誌性景點'},
-    {time:'傍晚',type:'transport',title:'嵐電回市區',note:'搭嵐山路面電車體驗'},
+  {label:'DAY 5',date:'1/22 五',title:'嵐山一日遊',area:'嵐山・嵯峨野',items:[
+    {time:'09:00',type:'transport',title:'前往嵐山',note:'搭嵐電（京福電鐵）或巴士，推薦嵐電嵐山站下'},
+    {time:'09:30',type:'spot',title:'竹林小徑',note:'早晨人少，嵯峨野翠竹步道，最佳拍照時間',isHighlight:true},
+    {time:'10:30',type:'spot',title:'天龍寺',note:'世界遺產，曹源池庭園四季皆美',isHighlight:true},
+    {time:'12:00',type:'food',title:'渡月橋附近午餐',note:'嵐山名物湯豆腐・抹茶料理'},
+    {time:'13:30',type:'spot',title:'渡月橋散步',note:'橋上眺望嵐山，冬日雪景或枯山水之美'},
+    {time:'14:30',type:'spot',title:'嵐山竹工藝・小店巡',note:'手作竹製品、甜品店、嵐山限定伴手禮'},
+    {time:'16:00',type:'transport',title:'嵐電遊覽',note:'搭嵐電前往帷子ノ辻，欣賞沿線風景',isHighlight:true},
+    {time:'18:00',type:'food',title:'四条・木屋町晚餐',note:'返回市區享用晚餐，河畔餐廳'},
   ]},
-  {label:'DAY 6',date:'1/23 六',title:'奈良 & 燒山祭',area:'奈良',items:[
-    {time:'上午',type:'transport',title:'前往奈良',note:'近鐵或 JR，約45分鐘'},
-    {time:'上午',type:'sightseeing',title:'奈良公園餵鹿',note:'鹿仙貝一份 ¥200，小心鹿搶東西 😅'},
-    {time:'上午',type:'sightseeing',title:'東大寺',note:'世界最大木造建築，奈良大佛超震撼',tags:['¥600']},
-    {time:'下午',type:'sightseeing',title:'春日大社',note:'千盞石燈籠，世界遺產',tags:['免費']},
-    {time:'下午',type:'food',title:'中谷堂',note:'奈良超高速現打麻糬，排隊也值得',tags:['必吃']},
-    {time:'下午',type:'food',title:'水谷茶屋',note:'奈良公園內茶屋，環境很美'},
-    {time:'傍晚',type:'sightseeing',title:'若草山燒山祭',note:'整座山點火！年度盛事，記得早點佔位',isHighlight:true,tags:['年度盛事🔥']},
+  {label:'DAY 6',date:'1/23 六',title:'奈良一日遊',area:'奈良公園',items:[
+    {time:'08:30',type:'transport',title:'前往奈良',note:'搭近鐵京都線，約 45 分鐘抵達近鐵奈良站'},
+    {time:'09:30',type:'spot',title:'東大寺',note:'世界遺產，日本最大木造建築，超巨大大佛',isHighlight:true},
+    {time:'10:30',type:'spot',title:'奈良公園餵鹿',note:'與 1200 頭野生鹿近距離接觸，鹿仙貝必買',isHighlight:true},
+    {time:'12:00',type:'food',title:'奈良市區午餐',note:'餐廳或三条通商店街輕食'},
+    {time:'13:30',type:'spot',title:'春日大社',note:'世界遺產，朱紅色神社，春日大社境內萬盞燈籠',isHighlight:true},
+    {time:'15:30',type:'spot',title:'ならまち散策',note:'古老町家街道，雜貨小店、咖啡廳'},
+    {time:'17:30',type:'transport',title:'返回京都',note:'近鐵回京都，傍晚抵達'},
+    {time:'20:00',type:'spot',title:'若草山燒山祭',note:'★ 1/23 限定！奈良山頂點火，從京都可能遠眺，建議當天確認',isHighlight:true},
   ]},
-  {label:'DAY 7',date:'1/24 日',title:'出町柳・貴船・鞍馬',area:'出町柳・京都市北',items:[
-    {time:'早上',type:'food',title:'出町雙葉 豆大福',note:'京都超人氣名店！每天限量，建議 8:00 前排隊\n📍 出町柳站步行約5分鐘',isHighlight:true,tags:['必吃','早去排隊']},
-    {time:'上午',type:'food',title:'大黑屋餅舖',note:'明治30年老舖！鎌餅是名物，鎌刀形狀求肥麻糬超可愛\n📍 寺町通今出川，出町雙葉步行約10分鐘',tags:['老舖','限量']},
-    {time:'上午',type:'transport',title:'搭叡山電鐵前往貴船口',note:'從出町柳站搭叡電，約30分鐘'},
-    {time:'中午',type:'sightseeing',title:'貴船神社',note:'冬天石燈籠結冰超美！縁結び守護神',tags:['水神社']},
-    {time:'下午',type:'sightseeing',title:'鞍馬寺',note:'從貴船步行翻山可達，或搭纜車',tags:['纜車¥200']},
-    {time:'傍晚',type:'transport',title:'搭叡電回出町柳',note:'回市區，順路逛寺町通'},
-    {time:'傍晚',type:'sightseeing',title:'回市區自由活動',note:'逛出町柳周邊，或鴨川散步'},
+  {label:'DAY 7',date:'1/24 日',title:'叡電・貴船神社',area:'出町柳 → 貴船',items:[
+    {time:'09:00',type:'food',title:'出町雙葉豆餅',note:'百年名店，週日開店，早到排隊買豆餅早餐',isHighlight:true},
+    {time:'10:00',type:'transport',title:'搭叡山電鐵',note:'出町柳站搭叡電，車窗楓景或雪景超美，終點貴船口',isHighlight:true},
+    {time:'11:00',type:'spot',title:'貴船神社',note:'水氣神社，雪中紅燈籠最夢幻，本宮→結社→奧宮全走',isHighlight:true},
+    {time:'13:00',type:'food',title:'貴船川床料理',note:'冬季川床懷石，需預約，溫暖的鍋物料理',isHighlight:true},
+    {time:'15:00',type:'spot',title:'鞍馬寺',note:'天狗傳說，鞍馬山健行，叡電鞍馬站下車'},
+    {time:'17:30',type:'transport',title:'返回市區',note:'搭叡電返回出町柳'},
+    {time:'19:00',type:'food',title:'河原町・四条晚餐',note:'最後一晚京都美食，錦市場周邊'},
+    {time:'21:00',type:'spot',title:'購買伴手禮',note:'錦市場・三条商店街・便利商店最後採購'},
   ]},
-  {label:'DAY 8',date:'1/25 一',title:'天橋立',area:'天橋立',items:[
-    {time:'出發前',type:'alert',title:'注意：今天可能下雪！',note:'天橋立冬天會下雪，確認已穿雪靴出門',isAlert:true,tags:['⚠️ 雪靴必備']},
-    {time:'上午早',type:'transport',title:'京都 → 天橋立（特急Hashidate）',note:'約2小時，建議早出發',tags:['特急','約¥3,110']},
-    {time:'中午',type:'sightseeing',title:'天橋立',note:'日本三景！可上觀景台看「飛龍觀」\n也可騎自行車穿越2公里松林沙洲',tags:['日本三景']},
-    {time:'中午',type:'food',title:'海鮮午餐',note:'天橋立當地新鮮海鮮丼、螃蟹料理'},
-    {time:'傍晚',type:'transport',title:'返回京都',note:'傍晚前搭車回京都，約2小時'},
+  {label:'DAY 8',date:'1/25 一',title:'京都→名古屋',area:'京都 → 名古屋',items:[
+    {time:'09:00',type:'transport',title:'退房・行李寄存',note:'三條格拉斯麗 Check-out，行李送至名古屋飯店（可用大和宅急便）'},
+    {time:'10:00',type:'spot',title:'京都車站周邊',note:'伊勢丹地下街最後購物、抹茶伴手禮補貨'},
+    {time:'12:00',type:'transport',title:'搭新幹線前往名古屋',note:'京都→名古屋 のぞみ 約 35 分鐘',isHighlight:true},
+    {time:'13:00',type:'hotel',title:'Check-in 名古屋飯店',note:'名古屋市區飯店，靠近地鐵方便'},
+    {time:'14:00',type:'spot',title:'名古屋市區探索',note:'大須商店街初探，或前往名古屋港水族館'},
+    {time:'19:00',type:'food',title:'名古屋名物晚餐',note:'矢場味噌豬排・或名古屋コーチン地雞料理',isHighlight:true},
   ]},
-  {label:'DAY 9',date:'1/26 二',title:'神戶',area:'神戶',items:[
-    {time:'上午',type:'transport',title:'京都 → 神戶（JR新快速）',note:'約55分鐘',tags:['約¥1,100']},
-    {time:'上午',type:'food',title:'神戶吐司',note:'神戶名物！ISUZU Bakery 推薦',tags:['必吃']},
-    {time:'上午',type:'sightseeing',title:'神戶動物王國',note:'室內動物園，可近距離接觸動物'},
-    {time:'下午',type:'sightseeing',title:'王子動物園',note:'免費入場！有大熊貓',tags:['免費']},
-    {time:'傍晚',type:'sightseeing',title:'神戶市區散步',note:'北野異人館、南京町中華街'},
+  {label:'DAY 9',date:'1/26 二',title:'LEGOLAND Japan',area:'名古屋・金城ふ頭',items:[
+    {time:'09:00',type:'transport',title:'前往 LEGOLAND',note:'搭あおなみ線至金城ふ頭站，步行即到'},
+    {time:'10:00',type:'spot',title:'LEGOLAND Japan 全天',note:'★ 全天體驗！積木樂園、MINILAND 縮小世界、各主題區',isHighlight:true},
+    {time:'10:30',type:'spot',title:'MINILAND',note:'用樂高重現日本各城市地標，超精細'},
+    {time:'12:00',type:'food',title:'園內午餐',note:'LEGOLAND 餐廳，或自帶便當（確認園區規定）'},
+    {time:'13:00',type:'spot',title:'各主題遊樂設施',note:'忍者道場、海盜海岸、城堡、探險世界'},
+    {time:'16:00',type:'spot',title:'SEA LIFE 名古屋',note:'LEGOLAND 旁水族館，合購套票更划算',isHighlight:true},
+    {time:'18:00',type:'transport',title:'返回名古屋市區',note:'あおなみ線返回'},
+    {time:'19:00',type:'food',title:'晚餐',note:'金山・榮地區餐廳'},
   ]},
-  {label:'DAY 10',date:'1/27 三',title:'京都最後一天',area:'京都',items:[
-    {time:'上午',type:'sightseeing',title:'藤森神社',note:'勝馬・學業守護神社，5月紫藤花超美！馬迷必拜',tags:['祈福','勝馬']},
-    {time:'上午',type:'sightseeing',title:'下鴨神社',note:'世界遺產！京都最古老神社之一，糺之森森林步道超療癒',tags:['世界遺產','免費']},
-    {time:'上午',type:'food',title:'村上開新堂',note:'明治40年創業，京都最古老洋菓子店！招牌俄羅斯蛋糕必買\n📍 寺町二條\n✅ 週三正常營業（10:00～17:30）',isHighlight:true,tags:['必買','俄羅斯蛋糕','老舖']},
-    {time:'中午',type:'sightseeing',title:'錦市場掃尾購物',note:'最後一次逛錦市場，醃菜、伴手禮補貨！'},
-    {time:'上午',type:'sightseeing',title:'市比賣神社',note:'女性守護神社，京都秘境',tags:['祈福']},
-    {time:'下午',type:'sightseeing',title:'京都寶可夢中心',note:'京都BAL百貨內，皮卡丘等著你！跟大阪不同限定商品，備好荷包💸',isHighlight:true,tags:['限定商品','購物']},
-    {time:'下午',type:'sightseeing',title:'teamLab（看票況）',note:'需提前線上購票，確認是否有票',tags:['需預約']},
-    {time:'傍晚',type:'food',title:'最後晚餐',note:'想吃什麼就吃什麼！旅程的最後一餐'},
-    {time:'晚上',type:'hotel',title:'整理行李',note:'明天 14:00 飛機，建議 11:00 前出發去機場'},
+  {label:'DAY 10',date:'1/27 三',title:'名古屋城・熱田神宮',area:'名古屋市區',items:[
+    {time:'09:30',type:'spot',title:'名古屋城',note:'日本三大名城之一，金シャチ鯱最具代表性，本丸御殿重建完成',isHighlight:true},
+    {time:'11:30',type:'spot',title:'名城公園',note:'名古屋城外苑，冬日散步'},
+    {time:'12:30',type:'food',title:'午餐',note:'名古屋城周邊、或前往熱田途中'},
+    {time:'14:00',type:'spot',title:'熱田神宮',note:'供奉草薙劍三神器之一，古老神社氣氛莊嚴',isHighlight:true},
+    {time:'15:30',type:'spot',title:'大須商店街',note:'電器、二手衣、美食、懷舊遊樂場，名古屋最熱鬧商街',isHighlight:true},
+    {time:'17:00',type:'food',title:'矢場とん 矢場店',note:'名古屋矢場味噌豬排本店，排隊名物',isHighlight:true},
+    {time:'19:00',type:'spot',title:'榮・栄地區夜逛',note:'名古屋最繁華商業區，最後血拼'},
+    {time:'21:00',type:'spot',title:'收拾行李',note:'整理行李，確認護照機票，準備明日出發'},
   ]},
-  {label:'DAY 11',date:'1/28 四',title:'回台灣 🏠',area:'關西機場 → 桃園',items:[
-    {time:'11:00前',type:'hotel',title:'飯店退房',note:'11:00 退房，可先寄放行李'},
-    {time:'~11:00',type:'transport',title:'Haruka 特急 → 關西機場',note:'約75分鐘，最晚 11:30 前搭車',tags:['¥1,100']},
-    {time:'14:00',type:'transport',title:'KIX 出發 JX821',note:'14:00 關西機場 → 16:15 桃園',tags:['JX821']},
-    {time:'16:15',type:'transport',title:'抵達桃園，回家！',note:'旅行圓滿結束 🎉',isHighlight:true},
+  {label:'DAY 11',date:'1/28 四',title:'返台',area:'名古屋 → 桃園',items:[
+    {time:'09:00',type:'spot',title:'名古屋市區',note:'最後早餐・早上可輕鬆逛街'},
+    {time:'12:00',type:'food',title:'午餐',note:'名古屋站附近美食，名古屋車站地下街'},
+    {time:'15:00',type:'transport',title:'前往中部國際機場（NGO）',note:'名鐵特急 ミュースカイ，名古屋→中部機場約 28 分鐘',isHighlight:true},
+    {time:'17:00',type:'transport',title:'機場報到・安檢',note:'星宇航空 JX839，建議提早 3 小時報到'},
+    {time:'21:20',type:'transport',title:'JX839 啟程返台',note:'21:20 名古屋 NGO 出發',isHighlight:true},
+    {time:'23:25',type:'transport',title:'抵達桃園國際機場',note:'23:25 TPE 落地，旅行圓滿結束！',isHighlight:true},
   ]},
-];
+];;
 
 const spots=[
   {city:'京都',name:'藤森神社',jp:'藤森神社',desc:'勝馬・學業守護，5月紫藤花超美',tags:['神社','祈福'],q:'藤森神社 京都'},
@@ -804,16 +814,15 @@ const foods=[
 ];
 
 const transports=[
-  {icon:'✈️',name:'去程：TPE → KIX（JX820）',detail:'出發 07:40 桃園 ／ 抵達 11:10 關西\n建議 05:00 前到機場',cost:'已購票'},
-  {icon:'🚄',name:'Haruka 特急（機場↔京都）',detail:'約75分鐘\n成人 ¥1,100 ／ 小孩 ¥550\n機場 JR 售票機購買',cost:'¥1,100/人'},
-  {icon:'💳',name:'ICOCA IC Card',detail:'關西地區電車、地鐵、巴士通用\n抵達後立即在機場購買',cost:'¥2,000'},
-  {icon:'🚌',name:'DAY4 包車（大阪）',detail:'10人座 ¥52,000 ／ 14人座 ¥57,000\n勝尾寺→天王寺→梅田→道頓堀',cost:'¥52,000~'},
-  {icon:'🚃',name:'京都 ↔ 宇治（JR奈良線）',detail:'約17分鐘',cost:'¥240'},
-  {icon:'🚃',name:'京都 ↔ 奈良',detail:'近鐵或 JR，約45分鐘',cost:'¥710~'},
-  {icon:'🚃',name:'京都 ↔ 天橋立（特急Hashidate）',detail:'約2小時，建議早出發',cost:'¥3,110'},
-  {icon:'🚃',name:'京都 ↔ 神戶（JR新快速）',detail:'約55分鐘',cost:'¥1,100'},
-  {icon:'✈️',name:'回程：KIX → TPE（JX821）',detail:'出發 14:00 ／ 抵達 16:15 桃園\n最晚 11:30 前到機場',cost:'已購票'},
-];
+  {icon:'✈️',name:'去程：台中 RMQ → 神戶 UKB（JX306）',detail:'出發 08:45 台中 ／ 抵達 12:30 神戶神戶機場\n建議 06:30 前到台中機場',cost:'已購票'},
+  {icon:'✈️',name:'回程：名古屋 NGO → 桃園 TPE（JX839）',detail:'出發 21:20 名古屋 ／ 抵達 23:25 桃園\n建議 18:00 前到中部國際機場',cost:'已購票'},
+  {icon:'🚄',name:'神戶→京都（電車）',detail:'神戶機場→三宮→阪急or神戶市営地鉄→大阪→京都\n或巴士直達，約 1.5 小時',cost:'約 ¥1,500/人'},
+  {icon:'🚄',name:'京都→名古屋（新幹線）',detail:'京都站 のぞみ → 名古屋 約 35 分鐘',cost:'¥3,640/人'},
+  {icon:'🚃',name:'名古屋→中部國際機場',detail:'名鐵 ミュースカイ 特急，名古屋→空港約 28 分鐘',cost:'¥1,250/人'},
+  {icon:'💳',name:'ICOCA IC 交通卡',detail:'關西地區通用，便利店也可使用\n每人各一張，大阪・京都・奈良・神戶皆適用',cost:'¥2,000（含¥500押金）'},
+  {icon:'🚗',name:'大阪租車自駕',detail:'DAY 2 大阪一日租車，可至勝尾寺等不便搭車景點',cost:'依車型'},
+  {icon:'🚌',name:'市巴士一日券',detail:'京都市巴士 230 円/次，一日券 700 円\n平安神宮・嵐山・金閣寺等景點適用',cost:'¥700/人/日'},
+];;
 
 const clBefore=['確認護照有效期限（6個月以上）','購買旅遊保險','換日圓現金備用','確認任天堂博物館預約（DAY3）','確認 teamLab 預約（DAY10）','下載 Google Maps 離線地圖（京都/大阪/奈良/神戶）','確認飯店訂房確認信','確認包車聯絡方式（DAY4）','通知大丸百貨取貨時間（Harbs蛋糕）'];
 const clPack=['❗ 雪靴（DAY8天橋立會下雪！）','厚外套 + 保暖內搭','🧤 手套（也可錦市場買）','暖暖包','口罩','充電器 + 行動電源','相機 / 記憶卡','小背包（白天出門用）','藥品（感冒藥、腸胃藥）'];
