@@ -1225,7 +1225,7 @@ showSec = function(id, btn){
   if(id === 'spots') setTimeout(()=>{initMap();kyotoMap&&kyotoMap.invalidateSize();}, 200);
 };
 
-renderItinerary(0);renderSpots('all');renderFood();renderTransport();renderChecklist();renderExp();checkBadge();restoreFlightData();
+buildTabs();renderItinerary(0);renderSpots('all');renderFood();renderTransport();renderChecklist();renderExp();checkBadge();restoreFlightData();
 // Show reminder on load if there are urgent items today
 (function(){
   const items=getTodayReminders();
