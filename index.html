@@ -896,6 +896,9 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 .alert-box p{display:flex;align-items:center;gap:6px;}
 .alert-box .ic{margin:0;}
 .empty-state .ic{display:block;margin:0 auto 8px;width:24px;height:24px;color:var(--faint);}
+.tl2-warn{display:flex;align-items:flex-start;gap:6px;margin-top:8px;font-size:12px;line-height:1.5;color:var(--rose);background:var(--rose-soft);border-radius:8px;padding:7px 10px;}
+.tl2-warn .ic{width:14px;height:14px;margin:1px 0 0;flex-shrink:0;}
+.tl2-card.has-warn{border-color:#ecd3d3;}
 </style>
 <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
 </head>
@@ -980,11 +983,11 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 <!-- HOTEL -->
 <div id="section-hotel" class="section">
   <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.8s ease-in-out infinite;"><i data-lucide="hotel" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">三條格拉斯麗酒店</div><div class="kawaii-banner-sub">全程 10 晚，烏丸御池站步行 5 分鐘</div></div></div>
+  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.8s ease-in-out infinite;"><i data-lucide="hotel" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">三條格拉斯麗酒店</div><div class="kawaii-banner-sub">京都 7 晚（1/18–1/25），烏丸御池站步行 5 分鐘</div></div></div>
   <div class="sec-title"><span>04</span>住宿資訊</div>
-  <div class="sec-desc">全程住宿三條格拉斯麗酒店，記得帶訂房確認信。</div>
+  <div class="sec-desc">京都段住三條格拉斯麗酒店，1/25 起改住名古屋，記得帶訂房確認信。</div>
   <div class="hotel-card">
-    <div class="hotel-nights">DAY 1–10 ／ 全程10晚（1/18–1/28）</div>
+    <div class="hotel-nights">DAY 1–7 ／ 7晚（1/18–1/25）</div>
     <div class="hotel-name">三條格拉斯麗酒店</div>
     <div class="hotel-jp">ホテルグラスリー三条</div>
     <div class="hotel-info">
@@ -1002,7 +1005,8 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
     <ul>
       <li>三條一帶餐廳選擇豐富，晚餐不用跑遠</li>
       <li>1月京都氣溫約2–10°C，睡前記得開暖氣</li>
-      <li>DAY8天橋立回來可能很晚，入住時確認門禁</li>
+      <li>DAY5 天橋立回來可能很晚，入住時確認門禁</li>
+      <li>1/25–1/28 名古屋住宿資訊待補</li>
     </ul>
   </div>
   </div>
@@ -1078,7 +1082,7 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
   <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.2s ease-in-out infinite;"><i data-lucide="backpack" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">出發前別忘記！</div><div class="kawaii-banner-sub">點擊項目打勾，勾選狀態自動儲存</div></div></div>
   <div class="sec-title"><span>06</span>出發前待辦</div>
   <div class="sec-desc">點擊項目打勾，勾選狀態會自動儲存。</div>
-  <div class="alert-box" style="margin-bottom:18px"><p><i data-lucide="triangle-alert" class="ic"></i>DAY8 天橋立（1/25）預計下雪，務必準備雪靴！</p></div>
+  <div class="alert-box" style="margin-bottom:18px"><p><i data-lucide="triangle-alert" class="ic"></i>DAY5 天橋立（1/22）可能下雪，記得準備防滑鞋！</p></div>
   <div class="cl-section"><div class="cl-title">行前必辦</div><div id="cl-before"></div></div>
   <div class="cl-section"><div class="cl-title">行李打包清單</div><div id="cl-pack"></div></div>
   </div>
@@ -1177,105 +1181,101 @@ const ic=(n,cls='')=>`<i data-lucide="${n}" class="ic${cls?' '+cls:''}"></i>`;
 
 const days=[
   {label:'DAY 1',date:'1/18 一',title:'抵達神戶→京都',area:'台中 → 神戶 → 京都',items:[
-    {time:'08:45',type:'transport',title:'台中出發 JX306',note:'08:45 台中 RMQ → 12:30 神戶 UKB',tags:['JX306','星宇航空'],isHighlight:true},
+    {time:'08:45',type:'transport',title:'台中出發 JX306',note:'08:45 台中 RMQ → 12:30 神戶 UKB'},
     {time:'12:30',type:'transport',title:'抵達神戶機場',note:'辦理入境手續、領取行李'},
-    {time:'13:30',type:'transport',title:'神戶→京都',note:'搭乘電車或高速巴士前往京都市區，約 1.5 小時'},
+    {time:'13:30',type:'transport',title:'神戶→京都',note:'搭電車或高速巴士前往京都市區，約 1.5 小時'},
     {time:'15:30',type:'hotel',title:'Check-in 三條格拉斯麗酒店',note:'15:00 起可 Check-in，烏丸御池站步行 5 分鐘',isHighlight:true},
     {time:'17:00',type:'food',title:'三條附近晚餐',note:'周邊探索，超市採購隔天早餐'},
   ]},
-  {label:'DAY 2',date:'1/19 二',title:'大阪一日遊',area:'京都 ⇄ 大阪',items:[
-    {time:'09:00',type:'transport',title:'租車出發',note:'開車前往大阪，全程使用租車自駕'},
-    {time:'10:00',type:'spot',title:'勝尾寺',note:'以「勝」為主題的古剎，達摩不倒翁聞名，停車方便',isHighlight:true},
-    {time:'12:00',type:'food',title:'天王寺午餐',note:'阿倍野地區商業街用餐'},
-    {time:'13:30',type:'spot',title:'天王寺・阿倍野',note:'展望台 Harukas 300 可選，逛街購物'},
-    {time:'16:00',type:'spot',title:'梅田・大阪駅',note:'Grand Front Osaka、LUCUA 購物商場'},
-    {time:'17:00',type:'spot',title:'寶可夢中心 大阪',note:'位於梅田 LUCUA，Pikachu 迷必訪！',isHighlight:true},
-    {time:'19:00',type:'food',title:'道頓堀晚餐',note:'章魚燒、大阪燒、螃蟹道樂，盡享大阪美食',isHighlight:true},
-    {time:'21:00',type:'transport',title:'返回京都',note:'開車約 45 分鐘返回飯店'},
+  {label:'DAY 2',date:'1/19 二',title:'大阪包車一日遊',area:'箕面 → 天王寺・難波 → 梅田',items:[
+    {time:'08:00',type:'transport',title:'飯店出發（包車）',note:'08:00～08:30 出發。早餐要在飯店處理，車上不能吃東西'},
+    {time:'09:30',type:'spot',title:'勝尾寺',note:'預估停留 09:30～12:00，滿山達摩不倒翁',isHighlight:true},
+    {time:'12:30',type:'spot',title:'箕面瀑布',note:'預估停留 12:30～13:00'},
+    {time:'14:00',type:'spot',title:'天王寺動物園',note:'預估停留 14:00～17:00（再考慮看看）。16:00 停止入園',warn:'與下面三間神社時間重疊，二擇一或調整時間'},
+    {time:'14:00',type:'spot',title:'大國主神社（種錢）',note:'預估停留 14:00～14:30，可以求種錢（錢母的神社）'},
+    {time:'15:00',type:'spot',title:'難波八阪神社',note:'預估停留 15:00～15:30，有獅子造型的神社，網紅景點',isHighlight:true},
+    {time:'16:00',type:'spot',title:'姬嶋神社',note:'預估停留 16:00～16:30，網紅推薦，可以去也可以不用去'},
+    {time:'17:00',type:'spot',title:'梅田車站・寶可夢中心',note:'17:00～ 寶可夢中心，逛街吃飯',isHighlight:true},
+    {time:'',type:'food',title:'千房大阪燒',note:'大阪燒名店'},
+    {time:'',type:'food',title:'燃えよ麺助',note:'福島站旁人氣拉麵，週一公休（這天週二有開）'},
+    {time:'',type:'transport',title:'返回京都車站',note:'包車送回京都'},
   ]},
-  {label:'DAY 3',date:'1/20 三',title:'宇治・伏見・祇園',area:'宇治 → 伏見 → 京都市區',items:[
-    {time:'09:00',type:'transport',title:'前往宇治',note:'搭 JR 奈良線，京都→宇治約 17 分鐘'},
-    {time:'09:30',type:'spot',title:'平等院鳳凰堂',note:'世界遺產，10 元硬幣上的圖案，早到人少',isHighlight:true},
-    {time:'11:00',type:'food',title:'中村藤吉本店',note:'宇治老舗抹茶甜點，生茶凍人氣第一',isHighlight:true},
-    {time:'13:00',type:'spot',title:'任天堂博物館',note:'需事先預約，體驗各時代任天堂遊戲機',isHighlight:true},
-    {time:'15:30',type:'spot',title:'伏見稻荷大社',note:'千本鳥居，傍晚光線最美，可爬至三ツ辻觀景'},
-    {time:'17:30',type:'spot',title:'建仁寺',note:'京都最古老禪寺，雙龍圖壯觀（17:00 閉門，早些進入）'},
-    {time:'19:00',type:'food',title:'無碍山房 Salon de Muge',note:'百年町家改建，精緻日式晚餐，需預約',isHighlight:true},
+  {label:'DAY 3',date:'1/20 三',title:'宇治・伏見稻荷',area:'宇治 → 京都市區 → 伏見',items:[
+    {time:'',type:'transport',title:'前往宇治車站',note:'搭 JR 奈良線，京都→宇治約 17 分鐘'},
+    {time:'',type:'food',title:'中村藤吉本店',note:'先去抽號碼牌，再去逛平等院',isHighlight:true},
+    {time:'',type:'spot',title:'平等院',note:'世界遺產，10 元硬幣上的鳳凰堂',isHighlight:true},
+    {time:'',type:'food',title:'小山園抹茶',note:'丸久小山園',warn:'丸久小山園宇治門市與京都西洞院店都是每週三公休，這天不能去'},
+    {time:'',type:'food',title:'一保堂抹茶',note:'在京都市區（寺町二条），不在宇治。喫茶室 10:00～17:00'},
+    {time:'',type:'food',title:'麵屋豬一',note:'京都市區（寺町仏光寺）。11:00～14:30、17:30～21:30',warn:'不定休，出發前確認店家公告'},
+    {time:'',type:'food',title:'たま木亭（買麵包）',note:'京阪黃檗站步行 5 分鐘。週一、週二公休，週三有開',isHighlight:true},
+    {time:'',type:'spot',title:'伏見稻荷大社',note:'千本鳥居，24 小時開放',isHighlight:true},
+    {time:'',type:'food',title:'豆大福（いなりふたば）',note:'伏見稻荷站旁。週四公休，週三有開'},
   ]},
-  {label:'DAY 4',date:'1/21 四',title:'梅小路・三十三間堂',area:'梅小路公園周邊',items:[
-    {time:'09:00',type:'spot',title:'東寺弘法市集',note:'每月 21 日限定！古董跳蚤市場，尋寶好去處',isHighlight:true},
-    {time:'11:00',type:'spot',title:'三十三間堂',note:'1001 尊千手觀音像，氣勢震撼，步行可達',isHighlight:true},
-    {time:'12:30',type:'food',title:'梅小路公園周邊午餐',note:'鐵道博物館附近餐廳或便當'},
-    {time:'13:30',type:'spot',title:'梅小路水族館',note:'京都市區水族館，有可愛企鵝',isHighlight:true},
-    {time:'15:30',type:'spot',title:'京都鐵道博物館',note:'小朋友最愛！實際火車展示與模擬駕駛',isHighlight:true},
-    {time:'17:30',type:'spot',title:'梅小路公園散步',note:'公園漫步，朱雀之庭日式庭園'},
-    {time:'19:00',type:'food',title:'西院・四条附近晚餐',note:'返回市區享用晚餐'},
+  {label:'DAY 4',date:'1/21 四',title:'東寺初弘法・東山寺社',area:'東寺 → 東山 → 北區',items:[
+    {time:'',type:'spot',title:'東寺市集（初弘法）',note:'每月 21 日的弘法市，1/21 是一年第一次「初弘法」，人非常多，建議一早就去（主要行程）',isHighlight:true},
+    {time:'',type:'spot',title:'三十三間堂',note:'1001 尊千手觀音',warn:'冬季關門較早（約 16:00），建議早點去'},
+    {time:'',type:'spot',title:'建仁寺',note:'雙龍圖，約 17:00 關門'},
+    {time:'',type:'spot',title:'清水寺',note:'清水舞台',isHighlight:true},
+    {time:'',type:'spot',title:'八坂庚申堂',note:'彩色束猿，拍照景點'},
+    {time:'',type:'spot',title:'六道珍皇寺',note:''},
+    {time:'',type:'spot',title:'六波羅蜜寺',note:'今天跑不完可移到 1/24'},
+    {time:'',type:'spot',title:'安井金比羅宮',note:'斷惡緣結良緣，24 小時開放'},
+    {time:'',type:'spot',title:'高台寺',note:''},
+    {time:'',type:'spot',title:'知恩院',note:''},
+    {time:'',type:'spot',title:'南禪寺',note:'水路閣'},
+    {time:'',type:'spot',title:'下鴨神社',note:''},
+    {time:'',type:'spot',title:'金閣寺',note:'今天跑不完可移到 1/24'},
+    {time:'',type:'spot',title:'今宮神社',note:'旁邊有烤麻糬老店'},
+    {time:'',type:'spot',title:'北野天滿宮',note:'今天跑不完可移到 1/24'},
+    {time:'',type:'spot',title:'御金神社',note:'今天跑不完可移到 1/24，24 小時開放'},
+    {time:'',type:'spot',title:'天下無敵神社',note:'正式名稱「霊光殿天満宮」，今出川站附近。社務所常沒人，要按門鈴求御守'},
   ]},
-  {label:'DAY 5',date:'1/22 五',title:'嵐山一日遊',area:'嵐山・嵯峨野',items:[
-    {time:'09:00',type:'transport',title:'前往嵐山',note:'搭嵐電（京福電鐵）或巴士，推薦嵐電嵐山站下'},
-    {time:'09:30',type:'spot',title:'竹林小徑',note:'早晨人少，嵯峨野翠竹步道，最佳拍照時間',isHighlight:true},
-    {time:'10:30',type:'spot',title:'天龍寺',note:'世界遺產，曹源池庭園四季皆美',isHighlight:true},
-    {time:'12:00',type:'food',title:'渡月橋附近午餐',note:'嵐山名物湯豆腐・抹茶料理'},
-    {time:'13:30',type:'spot',title:'渡月橋散步',note:'橋上眺望嵐山，冬日雪景或枯山水之美'},
-    {time:'14:30',type:'spot',title:'嵐山竹工藝・小店巡',note:'手作竹製品、甜品店、嵐山限定伴手禮'},
-    {time:'16:00',type:'transport',title:'嵐電遊覽',note:'搭嵐電前往帷子ノ辻，欣賞沿線風景',isHighlight:true},
-    {time:'18:00',type:'food',title:'四条・木屋町晚餐',note:'返回市區享用晚餐，河畔餐廳'},
+  {label:'DAY 5',date:'1/22 五',title:'天橋立一日遊',area:'天橋立站 → 智恩寺 → 沙洲 → 纜車',items:[
+    {time:'',type:'transport',title:'前往天橋立',note:'京都搭 JR 特急（はしだて號）約 2 小時，回程要預留時間'},
+    {time:'',type:'spot',title:'智恩寺',note:'扇子神籤 300 日圓',isHighlight:true,q:'智恩寺 天橋立',url:'https://maps.app.goo.gl/kXFxEbH19q9hrki66'},
+    {time:'',type:'spot',title:'迴旋橋（通往沙洲的路）',note:'走過旋轉橋就是天橋立沙洲松林步道',q:'天橋立 廻旋橋',url:'https://maps.app.goo.gl/hTXBK1oR3YEjzPYf9'},
+    {time:'',type:'spot',title:'紀念品店',note:'',q:null,url:'https://maps.app.goo.gl/zmi18xXtKJhu1pcH9'},
+    {time:'',type:'spot',title:'天橋立纜車',note:'吊椅／廂式纜車任選，往返票價：12 歲以上 1,000 日圓、小學生 500 日圓（上下山可搭配吊椅或廂式，共四種組合）。\n纜車站有洗手間和吸菸處，山頂旋轉木馬旁也有洗手間。\n1 月可能下雪，吊椅較冷，小朋友建議搭廂式。',isHighlight:true,q:null,url:'https://maps.app.goo.gl/zAxHEhG32mV5xoCn6'},
+    {time:'',type:'spot',title:'便利商店',note:'',q:null,url:'https://maps.app.goo.gl/v3jFHWAa7NmYq5Dd7'},
+    {time:'',type:'spot',title:'天橋立站前郵局',note:'郵局週六日及國定假日休息；ATM 週日及國定假日休息。\n1/22 是週五，郵局和 ATM 都有開。',q:null,url:'https://maps.app.goo.gl/CT9ZdEh4mqpDrQpM9'},
+    {time:'',type:'spot',title:'天橋立車站',note:'車站內有外幣兌換機',q:'天橋立駅',url:'https://maps.app.goo.gl/cs9oiVCHE4mbPQMg8'},
   ]},
-  {label:'DAY 6',date:'1/23 六',title:'奈良一日遊',area:'奈良公園',items:[
-    {time:'08:30',type:'transport',title:'前往奈良',note:'搭近鐵京都線，約 45 分鐘抵達近鐵奈良站'},
-    {time:'09:30',type:'spot',title:'東大寺',note:'世界遺產，日本最大木造建築，超巨大大佛',isHighlight:true},
-    {time:'10:30',type:'spot',title:'奈良公園餵鹿',note:'與 1200 頭野生鹿近距離接觸，鹿仙貝必買',isHighlight:true},
-    {time:'12:00',type:'food',title:'奈良市區午餐',note:'餐廳或三条通商店街輕食'},
-    {time:'13:30',type:'spot',title:'春日大社',note:'世界遺產，朱紅色神社，春日大社境內萬盞燈籠',isHighlight:true},
-    {time:'15:30',type:'spot',title:'ならまち散策',note:'古老町家街道，雜貨小店、咖啡廳'},
-    {time:'17:30',type:'transport',title:'返回京都',note:'近鐵回京都，傍晚抵達'},
-    {time:'20:00',type:'spot',title:'若草山燒山祭',note:'1/23 限定！奈良山頂點火，從京都可能遠眺，建議當天確認',isHighlight:true},
+  {label:'DAY 6',date:'1/23 六',title:'奈良・若草山燒山祭',area:'奈良公園',items:[
+    {time:'',type:'transport',title:'前往奈良',note:'搭近鐵，約 45 分鐘'},
+    {time:'',type:'spot',title:'奈良公園餵鹿',note:'鹿仙貝必買',isHighlight:true},
+    {time:'',type:'spot',title:'東大寺',note:'奈良大佛',isHighlight:true},
+    {time:'',type:'spot',title:'春日大社',note:'萬盞燈籠'},
+    {time:'',type:'food',title:'中谷堂',note:'超高速搗麻糬，10:00～19:00',warn:'不定休'},
+    {time:'',type:'food',title:'水谷茶屋',note:'只營業 11:00～15:30，週二、三公休（週六有開），請在下午前去'},
+    {time:'',type:'spot',title:'若草山燒山祭',note:'傍晚點火，人很多要提早卡位，帶厚外套',isHighlight:true,warn:'一月第四個星期六舉辦，推算 2027 是 1/23，待官方公告確認'},
   ]},
-  {label:'DAY 7',date:'1/24 日',title:'叡電・貴船神社',area:'出町柳 → 貴船',items:[
-    {time:'09:00',type:'food',title:'出町雙葉豆餅',note:'百年名店，週日開店，早到排隊買豆餅早餐',isHighlight:true},
-    {time:'10:00',type:'transport',title:'搭叡山電鐵',note:'出町柳站搭叡電，車窗楓景或雪景超美，終點貴船口',isHighlight:true},
-    {time:'11:00',type:'spot',title:'貴船神社',note:'水氣神社，雪中紅燈籠最夢幻，本宮→結社→奧宮全走',isHighlight:true},
-    {time:'13:00',type:'food',title:'貴船川床料理',note:'冬季川床懷石，需預約，溫暖的鍋物料理',isHighlight:true},
-    {time:'15:00',type:'spot',title:'鞍馬寺',note:'天狗傳說，鞍馬山健行，叡電鞍馬站下車'},
-    {time:'17:30',type:'transport',title:'返回市區',note:'搭叡電返回出町柳'},
-    {time:'19:00',type:'food',title:'河原町・四条晚餐',note:'最後一晚京都美食，錦市場周邊'},
-    {time:'21:00',type:'spot',title:'購買伴手禮',note:'錦市場・三条商店街・便利商店最後採購'},
+  {label:'DAY 7',date:'1/24 日',title:'京都市內・補 1/21 行程',area:'京都市內',items:[
+    {time:'',type:'spot',title:'京都市內逛逛',note:'1/21 沒去完的地方移到今天'},
+    {time:'',type:'spot',title:'金閣寺',note:'',isHighlight:true},
+    {time:'',type:'spot',title:'御金神社',note:'金色鳥居，求財，24 小時開放'},
+    {time:'',type:'spot',title:'天下無敵神社',note:'正式名稱「霊光殿天満宮」，今出川站附近'},
+    {time:'',type:'spot',title:'六波羅蜜寺',note:''},
+    {time:'',type:'spot',title:'北野天滿宮',note:'學問之神'},
   ]},
   {label:'DAY 8',date:'1/25 一',title:'京都→名古屋',area:'京都 → 名古屋',items:[
-    {time:'09:00',type:'transport',title:'退房・行李寄存',note:'三條格拉斯麗 Check-out，行李送至名古屋飯店（可用大和宅急便）'},
-    {time:'10:00',type:'spot',title:'京都車站周邊',note:'伊勢丹地下街最後購物、抹茶伴手禮補貨'},
-    {time:'12:00',type:'transport',title:'搭新幹線前往名古屋',note:'京都→名古屋 のぞみ 約 35 分鐘',isHighlight:true},
-    {time:'13:00',type:'hotel',title:'Check-in 名古屋飯店',note:'名古屋市區飯店，靠近地鐵方便'},
-    {time:'14:00',type:'spot',title:'名古屋市區探索',note:'大須商店街初探，或前往名古屋港水族館'},
-    {time:'19:00',type:'food',title:'名古屋名物晚餐',note:'矢場味噌豬排・或名古屋コーチン地雞料理',isHighlight:true},
+    {time:'',type:'transport',title:'退房，搭新幹線前往名古屋',note:'京都→名古屋 のぞみ 約 35 分鐘。行李可用宅急便寄到名古屋飯店'},
+    {time:'',type:'spot',title:'名古屋車站',note:'車站周邊逛街、地下街'},
+    {time:'',type:'spot',title:'科學博物館',note:'名古屋市科學館，世界最大級天象儀',warn:'每週一休館，1/25（一）去不了。可改到 1/26（二）'},
   ]},
   {label:'DAY 9',date:'1/26 二',title:'LEGOLAND Japan',area:'名古屋・金城ふ頭',items:[
-    {time:'09:00',type:'transport',title:'前往 LEGOLAND',note:'搭あおなみ線至金城ふ頭站，步行即到'},
-    {time:'10:00',type:'spot',title:'LEGOLAND Japan 全天',note:'全天體驗！積木樂園、MINILAND 縮小世界、各主題區',isHighlight:true},
-    {time:'10:30',type:'spot',title:'MINILAND',note:'用樂高重現日本各城市地標，超精細'},
-    {time:'12:00',type:'food',title:'園內午餐',note:'LEGOLAND 餐廳，或自帶便當（確認園區規定）'},
-    {time:'13:00',type:'spot',title:'各主題遊樂設施',note:'忍者道場、海盜海岸、城堡、探險世界'},
-    {time:'16:00',type:'spot',title:'SEA LIFE 名古屋',note:'LEGOLAND 旁水族館，合購套票更划算',isHighlight:true},
-    {time:'18:00',type:'transport',title:'返回名古屋市區',note:'あおなみ線返回'},
-    {time:'19:00',type:'food',title:'晚餐',note:'金山・榮地區餐廳'},
+    {time:'',type:'transport',title:'前往樂高樂園',note:'搭あおなみ線到金城ふ頭站'},
+    {time:'',type:'spot',title:'樂高樂園',note:'全天',isHighlight:true,warn:'2026 年 1 月最後兩週的週二～四都休園，1/26（二）很可能休園。2027 營業表出來後（約 11 月）再確認；可考慮改 1/25（一）'},
   ]},
-  {label:'DAY 10',date:'1/27 三',title:'名古屋城・熱田神宮',area:'名古屋市區',items:[
-    {time:'09:30',type:'spot',title:'名古屋城',note:'日本三大名城之一，金シャチ鯱最具代表性，本丸御殿重建完成',isHighlight:true},
-    {time:'11:30',type:'spot',title:'名城公園',note:'名古屋城外苑，冬日散步'},
-    {time:'12:30',type:'food',title:'午餐',note:'名古屋城周邊、或前往熱田途中'},
-    {time:'14:00',type:'spot',title:'熱田神宮',note:'供奉草薙劍三神器之一，古老神社氣氛莊嚴',isHighlight:true},
-    {time:'15:30',type:'spot',title:'大須商店街',note:'電器、二手衣、美食、懷舊遊樂場，名古屋最熱鬧商街',isHighlight:true},
-    {time:'17:00',type:'food',title:'矢場とん 矢場店',note:'名古屋矢場味噌豬排本店，排隊名物',isHighlight:true},
-    {time:'19:00',type:'spot',title:'榮・栄地區夜逛',note:'名古屋最繁華商業區，最後血拼'},
-    {time:'21:00',type:'spot',title:'收拾行李',note:'整理行李，確認護照機票，準備明日出發'},
+  {label:'DAY 10',date:'1/27 三',title:'鈴鹿賽道樂園',area:'三重・鈴鹿',items:[
+    {time:'',type:'transport',title:'前往鈴鹿',note:'名古屋出發約 1 小時'},
+    {time:'',type:'spot',title:'鈴鹿賽道樂園',note:'全天',isHighlight:true,warn:'每年 1 月下旬會停園檢修，1/27 可能碰上，等官方日曆公布再確認'},
   ]},
-  {label:'DAY 11',date:'1/28 四',title:'返台',area:'名古屋 → 桃園',items:[
-    {time:'09:00',type:'spot',title:'名古屋市區',note:'最後早餐・早上可輕鬆逛街'},
-    {time:'12:00',type:'food',title:'午餐',note:'名古屋站附近美食，名古屋車站地下街'},
-    {time:'15:00',type:'transport',title:'前往中部國際機場（NGO）',note:'名鐵特急 ミュースカイ，名古屋→中部機場約 28 分鐘',isHighlight:true},
-    {time:'17:00',type:'transport',title:'機場報到・安檢',note:'星宇航空 JX839，建議提早 3 小時報到'},
+  {label:'DAY 11',date:'1/28 四',title:'回國',area:'名古屋 → 桃園',items:[
+    {time:'',type:'spot',title:'名古屋市區',note:'早上輕鬆逛街、最後採購'},
+    {time:'15:00',type:'transport',title:'前往中部國際機場（NGO）',note:'名鐵特急 ミュースカイ，名古屋→中部機場約 28 分鐘'},
+    {time:'18:00',type:'transport',title:'機場報到',note:'星宇航空 JX839，建議提早 3 小時報到'},
     {time:'21:20',type:'transport',title:'JX839 啟程返台',note:'21:20 名古屋 NGO 出發',isHighlight:true},
-    {time:'23:25',type:'transport',title:'抵達桃園國際機場',note:'23:25 TPE 落地，旅行圓滿結束！',isHighlight:true},
+    {time:'23:25',type:'transport',title:'抵達桃園機場',note:'23:25 TPE 落地，旅行圓滿結束'},
   ]},
 ];;
 
@@ -1326,8 +1326,8 @@ const transports=[
   {icon:'bus',name:'市巴士一日券',detail:'京都市巴士 230 円/次，一日券 700 円\n平安神宮・嵐山・金閣寺等景點適用',cost:'¥700/人/日'},
 ];;
 
-const clBefore=['確認護照有效期限（6個月以上）','購買旅遊保險','換日圓現金備用','確認任天堂博物館預約（DAY3）','確認 teamLab 預約（DAY10）','下載 Google Maps 離線地圖（京都/大阪/奈良/神戶）','確認飯店訂房確認信','確認包車聯絡方式（DAY4）','通知大丸百貨取貨時間（Harbs蛋糕）'];
-const clPack=['雪靴（DAY8天橋立會下雪！）','厚外套 + 保暖內搭','手套（也可錦市場買）','暖暖包','口罩','充電器 + 行動電源','相機 / 記憶卡','小背包（白天出門用）','藥品（感冒藥、腸胃藥）'];
+const clBefore=['確認護照有效期限（6個月以上）','購買旅遊保險','換日圓現金備用','確認樂高樂園 1/26 是否營業（約 11 月公布）','確認鈴鹿賽道樂園 1/27 是否營業','下載 Google Maps 離線地圖（京都/大阪/奈良/名古屋）','確認飯店訂房確認信','確認包車聯絡方式（DAY2）','通知大丸百貨取貨時間（Harbs蛋糕）'];
+const clPack=['防滑鞋（DAY5 天橋立可能下雪）','厚外套 + 保暖內搭','手套（也可錦市場買）','暖暖包','口罩','充電器 + 行動電源','相機 / 記憶卡','小背包（白天出門用）','藥品（感冒藥、腸胃藥）'];
 
 let expenses=JSON.parse(localStorage.getItem('japan2027-exp')||'[]');
 let budget=parseInt(localStorage.getItem('japan2027-budget')||'0');
@@ -1416,17 +1416,17 @@ const reminders=[
   // 出發前提醒
   {type:'pre',daysBeforeStart:7,icon:'id-card',title:'護照確認',note:'確認護照有效期限超過6個月！',tag:'urgent'},
   {type:'pre',daysBeforeStart:7,icon:'japanese-yen',title:'換日圓',note:'建議出發前換好日圓現金備用。',tag:'info'},
-  {type:'pre',daysBeforeStart:3,icon:'gamepad-2',title:'任天堂博物館預約',note:'確認 DAY3 任天堂博物館預約是否完成！需提前線上預約。',tag:'urgent'},
-  {type:'pre',daysBeforeStart:3,icon:'waves',title:'teamLab 購票',note:'確認 DAY10 teamLab 是否已購票，票很快就售完。',tag:'urgent'},
-  {type:'pre',daysBeforeStart:1,icon:'luggage',title:'行李確認',note:'雪靴（DAY8天橋立必備）、厚外套、手套、暖暖包都打包了嗎？',tag:'urgent'},
+  {type:'pre',daysBeforeStart:7,icon:'toy-brick',title:'確認名古屋景點營業日',note:'再確認樂高樂園（1/26）、鈴鹿賽道樂園（1/27）當天有營業；名古屋市科學館週一休館。',tag:'urgent'},
+  {type:'pre',daysBeforeStart:3,icon:'flame',title:'若草山燒山祭日期',note:'確認官方公布的 2027 燒山日期是否為 1/23。',tag:'info'},
+  {type:'pre',daysBeforeStart:1,icon:'luggage',title:'行李確認',note:'防滑鞋（DAY5 天橋立）、厚外套、手套、暖暖包都打包了嗎？',tag:'urgent'},
   // 行程當天
   {type:'day',dayIndex:0,icon:'japanese-yen',title:'抵達後：先換日圓＋買ICOCA',note:'入境後先去換日圓，再到 JR 售票機購買 ICOCA 悠遊卡。',tag:'info'},
   {type:'day',dayIndex:0,icon:'alarm-clock',title:'大丸百貨取貨截止 19:00',note:'今天必須在 19:00 前到大丸百貨取 Harbs 草莓蛋糕！千萬別忘記！',tag:'urgent'},
-  {type:'day',dayIndex:2,icon:'gamepad-2',title:'任天堂博物館預約確認',note:'今天去宇治！記得帶任天堂博物館預約確認信。',tag:'info'},
-  {type:'day',dayIndex:3,icon:'landmark',title:'東寺弘法市集',note:'今天是21日！東寺弘法市集舉辦，建議早上先去逛再去水族館。',tag:'ok'},
+  {type:'day',dayIndex:2,icon:'ticket',title:'中村藤吉先抽號碼牌',note:'今天去宇治！到了先去中村藤吉本店抽號碼牌。小山園週三公休。',tag:'info'},
+  {type:'day',dayIndex:3,icon:'landmark',title:'東寺弘法市集',note:'今天是初弘法！人很多，建議一早先去東寺，再往東山。三十三間堂冬季較早關門。',tag:'ok'},
   {type:'day',dayIndex:5,icon:'flame',title:'若草山燒山祭',note:'今晚是奈良燒山祭！整座山點火，記得提早佔位，帶厚外套禦寒。',tag:'urgent'},
-  {type:'day',dayIndex:7,icon:'snowflake',title:'天橋立 可能下雪',note:'今天前往天橋立，預計會下雪！確認已穿雪靴出門，攜帶暖暖包。',tag:'urgent'},
-  {type:'day',dayIndex:10,icon:'plane-takeoff',title:'今日回台！退房前準備',note:'11:00 前退房，搭 Haruka 前往關西機場，14:00 JX821 起飛，最晚 11:30 前到機場。',tag:'urgent'},
+  {type:'day',dayIndex:4,icon:'snowflake',title:'天橋立 可能下雪',note:'今天前往天橋立，可能會下雪！穿防滑鞋，攜帶暖暖包。',tag:'urgent'},
+  {type:'day',dayIndex:10,icon:'plane-takeoff',title:'今日回台！退房前準備',note:'21:20 JX839 從中部國際機場起飛，最晚 18:00 前到機場報到。',tag:'urgent'},
   // 天氣/注意
   {type:'weather',icon:'thermometer',title:'京都1月氣溫提醒',note:'京都1月氣溫約 2–10°C，早晚很冷。保暖內搭、手套、圍巾都帶好！',tag:'info'},
   {type:'weather',icon:'hand',title:'手套可在錦市場購買',note:'DAY1 抵達後可到錦市場補買手套，種類多又便宜。',tag:'ok'},
@@ -1494,21 +1494,27 @@ const dayTheme=[
   {ill:'plane-landing',bg:'#e3f0ff',wave:'#a6d1ff'},
   {ill:'building-2',bg:'#ffe9e0',wave:'#ffc2a8'},
   {ill:'leaf',bg:'#e4f5e1',wave:'#a8e6b8'},
-  {ill:'train-track',bg:'#fff3d6',wave:'#ffd93d'},
-  {ill:'trees',bg:'#e6f4ea',wave:'#a8e6b8'},
+  {ill:'landmark',bg:'#fff3d6',wave:'#ffd93d'},
+  {ill:'waves',bg:'#e6f4ea',wave:'#a8e6b8'},
   {ill:'paw-print',bg:'#f6ebdf',wave:'#e8c9a0'},
-  {ill:'mountain-snow',bg:'#ffe5e5',wave:'#ffb3b3'},
+  {ill:'coins',bg:'#ffe5e5',wave:'#ffb3b3'},
   {ill:'train-front',bg:'#ece6ff',wave:'#d7c8ff'},
   {ill:'toy-brick',bg:'#fff1c9',wave:'#ffd93d'},
-  {ill:'castle',bg:'#e8eefc',wave:'#b9c9f5'},
+  {ill:'flag',bg:'#e8eefc',wave:'#b9c9f5'},
   {ill:'plane-takeoff',bg:'#efe6f7',wave:'#d7c8ff'},
 ];
 const MASCOT_SVG=`<svg viewBox="0 0 28 28"><path d="M14 26s-8-8.2-8-14a8 8 0 0 1 16 0c0 5.8-8 14-8 14z" fill="#0f1729"/><circle cx="14" cy="12" r="3.2" fill="#fff"/></svg>`;
 let curDay=0;
 // 每天所在城市（讓 Google 搜尋更準）
-const dayCity=['京都','大阪','京都','京都','京都 嵐山','奈良','京都','名古屋','名古屋','名古屋','名古屋'];
+const dayCity=['京都','大阪','京都','京都','京都府','奈良','京都','名古屋','名古屋','三重 鈴鹿','名古屋'];
 // 特別指定的搜尋關鍵字
 const placeQ={
+  '勝尾寺':'勝尾寺 箕面','箕面瀑布':'箕面大滝','天王寺動物園':'天王寺動物園','大國主神社（種錢）':'敷津松之宮 大国主神社',
+  '難波八阪神社':'難波八阪神社','姬嶋神社':'姫嶋神社 大阪','梅田車站・寶可夢中心':'ポケモンセンターオーサカDX','千房大阪燒':'千房 梅田','燃えよ麺助':'燃えよ麺助 福島',
+  '中村藤吉本店':'中村藤吉本店 宇治','平等院':'平等院 宇治','小山園抹茶':'丸久小山園 宇治','一保堂抹茶':'一保堂茶舗 京都本店','麵屋豬一':'麺屋 猪一 京都',
+  'たま木亭（買麵包）':'たま木亭 宇治','豆大福（いなりふたば）':'いなりふたば 伏見','東寺市集（初弘法）':'東寺','天下無敵神社':'霊光殿天満宮',
+  '天橋立':'天橋立','若草山燒山祭':'若草山','中谷堂':'中谷堂 奈良','水谷茶屋':'水谷茶屋 奈良','名古屋車站':'名古屋駅','科學博物館':'名古屋市科学館',
+  '樂高樂園':'LEGOLAND Japan','鈴鹿賽道樂園':'鈴鹿サーキット',
   '台中出發 JX306':'台中國際機場','抵達神戶機場':'神戶機場',
   'Check-in 三條格拉斯麗酒店':'Hotel Gracery Kyoto Sanjo',
   '勝尾寺':'勝尾寺 箕面','寶可夢中心 大阪':'Pokémon Center Osaka DX','道頓堀晚餐':'道頓堀',
@@ -1523,8 +1529,9 @@ const placeQ={
   '名古屋城':'名古屋城','名城公園':'名城公園','熱田神宮':'熱田神宮','大須商店街':'大須商店街',
 };
 // 不是特定地點的項目就不顯示地圖
-const noPlace=/^(園內午餐|午餐|晚餐|收拾行李|名古屋市區|購買伴手禮|各主題遊樂設施)$|周邊|附近|市區探索|名物晚餐|四条|河原町|西院/;
-function placeQuery(title,di){
+const noPlace=/^(京都市內逛逛|名古屋市區|園內午餐|午餐|晚餐|收拾行李|名古屋市區|購買伴手禮|各主題遊樂設施)$|周邊|附近|市區探索|名物晚餐|四条|河原町|西院/;
+function placeQuery(title,di,it){
+  if(it&&'q' in it) return it.q;
   if(placeQ[title]) return placeQ[title];
   if(noPlace.test(title)) return null;
   return title.replace(/[（(].*?[)）]/g,'')+' '+(dayCity[di]||'');
@@ -1532,14 +1539,17 @@ function placeQuery(title,di){
 function openPlace(card){
   card.classList.toggle('open');
   if(!card.classList.contains('open')||card.dataset.loaded) return;
-  const q=card.dataset.q; if(!q) return;
+  const q=card.dataset.q, url=card.dataset.url;
+  if(!q&&!url) return;
   card.dataset.loaded='1';
-  const e=encodeURIComponent(q);
+  const e=encodeURIComponent(q||'');
   const box=card.querySelector('.gm-slot');
-  box.innerHTML=`<div class="gm-box"><iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=${e}&hl=zh-TW&z=15&output=embed"></iframe></div>
+  const mapHref=url||`https://www.google.com/maps/search/?api=1&query=${e}`;
+  const navHref=q?`https://www.google.com/maps/dir/?api=1&destination=${e}`:url;
+  box.innerHTML=(q?`<div class="gm-box"><iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=${e}&hl=zh-TW&z=15&output=embed"></iframe></div>`:'')+`
     <div class="gm-btns">
-      <a class="gm-btn main" href="https://www.google.com/maps/search/?api=1&query=${e}" target="_blank" rel="noopener">${ic('camera')}照片・評價</a>
-      <a class="gm-btn" href="https://www.google.com/maps/dir/?api=1&destination=${e}" target="_blank" rel="noopener">${ic('navigation')}導航</a>
+      <a class="gm-btn main" href="${mapHref}" target="_blank" rel="noopener">${ic('camera')}${url?'Google 地圖・評價':'照片・評價'}</a>
+      ${q?`<a class="gm-btn" href="${navHref}" target="_blank" rel="noopener">${ic('navigation')}導航</a>`:''}
     </div>`;
 }
 
@@ -1548,7 +1558,7 @@ function moveKind(it){
   const t=(it.title+' '+(it.note||''));
   if(/JX|航班|飛|機場報到|啟程|抵達.*機場/.test(t)&&/JX|機場/.test(t)) return ['mv-plane',ic('plane')+'飛機'];
   if(/新幹線|のぞみ/.test(t)) return ['mv-shink',ic('train-front')+'新幹線'];
-  if(/租車|開車|自駕/.test(t)) return ['mv-car',ic('car')+'開車'];
+  if(/租車|開車|自駕|包車/.test(t)) return ['mv-car',ic('car')+'開車'];
   if(/電車|JR|近鐵|叡電|叡山|嵐電|名鐵|あおなみ|地鐵|特急|線/.test(t)) return ['mv-train',ic('tram-front')+'電車'];
   if(/巴士|バス/.test(t)) return ['mv-bus',ic('bus')+'巴士'];
   if(/步行|走路/.test(t)) return ['mv-walk',ic('footprints')+'步行'];
@@ -1600,10 +1610,11 @@ function renderItinerary(di){
       return `<div class="tl2-row tl2-move" ${delay}><div class="tl2-time">${it.time||''}</div><div class="tl2-dot"></div>
         <div class="mv-line"><span class="mv-pill ${cls}">${lbl}</span><span>${it.title}</span></div>${it.note?`<div class="mv-sub">${it.note.replace(/\n/g,'<br>')}</div>`:''}</div>`;
     }
-    const q=placeQuery(it.title,di);
+    const q=placeQuery(it.title,di,it);
     return `<div class="tl2-row" ${delay}><div class="tl2-time">${it.time||''}</div><div class="tl2-dot"></div>
-      <div class="tl2-card ${it.isHighlight?'hi':''}" data-q="${q?q.replace(/"/g,''):''}" onclick="if(!event.target.closest('.gm-slot'))openPlace(this)">
-        <div class="tl2-title">${it.isHighlight?'<span class="star">'+ic('star')+'</span>':''}${it.title}${q?'<span class="tl2-tap">'+ic('map-pin')+'看評價</span>':''}</div>
+      <div class="tl2-card ${it.isHighlight?'hi':''} ${it.warn?'has-warn':''}" data-q="${q?q.replace(/"/g,''):''}" data-url="${it.url||''}" onclick="if(!event.target.closest('.gm-slot'))openPlace(this)">
+        <div class="tl2-title">${it.isHighlight?'<span class="star">'+ic('star')+'</span>':''}${it.title}${(q||it.url)?'<span class="tl2-tap">'+ic('map-pin')+'看評價</span>':''}</div>
+        ${it.warn?`<div class="tl2-warn">${ic('triangle-alert')}<span>${it.warn}</span></div>`:''}
         <div class="tl2-note">${it.note?it.note.replace(/\n/g,'<br>'):''}<div class="gm-slot"></div></div></div></div>`;
   }).join('');
 }
