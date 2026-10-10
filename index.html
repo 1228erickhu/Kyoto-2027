@@ -6,8 +6,6 @@
 <title>我們的家族京都之旅 2027</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>#kyoto-map{height:360px;width:100%;margin-top:16px;border-radius:4px;overflow:hidden;}
 /* ══ 軌道式日期選擇（仿影片）══ */
 .rail{position:relative;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin:0 -20px 14px;padding:0 20px;}
@@ -967,8 +965,6 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 
 <nav>
   <button class="nav-btn active" onclick="showSec('itinerary',this)">每日行程</button>
-  <button class="nav-btn" onclick="showSec('spots',this)">景點</button>
-  <button class="nav-btn" onclick="showSec('food',this)">美食</button>
   <button class="nav-btn" onclick="showSec('hotel',this)">住宿</button>
   <button class="nav-btn" onclick="showSec('transport',this)">交通</button>
   <button class="nav-btn" onclick="showSec('checklist',this)">待辦</button>
@@ -993,41 +989,11 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
   </div>
 </div>
 
-<!-- SPOTS -->
-<div id="section-spots" class="section">
-  <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.5s ease-in-out infinite;"><i data-lucide="landmark" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">京都・大阪・奈良・神戶・天橋立</div><div class="kawaii-banner-sub">點擊景點卡片查看詳細資訊</div></div></div>
-  <div class="sec-title"><span>02</span>景點地圖</div>
-  <div class="sec-desc">點擊景點卡片在下方地圖查看位置。</div>
-  <div class="map-filter">
-    <button class="filter-btn active" onclick="filterSpots('all',this)">全部</button>
-    <button class="filter-btn" onclick="filterSpots('京都',this)">京都</button>
-    <button class="filter-btn" onclick="filterSpots('大阪',this)">大阪</button>
-    <button class="filter-btn" onclick="filterSpots('奈良',this)">奈良</button>
-    <button class="filter-btn" onclick="filterSpots('神戶',this)">神戶</button>
-    <button class="filter-btn" onclick="filterSpots('天橋立',this)">天橋立</button>
-    <button class="filter-btn" onclick="filterSpots('宇治',this)">宇治</button>
-  </div>
-  <div class="map-grid" id="spots-grid"></div>
-  <div id="kyoto-map"></div>
-  </div>
-</div>
-
-<!-- FOOD -->
-<div id="section-food" class="section">
-  <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2s ease-in-out infinite;"><i data-lucide="coffee" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">這次一定要吃到的美食！</div><div class="kawaii-banner-sub">拉麵・抹茶・和菓子・海鮮・麵包</div></div></div>
-  <div class="sec-title"><span>03</span>美食清單</div>
-  <div class="sec-desc">這次旅行一定要吃到的！</div>
-  <div class="food-grid" id="food-grid"></div>
-  </div>
-</div>
-
 <!-- HOTEL -->
 <div id="section-hotel" class="section">
   <div class="nb-page">
   <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.8s ease-in-out infinite;"><i data-lucide="hotel" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">住宿：京都 → 名古屋</div><div class="kawaii-banner-sub">京都 7 晚 ＋ 名古屋 3 晚</div></div></div>
-  <div class="sec-title"><span>04</span>住宿資訊</div>
+  <div class="sec-title"><span>02</span>住宿資訊</div>
   <div class="sec-desc">京都 7 晚 ＋ 名古屋 3 晚，1/25 是大移動日。</div>
 
   <div class="stay-bar">
@@ -1089,7 +1055,7 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 <div id="section-transport" class="section">
   <div class="nb-page">
   <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.6s ease-in-out infinite;"><i data-lucide="train-front" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">交通資訊 ＆ 已訂機票</div><div class="kawaii-banner-sub">抵達後優先購買 ICOCA 卡</div></div></div>
-  <div class="sec-title"><span>05</span>交通資訊</div>
+  <div class="sec-title"><span>03</span>交通資訊</div>
   <div class="sec-desc">主要票券與費用整理，抵達後優先購買 ICOCA。</div>
 
   <div class="flt-head"><i data-lucide="ticket-check" class="ic"></i>已訂機票・星宇航空</div>
@@ -1120,7 +1086,7 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 <div id="section-checklist" class="section">
   <div class="nb-page">
   <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.2s ease-in-out infinite;"><i data-lucide="backpack" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">出發前別忘記！</div><div class="kawaii-banner-sub">點擊項目打勾，勾選狀態自動儲存</div></div></div>
-  <div class="sec-title"><span>06</span>出發前待辦</div>
+  <div class="sec-title"><span>04</span>出發前待辦</div>
   <div class="sec-desc">點擊項目打勾，勾選狀態會自動儲存。</div>
   <div class="alert-box" style="margin-bottom:18px"><p><i data-lucide="triangle-alert" class="ic"></i>DAY5 天橋立（1/22）可能下雪，記得準備防滑鞋！</p></div>
   <div class="cl-section"><div class="cl-title">行前必辦</div><div id="cl-before"></div></div>
@@ -1132,7 +1098,7 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 <div id="section-expense" class="section">
   <div class="nb-page">
   <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.4s ease-in-out infinite;"><i data-lucide="wallet" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">旅遊記帳</div><div class="kawaii-banner-sub">記錄每筆費用，自動換算台幣</div></div></div>
-  <div class="sec-title"><span>07</span>旅遊記帳</div>
+  <div class="sec-title"><span>05</span>旅遊記帳</div>
   <div class="sec-desc">記錄每筆費用（日圓 ¥），自動換算台幣，資料儲存在此裝置。</div>
 
   <!-- Budget bar -->
@@ -1213,8 +1179,6 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 
 <nav class="fnav" id="fnav" aria-label="快速導覽">
   <button class="fnav-btn active" data-sec="itinerary" onclick="goSec('itinerary')"><i data-lucide="calendar-days" class="ic"></i><span>行程</span></button>
-  <button class="fnav-btn" data-sec="spots" onclick="goSec('spots')"><i data-lucide="map-pinned" class="ic"></i><span>景點</span></button>
-  <button class="fnav-btn" data-sec="food" onclick="goSec('food')"><i data-lucide="utensils" class="ic"></i><span>美食</span></button>
   <button class="fnav-btn" data-sec="hotel" onclick="goSec('hotel')"><i data-lucide="bed-double" class="ic"></i><span>住宿</span></button>
   <button class="fnav-btn" data-sec="transport" onclick="goSec('transport')"><i data-lucide="train-front" class="ic"></i><span>交通</span></button>
   <button class="fnav-btn" data-sec="checklist" onclick="goSec('checklist')"><i data-lucide="list-checks" class="ic"></i><span>待辦</span></button>
@@ -1853,7 +1817,7 @@ function goSec(id){
   showSec(id,top);
   if(top) top.scrollIntoView({inline:'center',block:'nearest'});
 }
-buildTabs();renderItinerary(0);renderSpots('all');renderFood();renderTransport();renderChecklist();renderExp();checkBadge();
+buildTabs();renderItinerary(0);renderTransport();renderChecklist();renderExp();checkBadge();
 // Show reminder on load if there are urgent items today
 (function(){
   const items=getTodayReminders();
