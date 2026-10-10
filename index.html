@@ -899,6 +899,49 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 .tl2-warn{display:flex;align-items:flex-start;gap:6px;margin-top:8px;font-size:12px;line-height:1.5;color:var(--rose);background:var(--rose-soft);border-radius:8px;padding:7px 10px;}
 .tl2-warn .ic{width:14px;height:14px;margin:1px 0 0;flex-shrink:0;}
 .tl2-card.has-warn{border-color:#ecd3d3;}
+.flt-head{display:flex;align-items:center;font-size:13px;font-weight:600;color:var(--muted);margin:4px 0 12px;}
+.flt-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--sh-1);padding:18px 18px 14px;margin-bottom:14px;}
+.flt-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.flt-tag{font-size:11px;font-weight:600;color:var(--accent-ink);background:var(--accent-soft);border-radius:6px;padding:2px 8px;}
+.flt-no{font-size:15px;font-weight:700;letter-spacing:.02em;}
+.flt-date{font-size:12px;color:var(--muted);margin-left:auto;}
+.flt-route{display:flex;align-items:center;gap:10px;}
+.flt-pt{min-width:72px;}
+.flt-pt.r{text-align:right;}
+.flt-time{font-size:24px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1;}
+.flt-code{font-size:12px;font-weight:600;color:var(--accent);margin-top:2px;}
+.flt-city{font-size:12px;color:var(--muted);}
+.flt-line{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--faint);font-size:11px;position:relative;}
+.flt-line::before{content:'';position:absolute;left:0;right:0;top:9px;border-top:1px dashed var(--border-2);}
+.flt-line .ic{position:relative;background:var(--white);padding:0 6px;width:30px;height:18px;margin:0;color:var(--accent);}
+.flt-note{display:flex;align-items:flex-start;gap:4px;margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);line-height:1.6;}
+.flt-note .ic{margin-top:2px;flex-shrink:0;}
+.day-badge{display:inline-block;margin-left:8px;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:none;color:#fff;background:var(--accent);border-radius:5px;padding:2px 7px;vertical-align:1px;}
+.stay-bar{display:flex;gap:4px;margin-bottom:20px;}
+.stay-seg{border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;font-size:12px;color:var(--muted);}
+.stay-seg b{font-size:14px;color:var(--ink);}
+.stay-seg.kyoto{flex:7;background:var(--accent-soft);}
+.stay-seg.nagoya{flex:3.6;background:var(--sand-soft);}
+.hotel-card.pending{border-style:dashed;border-color:var(--border-2);background:#fcfcfd;}
+.hotel-card.pending .hotel-name{color:var(--ink-2);}
+.hotel-badge.warn{background:var(--sand-soft);color:var(--sand);}
+.move-card{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--r-lg);box-shadow:var(--sh-1);padding:16px 18px;margin:0 0 16px;}
+.move-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:15px;}
+.move-head .day-badge{margin:0;}
+.move-step{display:flex;align-items:flex-start;gap:8px;padding:7px 0;font-size:13px;color:var(--ink-2);border-top:1px solid var(--border);}
+.move-step:first-child{border-top:none;}
+.move-t{width:58px;flex-shrink:0;font-size:12px;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums;padding-top:1px;}
+.move-step .ic{width:16px;height:16px;margin:2px 0 0;color:var(--faint);flex-shrink:0;}
+/* floating bottom nav */
+.fnav{position:fixed;top:auto;right:auto;overflow:visible;justify-content:space-between;left:50%;transform:translateX(-50%);bottom:calc(10px + env(safe-area-inset-bottom));z-index:300;display:flex;gap:2px;padding:6px;
+  width:min(560px,calc(100% - 20px));background:rgba(255,255,255,.88);backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px);
+  border:1px solid var(--border);border-radius:18px;box-shadow:var(--sh-3);}
+.fnav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 0 6px;border:none;background:none;border-radius:12px;color:var(--faint);font-size:10.5px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .15s,color .15s;}
+.fnav-btn .ic{width:20px;height:20px;margin:0;}
+.fnav-btn.active{color:var(--ink);background:var(--light);}
+.fnav-btn:active{transform:scale(.96);}
+.bell-btn{bottom:calc(92px + env(safe-area-inset-bottom)) !important;right:16px !important;}
+.section{padding-bottom:140px !important;}
 </style>
 <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
 </head>
@@ -983,11 +1026,17 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 <!-- HOTEL -->
 <div id="section-hotel" class="section">
   <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.8s ease-in-out infinite;"><i data-lucide="hotel" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">三條格拉斯麗酒店</div><div class="kawaii-banner-sub">京都 7 晚（1/18–1/25），烏丸御池站步行 5 分鐘</div></div></div>
+  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.8s ease-in-out infinite;"><i data-lucide="hotel" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">住宿：京都 → 名古屋</div><div class="kawaii-banner-sub">京都 7 晚 ＋ 名古屋 3 晚</div></div></div>
   <div class="sec-title"><span>04</span>住宿資訊</div>
-  <div class="sec-desc">京都段住三條格拉斯麗酒店，1/25 起改住名古屋，記得帶訂房確認信。</div>
+  <div class="sec-desc">京都 7 晚 ＋ 名古屋 3 晚，1/25 是大移動日。</div>
+
+  <div class="stay-bar">
+    <div class="stay-seg kyoto"><b>京都</b><span>1/18–1/25 · 7 晚</span></div>
+    <div class="stay-seg nagoya"><b>名古屋</b><span>1/25–1/28 · 3 晚</span></div>
+  </div>
+
   <div class="hotel-card">
-    <div class="hotel-nights">DAY 1–7 ／ 7晚（1/18–1/25）</div>
+    <div class="hotel-nights">京都 · DAY 1–7 · 1/18–1/25 · 7 晚</div>
     <div class="hotel-name">三條格拉斯麗酒店</div>
     <div class="hotel-jp">ホテルグラスリー三条</div>
     <div class="hotel-info">
@@ -998,15 +1047,39 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
       <div class="ic-line"><i data-lucide="shopping-bag" class="ic"></i>錦市場步行約10分鐘</div>
       <div class="ic-line"><i data-lucide="luggage" class="ic"></i>退房後可寄放行李</div>
     </div>
-    <div class="hotel-badge"><i data-lucide="check" class="ic"></i>記得帶確認信</div>
+    <div class="hotel-badge"><i data-lucide="check" class="ic"></i>已訂・記得帶確認信</div>
   </div>
+
+  <div class="move-card">
+    <div class="move-head"><span class="day-badge">大移動日</span><b>1/25（一）京都 → 名古屋</b></div>
+    <div class="move-steps">
+      <div class="move-step"><span class="move-t">1/24 晚</span><i data-lucide="package" class="ic"></i><span>飯店櫃台用宅急便寄大件行李到名古屋飯店</span></div>
+      <div class="move-step"><span class="move-t">11:00</span><i data-lucide="door-open" class="ic"></i><span>三條格拉斯麗 退房</span></div>
+      <div class="move-step"><span class="move-t">約 35 分</span><i data-lucide="train-front" class="ic"></i><span>京都站 のぞみ 新幹線 → 名古屋站（建議買指定席）</span></div>
+      <div class="move-step"><span class="move-t">15:00</span><i data-lucide="hotel" class="ic"></i><span>名古屋飯店 Check-in</span></div>
+    </div>
+  </div>
+
+  <div class="hotel-card pending">
+    <div class="hotel-nights">名古屋 · DAY 8–11 · 1/25–1/28 · 3 晚</div>
+    <div class="hotel-name">名古屋飯店（待訂／待補）</div>
+    <div class="hotel-jp">飯店確定後把資料補上</div>
+    <div class="hotel-info">
+      <div class="ic-line"><i data-lucide="map-pin" class="ic"></i>地址：待補</div>
+      <div class="ic-line"><i data-lucide="train-front-tunnel" class="ic"></i>最近車站：待補（建議名古屋站周邊，方便去樂高樂園、鈴鹿和機場）</div>
+      <div class="ic-line"><i data-lucide="clock" class="ic"></i>入住 ／ 退房時間：待補</div>
+      <div class="ic-line"><i data-lucide="luggage" class="ic"></i>1/28 退房後可否寄放行李（晚上 21:20 的班機）：待確認</div>
+    </div>
+    <div class="hotel-badge warn"><i data-lucide="circle-alert" class="ic"></i>尚未填入</div>
+  </div>
+
   <div class="tips" style="margin-top:14px">
     <div class="tips-t">住宿小提醒</div>
     <ul>
       <li>三條一帶餐廳選擇豐富，晚餐不用跑遠</li>
       <li>1月京都氣溫約2–10°C，睡前記得開暖氣</li>
-      <li>DAY5 天橋立回來可能很晚，入住時確認門禁</li>
-      <li>1/25–1/28 名古屋住宿資訊待補</li>
+      <li>DAY5 天橋立包車回來可能較晚，入住時確認門禁</li>
+      <li>名古屋飯店選名古屋站附近：搭あおなみ線去樂高、名鐵去機場都方便</li>
     </ul>
   </div>
   </div>
@@ -1015,61 +1088,28 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 <!-- TRANSPORT -->
 <div id="section-transport" class="section">
   <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.6s ease-in-out infinite;"><i data-lucide="train-front" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">交通資訊 ＆ 機票費用試算</div><div class="kawaii-banner-sub">抵達後優先購買 ICOCA 卡</div></div></div>
+  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.6s ease-in-out infinite;"><i data-lucide="train-front" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">交通資訊 ＆ 已訂機票</div><div class="kawaii-banner-sub">抵達後優先購買 ICOCA 卡</div></div></div>
   <div class="sec-title"><span>05</span>交通資訊</div>
   <div class="sec-desc">主要票券與費用整理，抵達後優先購買 ICOCA。</div>
 
-  <!-- Flight Calculator -->
-  <div class="flight-calc">
-    <div class="flight-calc-title"><i data-lucide="plane" class="ic"></i>機票費用試算</div>
-    <div style="display:grid;grid-template-columns:88px 1fr 1fr;gap:8px;align-items:end;margin-bottom:8px;">
-      <div></div>
-      <div style="font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);">來回票價（NT$）</div>
-      <div style="font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);">人數</div>
+  <div class="flt-head"><i data-lucide="ticket-check" class="ic"></i>已訂機票・星宇航空</div>
+  <div class="flt-card">
+    <div class="flt-top"><span class="flt-tag">去程</span><span class="flt-no">JX306</span><span class="flt-date">2027/1/18（一）</span></div>
+    <div class="flt-route">
+      <div class="flt-pt"><div class="flt-time">08:45</div><div class="flt-code">RMQ</div><div class="flt-city">台中</div></div>
+      <div class="flt-line"><i data-lucide="plane" class="ic"></i><span>約 2 小時 45 分</span></div>
+      <div class="flt-pt r"><div class="flt-time">12:30</div><div class="flt-code">UKB</div><div class="flt-city">神戶</div></div>
     </div>
-    <div class="flight-rows">
-      <div class="flight-row" style="grid-template-columns:88px 1fr 1fr;">
-        <div class="flight-row-label">成人</div>
-        <input class="flight-input" type="number" id="f-adult-price" placeholder="來回票價">
-        <input class="flight-input" type="number" id="f-adult-count" placeholder="人數" min="0" value="0">
-      </div>
-      <div class="flight-row" style="grid-template-columns:88px 1fr 1fr;">
-        <div class="flight-row-label">小孩</div>
-        <input class="flight-input" type="number" id="f-child-price" placeholder="來回票價">
-        <input class="flight-input" type="number" id="f-child-count" placeholder="人數" min="0" value="0">
-      </div>
+    <div class="flt-note"><i data-lucide="info" class="ic"></i>建議 06:30 前到台中機場報到；抵達後由神戶前往京都</div>
+  </div>
+  <div class="flt-card">
+    <div class="flt-top"><span class="flt-tag">回程</span><span class="flt-no">JX839</span><span class="flt-date">2027/1/28（四）</span></div>
+    <div class="flt-route">
+      <div class="flt-pt"><div class="flt-time">21:20</div><div class="flt-code">NGO</div><div class="flt-city">名古屋中部</div></div>
+      <div class="flt-line"><i data-lucide="plane" class="ic"></i><span>約 3 小時 05 分</span></div>
+      <div class="flt-pt r"><div class="flt-time">23:25</div><div class="flt-code">TPE</div><div class="flt-city">桃園</div></div>
     </div>
-    <button class="flight-calc-btn" onclick="calcFlight()"><i data-lucide="calculator" class="ic"></i>確認計算並記錄</button>
-    <div class="flight-result" id="flight-result">
-      <div class="flight-result-title">費用總結</div>
-      <div class="flight-result-grid">
-        <div class="flight-result-item">
-          <div class="flight-result-lbl">成人機票合計</div>
-          <div class="flight-result-val" id="fr-adults">NT$ 0</div>
-          <div class="flight-result-sub" id="fr-adults-sub"></div>
-        </div>
-        <div class="flight-result-item">
-          <div class="flight-result-lbl">小孩機票合計</div>
-          <div class="flight-result-val" id="fr-children">NT$ 0</div>
-          <div class="flight-result-sub" id="fr-children-sub"></div>
-        </div>
-      </div>
-      <hr style="border:none;border-top:1px solid var(--border);margin:12px 0;">
-      <div class="flight-result-item" style="text-align:center;padding:14px;">
-        <div class="flight-result-lbl">全家機票總費用（來回）</div>
-        <div class="flight-result-val total" id="fr-total">NT$ 0</div>
-        <div class="flight-result-sub" id="fr-total-sub"></div>
-      </div>
-    </div>
-
-    <!-- History -->
-    <div id="flight-history-wrap" style="margin-top:18px;display:none;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-        <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;"><i data-lucide="clipboard-list" class="ic"></i>歷史紀錄</div>
-        <button onclick="clearFlightHistory()" style="font-size:11px;padding:4px 10px;background:none;border:1px solid var(--border);border-radius:2px;cursor:pointer;color:var(--muted);font-family:'DM Sans',sans-serif;">清除全部</button>
-      </div>
-      <div id="flight-history-list"></div>
-    </div>
+    <div class="flt-note"><i data-lucide="info" class="ic"></i>建議 18:00 前到中部國際機場；名鐵ミュースカイ 名古屋→機場約 28 分</div>
   </div>
 
   <div id="transport-list"></div>
@@ -1170,6 +1210,16 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 </div>
 
 <!-- Floating bell button -->
+
+<nav class="fnav" id="fnav" aria-label="快速導覽">
+  <button class="fnav-btn active" data-sec="itinerary" onclick="goSec('itinerary')"><i data-lucide="calendar-days" class="ic"></i><span>行程</span></button>
+  <button class="fnav-btn" data-sec="spots" onclick="goSec('spots')"><i data-lucide="map-pinned" class="ic"></i><span>景點</span></button>
+  <button class="fnav-btn" data-sec="food" onclick="goSec('food')"><i data-lucide="utensils" class="ic"></i><span>美食</span></button>
+  <button class="fnav-btn" data-sec="hotel" onclick="goSec('hotel')"><i data-lucide="bed-double" class="ic"></i><span>住宿</span></button>
+  <button class="fnav-btn" data-sec="transport" onclick="goSec('transport')"><i data-lucide="train-front" class="ic"></i><span>交通</span></button>
+  <button class="fnav-btn" data-sec="checklist" onclick="goSec('checklist')"><i data-lucide="list-checks" class="ic"></i><span>待辦</span></button>
+  <button class="fnav-btn" data-sec="expense" onclick="goSec('expense')"><i data-lucide="wallet" class="ic"></i><span>記帳</span></button>
+</nav>
 <button class="bell-btn" id="bell-btn" onclick="showReminder()" title="查看行程提醒">
   <i data-lucide="bell" class="ic"></i>
   <span class="bell-badge" id="bell-badge" style="display:none"></span>
@@ -1187,8 +1237,8 @@ const days=[
     {time:'15:30',type:'hotel',title:'Check-in 三條格拉斯麗酒店',note:'15:00 起可 Check-in，烏丸御池站步行 5 分鐘',isHighlight:true},
     {time:'17:00',type:'food',title:'三條附近晚餐',note:'周邊探索，超市採購隔天早餐'},
   ]},
-  {label:'DAY 2',date:'1/19 二',title:'大阪包車一日遊',area:'箕面 → 天王寺・難波 → 梅田',items:[
-    {time:'08:00',type:'transport',title:'飯店出發（包車）',note:'08:00～08:30 出發。早餐要在飯店處理，車上不能吃東西'},
+  {label:'DAY 2',date:'1/19 二',badge:'Klook 一日包車',title:'大阪包車一日遊',area:'箕面 → 天王寺・難波 → 梅田',items:[
+    {time:'08:00',type:'transport',title:'Klook 包車・飯店出發',note:'Klook 一日包車行程。08:00～08:30 出發。早餐要在飯店處理，車上不能吃東西'},
     {time:'09:30',type:'spot',title:'勝尾寺',note:'預估停留 09:30～12:00，滿山達摩不倒翁',isHighlight:true},
     {time:'12:30',type:'spot',title:'箕面瀑布',note:'預估停留 12:30～13:00'},
     {time:'14:00',type:'spot',title:'天王寺動物園',note:'預估停留 14:00～17:00（再考慮看看）。16:00 停止入園',warn:'與下面三間神社時間重疊，二擇一或調整時間'},
@@ -1230,8 +1280,8 @@ const days=[
     {time:'',type:'spot',title:'御金神社',note:'今天跑不完可移到 1/24，24 小時開放'},
     {time:'',type:'spot',title:'天下無敵神社',note:'正式名稱「霊光殿天満宮」，今出川站附近。社務所常沒人，要按門鈴求御守'},
   ]},
-  {label:'DAY 5',date:'1/22 五',title:'天橋立一日遊',area:'天橋立站 → 智恩寺 → 沙洲 → 纜車',items:[
-    {time:'',type:'transport',title:'前往天橋立',note:'京都搭 JR 特急（はしだて號）約 2 小時，回程要預留時間'},
+  {label:'DAY 5',date:'1/22 五',badge:'Klook 一日包車',title:'天橋立一日遊（包車）',area:'天橋立站 → 智恩寺 → 沙洲 → 纜車',items:[
+    {time:'',type:'transport',title:'Klook 包車・飯店出發',note:'Klook 一日包車行程，專車從京都飯店接送，單程約 2 小時。\n行程更彈性，下大雪時也不受大眾運輸停駛影響。'},
     {time:'',type:'spot',title:'智恩寺',note:'扇子神籤 300 日圓',isHighlight:true,q:'智恩寺 天橋立',url:'https://maps.app.goo.gl/kXFxEbH19q9hrki66'},
     {time:'',type:'spot',title:'迴旋橋（通往沙洲的路）',note:'走過旋轉橋就是天橋立沙洲松林步道',q:'天橋立 廻旋橋',url:'https://maps.app.goo.gl/hTXBK1oR3YEjzPYf9'},
     {time:'',type:'spot',title:'紀念品店',note:'',q:null,url:'https://maps.app.goo.gl/zmi18xXtKJhu1pcH9'},
@@ -1239,6 +1289,7 @@ const days=[
     {time:'',type:'spot',title:'便利商店',note:'',q:null,url:'https://maps.app.goo.gl/v3jFHWAa7NmYq5Dd7'},
     {time:'',type:'spot',title:'天橋立站前郵局',note:'郵局週六日及國定假日休息；ATM 週日及國定假日休息。\n1/22 是週五，郵局和 ATM 都有開。',q:null,url:'https://maps.app.goo.gl/CT9ZdEh4mqpDrQpM9'},
     {time:'',type:'spot',title:'天橋立車站',note:'車站內有外幣兌換機',q:'天橋立駅',url:'https://maps.app.goo.gl/cs9oiVCHE4mbPQMg8'},
+    {time:'',type:'transport',title:'包車送回京都飯店',note:'Klook 專車接送'},
   ]},
   {label:'DAY 6',date:'1/23 六',title:'奈良・若草山燒山祭',area:'奈良公園',items:[
     {time:'',type:'transport',title:'前往奈良',note:'搭近鐵，約 45 分鐘'},
@@ -1257,8 +1308,10 @@ const days=[
     {time:'',type:'spot',title:'六波羅蜜寺',note:''},
     {time:'',type:'spot',title:'北野天滿宮',note:'學問之神'},
   ]},
-  {label:'DAY 8',date:'1/25 一',title:'京都→名古屋',area:'京都 → 名古屋',items:[
-    {time:'',type:'transport',title:'退房，搭新幹線前往名古屋',note:'京都→名古屋 のぞみ 約 35 分鐘。行李可用宅急便寄到名古屋飯店'},
+  {label:'DAY 8',date:'1/25 一',badge:'大移動日',title:'京都→名古屋',area:'京都 → 名古屋',items:[
+    {time:'11:00',type:'hotel',title:'三條格拉斯麗酒店 退房',note:'11:00 前退房。大件行李建議前一晚（1/24）在飯店櫃台用宅急便寄到名古屋飯店，隔天就能收到'},
+    {time:'',type:'transport',title:'搭新幹線前往名古屋',note:'京都站搭 のぞみ，京都→名古屋約 35 分鐘。全家 6 人建議先買好指定席'},
+    {time:'15:00',type:'hotel',title:'名古屋飯店 Check-in',note:'名古屋飯店資訊待補'},
     {time:'',type:'spot',title:'名古屋車站',note:'車站周邊逛街、地下街'},
     {time:'',type:'spot',title:'科學博物館',note:'名古屋市科學館，世界最大級天象儀',warn:'每週一休館，1/25（一）去不了。可改到 1/26（二）'},
   ]},
@@ -1316,13 +1369,11 @@ const foods=[
 ];
 
 const transports=[
-  {icon:'plane',name:'去程：台中 RMQ → 神戶 UKB（JX306）',detail:'出發 08:45 台中 ／ 抵達 12:30 神戶神戶機場\n建議 06:30 前到台中機場',cost:'已購票'},
-  {icon:'plane',name:'回程：名古屋 NGO → 桃園 TPE（JX839）',detail:'出發 21:20 名古屋 ／ 抵達 23:25 桃園\n建議 18:00 前到中部國際機場',cost:'已購票'},
   {icon:'train-front',name:'神戶→京都（電車）',detail:'神戶機場→三宮→阪急or神戶市営地鉄→大阪→京都\n或巴士直達，約 1.5 小時',cost:'約 ¥1,500/人'},
   {icon:'train-front',name:'京都→名古屋（新幹線）',detail:'京都站 のぞみ → 名古屋 約 35 分鐘',cost:'¥3,640/人'},
   {icon:'tram-front',name:'名古屋→中部國際機場',detail:'名鐵 ミュースカイ 特急，名古屋→空港約 28 分鐘',cost:'¥1,250/人'},
   {icon:'credit-card',name:'ICOCA IC 交通卡',detail:'關西地區通用，便利店也可使用\n每人各一張，大阪・京都・奈良・神戶皆適用',cost:'¥2,000（含¥500押金）'},
-  {icon:'car',name:'大阪租車自駕',detail:'DAY 2 大阪一日租車，可至勝尾寺等不便搭車景點',cost:'依車型'},
+  {icon:'car',name:'Klook 一日包車 ×2',detail:'DAY 2（1/19）大阪：勝尾寺・箕面・難波・梅田\nDAY 5（1/22）天橋立：專車接送，不受大雪停駛影響',cost:'已預訂'},
   {icon:'bus',name:'市巴士一日券',detail:'京都市巴士 230 円/次，一日券 700 円\n平安神宮・嵐山・金閣寺等景點適用',cost:'¥700/人/日'},
 ];;
 
@@ -1425,7 +1476,7 @@ const reminders=[
   {type:'day',dayIndex:2,icon:'ticket',title:'中村藤吉先抽號碼牌',note:'今天去宇治！到了先去中村藤吉本店抽號碼牌。小山園週三公休。',tag:'info'},
   {type:'day',dayIndex:3,icon:'landmark',title:'東寺弘法市集',note:'今天是初弘法！人很多，建議一早先去東寺，再往東山。三十三間堂冬季較早關門。',tag:'ok'},
   {type:'day',dayIndex:5,icon:'flame',title:'若草山燒山祭',note:'今晚是奈良燒山祭！整座山點火，記得提早佔位，帶厚外套禦寒。',tag:'urgent'},
-  {type:'day',dayIndex:4,icon:'snowflake',title:'天橋立 可能下雪',note:'今天前往天橋立，可能會下雪！穿防滑鞋，攜帶暖暖包。',tag:'urgent'},
+  {type:'day',dayIndex:4,icon:'snowflake',title:'天橋立 可能下雪',note:'今天是 Klook 包車去天橋立，可能會下雪！穿防滑鞋，攜帶暖暖包。',tag:'urgent'},
   {type:'day',dayIndex:10,icon:'plane-takeoff',title:'今日回台！退房前準備',note:'21:20 JX839 從中部國際機場起飛，最晚 18:00 前到機場報到。',tag:'urgent'},
   // 天氣/注意
   {type:'weather',icon:'thermometer',title:'京都1月氣溫提醒',note:'京都1月氣溫約 2–10°C，早晚很冷。保暖內搭、手套、圍巾都帶好！',tag:'info'},
@@ -1601,7 +1652,7 @@ function renderItinerary(di){
 
   document.getElementById('day-hero').innerHTML=`<div class="day-hero" style="--tile:${th.bg}">
     <div class="day-hero-ill">${ic(th.ill)}</div>
-    <div class="day-hero-txt"><div class="day-hero-no">Day ${di+1} · ${d.date}</div><div class="day-hero-title">${d.title}</div><div class="day-hero-area">${ic("map-pin")}${d.area}</div></div></div>`;
+    <div class="day-hero-txt"><div class="day-hero-no">Day ${di+1} · ${d.date}${d.badge?`<span class="day-badge">${d.badge}</span>`:''}</div><div class="day-hero-title">${d.title}</div><div class="day-hero-area">${ic("map-pin")}${d.area}</div></div></div>`;
 
   document.getElementById('timeline').innerHTML=d.items.map((it,i)=>{
     const delay=`style="animation-delay:${i*.04}s"`;
@@ -1791,7 +1842,18 @@ showSec = function(id, btn){
   if(id === 'spots') setTimeout(()=>{initMap();kyotoMap&&kyotoMap.invalidateSize();}, 200);
 };
 
-buildTabs();renderItinerary(0);renderSpots('all');renderFood();renderTransport();renderChecklist();renderExp();checkBadge();restoreFlightData();
+// 底部快速導覽：與上方分頁同步
+const _showSec2=showSec;
+showSec=function(id,btn){
+  _showSec2(id,btn);
+  document.querySelectorAll('.fnav-btn').forEach(b=>b.classList.toggle('active',b.dataset.sec===id));
+};
+function goSec(id){
+  const top=[...document.querySelectorAll('nav:not(.fnav) .nav-btn')].find(b=>(b.getAttribute('onclick')||'').includes("'"+id+"'"));
+  showSec(id,top);
+  if(top) top.scrollIntoView({inline:'center',block:'nearest'});
+}
+buildTabs();renderItinerary(0);renderSpots('all');renderFood();renderTransport();renderChecklist();renderExp();checkBadge();
 // Show reminder on load if there are urgent items today
 (function(){
   const items=getTodayReminders();
