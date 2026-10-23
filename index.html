@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>我們的家族京都之旅 2027</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f1729">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="京都 2027">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>#kyoto-map{height:360px;width:100%;margin-top:16px;border-radius:4px;overflow:hidden;}
@@ -1006,6 +1014,36 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 .tl2-rate{display:inline-flex;gap:4px;margin-left:2px;}
 .tl2-rate span{display:inline-flex;align-items:center;font-size:11px;font-weight:600;font-variant-numeric:tabular-nums;border-radius:5px;padding:1px 6px;}
 .tl2-rate .ic{width:11px;height:11px;margin:0 2px 0 0;fill:currentColor;}
+
+/* ══ 口袋名單 v5 ══ */
+.pk-filter-lbl{font-size:11px;font-weight:600;color:var(--faint);letter-spacing:.06em;margin:2px 2px 6px;}
+.pk-cat span{font-size:11px;color:var(--faint);font-weight:500;margin-left:1px;}
+.pk-cat.active span{color:var(--accent);}
+.pk-switch{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-2);margin:6px 2px 8px;cursor:pointer;user-select:none;}
+.pk-switch input{display:none;}
+.pk-switch-ui{width:36px;height:21px;border-radius:999px;background:var(--border-2);position:relative;transition:background .2s;flex-shrink:0;}
+.pk-switch-ui::after{content:'';position:absolute;top:2px;left:2px;width:17px;height:17px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:transform .2s;}
+.pk-switch input:checked + .pk-switch-ui{background:var(--sage);}
+.pk-switch input:checked + .pk-switch-ui::after{transform:translateX(15px);}
+.pk-hot{display:inline-flex;align-items:center;margin-left:6px;font-size:10px;font-weight:700;color:#fff;background:#b4564c;border-radius:5px;padding:1px 6px;vertical-align:2px;letter-spacing:.04em;}
+.pk-ratenote .pk-hot{margin:0 2px;vertical-align:0;}
+.pk-item{display:block;padding:12px 12px 10px 14px;}
+.pk-top{display:flex;align-items:flex-start;gap:12px;}
+.pk-zone{display:inline-flex;align-items:center;font-size:11px;font-weight:600;color:var(--sky2);background:var(--sky-soft);border-radius:5px;padding:1px 7px;}
+.pk-zone .ic{width:11px;height:11px;margin:0 2px 0 0;}
+.pk-del{width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:none;background:none;color:var(--faint);border-radius:8px;cursor:pointer;}
+.pk-del .ic{margin:0;width:16px;height:16px;}
+.pk-del:active,.pk-del:hover{color:var(--rose);background:var(--rose-soft);}
+.pk-actions{display:flex;gap:8px;margin:10px 0 0 46px;}
+.pk-nav,.pk-visit{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:2px;height:36px;border-radius:9px;font-size:13px;font-weight:600;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.pk-nav{background:var(--ink);color:#fff;border:1px solid var(--ink);}
+.pk-visit{background:var(--white);color:var(--ink-2);border:1px solid var(--border-2);}
+.pk-visit.on{background:var(--sage-soft);color:var(--sage);border-color:#cfe1d5;}
+.pk-nav .ic,.pk-visit .ic{width:15px;height:15px;}
+.pk-item.visited{background:#fafbfa;}
+.pk-item.visited .pk-name{color:var(--muted);}
+.pk-item.visited .pk-ic{background:var(--sage-soft);color:var(--sage);}
+@media(max-width:380px){.pk-actions{margin-left:0;}}
 </style>
 <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
 </head>
@@ -1060,22 +1098,26 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 <div id="section-pocket" class="section">
   <div class="nb-page">
   <div class="sec-title"><span>02</span>口袋名單</div>
-  <div class="sec-desc">想去的店和景點都收在這裡。新增、刪除會自動存在這台裝置的瀏覽器裡。</div>
+  <div class="sec-desc">想去的店和景點都在這裡。點「導航」直接開 Google 地圖，去過的按「已造訪」。所有變更都存在這台裝置。</div>
 
   <div class="pk-regions" id="pk-regions"></div>
   <div class="pk-toolbar">
-    <div class="pk-search"><i data-lucide="search" class="ic"></i><input id="pk-q" type="search" placeholder="搜尋名稱或標籤" oninput="pkRender()"></div>
+    <div class="pk-search"><i data-lucide="search" class="ic"></i><input id="pk-q" type="search" placeholder="搜尋店名、商圈或標籤" oninput="pkRender()"></div>
     <button class="pk-add-toggle" onclick="pkToggleForm()"><i data-lucide="plus" class="ic"></i>新增</button>
   </div>
+  <div class="pk-filter-lbl">分類</div>
   <div class="pk-cats" id="pk-cats"></div>
+  <div class="pk-filter-lbl">商圈</div>
+  <div class="pk-cats" id="pk-zones"></div>
 
   <div class="pk-form" id="pk-form">
     <div class="pk-form-title">新增地點</div>
     <div class="pk-grid">
-      <label>地區<select id="pk-f-region"><option value="kyoto">京都</option><option value="uji">宇治</option><option value="nara">奈良</option><option value="kobe">神戶</option><option value="nagoya">名古屋</option><option value="osaka">大阪</option></select></label>
-      <label>分類<select id="pk-f-cat"><option>景點</option><option>美食</option><option>甜點</option><option>咖啡</option><option>咖啡甜點</option><option>麵包甜點</option><option>購物</option><option>住宿</option><option>其他</option></select></label>
+      <label>地區<select id="pk-f-region" onchange="pkFillZoneList()"><option value="kyoto">京都</option><option value="uji">宇治</option><option value="nara">奈良</option><option value="kobe">神戶</option><option value="nagoya">名古屋</option><option value="osaka">大阪</option></select></label>
+      <label>分類<select id="pk-f-cat"><option>景點</option><option>美食</option><option>甜點</option><option>咖啡</option><option>咖啡甜點</option><option>麵包甜點</option><option>購物</option><option>購物景點</option><option>住宿</option><option>其他</option></select></label>
       <label class="full">名稱<input id="pk-f-name" placeholder="例：中村藤吉本店"></label>
-      <label class="full">標籤<input id="pk-f-tags" placeholder="用逗號或空白分隔，例：抹茶, 排隊名店"></label>
+      <label>商圈（選填）<input id="pk-f-zone" list="pk-zone-list" placeholder="例：祇園"><datalist id="pk-zone-list"></datalist></label>
+      <label>標籤（選填）<input id="pk-f-tags" placeholder="抹茶, 排隊名店"></label>
       <label>Google 評分（選填）<input id="pk-f-g" type="number" inputmode="decimal" step="0.1" min="0" max="5" placeholder="例：4.3"></label>
       <label>食べログ評分（選填）<input id="pk-f-t" type="number" inputmode="decimal" step="0.01" min="0" max="5" placeholder="例：3.55"></label>
       <label class="full">地址／備註（選填）<input id="pk-f-addr" placeholder="選填"></label>
@@ -1088,9 +1130,10 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 
   <div class="pk-countrow">
     <div class="pk-count" id="pk-count"></div>
-    <label class="pk-sort">排序<select onchange="pkSetSort(this.value)"><option value="default">分類</option><option value="google">Google 高→低</option><option value="tabelog">食べログ 高→低</option></select></label>
+    <label class="pk-sort">排序<select id="pk-sort" onchange="pkSetSort(this.value)"><option value="default">分類</option><option value="google">Google 高→低</option><option value="tabelog">食べログ 高→低</option></select></label>
   </div>
-  <div class="pk-ratenote">評分是整理名單時的參考值，可能和現在的 Google／食べログ不同。點評分就能修改。</div>
+  <label class="pk-switch"><input type="checkbox" id="pk-unvisited" onchange="pkRender()"><span class="pk-switch-ui"></span>只看還沒去過的</label>
+  <div class="pk-ratenote">評分是整理名單時的參考值，可能和現在的 Google／食べログ不同，點評分可修改。<span class="pk-hot">高分</span>＝Google 4.5 以上或食べログ 3.5 以上。</div>
   <div class="pk-list" id="pk-list"></div>
 
   <div class="pk-backup">
@@ -1337,7 +1380,7 @@ const days=[
     {time:'',type:'food',title:'中村藤吉本店',note:'先去抽號碼牌，再去逛平等院',isHighlight:true},
     {time:'',type:'spot',title:'平等院',note:'世界遺產，10 元硬幣上的鳳凰堂',isHighlight:true},
     {time:'',type:'food',title:'小山園抹茶',note:'丸久小山園',warn:'丸久小山園宇治門市與京都西洞院店都是每週三公休，這天不能去'},
-    {time:'',type:'food',title:'一保堂抹茶',note:'在京都市區（寺町二条），不在宇治。喫茶室 10:00～17:00'},
+    {time:'',type:'food',title:'一保堂抹茶',rating:{google:4.4,tabelog:3.75},note:'在京都市區（寺町二条），不在宇治。喫茶室 10:00～17:00'},
     {time:'',type:'food',title:'麵屋豬一',note:'京都市區（寺町仏光寺）。11:00～14:30、17:30～21:30',warn:'不定休，出發前確認店家公告'},
     {time:'',type:'food',title:'たま木亭（買麵包）',note:'京阪黃檗站步行 5 分鐘。週一、週二公休，週三有開',isHighlight:true},
     {time:'',type:'spot',title:'伏見稻荷大社',note:'千本鳥居，24 小時開放',isHighlight:true},
@@ -1942,45 +1985,53 @@ function goSec(id){
 }
 
 // ══ 口袋名單 ══
-const PK_DEFAULT={"kyoto":[{"id":"k3","name":"石清水八幡宮","category":"景點","tags":["神社","纜車"],"rating":{"google":4.5,"tabelog":null}},{"id":"k4","name":"飛行神社","category":"景點","tags":["神社","飛行安全"],"rating":{"google":4.2,"tabelog":null}},{"id":"k6","name":"太秦映畫村","category":"景點","tags":["主題樂園","江戶街景"],"rating":{"google":4.2,"tabelog":null}},{"id":"k7","name":"大原三千院","category":"景點","tags":["古寺","苔庭"],"rating":{"google":4.6,"tabelog":null}},{"id":"k8","name":"白鬚神社","category":"景點","tags":["神社","水中鳥居"],"rating":{"google":4.3,"tabelog":null}},{"id":"k10","name":"壇王法林寺","category":"景點","tags":["寺院","黑貓"],"rating":{"google":4.2,"tabelog":null}},{"id":"k11","name":"河合神社","category":"景點","tags":["神社","鏡繪馬"],"rating":{"google":4.4,"tabelog":null}},{"id":"k12","name":"神泉苑","category":"景點","tags":["庭園","平安京遺構"],"rating":{"google":4.3,"tabelog":null}},{"id":"k13","name":"大黑屋餅舖","category":"甜點","tags":["傳統餅舖"],"rating":{"google":4.2,"tabelog":3.35}},{"id":"k14","name":"豆大福 出町雙葉","category":"甜點","tags":["豆大福","排隊名店"],"rating":{"google":4.5,"tabelog":3.79}},{"id":"k15","name":"村上開新堂","category":"甜點","tags":["洋菓子","老舖"],"rating":{"google":4.3,"tabelog":3.65}},{"id":"k16","name":"茶寮寶全","category":"甜點","address":"京都府京都市左京区下鴨西高木町25","tags":["和菓子"],"rating":{"google":4.4,"tabelog":3.52}},{"id":"k17","name":"加茂みたらし茶屋","category":"甜點","tags":["醬油糰子","發源老店"],"rating":{"google":4.2,"tabelog":3.68}},{"id":"k18","name":"中村軒","category":"甜點","tags":["和菓子","刨冰"],"rating":{"google":4.4,"tabelog":3.71}},{"id":"k19","name":"阿闍梨餅本舖 満月","category":"甜點","tags":["阿闍梨餅","伴手禮"],"rating":{"google":4.5,"tabelog":3.72}},{"id":"k20","name":"カタパン屋","category":"甜點","tags":["硬派麵包"],"rating":{"google":4.1,"tabelog":3.25}},{"id":"k21","name":"麩嘉","category":"甜點","tags":["生麩","麩饅頭"],"rating":{"google":4.4,"tabelog":3.64}},{"id":"k22","name":"糖太郎","category":"甜點","tags":["特色甜點"],"rating":{"google":4.3,"tabelog":3.48}},{"id":"k23","name":"本家月餅家直正","category":"甜點","tags":["蕨餅","老舖"],"rating":{"google":4.6,"tabelog":3.78}},{"id":"k24","name":"かぎ甚","category":"甜點","tags":["祇園","和菓子"],"rating":{"google":4.3,"tabelog":3.5}},{"id":"k25","name":"Mamemono and Taiyaki まめものとたい焼き 清水店","category":"甜點","tags":["鯛魚燒","奶油鯛魚燒"],"rating":{"google":4.4,"tabelog":3.42}},{"id":"k26","name":"吉祥菓寮","category":"甜點","tags":["黃豆粉刨冰","芭菲"],"rating":{"google":4.3,"tabelog":3.62}},{"id":"k27","name":"梅園","category":"甜點","tags":["烤糰子","甘味處"],"rating":{"google":4.2,"tabelog":3.55}},{"id":"k28","name":"一文字屋和輔","category":"甜點","tags":["今宮神社","烤麻糬"],"rating":{"google":4.5,"tabelog":3.74}},{"id":"k29","name":"栗屋","category":"甜點","tags":["栗子甜點"],"rating":{"google":4.2,"tabelog":3.3}},{"id":"k30","name":"御倉屋","category":"甜點","tags":["和菓子"],"rating":{"google":4.4,"tabelog":3.58}},{"id":"k31","name":"とようけ屋山本 / とようけ茶屋","category":"美食","tags":["豆腐料理","油豆腐"],"rating":{"google":4.3,"tabelog":3.67}},{"id":"k32","name":"祇園小森","category":"甜點","tags":["抹茶甜點","祇園"],"rating":{"google":4.3,"tabelog":3.63}},{"id":"k33","name":"神馬堂","category":"甜點","tags":["現烤燒餅","限量老舖"],"rating":{"google":4.5,"tabelog":3.73}},{"id":"k34","name":"葵家やきもち総本舗","category":"甜點","tags":["燒餅","御手洗餅"],"rating":{"google":4.3,"tabelog":3.56}},{"id":"k35","name":"今西軒","category":"甜點","tags":["手作荻餅","限量名店"],"rating":{"google":4.6,"tabelog":3.81}},{"id":"k36","name":"京都鴨蕎麦 田","category":"美食","tags":["鴨肉蕎麥麵"],"rating":{"google":4.4,"tabelog":3.55}},{"id":"k37","name":"京ラーメン さだかず 祇園本店","category":"美食","tags":["祇園","深夜拉麵"],"rating":{"google":4.3,"tabelog":3.61}},{"id":"k38","name":"和醸良麺 すがり (Sugari)","category":"美食","tags":["沾麵","町家風格"],"rating":{"google":4.3,"tabelog":3.76}},{"id":"k39","name":"貝だし麺 きた田","category":"美食","tags":["貝類湯頭","拉麵"],"rating":{"google":4.3,"tabelog":3.64}},{"id":"k40","name":"おうどん一","category":"美食","tags":["烏龍麵"],"rating":{"google":4.2,"tabelog":3.45}},{"id":"k41","name":"セアブラノ神 壬生本店","category":"美食","tags":["背脂醬油拉麵","極粗麵"],"rating":{"google":4.2,"tabelog":3.68}},{"id":"k42","name":"無礙山房","category":"美食","tags":["抹茶","芭菲","庭園"],"rating":{"google":4.4,"tabelog":3.77}},{"id":"k43","name":"彌生軒食堂","category":"美食","tags":["平價定食"],"rating":{"google":4.1,"tabelog":3.2}},{"id":"k44","name":"宮川豚衛門","category":"美食","tags":["炸豬排","宮川町"],"rating":{"google":4.5,"tabelog":3.58}},{"id":"k45","name":"炭火燒鳥 馬耳東風","category":"美食","tags":["燒鳥","居酒屋"],"rating":{"google":4.5,"tabelog":3.79}},{"id":"k46","name":"karaageya","category":"美食","tags":["日式炸雞"],"rating":{"google":4.3,"tabelog":3.32}},{"id":"k47","name":"手づくりハンバーグの店 とくら 京都三条店","category":"美食","tags":["爆漿漢堡排","排隊名店"],"rating":{"google":4.4,"tabelog":3.65}},{"id":"k48","name":"洋食堂のろ","category":"美食","tags":["精緻洋食"],"rating":{"google":4.5,"tabelog":3.62}},{"id":"k49","name":"天丼まきの 京都寺町店","category":"美食","tags":["天丼","海老天婦羅"],"rating":{"google":4.3,"tabelog":3.51}},{"id":"k50","name":"京都海老天丼徳","category":"美食","tags":["天丼"],"rating":{"google":4.2,"tabelog":3.38}},{"id":"k51","name":"New Babe Kyoto","category":"美食","tags":["炸豬排"],"rating":{"google":4.6,"tabelog":3.55}},{"id":"k52","name":"鯛壽司","category":"美食","tags":["老字號壽司"],"rating":{"google":4.3,"tabelog":3.54}},{"id":"k53","name":"海鮮工房橋立物產","category":"美食","tags":["海鮮","伴手禮"],"rating":{"google":4.1,"tabelog":3.22}},{"id":"k54","name":"Spice Curry Kiteretsu","category":"美食","tags":["斯里蘭卡咖哩","香料咖哩"],"rating":{"google":4.6,"tabelog":3.58}},{"id":"k55","name":"MR.餃子","category":"美食","tags":["煎餃","爆汁"],"rating":{"google":4.3,"tabelog":3.69}},{"id":"k56","name":"新門前米村","category":"美食","tags":["創新料理","精緻餐飲"],"rating":{"google":4.6,"tabelog":3.92}},{"id":"k57","name":"酒呑氣 びんご","category":"美食","tags":["居酒屋"],"rating":{"google":4.4,"tabelog":3.55}},{"id":"k58","name":"京都炭火串燒 Tsujiya 四條御幸町店","category":"美食","tags":["串燒","雞肉料理"],"rating":{"google":4.3,"tabelog":3.48}},{"id":"k59","name":"田中雞卵","category":"美食","tags":["錦市場","玉子燒"],"rating":{"google":4.2,"tabelog":3.49}},{"id":"k60","name":"京都柳小路 TAKA","category":"美食","tags":["柳小路","時尚居酒屋"],"rating":{"google":4.4,"tabelog":3.59}},{"id":"k61","name":"先斗町薬膳カレー","category":"美食","tags":["藥膳咖哩","無添加","先斗町"],"rating":{"google":4.2,"tabelog":3.48}},{"id":"k62","name":"百年蕎麦 壽","category":"美食","tags":["百年蕎麥","站立蕎麥","御幸町"],"rating":{"google":4.1,"tabelog":3.32}},{"id":"k63","name":"御飯屋 一芯","category":"美食","tags":["羽釜炊飯","日式定食","角煮"],"rating":{"google":4.4,"tabelog":3.65}},{"id":"k64","name":"weekends coffee","category":"咖啡","tags":["質感咖啡"],"rating":{"google":4.5,"tabelog":3.52}},{"id":"k65","name":"Inahiko Coffee 稲彦珈琲 伏見稲荷本店","category":"咖啡","tags":["伏見稻荷","特色咖啡"],"rating":{"google":4.6,"tabelog":3.28}},{"id":"k66","name":"スターバックスコーヒー京都円山公園菊の渓店","category":"咖啡","tags":["圓山公園","特色星巴克"],"rating":{"google":4.3,"tabelog":3.15}},{"id":"k67","name":"Here咖啡 (HERE KYOTO)","category":"咖啡","tags":["設計感咖啡"],"rating":{"google":4.3,"tabelog":3.55}},{"id":"k68","name":"日東堂咖啡牛奶","category":"咖啡","tags":["清水寺周邊","質感選物"],"rating":{"google":4.2,"tabelog":3.3}},{"id":"k69","name":"京都いとおかし","category":"咖啡","tags":["甜點喫茶"],"rating":{"google":4.3,"tabelog":3.38}},{"id":"k70","name":"SHUHARI KYOTO","category":"咖啡","tags":["西陣","手刷抹茶"],"rating":{"google":4.7,"tabelog":3.42}},{"id":"k71","name":"sui","category":"咖啡","tags":["質感咖啡廳"],"rating":{"google":4.4,"tabelog":3.35}},{"id":"k72","name":"TO.","category":"咖啡","tags":["風格餐酒","咖啡"],"rating":{"google":4.5,"tabelog":3.58}},{"id":"k73","name":"La Madrague (喫茶マドラグ)","category":"咖啡","tags":["厚蛋燒三明治","懷舊喫茶"],"rating":{"google":4.3,"tabelog":3.68}},{"id":"k74","name":"Creperie Garcon","category":"咖啡","tags":["法式可麗餅"],"rating":{"google":4.5,"tabelog":3.52}},{"id":"k75","name":"smart coffee (スマート珈琲店)","category":"咖啡","tags":["昭和喫茶","法式吐司","手沖咖啡"],"rating":{"google":4.4,"tabelog":3.74}},{"id":"k76","name":"くるみ (Kurumi)","category":"咖啡","tags":["特色喫茶"],"rating":{"google":4.2,"tabelog":3.48}},{"id":"k77","name":"乃咫 nota (Dorayaki & Black Tea)","category":"咖啡","tags":["銅鑼燒","和紅茶","隱世咖啡"],"rating":{"google":4.6,"tabelog":3.45}},{"id":"k78","name":"京都 Godiva 麵包","category":"咖啡","tags":["Godiva","巧克力烘焙"],"rating":{"google":4.2,"tabelog":3.25}},{"id":"k79","name":"京都茅乃舍","category":"購物","tags":["高湯包","伴手禮"],"rating":{"google":4.4,"tabelog":null}},{"id":"k80","name":"麥當勞 金閣寺店","category":"美食","tags":["速食","便利點"],"rating":{"google":3.9,"tabelog":null}},{"id":"k81","name":"麥當勞 河原町店","category":"美食","tags":["速食","便利點"],"rating":{"google":3.8,"tabelog":null}},{"id":"k82","name":"The OneFive Kyoto","category":"住宿","tags":["質感飯店"],"rating":{"google":4.2,"tabelog":null}}],"uji":[{"id":"uji1","name":"hoho焙茶 (ほうほう / HOHO HOJICHA)","category":"咖啡甜點","tags":["焙茶專賣","宇治茶","焙茶甜點"],"rating":{"google":4.4,"tabelog":3.52}}],"nara":[{"id":"nara2","name":"二月堂","category":"景點","tags":["古寺","修二會","俯瞰市景"],"rating":{"google":4.7,"tabelog":null}},{"id":"nara3","name":"興福寺","category":"景點","tags":["五重塔","古蹟"],"rating":{"google":4.5,"tabelog":null}},{"id":"nara4","name":"朱雀門","category":"景點","tags":["平城宮跡","歷史地標"],"rating":{"google":4.3,"tabelog":null}},{"id":"nara5","name":"唐招提寺","category":"景點","tags":["鑑真和尚","唐風建築"],"rating":{"google":4.6,"tabelog":null}},{"id":"nara6","name":"藥師寺","category":"景點","tags":["東塔","法相宗"],"rating":{"google":4.5,"tabelog":null}},{"id":"nara7","name":"法隆寺","category":"景點","tags":["世界最早木造建築","飛鳥時代"],"rating":{"google":4.6,"tabelog":null}},{"id":"nara8","name":"長谷寺","category":"景點","tags":["牡丹名所","懸造本堂"],"rating":{"google":4.6,"tabelog":null}},{"id":"nara9","name":"中將堂本舖","category":"甜點","tags":["中將餅","艾草麻糬","百年老舖"],"rating":{"google":4.4,"tabelog":3.68}},{"id":"nara10","name":"中古堂","category":"甜點","tags":["和菓子","伴手禮"],"rating":{"google":4.2,"tabelog":3.35}},{"id":"nara11","name":"道明寺 + 御手橋","category":"景點","tags":["道明寺粉發源地","古橋"],"rating":{"google":4.3,"tabelog":null}}],"kobe":[{"id":"b1","name":"動物王國","category":"景點","tags":["親近動物","親子"],"rating":{"google":4.6,"tabelog":null}},{"id":"b2","name":"須磨海洋世界虎鯨秀","category":"景點","tags":["海洋館","虎鯨秀"],"rating":{"google":4.4,"tabelog":null}},{"id":"b3","name":"かつ丼吉兵衛 三宮本店","category":"美食","tags":["豬排丼","三宮"],"rating":{"google":4.2,"tabelog":3.62}},{"id":"b4","name":"not's","category":"美食","tags":["神戶牛排"],"rating":{"google":4.6,"tabelog":3.55}},{"id":"b5","name":"Bakery RIKI","category":"麵包甜點","tags":["排隊名店","人氣麵包"],"rating":{"google":4.5,"tabelog":3.75}},{"id":"b6","name":"TAOCA COFFEE","category":"咖啡","tags":["起司蛋糕","咖啡試喝"],"rating":{"google":4.4,"tabelog":3.38}},{"id":"b7","name":"isuzu 麵包坊","category":"麵包甜點","tags":["老字號麵包"],"rating":{"google":4.3,"tabelog":3.6}},{"id":"b8","name":"生田神社","category":"景點","tags":["神社","市中心"],"rating":{"google":4.5,"tabelog":null}},{"id":"b9","name":"摩耶山","category":"景點","tags":["掬星台","三大夜景"],"rating":{"google":4.6,"tabelog":null}},{"id":"b10","name":"Ça Marche","category":"麵包甜點","tags":["法式麵包"],"rating":{"google":4.4,"tabelog":3.72}},{"id":"b11","name":"紗布起司","category":"麵包甜點","tags":["起司甜點"],"rating":{"google":4.2,"tabelog":3.25}},{"id":"b12","name":"人生餃子店","category":"美食","tags":["特色餃子"],"rating":{"google":4.1,"tabelog":3.35}},{"id":"b13","name":"炉端とおでん 呼炉凪来 三宮店","category":"美食","tags":["關東煮","居酒屋"],"rating":{"google":4.3,"tabelog":3.28}},{"id":"b14","name":"Tommy's Sannomiya","category":"麵包甜點","tags":["紅豆吐司","名店"],"rating":{"google":4.3,"tabelog":3.65}},{"id":"b15","name":"DoRSIA","category":"咖啡","tags":["人氣布丁","咖啡廳"],"rating":{"google":4.3,"tabelog":3.52}},{"id":"b16","name":"賀正軒","category":"美食","tags":["拉麵"],"rating":{"google":4.2,"tabelog":3.58}},{"id":"b17","name":"北野異人館","category":"景點","tags":["洋館街區","異國風情"],"rating":{"google":4.2,"tabelog":null}},{"id":"b18","name":"神戶塔","category":"景點","tags":["神戶港","經典地標"],"rating":{"google":4.3,"tabelog":null}},{"id":"b19","name":"麵包超人博物館","category":"景點","tags":["親子","打卡景點"],"rating":{"google":4.4,"tabelog":null}}],"nagoya":[{"id":"ngo1","name":"Yellow Noritakeshinmachi","category":"購物","address":"AEON MALL Nagoya Noritake Garden 1F","tags":["專賣店","AEON MALL"],"rating":{"google":4.2,"tabelog":3.25}}],"osaka":[]};
+const PK_DEFAULT={"kyoto":[{"id":"k3","name":"石清水八幡宮","category":"景點","zone":"八幡","tags":["神社","纜車"],"rating":{"google":4.5,"tabelog":null}},{"id":"k4","name":"飛行神社","category":"景點","zone":"八幡","tags":["神社","飛行安全"],"rating":{"google":4.2,"tabelog":null}},{"id":"k6","name":"太秦映畫村","category":"景點","zone":"太秦","tags":["主題樂園","江戶街景"],"rating":{"google":4.2,"tabelog":null}},{"id":"k7","name":"大原三千院","category":"景點","zone":"大原","tags":["古寺","苔庭"],"rating":{"google":4.6,"tabelog":null}},{"id":"k8","name":"白鬚神社","category":"景點","zone":"滋賀","tags":["神社","水中鳥居"],"rating":{"google":4.3,"tabelog":null}},{"id":"k10","name":"壇王法林寺","category":"景點","zone":"三條","tags":["寺院","黑貓"],"rating":{"google":4.2,"tabelog":null}},{"id":"k11","name":"河合神社","category":"景點","zone":"下鴨","tags":["神社","鏡繪馬"],"rating":{"google":4.4,"tabelog":null}},{"id":"k12","name":"神泉苑","category":"景點","zone":"二條","tags":["庭園","平安京遺構"],"rating":{"google":4.3,"tabelog":null}},{"id":"k13","name":"大黑屋餅舖","category":"甜點","zone":"烏丸","tags":["傳統餅舖"],"rating":{"google":4.2,"tabelog":3.35}},{"id":"k14","name":"豆大福 出町雙葉","category":"甜點","zone":"出町柳","tags":["豆大福","排隊名店"],"rating":{"google":4.5,"tabelog":3.79}},{"id":"k15","name":"村上開新堂","category":"甜點","zone":"河原町","tags":["洋菓子","老舖"],"rating":{"google":4.3,"tabelog":3.65}},{"id":"k16","name":"茶寮寶全","category":"甜點","zone":"下鴨","address":"京都府京都市左京区下鴨西高木町25","tags":["和菓子"],"rating":{"google":4.4,"tabelog":3.52}},{"id":"k17","name":"加茂みたらし茶屋","category":"甜點","zone":"下鴨","tags":["醬油糰子","發源老店"],"rating":{"google":4.2,"tabelog":3.68}},{"id":"k18","name":"中村軒","category":"甜點","zone":"桂","tags":["和菓子","刨冰"],"rating":{"google":4.4,"tabelog":3.71}},{"id":"k19","name":"阿闍梨餅本舖 満月","category":"甜點","zone":"出町柳","tags":["阿闍梨餅","伴手禮"],"rating":{"google":4.5,"tabelog":3.72}},{"id":"k20","name":"カタパン屋","category":"甜點","zone":"伏見","tags":["硬派麵包"],"rating":{"google":4.1,"tabelog":3.25}},{"id":"k21","name":"麩嘉","category":"甜點","zone":"府廳前","tags":["生麩","麩饅頭"],"rating":{"google":4.4,"tabelog":3.64}},{"id":"k22","name":"糖太郎","category":"甜點","zone":"烏丸","tags":["特色甜點"],"rating":{"google":4.3,"tabelog":3.48}},{"id":"k23","name":"本家月餅家直正","category":"甜點","zone":"三條","tags":["蕨餅","老舖"],"rating":{"google":4.6,"tabelog":3.78}},{"id":"k24","name":"かぎ甚","category":"甜點","zone":"祇園","tags":["祇園","和菓子"],"rating":{"google":4.3,"tabelog":3.5}},{"id":"k25","name":"Mamemono and Taiyaki 清水店","category":"甜點","zone":"清水寺","tags":["鯛魚燒","奶油鯛魚燒"],"rating":{"google":4.4,"tabelog":3.42}},{"id":"k26","name":"吉祥菓寮","category":"甜點","zone":"祇園","tags":["黃豆粉刨冰","芭菲"],"rating":{"google":4.3,"tabelog":3.62}},{"id":"k27","name":"梅園","category":"甜點","zone":"河原町","tags":["烤糰子","甘味處"],"rating":{"google":4.2,"tabelog":3.55}},{"id":"k28","name":"一文字屋和輔","category":"甜點","zone":"紫野","tags":["今宮神社","烤麻糬"],"rating":{"google":4.5,"tabelog":3.74}},{"id":"k29","name":"栗屋","category":"甜點","zone":"烏丸","tags":["栗子甜點"],"rating":{"google":4.2,"tabelog":3.3}},{"id":"k30","name":"御倉屋","category":"甜點","zone":"北區","tags":["和菓子"],"rating":{"google":4.4,"tabelog":3.58}},{"id":"k31","name":"とようけ屋山本 / とようけ茶屋","category":"美食","zone":"北野","tags":["豆腐料理","油豆腐"],"rating":{"google":4.3,"tabelog":3.67}},{"id":"k32","name":"祇園小森","category":"甜點","zone":"祇園","tags":["抹茶甜點","祇園"],"rating":{"google":4.3,"tabelog":3.63}},{"id":"k33","name":"神馬堂","category":"甜點","zone":"上賀茂","tags":["現烤燒餅","限量老舖"],"rating":{"google":4.5,"tabelog":3.73}},{"id":"k34","name":"葵家やきもち総本舗","category":"甜點","zone":"上賀茂","tags":["燒餅","御手洗餅"],"rating":{"google":4.3,"tabelog":3.56}},{"id":"k35","name":"今西軒","category":"甜點","zone":"五條","tags":["手作荻餅","限量名店"],"rating":{"google":4.6,"tabelog":3.81}},{"id":"k83","name":"治一郎 大丸京都店","category":"甜點","zone":"四條烏丸","address":"大丸京都店 B1F","tags":["年輪蛋糕","布丁","人氣伴手禮"],"rating":{"google":4.3,"tabelog":3.12}},{"id":"k84","name":"虎屋菓寮 京都一条店","category":"甜點","zone":"御所","tags":["羊羹發祥老舖","枯山水庭園"],"rating":{"google":4.5,"tabelog":3.73}},{"id":"k85","name":"鍵善良房 本店","category":"甜點","zone":"祇園","tags":["祇園老舖","黑糖葛切","和菓子"],"rating":{"google":4.3,"tabelog":3.78}},{"id":"k86","name":"GION GOZU 祇園布丁","category":"甜點","zone":"祇園","tags":["祇園散策","濃郁布丁"],"rating":{"google":4.4,"tabelog":3.45}},{"id":"k87","name":"和栗專門 紗織","category":"甜點","zone":"木屋町","tags":["現擠和栗蒙布朗","奢華甜點"],"rating":{"google":4.3,"tabelog":3.68}},{"id":"k36","name":"京都鴨蕎麦 田","category":"美食","zone":"祇園","tags":["鴨肉蕎麥麵"],"rating":{"google":4.4,"tabelog":3.55}},{"id":"k37","name":"京ラーメン さだかず 祇園本店","category":"美食","zone":"祇園","tags":["祇園","深夜拉麵"],"rating":{"google":4.3,"tabelog":3.61}},{"id":"k38","name":"和醸良麺 すがり (Sugari)","category":"美食","zone":"四條烏丸","tags":["沾麵","町家風格"],"rating":{"google":4.3,"tabelog":3.76}},{"id":"k39","name":"貝だし麺 きた田","category":"美食","zone":"京都車站","tags":["貝類湯頭","拉麵"],"rating":{"google":4.3,"tabelog":3.64}},{"id":"k40","name":"おうどん一","category":"美食","zone":"河原町","tags":["烏龍麵"],"rating":{"google":4.2,"tabelog":3.45}},{"id":"k41","name":"セアブラノ神 壬生本店","category":"美食","zone":"壬生","tags":["背脂醬油拉麵","極粗麵"],"rating":{"google":4.2,"tabelog":3.68}},{"id":"k42","name":"無礙山房","category":"美食","zone":"東山","tags":["抹茶","芭菲","庭園"],"rating":{"google":4.4,"tabelog":3.77}},{"id":"k43","name":"彌生軒食堂","category":"美食","zone":"河原町","tags":["平價定食"],"rating":{"google":4.1,"tabelog":3.2}},{"id":"k44","name":"宮川豚衛門","category":"美食","zone":"宮川町","tags":["炸豬排","宮川町"],"rating":{"google":4.5,"tabelog":3.58}},{"id":"k45","name":"炭火燒鳥 馬耳東風","category":"美食","zone":"四條烏丸","tags":["燒鳥","居酒屋"],"rating":{"google":4.5,"tabelog":3.79}},{"id":"k46","name":"karaageya","category":"美食","zone":"河原町","tags":["日式炸雞"],"rating":{"google":4.3,"tabelog":3.32}},{"id":"k47","name":"手づくりハンバーグの店 とくら 京都三条店","category":"美食","zone":"三條","tags":["爆漿漢堡排","排隊名店"],"rating":{"google":4.4,"tabelog":3.65}},{"id":"k48","name":"洋食堂のろ","category":"美食","zone":"二條","tags":["精緻洋食"],"rating":{"google":4.5,"tabelog":3.62}},{"id":"k49","name":"天丼まきの 京都寺町店","category":"美食","zone":"寺町","tags":["天丼","海老天婦羅"],"rating":{"google":4.3,"tabelog":3.51}},{"id":"k50","name":"京都海老天丼徳","category":"美食","zone":"河原町","tags":["天丼"],"rating":{"google":4.2,"tabelog":3.38}},{"id":"k51","name":"New Babe Kyoto","category":"美食","zone":"烏丸","tags":["炸豬排"],"rating":{"google":4.6,"tabelog":3.55}},{"id":"k52","name":"鯛壽司","category":"美食","zone":"木屋町","tags":["老字號壽司"],"rating":{"google":4.3,"tabelog":3.54}},{"id":"k53","name":"海鮮工房橋立物產","category":"美食","zone":"宮津","tags":["海鮮","伴手禮"],"rating":{"google":4.1,"tabelog":3.22}},{"id":"k54","name":"Spice Curry Kiteretsu","category":"美食","zone":"北區","tags":["斯里蘭卡咖哩","香料咖哩"],"rating":{"google":4.6,"tabelog":3.58}},{"id":"k55","name":"MR.餃子","category":"美食","zone":"東寺","tags":["煎餃","爆汁"],"rating":{"google":4.3,"tabelog":3.69}},{"id":"k56","name":"新門前米村","category":"美食","zone":"祇園","tags":["創新料理","精緻餐飲"],"rating":{"google":4.6,"tabelog":3.92}},{"id":"k57","name":"酒呑氣 びんご","category":"美食","zone":"烏丸","tags":["居酒屋"],"rating":{"google":4.4,"tabelog":3.55}},{"id":"k58","name":"京都炭火串燒 Tsujiya 四條御幸町店","category":"美食","zone":"四條","tags":["串燒","雞肉料理"],"rating":{"google":4.3,"tabelog":3.48}},{"id":"k59","name":"田中雞卵","category":"美食","zone":"錦市場","tags":["錦市場","玉子燒"],"rating":{"google":4.2,"tabelog":3.49}},{"id":"k60","name":"京都柳小路 TAKA","category":"美食","zone":"河原町","tags":["柳小路","時尚居酒屋"],"rating":{"google":4.4,"tabelog":3.59}},{"id":"k61","name":"先斗町薬膳カレー","category":"美食","zone":"先斗町","tags":["藥膳咖哩","無添加"],"rating":{"google":4.2,"tabelog":3.48}},{"id":"k62","name":"百年蕎麦 壽","category":"美食","zone":"御幸町","tags":["百年蕎麥","站立蕎麥"],"rating":{"google":4.1,"tabelog":3.32}},{"id":"k63","name":"御飯屋 一芯","category":"美食","zone":"三條","tags":["羽釜炊飯","日式定食"],"rating":{"google":4.4,"tabelog":3.65}},{"id":"k88","name":"炭炉まん (炭爐Man)","category":"美食","zone":"河原町","tags":["炭燒料理","爐端燒","精緻串燒"],"rating":{"google":4.5,"tabelog":3.58}},{"id":"k89","name":"京的燒肉處 弘","category":"美食","zone":"三條/木屋町","tags":["高品質和牛","人氣燒肉連鎖"],"rating":{"google":4.5,"tabelog":3.58}},{"id":"k90","name":"京蕎麥處 花卷","category":"美食","zone":"市區","tags":["傳統手打蕎麥麵","京風味"],"rating":{"google":4.2,"tabelog":3.42}},{"id":"k91","name":"祇園 鰻 川藤","category":"美食","zone":"祇園","tags":["炭烤鰻魚","精緻鰻魚飯"],"rating":{"google":4.4,"tabelog":3.55}},{"id":"k64","name":"weekends coffee","category":"咖啡","zone":"岡崎","tags":["質感咖啡"],"rating":{"google":4.5,"tabelog":3.52}},{"id":"k65","name":"Inahiko Coffee 伏見稲荷本店","category":"咖啡","zone":"伏見","tags":["伏見稻荷","特色咖啡"],"rating":{"google":4.6,"tabelog":3.28}},{"id":"k66","name":"スターバックスコーヒー京都円山公園菊の渓店","category":"咖啡","zone":"東山","tags":["圓山公園","特色星巴克"],"rating":{"google":4.3,"tabelog":3.15}},{"id":"k67","name":"Here咖啡 (HERE KYOTO)","category":"咖啡","zone":"二條","tags":["設計感咖啡"],"rating":{"google":4.3,"tabelog":3.55}},{"id":"k68","name":"日東堂咖啡牛奶","category":"咖啡","zone":"清水寺","tags":["清水寺周邊","質感選物"],"rating":{"google":4.2,"tabelog":3.3}},{"id":"k69","name":"京都いとおかし","category":"咖啡","zone":"市區","tags":["甜點喫茶"],"rating":{"google":4.3,"tabelog":3.38}},{"id":"k70","name":"SHUHARI KYOTO","category":"咖啡","zone":"西陣","tags":["手刷抹茶"],"rating":{"google":4.7,"tabelog":3.42}},{"id":"k71","name":"sui","category":"咖啡","zone":"市區","tags":["質感咖啡廳"],"rating":{"google":4.4,"tabelog":3.35}},{"id":"k72","name":"TO.","category":"咖啡","zone":"御所","tags":["風格餐酒","咖啡"],"rating":{"google":4.5,"tabelog":3.58}},{"id":"k73","name":"La Madrague (喫茶マドラグ)","category":"咖啡","zone":"烏丸御池","tags":["厚蛋燒三明治","懷舊喫茶"],"rating":{"google":4.3,"tabelog":3.68}},{"id":"k74","name":"Creperie Garcon","category":"咖啡","zone":"河原町","tags":["法式可麗餅"],"rating":{"google":4.5,"tabelog":3.52}},{"id":"k75","name":"smart coffee (スマート珈琲店)","category":"咖啡","zone":"三條","tags":["昭和喫茶","法式吐司"],"rating":{"google":4.4,"tabelog":3.74}},{"id":"k76","name":"くるみ (Kurumi)","category":"咖啡","zone":"四條","tags":["特色喫茶"],"rating":{"google":4.2,"tabelog":3.48}},{"id":"k77","name":"乃咫 nota (Dorayaki & Black Tea)","category":"咖啡","zone":"五條","tags":["銅鑼燒","和紅茶"],"rating":{"google":4.6,"tabelog":3.45}},{"id":"k78","name":"京都 Godiva 麵包","category":"咖啡","zone":"河原町","tags":["Godiva","巧克力烘焙"],"rating":{"google":4.2,"tabelog":3.25}},{"id":"k80","name":"茶房 居雨 KYO AMAHARE","category":"咖啡","zone":"市區","tags":["日式極致美學","隱世茶房"],"rating":{"google":4.6,"tabelog":3.52}},{"id":"k81","name":"ARCHI coffee and wine","category":"咖啡","zone":"市區","tags":["極簡風格","自然酒","咖啡酒吧"],"rating":{"google":4.5,"tabelog":3.38}},{"id":"k82","name":"京都茅乃舍","category":"購物","zone":"河原町","tags":["高湯包","伴手禮"],"rating":{"google":4.4,"tabelog":null}},{"id":"k92","name":"麥當勞 金閣寺店","category":"美食","zone":"金閣寺","tags":["速食","便利點"],"rating":{"google":3.9,"tabelog":null}},{"id":"k93","name":"麥當勞 河原町店","category":"美食","zone":"河原町","tags":["速食","便利點"],"rating":{"google":3.8,"tabelog":null}},{"id":"k94","name":"The OneFive Kyoto","category":"住宿","zone":"二條","tags":["質感飯店"],"rating":{"google":4.2,"tabelog":null}}],"uji":[{"id":"u1","name":"hoho焙茶 (HOHO HOJICHA)","category":"咖啡甜點","zone":"宇治車站","tags":["焙茶專賣","宇治茶","焙茶甜點"],"rating":{"google":4.4,"tabelog":3.52}}],"nara":[{"id":"n2","name":"二月堂","category":"景點","zone":"奈良公園","tags":["古寺","俯瞰市景"],"rating":{"google":4.7,"tabelog":null}},{"id":"n3","name":"興福寺","category":"景點","zone":"近鐵奈良","tags":["五重塔","古蹟"],"rating":{"google":4.5,"tabelog":null}},{"id":"n4","name":"朱雀門","category":"景點","zone":"平城宮跡","tags":["歷史地標"],"rating":{"google":4.3,"tabelog":null}},{"id":"n5","name":"唐招提寺","category":"景點","zone":"西之京","tags":["鑑真和尚","唐風建築"],"rating":{"google":4.6,"tabelog":null}},{"id":"n6","name":"藥師寺","category":"景點","zone":"西之京","tags":["東塔","法相宗"],"rating":{"google":4.5,"tabelog":null}},{"id":"n7","name":"法隆寺","category":"景點","zone":"斑鳩","tags":["世界最早木造建築"],"rating":{"google":4.6,"tabelog":null}},{"id":"n8","name":"長谷寺","category":"景點","zone":"櫻井","tags":["牡丹名所","懸造本堂"],"rating":{"google":4.6,"tabelog":null}},{"id":"n9","name":"中將堂本舖","category":"甜點","zone":"當麻","tags":["中將餅","艾草麻糬","百年老舖"],"rating":{"google":4.4,"tabelog":3.68}},{"id":"n10","name":"中古堂","category":"甜點","zone":"奈良町","tags":["和菓子","伴手禮"],"rating":{"google":4.2,"tabelog":3.35}},{"id":"n11","name":"道明寺 + 御手橋","category":"景點","zone":"藤井寺","tags":["道明寺粉發源地","古橋"],"rating":{"google":4.3,"tabelog":null}},{"id":"n12","name":"信貴山成福院","category":"景點","zone":"信貴山","tags":["虎之寺","祈求財運"],"rating":{"google":4.5,"tabelog":null}}],"kobe":[{"id":"b1","name":"動物王國","category":"景點","zone":"港島","tags":["親近動物","親子"],"rating":{"google":4.6,"tabelog":null}},{"id":"b2","name":"須磨海洋世界虎鯨秀","category":"景點","zone":"須磨","tags":["海洋館","虎鯨秀"],"rating":{"google":4.4,"tabelog":null}},{"id":"b3","name":"かつ丼吉兵衛 三宮本店","category":"美食","zone":"三宮","tags":["豬排丼","三宮"],"rating":{"google":4.2,"tabelog":3.62}},{"id":"b4","name":"not's","category":"美食","zone":"三宮","tags":["神戶牛排"],"rating":{"google":4.6,"tabelog":3.55}},{"id":"b5","name":"Bakery RIKI","category":"麵包甜點","zone":"南京町","tags":["排隊名店","人氣麵包"],"rating":{"google":4.5,"tabelog":3.75}},{"id":"b6","name":"TAOCA COFFEE","category":"咖啡","zone":"三宮","tags":["起司蛋糕","咖啡試喝"],"rating":{"google":4.4,"tabelog":3.38}},{"id":"b7","name":"isuzu 麵包坊","category":"麵包甜點","zone":"三宮","tags":["老字號麵包"],"rating":{"google":4.3,"tabelog":3.6}},{"id":"b8","name":"生田神社","category":"景點","zone":"三宮","tags":["神社","市中心"],"rating":{"google":4.5,"tabelog":null}},{"id":"b9","name":"摩耶山","category":"景點","zone":"摩耶","tags":["掬星台","三大夜景"],"rating":{"google":4.6,"tabelog":null}},{"id":"b10","name":"Ça Marche","category":"麵包甜點","zone":"北野","tags":["法式麵包"],"rating":{"google":4.4,"tabelog":3.72}},{"id":"b11","name":"紗布起司","category":"麵包甜點","zone":"元町","tags":["起司甜點"],"rating":{"google":4.2,"tabelog":3.25}},{"id":"b12","name":"人生餃子店","category":"美食","zone":"三宮","tags":["特色餃子"],"rating":{"google":4.1,"tabelog":3.35}},{"id":"b13","name":"呼炉凪来 三宮店","category":"美食","zone":"三宮","tags":["關東煮","居酒屋"],"rating":{"google":4.3,"tabelog":3.28}},{"id":"b14","name":"Tommy's Sannomiya","category":"麵包甜點","zone":"三宮","tags":["紅豆吐司","名店"],"rating":{"google":4.3,"tabelog":3.65}},{"id":"b15","name":"DoRSIA","category":"咖啡","zone":"三宮","tags":["人氣布丁","咖啡廳"],"rating":{"google":4.3,"tabelog":3.52}},{"id":"b16","name":"賀正軒","category":"美食","zone":"御影","tags":["拉麵"],"rating":{"google":4.2,"tabelog":3.58}},{"id":"b17","name":"北野異人館","category":"景點","zone":"北野","tags":["洋館街區","異國風情"],"rating":{"google":4.2,"tabelog":null}},{"id":"b18","name":"神戶塔","category":"景點","zone":"美利堅公園","tags":["神戶港","經典地標"],"rating":{"google":4.3,"tabelog":null}},{"id":"b19","name":"麵包超人博物館","category":"景點","zone":"港區","tags":["親子","打卡景點"],"rating":{"google":4.4,"tabelog":null}},{"id":"b20","name":"Étoile KOBE (エトワール コウベ)","category":"麵包甜點","zone":"三宮","tags":["神戶夜景甜點","法式糕點"],"rating":{"google":4.3,"tabelog":3.42}},{"id":"b21","name":"神戶布引香草園","category":"景點","zone":"新神戶","tags":["纜車","俯瞰神戶港夜景"],"rating":{"google":4.5,"tabelog":null}}],"nagoya":[{"id":"ngo1","name":"HARBS 榮本店","category":"咖啡甜點","zone":"榮","tags":["創始本店","水果千層"],"rating":{"google":4.3,"tabelog":3.58}},{"id":"ngo2","name":"あつた蓬萊軒 本店","category":"美食","zone":"熱田","tags":["鰻魚飯三吃始祖","百年老店"],"rating":{"google":4.6,"tabelog":3.79}},{"id":"ngo3","name":"風來坊 榮店","category":"美食","zone":"榮","tags":["手羽先創始店","夢幻炸雞翅"],"rating":{"google":4.1,"tabelog":3.51}},{"id":"ngo4","name":"矢場豬排 榮セントライズ店","category":"美食","zone":"榮","tags":["味噌豬排","昭和老店"],"rating":{"google":4.2,"tabelog":3.39}},{"id":"ngo5","name":"山本屋總本家 / 本店","category":"美食","zone":"榮/名站","tags":["味噌煮込烏龍麵"],"rating":{"google":4.1,"tabelog":3.52}},{"id":"ngo6","name":"世界的山將 榮店","category":"美食","zone":"榮","tags":["夢幻手羽先","居酒屋"],"rating":{"google":4.2,"tabelog":3.48}},{"id":"ngo7","name":"ひつまぶし う家 名古屋店","category":"美食","zone":"名站","tags":["鰻魚飯三吃","備長炭現烤"],"rating":{"google":4.5,"tabelog":3.65}},{"id":"ngo8","name":"宮鍵","category":"美食","zone":"伏見","tags":["百年老店","雞肉料理","鰻魚丼"],"rating":{"google":4.3,"tabelog":3.68}},{"id":"ngo9","name":"鰻木屋","category":"美食","zone":"久屋大通","tags":["在地隱藏老店","炭燒鰻魚"],"rating":{"google":4.5,"tabelog":3.82}},{"id":"ngo10","name":"鰻魚いば昇","category":"美食","zone":"榮","tags":["百年鰻魚飯"],"rating":{"google":4.3,"tabelog":3.72}},{"id":"ngo11","name":"Yakko (やっこ)","category":"美食","zone":"大須","tags":["老字號鰻魚飯","味噌料理"],"rating":{"google":4.1,"tabelog":3.48}},{"id":"ngo12","name":"滿州城","category":"美食","zone":"市區","tags":["在地中華料理","餃子"],"rating":{"google":4.1,"tabelog":3.32}},{"id":"ngo13","name":"塚ちゃん餃子","category":"美食","zone":"市區","tags":["手作煎餃","居酒屋"],"rating":{"google":4.4,"tabelog":3.42}},{"id":"ngo14","name":"麵屋獅子丸","category":"美食","zone":"名站","tags":["濃厚雞白湯拉麵","泡沫系"],"rating":{"google":4.3,"tabelog":3.74}},{"id":"ngo15","name":"麵屋Hayabusa (麺屋はやぶさ)","category":"美食","zone":"名站","tags":["創意拉麵","貝類高湯"],"rating":{"google":4.3,"tabelog":3.65}},{"id":"ngo16","name":"麺屋 有象無象","category":"美食","zone":"大須","tags":["濃厚魚介豚骨","魚介沾麵"],"rating":{"google":4.3,"tabelog":3.61}},{"id":"ngo17","name":"とろ〜り卵のオムライス さん太","category":"美食","zone":"市區/岡崎","tags":["爆漿流心蛋包飯","神級蛋包飯"],"rating":{"google":4.3,"tabelog":3.55}},{"id":"ngo18","name":"昼だけうなぎ屋 今池店","category":"美食","zone":"今池","tags":["中午限定鰻魚飯","超高CP值"],"rating":{"google":4.4,"tabelog":3.48}},{"id":"ngo19","name":"Échiré 艾許奶油 名古屋店","category":"甜點","zone":"名站","tags":["法國頂級奶油","限定甜點"],"rating":{"google":4.4,"tabelog":3.62}},{"id":"ngo20","name":"つばめパン & Milk","category":"咖啡甜點","zone":"尼ケ坂/名站","tags":["天然酵母吐司","厚燒玉子三明治"],"rating":{"google":4.3,"tabelog":3.55}},{"id":"ngo21","name":"Coffee House KAKO 花車本店","category":"咖啡","zone":"名站","tags":["元祖紅豆果醬吐司","昭和喫茶"],"rating":{"google":4.3,"tabelog":3.67}},{"id":"ngo22","name":"KONPARU (コンパル) 招牌炸蝦三明治","category":"咖啡美食","zone":"大須/名站","tags":["昭和喫茶","酥脆炸蝦排"],"rating":{"google":4.1,"tabelog":3.52}},{"id":"ngo23","name":"いもんね (Imonne)","category":"甜點","zone":"伊勢/名古屋","tags":["現包Gelato大福","地瓜甜點"],"rating":{"google":4.5,"tabelog":3.5}},{"id":"ngo24","name":"Ralph's Coffee 名古屋久屋大通","category":"咖啡甜點","zone":"久屋大通","tags":["久屋大通公園","美式精品咖啡"],"rating":{"google":4.3,"tabelog":3.52}},{"id":"ngo25","name":"Panel Cafe 名古屋駅前店","category":"咖啡甜點","zone":"名站","tags":["爆漿舒芙蕾鬆餅","抹茶鬆餅"],"rating":{"google":4.4,"tabelog":3.48}},{"id":"ngo26","name":"大須ベーカリー (大須麵包店)","category":"麵包甜點","zone":"大須","tags":["昭和復古烘焙","菠蘿麵包"],"rating":{"google":4.4,"tabelog":3.58}},{"id":"ngo27","name":"Fruit Candy ar. 水果糖葫蘆","category":"甜點","zone":"大須","tags":["鮮果冰糖葫蘆","大須散策"],"rating":{"google":4.4,"tabelog":3.25}},{"id":"ngo28","name":"鯛福茶庵 八代目澤屋","category":"甜點","zone":"大須","tags":["現烤鯛魚燒","單頭烤具"],"rating":{"google":4.2,"tabelog":3.52}},{"id":"ngo29","name":"名古屋寶可夢中心","category":"購物景點","zone":"榮","tags":["寶可夢官方商店","松坂屋"],"rating":{"google":4.4,"tabelog":null}},{"id":"ngo30","name":"三輪神社","category":"景點","zone":"大須","tags":["兔子神社","可愛御朱印"],"rating":{"google":4.4,"tabelog":null}},{"id":"ngo31","name":"萬松寺","category":"景點","zone":"大須","tags":["織田信長菩提寺","機關人偶"],"rating":{"google":4,"tabelog":null}},{"id":"ngo32","name":"常滑 招財貓街","category":"景點","zone":"常滑","tags":["招財貓故鄉","巨大招財貓"],"rating":{"google":4.4,"tabelog":null}},{"id":"ngo33","name":"三光稻荷神社","category":"景點","zone":"犬山","tags":["粉紅愛心繪馬","洗錢弁天"],"rating":{"google":4.3,"tabelog":null}},{"id":"ngo34","name":"針網神社","category":"景點","zone":"犬山","tags":["犬山城下町","歷史古社"],"rating":{"google":4.2,"tabelog":null}},{"id":"ngo35","name":"伊奴神社","category":"景點","zone":"西區","tags":["狗狗神社","安產除厄"],"rating":{"google":4.4,"tabelog":null}},{"id":"ngo36","name":"中日大樓 (Chunichi Building)","category":"購物景點","zone":"榮","tags":["榮商圈新地標","展望台"],"rating":{"google":4.2,"tabelog":null}},{"id":"ngo37","name":"清洲城","category":"景點","zone":"清須","tags":["織田信長起家城","天守閣"],"rating":{"google":4.1,"tabelog":null}},{"id":"ngo38","name":"AEON MALL 名古屋則武新町","category":"購物","zone":"名站","tags":["蔦屋書店打卡牆","大型購物商場"],"rating":{"google":4.3,"tabelog":null}},{"id":"ngo39","name":"Yellow Noritakeshinmachi","category":"購物","zone":"名站","address":"AEON MALL Nagoya Noritake Garden 1F","tags":["專賣店"],"rating":{"google":4.2,"tabelog":3.25}},{"id":"ngo40","name":"SkYlee","category":"購物景點","zone":"市區","tags":["特色選物"],"rating":{"google":4.2,"tabelog":null}},{"id":"ngo41","name":"尾張松風屋 寶可夢蝦餅","category":"購物","zone":"名站","tags":["伴手禮","寶可夢包裝"],"rating":{"google":4.2,"tabelog":null}},{"id":"ngo42","name":"#C-pla 大須店 (千台扭蛋機)","category":"購物景點","zone":"大須","tags":["巨大扭蛋專賣店","動漫週邊"],"rating":{"google":4.1,"tabelog":null}},{"id":"ngo43","name":"Sanoya (佐野屋) 便宜超市","category":"購物","zone":"大須","tags":["大須商店街","平價生鮮超市"],"rating":{"google":4,"tabelog":null}}],"osaka":[]};
 const PK_KEY='japan2027-pocket';
+const PK_VER=5;
 const PK_REGIONS=[['kyoto','京都'],['uji','宇治'],['nara','奈良'],['kobe','神戶'],['nagoya','名古屋'],['osaka','大阪']];
-const PK_VER=4;
-const PK_IN_ITINERARY=["33間堂", "建仁寺", "御金神社", "靈光殿天滿宮", "東大寺"]; // 已排進每日行程，從口袋名單移除
-const PK_RATING_V3={"33間堂":{"google":4.6,"tabelog":null},"建仁寺":{"google":4.6,"tabelog":null},"石清水八幡宮":{"google":4.5,"tabelog":null},"飛行神社":{"google":4.2,"tabelog":null},"靈光殿天滿宮":{"google":4.4,"tabelog":null},"太秦映畫村":{"google":4.2,"tabelog":null},"大原三千院":{"google":4.6,"tabelog":null},"白鬚神社":{"google":4.3,"tabelog":null},"御金神社":{"google":4.3,"tabelog":null},"壇王法林寺":{"google":4.2,"tabelog":null},"河合神社":{"google":4.4,"tabelog":null},"神泉苑":{"google":4.3,"tabelog":null},"大黑屋餅舖":{"google":4.2,"tabelog":3.35},"豆大福 出町雙葉":{"google":4.5,"tabelog":3.79},"村上開新堂":{"google":4.3,"tabelog":3.65},"茶寮寶全":{"google":4.4,"tabelog":3.52},"加茂みたらし茶屋":{"google":4.2,"tabelog":3.68},"中村軒":{"google":4.4,"tabelog":3.71},"阿闍梨餅本舖 満月":{"google":4.5,"tabelog":3.72},"カタパン屋":{"google":4.1,"tabelog":3.25},"麩嘉":{"google":4.4,"tabelog":3.64},"糖太郎":{"google":4.3,"tabelog":3.48},"本家月餅家直正":{"google":4.6,"tabelog":3.78},"かぎ甚":{"google":4.3,"tabelog":3.5},"Mamemono and Taiyaki まめものとたい焼き 清水店":{"google":4.4,"tabelog":3.42},"吉祥菓寮":{"google":4.3,"tabelog":3.62},"梅園":{"google":4.2,"tabelog":3.55},"一文字屋和輔":{"google":4.5,"tabelog":3.74},"栗屋":{"google":4.2,"tabelog":3.3},"御倉屋":{"google":4.4,"tabelog":3.58},"とようけ屋山本 / とようけ茶屋":{"google":4.3,"tabelog":3.67},"祇園小森":{"google":4.3,"tabelog":3.63},"神馬堂":{"google":4.5,"tabelog":3.73},"葵家やきもち総本舗":{"google":4.3,"tabelog":3.56},"今西軒":{"google":4.6,"tabelog":3.81},"京都鴨蕎麦 田":{"google":4.4,"tabelog":3.55},"京ラーメン さだかず 祇園本店":{"google":4.3,"tabelog":3.61},"和醸良麺 すがり (Sugari)":{"google":4.3,"tabelog":3.76},"貝だし麺 きた田":{"google":4.3,"tabelog":3.64},"おうどん一":{"google":4.2,"tabelog":3.45},"セアブラノ神 壬生本店":{"google":4.2,"tabelog":3.68},"無礙山房":{"google":4.4,"tabelog":3.77},"彌生軒食堂":{"google":4.1,"tabelog":3.2},"宮川豚衛門":{"google":4.5,"tabelog":3.58},"炭火燒鳥 馬耳東風":{"google":4.5,"tabelog":3.79},"karaageya":{"google":4.3,"tabelog":3.32},"手づくりハンバーグの店 とくら 京都三条店":{"google":4.4,"tabelog":3.65},"洋食堂のろ":{"google":4.5,"tabelog":3.62},"天丼まきの 京都寺町店":{"google":4.3,"tabelog":3.51},"京都海老天丼徳":{"google":4.2,"tabelog":3.38},"New Babe Kyoto":{"google":4.6,"tabelog":3.55},"鯛壽司":{"google":4.3,"tabelog":3.54},"海鮮工房橋立物產":{"google":4.1,"tabelog":3.22},"Spice Curry Kiteretsu":{"google":4.6,"tabelog":3.58},"MR.餃子":{"google":4.3,"tabelog":3.69},"新門前米村":{"google":4.6,"tabelog":3.92},"酒呑氣 びんご":{"google":4.4,"tabelog":3.55},"京都炭火串燒 Tsujiya 四條御幸町店":{"google":4.3,"tabelog":3.48},"田中雞卵":{"google":4.2,"tabelog":3.49},"京都柳小路 TAKA":{"google":4.4,"tabelog":3.59},"先斗町薬膳カレー":{"google":4.2,"tabelog":3.48},"百年蕎麦 壽":{"google":4.1,"tabelog":3.32},"御飯屋 一芯":{"google":4.4,"tabelog":3.65},"weekends coffee":{"google":4.5,"tabelog":3.52},"Inahiko Coffee 稲彦珈琲 伏見稲荷本店":{"google":4.6,"tabelog":3.28},"スターバックスコーヒー京都円山公園菊の渓店":{"google":4.3,"tabelog":3.15},"Here咖啡 (HERE KYOTO)":{"google":4.3,"tabelog":3.55},"日東堂咖啡牛奶":{"google":4.2,"tabelog":3.3},"京都いとおかし":{"google":4.3,"tabelog":3.38},"SHUHARI KYOTO":{"google":4.7,"tabelog":3.42},"sui":{"google":4.4,"tabelog":3.35},"TO.":{"google":4.5,"tabelog":3.58},"La Madrague (喫茶マドラグ)":{"google":4.3,"tabelog":3.68},"Creperie Garcon":{"google":4.5,"tabelog":3.52},"smart coffee (スマート珈琲店)":{"google":4.4,"tabelog":3.74},"くるみ (Kurumi)":{"google":4.2,"tabelog":3.48},"乃咫 nota (Dorayaki & Black Tea)":{"google":4.6,"tabelog":3.45},"京都 Godiva 麵包":{"google":4.2,"tabelog":3.25},"京都茅乃舍":{"google":4.4,"tabelog":null},"麥當勞 金閣寺店":{"google":3.9,"tabelog":null},"麥當勞 河原町店":{"google":3.8,"tabelog":null},"The OneFive Kyoto":{"google":4.2,"tabelog":null},"hoho焙茶 (ほうほう / HOHO HOJICHA)":{"google":4.4,"tabelog":3.52},"東大寺":{"google":4.7,"tabelog":null},"二月堂":{"google":4.7,"tabelog":null},"興福寺":{"google":4.5,"tabelog":null},"朱雀門":{"google":4.3,"tabelog":null},"唐招提寺":{"google":4.6,"tabelog":null},"藥師寺":{"google":4.5,"tabelog":null},"法隆寺":{"google":4.6,"tabelog":null},"長谷寺":{"google":4.6,"tabelog":null},"中將堂本舖":{"google":4.4,"tabelog":3.68},"中古堂":{"google":4.2,"tabelog":3.35},"道明寺 + 御手橋":{"google":4.3,"tabelog":null},"動物王國":{"google":4.6,"tabelog":null},"須磨海洋世界虎鯨秀":{"google":4.4,"tabelog":null},"かつ丼吉兵衛 三宮本店":{"google":4.2,"tabelog":3.62},"not's":{"google":4.6,"tabelog":3.55},"Bakery RIKI":{"google":4.5,"tabelog":3.75},"TAOCA COFFEE":{"google":4.4,"tabelog":3.38},"isuzu 麵包坊":{"google":4.3,"tabelog":3.6},"生田神社":{"google":4.5,"tabelog":null},"摩耶山":{"google":4.6,"tabelog":null},"Ça Marche":{"google":4.4,"tabelog":3.72},"紗布起司":{"google":4.2,"tabelog":3.25},"人生餃子店":{"google":4.1,"tabelog":3.35},"炉端とおでん 呼炉凪来 三宮店":{"google":4.3,"tabelog":3.28},"Tommy's Sannomiya":{"google":4.3,"tabelog":3.65},"DoRSIA":{"google":4.3,"tabelog":3.52},"賀正軒":{"google":4.2,"tabelog":3.58},"北野異人館":{"google":4.2,"tabelog":null},"神戶塔":{"google":4.3,"tabelog":null},"麵包超人博物館":{"google":4.4,"tabelog":null},"Yellow Noritakeshinmachi":{"google":4.2,"tabelog":3.25}};
-const PK_NEW_V2=["先斗町薬膳カレー","百年蕎麦 壽","御飯屋 一芯","乃咫 nota (Dorayaki & Black Tea)","京都 Godiva 麵包","hoho焙茶 (ほうほう / HOHO HOJICHA)","東大寺","二月堂","興福寺","朱雀門","唐招提寺","藥師寺","法隆寺","長谷寺","中將堂本舖","中古堂","道明寺 + 御手橋"];
-const PK_CAT_ORDER=['景點','美食','甜點','麵包甜點','咖啡','咖啡甜點','購物','住宿','其他'];
-const PK_CAT_ICON={'景點':'landmark','美食':'utensils','甜點':'cake','麵包甜點':'croissant','咖啡':'coffee','咖啡甜點':'coffee','購物':'shopping-bag','住宿':'bed-double','其他':'pin'};
-let pkData, pkRegion='kyoto', pkCat='全部', pkSort='default';
+// 已排進每日行程的地點，不放在口袋名單（評分改顯示在行程卡片上）
+const PK_IN_ITINERARY=['33間堂','建仁寺','御金神社','靈光殿天滿宮','東大寺','一保堂茶舗 京都本店'];
+// 舊版名稱 → 新版名稱
+const PK_ALIAS={'Mamemono and Taiyaki まめものとたい焼き 清水店':'Mamemono and Taiyaki 清水店','Inahiko Coffee 稲彦珈琲 伏見稲荷本店':'Inahiko Coffee 伏見稲荷本店','hoho焙茶 (ほうほう / HOHO HOJICHA)':'hoho焙茶 (HOHO HOJICHA)','炉端とおでん 呼炉凪来 三宮店':'呼炉凪来 三宮店'};
+const PK_V1_NAMES=["33間堂","建仁寺","石清水八幡宮","飛行神社","靈光殿天滿宮","太秦映畫村","大原三千院","白鬚神社","御金神社","壇王法林寺","河合神社","神泉苑","大黑屋餅舖","豆大福 出町雙葉","村上開新堂","茶寮寶全","加茂みたらし茶屋","中村軒","阿闍梨餅本舖 満月","カタパン屋","麩嘉","糖太郎","本家月餅家直正","かぎ甚","Mamemono and Taiyaki まめものとたい焼き 清水店","吉祥菓寮","梅園","一文字屋和輔","栗屋","御倉屋","とようけ屋山本 / とようけ茶屋","祇園小森","神馬堂","葵家やきもち総本舗","今西軒","京都鴨蕎麦 田","京ラーメン さだかず 祇園本店","和醸良麺 すがり (Sugari)","貝だし麺 きた田","おうどん一","セアブラノ神 壬生本店","無礙山房","彌生軒食堂","宮川豚衛門","炭火燒鳥 馬耳東風","karaageya","手づくりハンバーグの店 とくら 京都三条店","洋食堂のろ","天丼まきの 京都寺町店","京都海老天丼徳","New Babe Kyoto","鯛壽司","海鮮工房橋立物產","Spice Curry Kiteretsu","MR.餃子","新門前米村","酒呑氣 びんご","京都炭火串燒 Tsujiya 四條御幸町店","田中雞卵","京都柳小路 TAKA","weekends coffee","Inahiko Coffee 稲彦珈琲 伏見稲荷本店","スターバックスコーヒー京都円山公園菊の渓店","Here咖啡 (HERE KYOTO)","日東堂咖啡牛奶","京都いとおかし","SHUHARI KYOTO","sui","TO.","La Madrague (喫茶マドラグ)","Creperie Garcon","smart coffee (スマート珈琲店)","くるみ (Kurumi)","京都茅乃舍","麥當勞 金閣寺店","麥當勞 河原町店","The OneFive Kyoto","動物王國","須磨海洋世界虎鯨秀","かつ丼吉兵衛 三宮本店","not's","Bakery RIKI","TAOCA COFFEE","isuzu 麵包坊","生田神社","摩耶山","Ça Marche","紗布起司","人生餃子店","炉端とおでん 呼炉凪来 三宮店","Tommy's Sannomiya","DoRSIA","賀正軒","北野異人館","神戶塔","麵包超人博物館","Yellow Noritakeshinmachi"];
+const PK_CAT_ORDER=['景點','美食','甜點','麵包甜點','咖啡','咖啡甜點','咖啡美食','購物','購物景點','住宿','其他'];
+const PK_CAT_ICON={'景點':'landmark','美食':'utensils','甜點':'cake','麵包甜點':'croissant','咖啡':'coffee','咖啡甜點':'coffee','咖啡美食':'sandwich','購物':'shopping-bag','購物景點':'store','住宿':'bed-double','其他':'pin'};
+let pkData, pkRegion='kyoto', pkCat='全部', pkZone='全部', pkSort='default';
 const pkNum=v=>(v===null||v===undefined||v===''||isNaN(+v))?null:+v;
+const pkEsc=s=>String(s==null?'':s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const pkClone=o=>JSON.parse(JSON.stringify(o));
+const pkCanon=n=>PK_ALIAS[n]||n;
+const pkHot=x=>{const g=pkNum(x.rating&&x.rating.google),t=pkNum(x.rating&&x.rating.tabelog);return (g!==null&&g>=4.5)||(t!==null&&t>=3.5);};
+
 function pkLoad(){
   let stored=null;
   try{const s=localStorage.getItem(PK_KEY); if(s){const d=JSON.parse(s); if(d&&typeof d==='object') stored=d;}}catch(e){}
-  if(!stored){pkData=JSON.parse(JSON.stringify(PK_DEFAULT)); pkData._meta={v:PK_VER,deleted:[]};}
-  else pkData=stored;
+  if(!stored){pkData=pkClone(PK_DEFAULT); pkData._meta={v:PK_VER,deleted:[]}; pkSave(); return;}
+  pkData=stored;
   PK_REGIONS.forEach(([k])=>{if(!Array.isArray(pkData[k])) pkData[k]=[];});
   const meta=pkData._meta||{v:1,deleted:[]};
   if(!Array.isArray(meta.deleted)) meta.deleted=[];
   let changed=!pkData._meta;
-  if((meta.v||1)<2){
-    // 舊版名單：只補上這次新加入的地點，不會把你刪過的加回來
-    const have=new Set(PK_REGIONS.flatMap(([k])=>pkData[k].map(x=>x.name)));
+  if((meta.v||1)<PK_VER){
+    const byName={}; PK_REGIONS.forEach(([k])=>(PK_DEFAULT[k]||[]).forEach(x=>byName[x.name]=x));
+    const itin=new Set(PK_IN_ITINERARY), deleted=new Set(meta.deleted.map(pkCanon)), v1=new Set(PK_V1_NAMES.map(pkCanon));
+    // 1) 移除已排進行程的；2) 舊資料補上商圈與評分（不覆蓋你改過的）
+    PK_REGIONS.forEach(([k])=>{
+      pkData[k]=pkData[k].filter(x=>!itin.has(pkCanon(x.name)));
+      pkData[k].forEach(x=>{const d=byName[pkCanon(x.name)]; if(!d) return;
+        if(!x.zone&&d.zone) x.zone=d.zone;
+        if(!x.rating&&d.rating) x.rating=pkClone(d.rating);});
+    });
+    // 3) 加入新地點（你刪過的不會回來）
+    const have=new Set(PK_REGIONS.flatMap(([k])=>pkData[k].map(x=>pkCanon(x.name))));
     PK_REGIONS.forEach(([k])=>(PK_DEFAULT[k]||[]).forEach(x=>{
-      if(PK_NEW_V2.includes(x.name)&&!have.has(x.name)&&!meta.deleted.includes(x.name)) pkData[k].push(JSON.parse(JSON.stringify(x)));
+      if(have.has(x.name)||deleted.has(x.name)) return;
+      if((meta.v||1)<2&&v1.has(x.name)) return; // 最早版本沒有記錄刪除，保守處理
+      pkData[k].push(pkClone(x));
     }));
-    meta.v=2; changed=true;
-  }
-  if((meta.v||1)<3){
-    // 補上 Google／Tabelog 參考評分（不覆蓋你自己改過的）
-    PK_REGIONS.forEach(([k])=>pkData[k].forEach(x=>{ if(!x.rating&&PK_RATING_V3[x.name]) x.rating=JSON.parse(JSON.stringify(PK_RATING_V3[x.name])); }));
-    meta.v=3; changed=true;
-  }
-  if((meta.v||1)<4){
-    PK_REGIONS.forEach(([k])=>{pkData[k]=pkData[k].filter(x=>!PK_IN_ITINERARY.includes(x.name));});
-    meta.v=4; changed=true;
+    meta.v=PK_VER; changed=true;
   }
   pkData._meta=meta;
-  // 確保每個地點的 id 不重複（新舊資料編號不同）
   const seen=new Set();
   PK_REGIONS.forEach(([k])=>pkData[k].forEach(x=>{
     if(!x.id||seen.has(String(x.id))){x.id=k+'-'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);changed=true;}
@@ -1989,44 +2040,67 @@ function pkLoad(){
   if(changed) pkSave();
 }
 function pkSave(){try{localStorage.setItem(PK_KEY,JSON.stringify(pkData));}catch(e){alert('儲存失敗：瀏覽器可能關閉了儲存功能');}}
-const pkEsc=s=>String(s==null?'':s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-function pkSetRegion(r){pkRegion=r;pkCat='全部';pkRender();}
-function pkSetCat(cat){pkCat=cat;pkRender();}
+function pkFind(id){return (pkData[pkRegion]||[]).find(i=>String(i.id)===String(id));}
+function pkSetRegion(r){pkRegion=r;pkCat='全部';pkZone='全部';pkRender();window.scrollTo({top:document.getElementById('pk-regions').getBoundingClientRect().top+scrollY-70});}
+function pkSetCat(v){pkCat=v;pkRender();}
+function pkSetZone(v){pkZone=v;pkRender();}
+function pkSetSort(v){pkSort=v;pkRender();}
+function pkChips(list,cur,fn){
+  return list.map(([v,n])=>`<button class="pk-cat ${v===cur?'active':''}" onclick="${fn}(decodeURIComponent('${encodeURIComponent(v)}'))">${pkEsc(v==='全部'?'全部':v)} <span>${n}</span></button>`).join('');
+}
 function pkRender(){
   const all=PK_REGIONS.reduce((n,[k])=>n+pkData[k].length,0);
   document.getElementById('pk-regions').innerHTML=PK_REGIONS.map(([k,l])=>
     `<button class="pk-region ${k===pkRegion?'active':''}" onclick="pkSetRegion('${k}')">${l}<span>${pkData[k].length}</span></button>`).join('');
   const list=pkData[pkRegion]||[];
-  const cats=['全部',...PK_CAT_ORDER.filter(c=>list.some(x=>x.category===c)),...[...new Set(list.map(x=>x.category))].filter(c=>!PK_CAT_ORDER.includes(c))];
-  if(!cats.includes(pkCat)) pkCat='全部';
-  document.getElementById('pk-cats').innerHTML=cats.map(c=>{
-    const n=c==='全部'?list.length:list.filter(x=>x.category===c).length;
-    return `<button class="pk-cat ${c===pkCat?'active':''}" onclick="pkSetCat('${pkEsc(c)}')">${pkEsc(c)} ${n}</button>`;}).join('');
+  const onlyNew=document.getElementById('pk-unvisited').checked;
   const q=(document.getElementById('pk-q').value||'').trim().toLowerCase();
-  let items=list.filter(x=>pkCat==='全部'||x.category===pkCat);
-  if(q) items=items.filter(x=>(x.name+' '+(x.tags||[]).join(' ')+' '+(x.address||'')).toLowerCase().includes(q));
+  const base=list.filter(x=>(!onlyNew||!x.visited)&&(!q||(x.name+' '+(x.zone||'')+' '+(x.tags||[]).join(' ')+' '+(x.address||'')+' '+x.category).toLowerCase().includes(q)));
+  // 分類 chips（依目前商圈）
+  const byZone=base.filter(x=>pkZone==='全部'||x.zone===pkZone);
+  const cats=[...new Set(list.map(x=>x.category))].sort((a,b)=>{const ia=PK_CAT_ORDER.indexOf(a),ib=PK_CAT_ORDER.indexOf(b);return (ia<0?99:ia)-(ib<0?99:ib);});
+  if(pkCat!=='全部'&&!cats.includes(pkCat)) pkCat='全部';
+  document.getElementById('pk-cats').innerHTML=pkChips([['全部',byZone.length],...cats.map(c=>[c,byZone.filter(x=>x.category===c).length]).filter(([cc,n])=>n>0||cc===pkCat)],pkCat,'pkSetCat');
+  // 商圈 chips（依目前分類，數量多的在前）
+  const byCat=base.filter(x=>pkCat==='全部'||x.category===pkCat);
+  const zc={}; byCat.forEach(x=>{const z=x.zone||'未分區'; zc[z]=(zc[z]||0)+1;});
+  if(pkZone!=='全部'&&!zc[pkZone]&&!list.some(x=>(x.zone||'未分區')===pkZone)) pkZone='全部';
+  const zones=Object.entries(zc).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],'zh-Hant'));
+  if(pkZone!=='全部'&&!zc[pkZone]) zones.push([pkZone,0]);
+  document.getElementById('pk-zones').innerHTML=pkChips([['全部',byCat.length],...zones],pkZone,'pkSetZone');
+  // 清單
+  let items=byCat.filter(x=>pkZone==='全部'||(x.zone||'未分區')===pkZone);
   const rs=(x,k)=>{const v=pkNum(x.rating&&x.rating[k]);return v===null?-1:v;};
   items=items.slice().sort((a,b)=>{
-    if(pkSort==='google') return rs(b,'google')-rs(a,'google');
-    if(pkSort==='tabelog') return rs(b,'tabelog')-rs(a,'tabelog');
+    if(pkSort==='google') return rs(b,'google')-rs(a,'google')||rs(b,'tabelog')-rs(a,'tabelog');
+    if(pkSort==='tabelog') return rs(b,'tabelog')-rs(a,'tabelog')||rs(b,'google')-rs(a,'google');
     const ia=PK_CAT_ORDER.indexOf(a.category),ib=PK_CAT_ORDER.indexOf(b.category);return (ia<0?99:ia)-(ib<0?99:ib);});
   const rl=PK_REGIONS.find(r=>r[0]===pkRegion)[1];
-  document.getElementById('pk-count').textContent=`${rl}・共 ${items.length} 項（全部地區 ${all} 項）`;
-  document.getElementById('pk-list').innerHTML=items.length?items.map(x=>{
-    const mq=encodeURIComponent(x.name+' '+(x.address?x.address:rl));
-    return `<div class="pk-item">
+  const visited=list.filter(x=>x.visited).length;
+  document.getElementById('pk-count').textContent=`${rl}・顯示 ${items.length} 項｜已造訪 ${visited}/${list.length}（全部 ${all} 項）`;
+  document.getElementById('pk-list').innerHTML=items.length?items.map(pkCard).join(''):`<div class="pk-empty">${q||onlyNew||pkCat!=='全部'||pkZone!=='全部'?'沒有符合條件的地點':'這裡還沒有地點，按「新增」加入吧'}</div>`;
+}
+function pkCard(x){
+  const rl=PK_REGIONS.find(r=>r[0]===pkRegion)[1];
+  const mq=encodeURIComponent(x.name+' '+(x.address||((x.zone&&x.zone!=='市區'?x.zone+' ':'')+rl)));
+  const id=pkEsc(x.id);
+  return `<div class="pk-item ${x.visited?'visited':''}">
+    <div class="pk-top">
       <div class="pk-ic">${ic(PK_CAT_ICON[x.category]||'pin')}</div>
       <div class="pk-body">
-        <div class="pk-name">${pkEsc(x.name)}</div>
-        <div class="pk-meta"><span class="pk-catlbl">${pkEsc(x.category)}</span>${(x.tags||[]).map(t=>`<span class="pk-tag">${pkEsc(t)}</span>`).join('')}</div>
+        <div class="pk-name">${pkEsc(x.name)}${pkHot(x)?'<span class="pk-hot">高分</span>':''}</div>
+        <div class="pk-meta"><span class="pk-catlbl">${pkEsc(x.category)}</span>${x.zone?`<span class="pk-zone">${ic('map-pin')}${pkEsc(x.zone)}</span>`:''}${(x.tags||[]).map(t=>`<span class="pk-tag">${pkEsc(t)}</span>`).join('')}</div>
         ${pkRateHTML(x)}
         ${x.address?`<div class="pk-sub">${ic('map-pin')}${pkEsc(x.address)}</div>`:''}
         ${x.businessHours?`<div class="pk-sub">${ic('clock')}${pkEsc(x.businessHours)}</div>`:''}
       </div>
-      <div class="pk-acts">
-        <a class="pk-act" href="https://www.google.com/maps/search/?api=1&query=${mq}" target="_blank" rel="noopener" title="Google 地圖">${ic('external-link')}</a>
-        <button class="pk-act del" onclick="pkDel('${pkEsc(x.id)}')" title="刪除">${ic('trash-2')}</button>
-      </div></div>`;}).join(''):`<div class="pk-empty">${q?'找不到符合的地點':'這裡還沒有地點，按「新增」加入吧'}</div>`;
+      <button class="pk-del" onclick="pkDel('${id}')" title="刪除" aria-label="刪除">${ic('trash-2')}</button>
+    </div>
+    <div class="pk-actions">
+      <a class="pk-nav" href="https://www.google.com/maps/search/?api=1&query=${mq}" target="_blank" rel="noopener">${ic('navigation')}導航</a>
+      <button class="pk-visit ${x.visited?'on':''}" onclick="pkToggleVisited('${id}')">${x.visited?ic('circle-check')+'已造訪':ic('heart')+'想去'}</button>
+    </div>
+  </div>`;
 }
 function pkRateHTML(x){
   const g=pkNum(x.rating&&x.rating.google), t=pkNum(x.rating&&x.rating.tabelog);
@@ -2034,22 +2108,27 @@ function pkRateHTML(x){
   if(g===null&&t===null) return `<button class="pk-rate empty" onclick="pkEditRating('${id}')">${ic('star')}加評分</button>`;
   return `<button class="pk-rate" onclick="pkEditRating('${id}')" title="點一下修改評分">
     ${g!==null?`<span class="pk-g ${g>=4.5?'hi':''}">${ic('star')}Google ${g.toFixed(1)}</span>`:''}
-    ${t!==null?`<span class="pk-t ${t>=3.6?'hi':''}">食べログ ${t.toFixed(2)}</span>`:''}</button>`;
+    ${t!==null?`<span class="pk-t ${t>=3.5?'hi':''}">食べログ ${t.toFixed(2)}</span>`:''}</button>`;
 }
+function pkToggleVisited(id){const x=pkFind(id); if(!x) return; x.visited=!x.visited; if(!x.visited) delete x.visited; pkSave(); pkRender();}
 function pkEditRating(id){
-  const list=pkData[pkRegion]; const x=list.find(i=>String(i.id)===String(id)); if(!x) return;
+  const x=pkFind(id); if(!x) return;
   const cur=x.rating||{};
   const g=prompt(`「${x.name}」\nGoogle 評分（0–5，留空代表沒有）`, cur.google!=null?cur.google:''); if(g===null) return;
   const t=prompt(`「${x.name}」\n食べログ評分（0–5，留空代表沒有）`, cur.tabelog!=null?cur.tabelog:''); if(t===null) return;
   const clamp=v=>{const n=pkNum(String(v).trim());return n===null?null:Math.max(0,Math.min(5,n));};
   x.rating={google:clamp(g),tabelog:clamp(t)}; pkSave(); pkRender();
 }
-function pkSetSort(v){pkSort=v;pkRender();}
+function pkFillZoneList(){
+  const r=document.getElementById('pk-f-region').value;
+  const zs=[...new Set((pkData[r]||[]).map(x=>x.zone).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'zh-Hant'));
+  document.getElementById('pk-zone-list').innerHTML=zs.map(z=>`<option value="${pkEsc(z)}">`).join('');
+}
 function pkToggleForm(show){
   const f=document.getElementById('pk-form');
   const on=show===undefined?!f.classList.contains('open'):show;
   f.classList.toggle('open',on);
-  if(on){document.getElementById('pk-f-region').value=pkRegion;setTimeout(()=>document.getElementById('pk-f-name').focus(),50);}
+  if(on){document.getElementById('pk-f-region').value=pkRegion;pkFillZoneList();setTimeout(()=>document.getElementById('pk-f-name').focus(),50);}
 }
 function pkAdd(){
   const name=document.getElementById('pk-f-name').value.trim();
@@ -2057,12 +2136,15 @@ function pkAdd(){
   const region=document.getElementById('pk-f-region').value;
   const item={id:'u'+Date.now(),name,category:document.getElementById('pk-f-cat').value,
     tags:document.getElementById('pk-f-tags').value.split(/[,，、\s]+/).map(t=>t.trim()).filter(Boolean)};
+  const zone=document.getElementById('pk-f-zone').value.trim(); if(zone) item.zone=zone;
   const addr=document.getElementById('pk-f-addr').value.trim(); if(addr) item.address=addr;
   const fg=pkNum(document.getElementById('pk-f-g').value), ft=pkNum(document.getElementById('pk-f-t').value);
   if(fg!==null||ft!==null) item.rating={google:fg,tabelog:ft};
-  pkData[region].unshift(item); pkSave();
-  ['pk-f-name','pk-f-tags','pk-f-addr','pk-f-g','pk-f-t'].forEach(id=>document.getElementById(id).value='');
-  pkToggleForm(false); pkRegion=region; pkCat='全部'; pkRender();
+  pkData[region].unshift(item);
+  if(pkData._meta) pkData._meta.deleted=pkData._meta.deleted.filter(n=>n!==name);
+  pkSave();
+  ['pk-f-name','pk-f-tags','pk-f-addr','pk-f-g','pk-f-t','pk-f-zone'].forEach(id=>document.getElementById(id).value='');
+  pkToggleForm(false); pkRegion=region; pkCat='全部'; pkZone='全部'; pkRender();
 }
 function pkDel(id){
   const list=pkData[pkRegion]; const i=list.findIndex(x=>String(x.id)===String(id)); if(i<0) return;
@@ -2084,14 +2166,15 @@ function pkImport(input){
     let d=JSON.parse(r.result); if(d.japanTravelData) d=d.japanTravelData;
     if(!PK_REGIONS.some(([k])=>Array.isArray(d[k]))) throw 0;
     if(!confirm('匯入會取代目前這台裝置上的口袋名單，確定嗎？')) return;
-    pkData=d; if(!pkData._meta) pkData._meta={v:PK_VER,deleted:[]}; PK_REGIONS.forEach(([k])=>{if(!Array.isArray(pkData[k])) pkData[k]=[];});
-    pkSave(); pkRender(); alert('匯入完成');
+    pkData=d; if(!pkData._meta) pkData._meta={v:PK_VER,deleted:[]};
+    PK_REGIONS.forEach(([k])=>{if(!Array.isArray(pkData[k])) pkData[k]=[];});
+    pkSave(); pkLoad(); pkRender(); alert('匯入完成');
   }catch(e){alert('檔案格式不正確，請選擇從這裡匯出的 JSON 檔');}finally{input.value='';}};
   r.readAsText(f);
 }
 function pkReset(){
-  if(!confirm('還原成預設名單？你新增或刪除過的內容會消失（建議先匯出備份）。')) return;
-  pkData=JSON.parse(JSON.stringify(PK_DEFAULT)); pkData._meta={v:PK_VER,deleted:[]}; pkSave(); pkRender();
+  if(!confirm('還原成預設名單？你新增、刪除和「已造訪」紀錄都會消失（建議先匯出備份）。')) return;
+  pkData=pkClone(PK_DEFAULT); pkData._meta={v:PK_VER,deleted:[]}; pkSave(); pkCat='全部'; pkZone='全部'; pkRender();
 }
 pkLoad(); pkRender();
 
@@ -2138,6 +2221,12 @@ setInterval(createSnow,250);
   draw();
 })();
 if(window.lucide) lucide.createIcons({attrs:{'stroke-width':1.75}});
+</script>
+<script>
+// ── 離線功能（PWA）：需要和 index.html 放在同一層的 sw.js ──
+if('serviceWorker' in navigator && (location.protocol==='https:'||location.hostname==='localhost')){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+}
 </script>
 </body>
 </html>
