@@ -1479,6 +1479,91 @@ body.is-offline .cv-offline{display:inline-flex;}
 .off-ok .ic,.off-wait .ic{width:22px;height:22px;margin:2px 0 0;flex-shrink:0;}
 .off-ok b,.off-wait b{display:block;font-size:14px;font-weight:900;margin-bottom:2px;}
 .off-ok span,.off-wait span{font-size:12.5px;line-height:1.6;opacity:.85;}
+
+/* ══ 行程分頁：基地、橫幅、候選池、情境、推薦 ══ */
+#day-picks{display:none !important;}
+body[data-sec="tools"] .nb-fab{display:none !important;}
+body[data-sec="itinerary"] .nb-fab{display:flex !important;}
+.it-base{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 0 12px;}
+.it-base::-webkit-scrollbar{display:none;}
+.it-chip{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;height:38px;padding:0 14px 0 10px;border-radius:999px;font-size:13px;white-space:nowrap;box-shadow:var(--sh-1);}
+.it-chip .ic{width:17px;height:17px;margin:0;}
+.it-chip b{font-weight:900;}
+.it-chip span{opacity:.8;font-weight:600;}
+.it-chip.base-kyoto{background:#E3DEFF;color:#3E2FA8;}
+.it-chip.base-nagoya{background:#FFE1D6;color:#A8391C;}
+.it-chip.theme{background:#fff;color:var(--ink-2);}
+.it-chip.theme .ic{color:var(--butter);fill:var(--butter);}
+.it-banner{border-radius:24px;padding:14px 16px 10px;margin:0 0 14px;box-shadow:var(--sh-2);}
+.it-banner.arrive{background:linear-gradient(135deg,#DDEEFB,#E3DEFF);}
+.it-banner.prep{background:linear-gradient(135deg,#FFF3C4,#FFE1D6);}
+.it-banner.move{background:linear-gradient(135deg,#FFAE96,#F7A9CB);color:#3F1F14;}
+.it-banner.leave{background:linear-gradient(135deg,#D3F4E7,#DDEEFB);}
+.it-b-head{display:flex;align-items:center;gap:6px;margin-bottom:6px;}
+.it-b-head .ic{width:22px;height:22px;margin:0;}
+.it-b-head b{font-size:17px;font-weight:900;}
+.it-b-head button{margin-left:auto;display:inline-flex;align-items:center;gap:1px;height:30px;padding:0 10px 0 12px;border:none;border-radius:999px;background:rgba(255,255,255,.7);color:var(--ink);font-size:12px;font-weight:800;cursor:pointer;}
+.it-b-head button .ic{width:14px;height:14px;}
+.it-b-row{display:flex;gap:10px;padding:7px 0;border-top:1px dashed rgba(63,53,48,.15);font-size:13.5px;}
+.it-b-row span{flex:0 0 66px;font-weight:900;font-variant-numeric:tabular-nums;}
+.it-b-row p{margin:0;line-height:1.5;}
+/* 候選池 */
+.tp{margin-bottom:18px !important;}
+.tp-head{background:linear-gradient(135deg,#FF8A70,#F4A6C8) !important;}
+.tp-thumb{width:40px;height:40px;flex-shrink:0;border-radius:14px !important;box-shadow:none !important;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--c1),var(--c2)) !important;overflow:visible !important;cursor:default !important;content-visibility:visible !important;}
+.tp-thumb span{display:flex;color:var(--ci);}
+.tp-thumb .ic{margin:0;width:19px;height:19px;}
+.tp-row{gap:7px !important;}
+.tp-empty{display:flex;align-items:center;gap:6px;font-weight:600;color:var(--ink-2);}
+.tp-empty .ic{width:18px;height:18px;color:var(--coral);flex-shrink:0;}
+/* 情境篩選 */
+.mood{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -16px 14px;padding:2px 16px 4px;}
+.mood::-webkit-scrollbar{display:none;}
+.mood-chip{flex:0 0 auto;display:inline-flex;align-items:center;gap:4px;height:40px;padding:0 14px 0 11px;border:none;border-radius:999px;font-size:13.5px;font-weight:800;color:var(--ink);cursor:pointer;box-shadow:var(--sh-1);-webkit-tap-highlight-color:transparent;transition:transform .12s;}
+.mood-chip:active{transform:scale(.95);}
+.mood-chip .ic{width:17px;height:17px;margin:0;}
+.mood-chip span{font-size:11px;font-weight:800;opacity:.6;}
+.m-all{background:#fff;} .m-rain{background:#DDEEFB;} .m-rest{background:#FFF3C4;} .m-night{background:#E3DEFF;} .m-shop{background:#D3F4E7;} .m-top{background:#FFE1D6;}
+.mood-chip.on{background:var(--ink);color:#fff;box-shadow:0 8px 18px rgba(63,53,48,.25);}
+.mood-chip.on span{opacity:.8;}
+.mood-chip.m-top .ic{color:#FF8A70;} .mood-chip.on .ic{color:var(--butter);}
+/* 推薦 */
+.sg-head{display:flex;align-items:baseline;gap:8px;margin:0 2px 10px;}
+.sg-head b{font-size:18px;font-weight:900;}
+.sg-head span{font-size:12px;color:var(--muted);font-weight:600;}
+.sg-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+@media(min-width:720px){.sg-grid{grid-template-columns:repeat(3,minmax(0,1fr));}}
+.sg-item{cursor:default !important;}
+.sg-item .pk-hero{height:84px;}
+.sg-item .pk-hero-ic{width:48px;height:48px;}
+.sg-item .pk-hero-ic .ic{width:23px;height:23px;}
+.sg-rate{margin-top:6px;}
+.sg-hb{margin-top:6px;}
+.sg-item .pk-actions .pk-nav{flex:0 0 42px !important;}
+.sg-item .pk-actions .pk-nav .ic{margin:0;}
+.sg-foot{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 22px;}
+.sg-more{flex:1;min-width:140px;display:inline-flex;align-items:center;justify-content:center;gap:4px;height:46px;border:none;border-radius:18px;background:var(--ink);color:#fff;font-size:14px;font-weight:800;cursor:pointer;}
+.sg-more.ghost{background:#fff;color:var(--ink);box-shadow:var(--sh-1);}
+.sg-more .ic{width:16px;height:16px;}
+.sg-empty{background:#fff;border-radius:22px;padding:22px;text-align:center;color:var(--muted);font-size:13px;box-shadow:var(--sh-1);}
+/* 原定安排 */
+.it-orig{background:#fff;border-radius:24px;box-shadow:var(--sh-1);padding:4px 14px;margin-bottom:20px;}
+.it-orig summary{list-style:none;display:flex;align-items:center;gap:6px;height:52px;font-size:15px;font-weight:800;color:var(--ink-2);cursor:pointer;}
+.it-orig summary::-webkit-details-marker{display:none;}
+.it-orig summary .ic{width:18px;height:18px;margin:0;}
+.it-orig summary span{font-size:12px;color:var(--faint);font-weight:700;}
+.it-orig summary .ic:last-child{margin-left:auto;transition:transform .2s;}
+.it-orig[open] summary .ic:last-child{transform:rotate(180deg);}
+.it-orig[open]{padding-bottom:14px;}
+.it-orig .day-hero{margin-top:4px;}
+/* 名單：其他基地的地區排後面、淡一點 */
+.pk-region.off-base:not(.active){opacity:.55;}
+.pk-region-sep{flex:0 0 1px;align-self:stretch;background:var(--border-2);margin:6px 2px;}
+/* 附近：步行距離 */
+.nb-dist{display:flex !important;flex-direction:column;align-items:center;gap:1px;min-width:64px !important;}
+.nb-dist .ic{width:15px;height:15px;margin:0;}
+.nb-dist b{font-size:13px;font-weight:900;}
+.nb-dist span{font-size:10.5px;font-weight:700;opacity:.75;}
 </style>
 <script src="icons.js"></script>
 </head>
@@ -1495,22 +1580,12 @@ body.is-offline .cv-offline{display:inline-flex;}
 <!-- ITINERARY -->
 <div id="section-itinerary" class="section active">
   <div class="nb-page">
-  <div class="sec-title">每日行程</div>
   <div class="rail" id="rail"><div class="rail-inner" id="rail-inner"></div></div>
-  <div id="day-hero"></div>
-  <div class="tl2" id="timeline"></div>
-  <div class="dp" id="day-picks"></div>
-  </div>
-</div>
-
-<!-- POCKET LIST -->
-<div id="section-pocket" class="section">
-  <div class="nb-page">
-  <div class="sec-title">口袋名單</div>
-
+  <div class="it-base" id="it-base"></div>
+  <div id="it-banner"></div>
   <div class="tp" id="tp">
     <div class="tp-head">
-      <div class="tp-title"><i data-lucide="route" class="ic"></i><span id="tp-title-txt">行程排程</span><span class="tp-count" id="tp-count">0</span></div>
+      <div class="tp-title"><i data-lucide="route" class="ic"></i><span id="tp-title-txt">今日候選池</span><span class="tp-count" id="tp-count">0</span></div>
       <div class="tp-tools">
         <a class="tp-tool" id="tp-route" target="_blank" rel="noopener" title="整條路線開 Google 地圖"><i data-lucide="map" class="ic"></i>路線</a>
         <button class="tp-tool" id="tp-clear" onclick="tpClear()" title="清空這天"><i data-lucide="eraser" class="ic"></i>清空</button>
@@ -1523,9 +1598,26 @@ body.is-offline .cv-offline{display:inline-flex;}
     </div>
   </div>
 
+  <div class="mood" id="mood-it"></div>
+  <div class="sg" id="it-suggest"></div>
+  <details class="it-orig" id="it-orig">
+    <summary id="it-orig-sum">原定安排</summary>
+    <div id="day-hero"></div>
+    <div class="tl2" id="timeline"></div>
+  </details>
+  <div class="dp" id="day-picks"></div>
+  </div>
+</div>
+
+<!-- POCKET LIST -->
+<div id="section-pocket" class="section">
+  <div class="nb-page">
+  <div class="sec-title">口袋名單</div>
+
   <div class="pk-regions" id="pk-regions"></div>
   <div class="pk-cats" id="pk-cats"></div>
   <div class="pk-cats" id="pk-zones"></div>
+  <div class="mood" id="mood-pk"></div>
 
   <div class="pk-form" id="pk-form">
     <div class="pk-form-title">新增地點</div>
@@ -1780,7 +1872,7 @@ body.is-offline .cv-offline{display:inline-flex;}
   <button class="fnav-btn" data-sec="pocket" onclick="goSec('pocket')"><i data-lucide="map-pinned" class="ic"></i><span>口袋名單</span></button>
   <button class="fnav-btn" data-sec="tools" onclick="goSec('tools')"><i data-lucide="luggage" class="ic"></i><span>旅途助手</span></button>
 </nav>
-<button class="nb-fab" id="nb-fab" onclick="nbOpen()" aria-label="附近口袋名單"><i data-lucide="locate-fixed" class="ic"></i><span>附近空檔快搜</span></button>
+<button class="nb-fab" id="nb-fab" onclick="nbOpen()" aria-label="附近口袋名單"><i data-lucide="locate-fixed" class="ic"></i><span>附近口袋名單</span></button>
 <div class="nb-overlay" id="nb-overlay" onclick="if(event.target===this)nbClose()">
   <div class="nb-sheet" role="dialog" aria-label="附近口袋名單">
     <div class="nb-grab"></div>
@@ -2215,7 +2307,7 @@ function buildTabs(){
   const area=document.getElementById('section-itinerary');
   area.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
   area.addEventListener('touchend',e=>{
-    if(e.target.closest('.rail')) return;
+    if(e.target.closest('.rail,.tp,.mood,.sg,.it-base,.cv-dates,.tl-tabs')) return;
     const dx=e.changedTouches[0].clientX-sx, dy=e.changedTouches[0].clientY-sy;
     if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){
       const n=curDay+(dx<0?1:-1);
@@ -2510,12 +2602,13 @@ function pkRender(){
   const hit=x=>!q||(x.name+' '+(x.zone||'')+' '+(x.tags||[]).join(' ')+' '+(x.address||'')+' '+x.category).toLowerCase().includes(q);
   const cnt=Object.fromEntries(PK_REGIONS.map(([k])=>[k,pkData[k].filter(hit).length]));
   if(q&&!cnt[pkRegion]){const f=PK_REGIONS.find(([k])=>cnt[k]); if(f){pkRegion=f[0];pkCat='全部';pkZone='全部';}}
-  document.getElementById('pk-regions').innerHTML=PK_REGIONS.map(([k,l])=>
-    `<button class="pk-region ${k===pkRegion?'active':''} ${q&&!cnt[k]?'dim':''}" onclick="pkSetRegion('${k}')">${l}<span>${cnt[k]}</span></button>`).join('')+
+  const bR=baseOf(tpSel).regions, ordR=[...PK_REGIONS.filter(([k])=>bR.includes(k)),...PK_REGIONS.filter(([k])=>!bR.includes(k))];
+  document.getElementById('pk-regions').innerHTML=ordR.map(([k,l],i)=>
+    `${i===bR.length?'<span class="pk-region-sep"></span>':''}<button class="pk-region ${k===pkRegion?'active':''} ${q&&!cnt[k]?'dim':''} ${bR.includes(k)?'':'off-base'}" onclick="pkSetRegion('${k}')">${l}<span>${cnt[k]}</span></button>`).join('')+
     `<button class="pk-region add" onclick="pkToggleForm()" aria-label="新增地點">${ic('plus')}</button>`;
   const list=pkData[pkRegion]||[];
   const onlyNew=document.getElementById('pk-unvisited').checked;
-  const base=list.filter(x=>(!onlyNew||!x.visited)&&(!q||(x.name+' '+(x.zone||'')+' '+(x.tags||[]).join(' ')+' '+(x.address||'')+' '+x.category).toLowerCase().includes(q)));
+  const base=list.filter(x=>moodMatch(x,moodSel)&&(!onlyNew||!x.visited)&&(!q||(x.name+' '+(x.zone||'')+' '+(x.tags||[]).join(' ')+' '+(x.address||'')+' '+x.category).toLowerCase().includes(q)));
   // 分類 chips（依目前商圈）
   const byZone=base.filter(x=>pkZone==='全部'||x.zone===pkZone);
   const cats=[...new Set(list.map(x=>x.category))].sort((a,b)=>{const ia=PK_CAT_ORDER.indexOf(a),ib=PK_CAT_ORDER.indexOf(b);return (ia<0?99:ia)-(ib<0?99:ib);});
@@ -2654,6 +2747,83 @@ function pkReset(){
   if(!confirm('還原成預設名單？你新增、刪除和「已造訪」紀錄都會消失（建議先匯出備份）。')) return;
   pkData=pkClone(PK_DEFAULT); pkData._meta={v:PK_VER,deleted:[]}; pkSave(); pkCat='全部'; pkZone='全部'; pkRender();
 }
+// ══ 飯店錨點、今日候選池、情境篩選 ══
+const BASE_KYOTO={k:'kyoto',name:'京都',regions:['kyoto','uji','nara','kobe','osaka'],hotel:'三條格拉斯麗酒店',of:7,first:0};
+const BASE_NAGOYA={k:'nagoya',name:'名古屋',regions:['nagoya'],hotel:'名古屋飯店（待補）',of:3,first:7};
+function baseOf(iso){return iso<='2027-01-24'?BASE_KYOTO:BASE_NAGOYA;}
+const MOODS=[['all','全部','layout-grid'],['rain','雨天備案','umbrella'],['rest','腳痠休息','coffee'],['night','夜間/夜景','moon-star'],['shop','採購購物','shopping-bag'],['top','高分名店','star']];
+var moodSel=(()=>{try{return localStorage.getItem('japan2027-mood')||'all';}catch(e){return 'all';}})();
+const MOOD_INDOOR_CATS=['美食','甜點','咖啡','咖啡甜點','咖啡美食','麵包甜點','購物','購物景點','住宿'];
+function moodMatch(x,m){
+  if(!m||m==='all') return true;
+  const tb=pkNum(x.rating&&x.rating.tabelog);
+  if(m==='top') return tb!==null&&tb>=3.5;
+  if(Array.isArray(x.moods)&&x.moods.length) return x.moods.includes(m);
+  const t=(x.name+' '+(x.tags||[]).join(' ')+' '+(x.zone||'')).toLowerCase(), c=x.category;
+  if(m==='rain') return MOOD_INDOOR_CATS.includes(c)||/館|博物|水族|科學|商場|mall|parco|大樓|地下街|扭蛋|寶可夢|室內|展望台|oasis|映畫|市場/.test(t);
+  if(m==='rest') return ['咖啡','咖啡甜點','咖啡美食'].includes(c)||(c!=='景點'&&c!=='購物'&&/茶|喫茶|甘味|咖啡|珈琲|coffee|cafe|芭菲|刨冰|布丁/.test(t));
+  if(m==='night') return /夜景|夜|居酒屋|燒鳥|串燒|爐端|炉端|酒|展望|塔|tower|觀覽車|燈海|深夜|bar|おでん|關東煮/.test(t)||hrsParse(hrsOf(x)).some(r=>r[1]>=21*60);
+  if(m==='shop') return ['購物','購物景點'].includes(c)||/伴手禮|商店街|超市|選物|扭蛋|寶可夢|商場|百貨|mall|parco|專賣/.test(t);
+  return true;
+}
+function moodSet(m){moodSel=m;try{localStorage.setItem('japan2027-mood',m);}catch(e){} sgLimit=8; moodRender(); sgRender(); pkRender();}
+function moodRender(){
+  const base=baseOf(tpSel), pool=base.regions.flatMap(r=>pkData[r]||[]);
+  const html=MOODS.map(([k,l,icn])=>{const n=pool.filter(x=>moodMatch(x,k)).length;
+    return `<button class="mood-chip m-${k} ${moodSel===k?'on':''}" onclick="moodSet('${k}')">${ic(icn)}${l}${k!=='all'?`<span>${n}</span>`:''}</button>`;}).join('');
+  ['mood-it','mood-pk'].forEach(id=>{const el=document.getElementById(id); if(el) el.innerHTML=html;});
+}
+function rateBadges(x){
+  const g=pkNum(x.rating&&x.rating.google), t=pkNum(x.rating&&x.rating.tabelog);
+  if(g===null&&t===null) return '';
+  return `<div class="pk-rate sg-rate">${g!==null?`<span class="pk-g ${g>=4.5?'hi':''}">${ic('star')}G ${g.toFixed(1)}</span>`:''}${t!==null?`<span class="pk-t ${t>=3.5?'hi':''}">食 ${t.toFixed(2)}</span>`:''}</div>`;
+}
+function sgScore(x){const g=pkNum(x.rating&&x.rating.google)||0, t=pkNum(x.rating&&x.rating.tabelog); return (t!==null?(t-3)*2:0)+g;}
+var sgLimit=8;
+function sgMore(){sgLimit+=8;sgRender();}
+function sgRender(){
+  const box=document.getElementById('it-suggest'); if(!box) return;
+  const base=baseOf(tpSel);
+  const items=[];
+  base.regions.forEach(r=>(pkData[r]||[]).forEach(x=>{ if(moodMatch(x,moodSel)&&!tpHas(r,x.id)) items.push({r,x}); }));
+  items.sort((a,b)=>(a.x.visited?1:0)-(b.x.visited?1:0)||sgScore(b.x)-sgScore(a.x));
+  const ml=(MOODS.find(m=>m[0]===moodSel)||MOODS[0])[1];
+  box.innerHTML=`<div class="sg-head"><b>${moodSel==='all'?'推薦加入':ml}</b><span>${base.name}周邊・${items.length} 個</span></div>`+
+    (items.length?`<div class="sg-grid">${items.slice(0,sgLimit).map(o=>sgCard(o.r,o.x)).join('')}</div>`:`<div class="sg-empty">這個情境在${base.name}周邊沒有符合的地點。</div>`)+
+    `<div class="sg-foot">${items.length>sgLimit?`<button class="sg-more" onclick="sgMore()">再看 8 個</button>`:''}<button class="sg-more ghost" onclick="goSec('pocket')">${ic('map-pinned')}到口袋名單看全部</button></div>`;
+}
+function sgCard(r,x){
+  const id=pkEsc(x.id), st=hrsStatus(x,tpSel);
+  const q=encodeURIComponent(x.name+' '+(x.address||((tpZoneKey(x.zone)&&tpZoneKey(x.zone)!=='市區'?tpZoneKey(x.zone)+' ':'')+(TP_REGION_NAME[r]||''))));
+  return `<div class="pk-item sg-item ${x.visited?'visited':''}" data-cat="${pkEsc(x.category)}">
+    <div class="pk-hero"><span class="pk-hero-ic">${ic(PK_CAT_ICON[x.category]||'pin')}</span>${x.zone?`<span class="pk-zonepill">${pkEsc(x.zone)}</span>`:''}${pkHot(x)?'<span class="pk-hot">HOT</span>':''}${x.visited?`<span class="pk-been">${ic('check')}</span>`:''}</div>
+    <div class="pk-content"><div class="pk-name">${pkEsc(x.name)}</div>${rateBadges(x)}${st?`<div class="sg-hb">${hrsBadge(st)}</div>`:''}
+      <div class="pk-actions"><a class="pk-nav" href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener" aria-label="導航">${ic('navigation')}</a>
+      <button class="pk-today" onclick="tpToggle('${r}','${id}')">${ic('plus')}<span>加入</span></button></div></div></div>`;
+}
+function itBaseRender(){
+  const el=document.getElementById('it-base'); if(!el) return;
+  const i=TP_DATES.indexOf(tpSel), b=baseOf(tpSel), d=days[i]||{};
+  const night=tpSel==='2027-01-28'?'':`第 ${i-b.first+1}/${b.of} 晚`;
+  el.innerHTML=`<div class="it-chip base-${b.k}">${ic('hotel')}<b>${b.name} Base</b><span>${pkEsc(b.hotel)}${night?'・'+night:'・退房日'}</span></div>`+
+    (d.title?`<div class="it-chip theme">${ic('sparkles')}<span>${pkEsc(d.title)}</span></div>`:'');
+}
+function itBannerRender(){
+  const el=document.getElementById('it-banner'); if(!el) return;
+  const B={
+    '2027-01-18':{c:'arrive',icn:'plane-landing',t:'抵達日',s:[['08:45','台中 RMQ 出發（JX306）'],['12:30','抵達神戶機場 UKB'],['15:00','京都・三條格拉斯麗 Check-in']]},
+    '2027-01-24':{c:'prep',icn:'package',t:'明天大移動・今晚準備',s:[['今晚','飯店櫃台用宅急便寄大件行李到名古屋飯店'],['睡前','整理隨身行李，確認新幹線車票']]},
+    '2027-01-25':{c:'move',icn:'train-front',t:'大移動日・京都 → 名古屋',s:[['11:00 前','三條格拉斯麗 退房'],['約 35 分','京都站搭のぞみ → 名古屋站（指定席 ¥5,910）'],['15:00','名古屋飯店 Check-in']]},
+    '2027-01-28':{c:'leave',icn:'plane-takeoff',t:'離境日',s:[['上午','名古屋飯店退房，行李寄放'],['18:00 前','到中部國際機場（名鐵ミュースカイ約 28 分）'],['21:20','JX839 起飛 → 23:25 桃園']]}
+  }[tpSel];
+  el.innerHTML=B?`<div class="it-banner ${B.c}"><div class="it-b-head">${ic(B.icn)}<b>${B.t}</b>${B.c==='move'?`<button onclick="goSec('transport')">交通資訊 ${ic('chevron-right')}</button>`:''}</div>${B.s.map(([a,b])=>`<div class="it-b-row"><span>${a}</span><p>${b}</p></div>`).join('')}</div>`:'';
+}
+function itRender(di){
+  itBaseRender(); itBannerRender(); moodRender(); sgRender();
+  const d=days[di]; const sum=document.getElementById('it-orig-sum');
+  if(sum&&d) sum.innerHTML=`${ic('scroll-text')}原定安排（參考）<span>${d.items.length} 項</span>${ic('chevron-down')}`;
+}
+
 pkLoad();
 
 // ══ 今日行程規劃區 ══
@@ -2802,10 +2972,10 @@ function tpToggle(r,id,iso){
     if(!tpAddCheck(x,iso)) return false;
     list.push({r,id:x.id,name:x.name,zone:x.zone||'',category:x.category}); if(iso===tpSel) tpOpen=true;}
   if(iso===tpSel) tpData=list;
-  tpSave(); tpRender(); pkRender(); if(typeof nbRender==='function'&&nbState.open) nbRender();
+  tpSave(); tpRender(); pkRender(); if(typeof sgRender==='function') sgRender(); if(typeof nbRender==='function'&&nbState.open) nbRender();
   return true;
 }
-function tpRemove(i){tpData.splice(i,1);tpSave();tpRender();pkRender();}
+function tpRemove(i){tpData.splice(i,1);tpSave();tpRender();pkRender();sgRender();}
 function tpMove(i,d){const j=i+d; if(j<0||j>=tpData.length) return; [tpData[i],tpData[j]]=[tpData[j],tpData[i]]; tpSave(); tpRender();}
 function tpClear(){if(!tpData.length) return; if(!confirm(`清空 ${tpMD(tpSel)} 的行程？`)) return; tpData.length=0; tpSave(); tpRender(); pkRender();}
 function tpToggleOpen(){tpOpen=!tpOpen; tpSave(); tpRender();}
@@ -2835,13 +3005,14 @@ function tpWarnings(){
   });
   // 公休
   tpData.forEach(t=>{const x=tpLookup(t); const st=x&&hrsStatus(x,tpSel); if(st&&st.k==='closed') out.push({lvl:'red',html:`<b>公休提醒：</b>「${pkEsc(t.name)}」${tpMD(tpSel)}（週${WD[tpWd(tpSel)]}）公休。`});});
+  if(tpData.length>5) out.push({lvl:'yellow',html:`<b>行程有點滿：</b>今天選了 ${tpData.length} 個，建議 3–5 個，玩起來比較從容。`});
   return out.sort((a,b)=>(a.lvl==='red'?0:1)-(b.lvl==='red'?0:1));
 }
 function tpRender(){
   TP_DATES.forEach(d=>tpPlans[d].forEach(t=>{const x=tpLookup(t); if(x){t.name=x.name;t.zone=x.zone||'';t.category=x.category;}}));
   const n=tpData.length, today=jstNow().iso;
   document.getElementById('tp-count').textContent=n;
-  document.getElementById('tp-title-txt').textContent=`${tpMD(tpSel)}（${WD[tpWd(tpSel)]}）`;
+  document.getElementById('tp-title-txt').textContent='今日候選池';
   cvRenderDates();
   if(false) TP_DATES.map((d,i)=>{const k=tpPlans[d].length;
     return `<button class="tp-date ${d===tpSel?'active':''} ${d===today?'today':''}" onclick="tpSelect('${d}')"><b>${tpMD(d)}</b><span>${d===today?'今天':'週'+WD[tpWd(d)]}</span>${k?`<i class="tp-dot">${k}</i>`:''}</button>`;}).join('');
@@ -2862,13 +3033,14 @@ function tpRender(){
     return `<div class="tp-row" data-i="${i}">
       <button class="tp-handle" aria-label="拖曳排序" onpointerdown="tpDragStart(event)">${ic('grip-vertical')}</button>
       <div class="tp-num">${i+1}</div>
+      <div class="tp-thumb pk-item" data-cat="${pkEsc(t.category||'')}"><span>${ic(PK_CAT_ICON[t.category]||'pin')}</span></div>
       <div class="tp-info"><div class="tp-name">${pkEsc(t.name)}</div><div class="tp-sub">${pkEsc(TP_REGION_NAME[t.r]||t.r)}${t.zone?'・'+pkEsc(t.zone):''}${t.category?'・'+pkEsc(t.category):''}</div>${st?`<div class="tp-hb">${hrsBadge(st)}</div>`:''}</div>
       <div class="tp-btns">
         <button onclick="tpMove(${i},-1)" ${i===0?'disabled':''} aria-label="上移">${ic('chevron-up')}</button>
         <button onclick="tpMove(${i},1)" ${i===n-1?'disabled':''} aria-label="下移">${ic('chevron-down')}</button>
         <button class="rm" onclick="tpRemove(${i})" aria-label="移除">${ic('trash-2')}</button>
       </div></div>`;}).join('')
-    :`<div class="tp-empty">${tpMD(tpSel)} 還沒有加入地點。在下方卡片按「${ic('plus')}${tpMD(tpSel)}」就會排進這天；上面的日期可以切換要排哪一天。</div>`;
+    :`<div class="tp-empty">${ic('sparkles')}今天想去哪？從下方推薦挑 3–5 個，或到口袋名單加入。</div>`;
   if(n>10) document.getElementById('tp-list').insertAdjacentHTML('beforeend','<div class="tp-note">Google 地圖路線最多帶入前 10 個地點。</div>');
   const ws=tpWarnings();
   document.getElementById('tp-warns').innerHTML=ws.map(w=>`<div class="tp-warn ${w.lvl}">${ic(w.lvl==='red'?'siren':'triangle-alert')}<span>${w.html}</span></div>`).join('');
@@ -2963,7 +3135,7 @@ function nbRender(){
   list.innerHTML=res.slice(0,40).map(o=>{const x=o.x, id=pkEsc(x.id), s=hrsStatus(x,iso), added=(tpPlans[ref]||[]).some(t=>t.r===o.r&&String(t.id)===String(x.id));
     const q=encodeURIComponent(x.name+' '+(x.address||((tpZoneKey(x.zone)&&tpZoneKey(x.zone)!=='市區'?tpZoneKey(x.zone)+' ':'')+TP_REGION_NAME[o.r])));
     return `<div class="nb-item">
-      <div class="nb-dist">${!o.exact&&o.km<0.3?'同一區':(o.exact?'':'約 ')+nbFmt(o.km)}</div>
+      <div class="nb-dist">${ic('footprints')}<b>${!o.exact&&o.km<0.3?'同一區':(o.exact?'':'約 ')+nbFmt(o.km)}</b>${o.km<3&&(o.exact||o.km>=0.3)?`<span>步行約 ${Math.max(1,Math.round(o.km*1000/80))} 分</span>`:''}</div>
       <div class="nb-body"><div class="pk-name">${pkEsc(x.name)}${pkHot(x)?'<span class="pk-hot">高分</span>':''}</div>
         <div class="pk-meta"><span class="pk-catlbl">${pkEsc(x.category)}</span>${x.zone?`<span class="pk-zone">${ic('map-pin')}${pkEsc(x.zone)}</span>`:''}${s?hrsBadge(s):''}</div>
         <div class="nb-acts"><a class="pk-nav" href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener">${ic('navigation')}導航</a>
@@ -3028,9 +3200,11 @@ const _renderItin=renderItinerary;
 renderItinerary=function(di){
   _renderItin(di);
   const d=TP_DATES[di];
-  if(d&&d!==tpSel){tpSave();tpSel=d;tpData=tpPlans[d];tpSave();}
-  tpRender(); pkRender(); dpRender(di);
+  if(d&&d!==tpSel){tpSave();tpSel=d;tpData=tpPlans[d];tpSave();
+    const b=baseOf(d); if(!b.regions.includes(pkRegion)){pkRegion=b.regions[0];pkCat='全部';pkZone='全部';}}
+  tpRender(); pkRender(); itRender(di);
 };
+{const b=baseOf(tpSel); if(!b.regions.includes(pkRegion)) pkRegion=b.regions[0];}
 buildTabs();renderItinerary(Math.max(0,TP_DATES.indexOf(tpSel)));
 tlMount(); fxRateLabel(); offBanner(); document.body.dataset.sec='itinerary';
 try{const k=localStorage.getItem('japan2027-tlpane'); if(k) tlPane(k);}catch(e){}

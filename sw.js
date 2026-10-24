@@ -6,7 +6,7 @@
 //   • 圖示（icons.js）、字型、manifest 等靜態資源：Cache First（先用手機裡的，背景再更新）。
 //   • Google 地圖、導航等外部服務：照常連網，不快取。
 // 更新網站後想強制所有人換新快取，把 CACHE 版本號加 1。
-const CACHE = 'kyoto2027-v2';
+const CACHE = 'kyoto2027-v3';
 
 // 安裝時就先存好的檔案（同網域）
 const CORE = ['./', './index.html', './icons.js', './manifest.json', './icon-192.png', './icon-512.png'];
