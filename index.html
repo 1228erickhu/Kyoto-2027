@@ -1675,6 +1675,18 @@ body[data-sec="itinerary"] .nb-fab{display:flex !important;}
 @media(max-width:360px){.pk-item .pk-actions span{display:none !important;}}
 .lb-note{position:absolute;left:12px;top:14px;z-index:2;font-size:11px;font-weight:800;color:#fff;background:rgba(0,0,0,.45);border-radius:999px;padding:4px 10px;}
 .lb-rate{position:static !important;flex-direction:row !important;align-items:center !important;justify-content:flex-start;}
+
+/* 單日重置 */
+.tp-reset{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px dashed var(--border-2,#E9E1D6);}
+.tp-state{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:800;color:var(--muted);}
+.tp-state .ic{width:15px;height:15px;margin:0;}
+.tp-state.def .ic{color:#2F8A5E;}
+.tp-state.mod{color:#A8391C;} .tp-state.mod .ic{color:#FF8A70;}
+.tp-resetbtn{display:inline-flex;align-items:center;gap:4px;height:38px;padding:0 14px 0 11px;border:none;border-radius:999px;background:#FFE1D6;color:#A8391C;font-size:13px;font-weight:900;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.tp-resetbtn .ic{width:16px;height:16px;margin:0;}
+.tp-resetbtn:active{transform:scale(.96);}
+.tp-resetbtn:disabled{background:#F2EDE6;color:var(--faint);cursor:default;}
+.tp-def{display:inline-flex;align-items:center;height:18px;padding:0 6px;margin-right:5px;border-radius:999px;background:#E3DEFF;color:#3E2FA8;font-size:10.5px;font-weight:800;vertical-align:1px;}
 </style>
 <script src="icons.js"></script>
 <script src="covers.js"></script>
@@ -1707,6 +1719,7 @@ body[data-sec="itinerary"] .nb-fab{display:flex !important;}
     <div class="tp-body" id="tp-body">
       <div class="tp-list" id="tp-list"></div>
       <div class="tp-warns" id="tp-warns"></div>
+      <div class="tp-reset" id="tp-reset"></div>
     </div>
   </div>
 
@@ -3081,20 +3094,52 @@ function jstNow(){
   const g=t=>f.find(x=>x.type===t).value;
   return {iso:`${g('year')}-${g('month')}-${g('day')}`,min:(+g('hour'))*60+(+g('minute'))};
 }
+// 每天獨立存一份：schedule_2027_01_18 … schedule_2027_01_28
+const TP_DAY_KEY=d=>'schedule_'+d.replace(/-/g,'_');
+// 系統預設：該日「原定安排」裡的景點與美食（交通、住宿不放）
+const TP_DAY_REGION={'2027-01-19':'osaka','2027-01-23':'nara','2027-01-25':'nagoya','2027-01-26':'nagoya','2027-01-27':'nagoya','2027-01-28':'nagoya'};
+const TP_DAY_ZONE={'2027-01-22':'天橋立','2027-01-23':'奈良公園','2027-01-26':'港區','2027-01-27':'三重'};
+function tpDefaults(iso){
+  const d=days[TP_DATES.indexOf(iso)]; if(!d) return [];
+  return d.items.filter(t=>t.type==='spot'||t.type==='food').map((t,i)=>{
+    let r=TP_DAY_REGION[iso]||'kyoto';
+    if(/平等院|中村藤吉|小山園|宇治/.test(t.title)) r='uji';
+    return {r,id:'def-'+iso+'-'+i,name:t.title,zone:TP_DAY_ZONE[iso]||'',category:t.type==='food'?'美食':'景點',time:t.time||'',def:true};
+  });
+}
+const tpSig=list=>JSON.stringify((list||[]).map(t=>t.r+':'+t.id));
+function tpIsDefault(iso){return tpSig(tpPlans[iso])===tpSig(tpDefaults(iso));}
 function tpLoad(){
+  let legacy={};
   try{const s=JSON.parse(localStorage.getItem(TP_PLANS_KEY)||'null');
-    if(s){tpPlans=s.plans||{};tpOpen=s.open!==false;if(TP_DATES.includes(s.sel))tpSel=s.sel;}
+    if(s){legacy=s.plans||{};tpOpen=s.open!==false;if(TP_DATES.includes(s.sel))tpSel=s.sel;}
   }catch(e){}
   // 舊版「今日行程」搬到第一天
   try{const old=JSON.parse(localStorage.getItem('japan2027-today')||'null');
-    if(old&&Array.isArray(old.items)&&old.items.length){tpPlans[TP_DATES[0]]=(tpPlans[TP_DATES[0]]||[]).concat(old.items);}
+    if(old&&Array.isArray(old.items)&&old.items.length){legacy[TP_DATES[0]]=(legacy[TP_DATES[0]]||[]).concat(old.items);}
     localStorage.removeItem('japan2027-today');
   }catch(e){}
+  TP_DATES.forEach(d=>{
+    let v=null;
+    try{const raw=localStorage.getItem(TP_DAY_KEY(d)); if(raw!==null){const o=JSON.parse(raw); v=Array.isArray(o)?o:(o&&Array.isArray(o.items)?o.items:null);}}catch(e){}
+    if(!v) v=(Array.isArray(legacy[d])&&legacy[d].length)?legacy[d]:tpDefaults(d);   // 舊資料有排過就保留，沒排過放預設
+    tpPlans[d]=v;
+  });
   const today=jstNow().iso; if(TP_DATES.includes(today)) tpSel=today;
-  TP_DATES.forEach(d=>{if(!Array.isArray(tpPlans[d])) tpPlans[d]=[];});
-  tpData=tpPlans[tpSel]; tpSave();
+  tpData=tpPlans[tpSel]; tpSaveAll();
 }
-function tpSave(){tpPlans[tpSel]=tpData;try{localStorage.setItem(TP_PLANS_KEY,JSON.stringify({plans:tpPlans,sel:tpSel,open:tpOpen}));}catch(e){}}
+function tpSaveMeta(){try{localStorage.setItem(TP_PLANS_KEY,JSON.stringify({v:2,sel:tpSel,open:tpOpen}));}catch(e){}}
+function tpSaveDay(d){try{localStorage.setItem(TP_DAY_KEY(d),JSON.stringify({date:d,items:tpPlans[d]||[],updated:Date.now()}));}catch(e){}}
+function tpSaveAll(){TP_DATES.forEach(tpSaveDay);tpSaveMeta();}
+// 只寫目前這天（加入其他天時 tpToggle 會另外存那一天）
+function tpSave(){tpPlans[tpSel]=tpData;tpSaveDay(tpSel);tpSaveMeta();}
+function tpResetDay(){
+  const d=tpSel, md=tpMD(d);
+  if(tpIsDefault(d)){alert(`${md} 目前就是預設行程。`);return;}
+  if(!confirm(`確定要恢復 ${md} 的初始預設行程嗎？\n當天自訂的修改將會重置。\n（其他日期不受影響）`)) return;
+  tpPlans[d]=tpDefaults(d); tpData=tpPlans[d]; tpSaveDay(d); tpSaveMeta();
+  tpRender(); pkRender(); if(typeof sgRender==='function') sgRender(); if(typeof nbRender==='function'&&nbState.open) nbRender();
+}
 function tpSelect(d){tpOpen=true;renderItinerary(Math.max(0,TP_DATES.indexOf(d)));}
 // 頂部日期列（每日行程與排程共用）
 const CV_TINTS=['#FFE9A8','#C8F0DF','#F9CFE1','#CFE6F8','#FFD8C9','#E2D6F8'];
@@ -3181,7 +3226,7 @@ function tpToggle(r,id,iso){
     if(!tpAddCheck(x,iso)) return false;
     list.push({r,id:x.id,name:x.name,zone:x.zone||'',category:x.category}); if(iso===tpSel) tpOpen=true;}
   if(iso===tpSel) tpData=list;
-  tpSave(); tpRender(); pkRender(); if(typeof sgRender==='function') sgRender(); if(typeof nbRender==='function'&&nbState.open) nbRender();
+  tpSaveDay(iso); tpSave(); tpRender(); pkRender(); if(typeof sgRender==='function') sgRender(); if(typeof nbRender==='function'&&nbState.open) nbRender();
   return true;
 }
 function tpRemove(i){tpData.splice(i,1);tpSave();tpRender();pkRender();sgRender();}
@@ -3227,7 +3272,7 @@ function tpRender(){
     return `<button class="tp-date ${d===tpSel?'active':''} ${d===today?'today':''}" onclick="tpSelect('${d}')"><b>${tpMD(d)}</b><span>${d===today?'今天':'週'+WD[tpWd(d)]}</span>${k?`<i class="tp-dot">${k}</i>`:''}</button>`;}).join('');
   const total=TP_DATES.reduce((s,d)=>s+tpPlans[d].length,0);
   const badge=document.querySelector('.fnav-btn[data-sec="pocket"]');
-  if(badge){let b=badge.querySelector('.fnav-badge'); if(total){if(!b){b=document.createElement('span');b.className='fnav-badge';badge.appendChild(b);} b.textContent=total;} else if(b) b.remove();}
+  if(badge){let b=badge.querySelector('.fnav-badge'); if(false&&total){if(!b){b=document.createElement('span');b.className='fnav-badge';badge.appendChild(b);} b.textContent=total;} else if(b) b.remove();}
   const tp=document.getElementById('tp'); tp.classList.toggle('closed',!tpOpen);
   document.getElementById('tp-fold').innerHTML=ic(tpOpen?'chevron-up':'chevron-down');
   const route=document.getElementById('tp-route');
@@ -3243,13 +3288,16 @@ function tpRender(){
       <button class="tp-handle" aria-label="拖曳排序" onpointerdown="tpDragStart(event)">${ic('grip-vertical')}</button>
       <div class="tp-num">${i+1}</div>
       <div class="tp-thumb pk-item" data-cat="${pkEsc(t.category||'')}"><span>${ic(PK_CAT_ICON[t.category]||'pin')}</span></div>
-      <div class="tp-info"><div class="tp-name">${pkEsc(t.name)}</div><div class="tp-sub">${pkEsc(TP_REGION_NAME[t.r]||t.r)}${t.zone?'・'+pkEsc(t.zone):''}${t.category?'・'+pkEsc(t.category):''}</div>${st?`<div class="tp-hb">${hrsBadge(st)}</div>`:''}</div>
+      <div class="tp-info"><div class="tp-name">${pkEsc(t.name)}</div><div class="tp-sub">${t.def?`<span class="tp-def">原定${t.time?' '+pkEsc(t.time):''}</span>`:''}${pkEsc(TP_REGION_NAME[t.r]||t.r)}${t.zone?'・'+pkEsc(t.zone):''}${t.category?'・'+pkEsc(t.category):''}</div>${st?`<div class="tp-hb">${hrsBadge(st)}</div>`:''}</div>
       <div class="tp-btns">
         <button onclick="tpMove(${i},-1)" ${i===0?'disabled':''} aria-label="上移">${ic('chevron-up')}</button>
         <button onclick="tpMove(${i},1)" ${i===n-1?'disabled':''} aria-label="下移">${ic('chevron-down')}</button>
         <button class="rm" onclick="tpRemove(${i})" aria-label="移除">${ic('trash-2')}</button>
       </div></div>`;}).join('')
     :`<div class="tp-empty">${ic('sparkles')}今天想去哪？從下方推薦挑 3–5 個，或到口袋名單加入。</div>`;
+  const isDef=tpIsDefault(tpSel), nDef=tpDefaults(tpSel).length;
+  document.getElementById('tp-reset').innerHTML=`<span class="tp-state ${isDef?'def':'mod'}">${ic(isDef?'circle-check':'pencil')}${isDef?`預設行程${nDef?'（'+nDef+' 個原定地點）':''}`:`已自訂・只存在 ${tpMD(tpSel)}`}</span>
+    <button class="tp-resetbtn" onclick="tpResetDay()" ${isDef?'disabled':''}>${ic('rotate-ccw')}重置 ${tpMD(tpSel)} 行程</button>`;
   if(n>10) document.getElementById('tp-list').insertAdjacentHTML('beforeend','<div class="tp-note">Google 地圖路線最多帶入前 10 個地點。</div>');
   const ws=tpWarnings();
   document.getElementById('tp-warns').innerHTML=ws.map(w=>`<div class="tp-warn ${w.lvl}">${ic(w.lvl==='red'?'siren':'triangle-alert')}<span>${w.html}</span></div>`).join('');

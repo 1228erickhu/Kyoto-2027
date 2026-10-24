@@ -7,7 +7,7 @@
 //   • Google 地圖、導航等外部服務：照常連網，不快取。
 // 更新網站後想強制所有人換新快取，把 CACHE 版本號加 1。
 importScripts('./covers.js');  // 主題封面照片清單（self.KYOTO_COVERS）
-const CACHE = 'kyoto2027-v5';
+const CACHE = 'kyoto2027-v6';
 // 主題封面照片：安裝時全部先存好（換照片時把版本號加 1）
 const COVER_CACHE = 'kyoto2027-covers-v1';
 // 看過的地點照片另外存一份（最多 IMG_MAX 張，舊的自動刪），沒網路時卡片照片也看得到
