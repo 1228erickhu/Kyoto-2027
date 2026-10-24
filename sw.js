@@ -6,7 +6,10 @@
 //   • 圖示（icons.js）、字型、manifest 等靜態資源：Cache First（先用手機裡的，背景再更新）。
 //   • Google 地圖、導航等外部服務：照常連網，不快取。
 // 更新網站後想強制所有人換新快取，把 CACHE 版本號加 1。
-const CACHE = 'kyoto2027-v3';
+const CACHE = 'kyoto2027-v4';
+// 看過的地點照片另外存一份（最多 IMG_MAX 張，舊的自動刪），沒網路時卡片照片也看得到
+const IMG_CACHE = 'kyoto2027-img';
+const IMG_MAX = 150;
 
 // 安裝時就先存好的檔案（同網域）
 const CORE = ['./', './index.html', './icons.js', './manifest.json', './icon-192.png', './icon-512.png'];
@@ -34,7 +37,7 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
   e.waitUntil((async () => {
     const keys = await caches.keys();
-    await Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)));
+    await Promise.all(keys.filter(k => k !== CACHE && k !== IMG_CACHE).map(k => caches.delete(k)));
     await self.clients.claim();
   })());
 });
@@ -70,7 +73,30 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // 2) 同網域靜態檔與 CDN：Cache First，背景更新
+  // 2) 外部照片（地點卡片的 imageUrl）：Cache First，存在獨立快取
+  if (req.destination === 'image' && url.origin !== location.origin) {
+    e.respondWith((async () => {
+      const cache = await caches.open(IMG_CACHE);
+      const hit = await cache.match(req);
+      if (hit) return hit;
+      try {
+        const res = await fetch(req);
+        if (res && (res.ok || res.type === 'opaque')) {
+          e.waitUntil((async () => {
+            await cache.put(req, res.clone());
+            const keys = await cache.keys();
+            for (let i = 0; i < keys.length - IMG_MAX; i++) await cache.delete(keys[i]);
+          })());
+        }
+        return res;
+      } catch (err) {
+        return new Response('', { status: 504, statusText: 'offline' });
+      }
+    })());
+    return;
+  }
+
+  // 3) 同網域靜態檔與 CDN：Cache First，背景更新
   if (url.origin === location.origin || CDN_HOSTS.includes(url.hostname)) {
     e.respondWith((async () => {
       const cache = await caches.open(CACHE);
@@ -84,5 +110,5 @@ self.addEventListener('fetch', e => {
       return res || new Response('', { status: 504, statusText: 'offline' });
     })());
   }
-  // 3) 其他（Google 地圖等）不攔截
+  // 4) 其他（Google 地圖等）不攔截
 });

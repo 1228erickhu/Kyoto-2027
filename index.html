@@ -1564,6 +1564,83 @@ body[data-sec="itinerary"] .nb-fab{display:flex !important;}
 .nb-dist .ic{width:15px;height:15px;margin:0;}
 .nb-dist b{font-size:13px;font-weight:900;}
 .nb-dist span{font-size:10.5px;font-weight:700;opacity:.75;}
+
+/* ══ 照片標頭（Canva 圖塊） ══ */
+.pk-hero.ph{position:relative;height:164px !important;padding:0 !important;display:block !important;overflow:hidden;border-radius:24px 24px 0 0;cursor:zoom-in;background:none !important;}
+.pk-hero.ph.no-img{cursor:pointer;}
+.sg-item .pk-hero.ph{height:150px !important;}
+.ph-cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  background:
+   radial-gradient(circle at 84% 18%,rgba(255,255,255,.5) 0 26px,transparent 27px),
+   radial-gradient(circle at 8% 104%,rgba(255,255,255,.35) 0 60px,transparent 61px),
+   radial-gradient(rgba(255,255,255,.5) 1.4px,transparent 1.6px) 0 0/12px 12px,
+   linear-gradient(140deg,var(--t1,var(--c1)),var(--t2,var(--c2)));}
+.ph-cover .pk-hero-ic{position:static;margin:0;}
+.ph-word{position:absolute;right:-6px;bottom:30px;font-size:44px;font-weight:900;letter-spacing:-.02em;line-height:1;color:rgba(255,255,255,.55);white-space:nowrap;transform:rotate(-8deg);pointer-events:none;}
+.ph[data-th="matcha"]{--t1:#9FD4A0;--t2:#E4F5D9;--ci:#3E7B3A;}
+.ph[data-th="unagi"]{--t1:#E8B07A;--t2:#FBE6CC;--ci:#8A4B12;}
+.ph[data-th="sea"]{--t1:#8FCFEA;--t2:#DDF2FB;--ci:#1F6F92;}
+.ph[data-th="ramen"]{--t1:#FFB27E;--t2:#FFE7D3;--ci:#B9541A;}
+.ph[data-th="udon"]{--t1:#F5D28A;--t2:#FFF3D2;--ci:#91680E;}
+.ph[data-th="beef"]{--t1:#F49A9A;--t2:#FDE0DD;--ci:#A3302F;}
+.ph[data-th="tori"]{--t1:#FFC77A;--t2:#FFEDC9;--ci:#A5620B;}
+.ph[data-th="katsu"]{--t1:#E9B88C;--t2:#FAE7D6;--ci:#874B1E;}
+.ph[data-th="curry"]{--t1:#FFD066;--t2:#FFF1C2;--ci:#966600;}
+.ph[data-th="izakaya"]{--t1:#C9B4F5;--t2:#ECE3FF;--ci:#5A3CB5;}
+.ph[data-th="sweet"]{--t1:#F7A9CB;--t2:#FDE0EE;--ci:#C23F7A;}
+.ph[data-th="wagashi"]{--t1:#F5B8C4;--t2:#E9F5DA;--ci:#A6405A;}
+.ph[data-th="bread"]{--t1:#FFC97A;--t2:#FFEBC8;--ci:#A9620C;}
+.ph[data-th="cafe"]{--t1:#D9B48F;--t2:#F7EBDD;--ci:#7A4F27;}
+.ph[data-th="shrine"]{--t1:#FF9C86;--t2:#FFE3DA;--ci:#C33A22;}
+.ph[data-th="temple"]{--t1:#B9AEFA;--t2:#E3DEFF;--ci:#5B4BD6;}
+.ph[data-th="castle"]{--t1:#9DB8F2;--t2:#E2EBFF;--ci:#3355A8;}
+.ph[data-th="nature"]{--t1:#8FD9B0;--t2:#DDF6E8;--ci:#237A4E;}
+.ph[data-th="aqua"]{--t1:#7FD3E0;--t2:#DBF5F8;--ci:#18727F;}
+.ph[data-th="park"]{--t1:#FFD95A;--t2:#FFD6E6;--ci:#B04277;}
+.ph[data-th="museum"]{--t1:#A9C4E8;--t2:#E6EEF9;--ci:#335C8E;}
+.ph[data-th="tower"]{--t1:#9C94E8;--t2:#F9D7E8;--ci:#4A3DAE;}
+.ph[data-th="market"]{--t1:#7FD8B6;--t2:#D3F4E7;--ci:#1E7E5A;}
+.ph[data-th="toy"]{--t1:#FFE066;--t2:#BFE7FF;--ci:#B05A00;}
+.ph[data-th="stay"]{--t1:#8EC5EE;--t2:#DCEEFC;--ci:#2B6A9C;}
+.ph[data-th="food"]{--t1:#FFAE96;--t2:#FFE1D6;--ci:#D2502F;}
+.ph-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s ease;background:transparent;}
+.ph-img.ok{opacity:1;}
+.ph.has-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 55%,rgba(0,0,0,.38) 100%);pointer-events:none;}
+.ph > .pk-hot,.ph > .pk-been,.ph > .pk-zonepill,.ph > .ph-rate,.ph > .ph-zoom{z-index:2;}
+.ph > .pk-zonepill{left:10px !important;top:10px;bottom:auto !important;max-width:calc(100% - 70px);}
+.ph > .pk-been{left:auto !important;right:10px;top:auto !important;bottom:10px;}
+.ph-rate{position:absolute;left:10px;bottom:10px;display:flex;flex-wrap:wrap;gap:5px;max-width:calc(100% - 50px);}
+.ph-rate > span{display:inline-flex;align-items:center;gap:2px;height:24px;padding:0 9px 0 7px;border-radius:999px;font-size:12px;font-weight:900;font-variant-numeric:tabular-nums;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 4px 12px rgba(0,0,0,.12);}
+.ph-rate .ic{width:13px;height:13px;margin:0;}
+.ph-g{background:rgba(255,255,255,.88);color:#3F3530;}
+.ph-g .ic{color:#F5A623;fill:#F5A623;}
+.ph-g.hi{background:#FFD95A;color:#3F3530;}
+.ph-t{background:rgba(255,174,150,.92);color:#5A1E0D;padding-left:9px !important;}
+.ph-t.hi{background:#FF8A70;color:#fff;}
+.ph-zoom{position:absolute;right:10px;bottom:10px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;color:var(--ink);box-shadow:0 4px 12px rgba(0,0,0,.12);}
+.ph-zoom .ic{width:15px;height:15px;margin:0;}
+.ph.no-img .ph-zoom{background:rgba(255,255,255,.6);}
+.ph:has(.pk-been) .ph-zoom{display:none;}
+.pk-item.visited .ph-img{filter:saturate(.6);}
+.pk-item.open .pk-hero.ph{height:164px !important;}
+/* 展開區：評分＋照片按鈕 */
+.pk-more-edit{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px;}
+.pk-more-edit .pk-rate{margin:0 !important;}
+.pk-imgbtn{display:inline-flex;align-items:center;gap:4px;height:28px;padding:0 10px;border:none;border-radius:999px;background:#F2EDE6;color:var(--ink-2);font-size:12px;font-weight:800;cursor:pointer;}
+.pk-imgbtn .ic{width:14px;height:14px;margin:0;}
+/* 照片放大 */
+.pk-lb{position:fixed;inset:0;z-index:3000;background:rgba(30,24,20,.82);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .2s;}
+.pk-lb.on{opacity:1;pointer-events:auto;}
+.lb-box{position:relative;width:100%;max-width:560px;background:#FAF7F2;border-radius:28px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.35);transform:scale(.96);transition:transform .2s;}
+.pk-lb.on .lb-box{transform:scale(1);}
+.lb-box img{display:block;width:100%;max-height:62vh;object-fit:contain;background:#1f1a17;}
+.lb-close{position:absolute;right:12px;top:12px;width:40px;height:40px;border:none;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;}
+.lb-close .ic{margin:0;width:20px;height:20px;}
+.lb-info{padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;}
+.lb-info b{font-size:18px;font-weight:900;}
+.lb-rate{position:static;max-width:none;}
+.lb-maps{display:flex;align-items:center;justify-content:center;gap:6px;height:48px;border-radius:18px;background:var(--ink);color:#fff;font-weight:800;font-size:14px;text-decoration:none;}
+.lb-maps .ic{width:18px;height:18px;margin:0;}
 </style>
 <script src="icons.js"></script>
 </head>
@@ -2647,17 +2724,12 @@ function pkCard(x){
   const id=pkEsc(x.id), th=PK_CAT_THEME[x.category]||PK_CAT_THEME['其他'];
   const tags=x.tags||[], added=tpHas(pkRegion,x.id), hasHrs=!!(hrsOf(x)||hrsClosed(x).length);
   return `<div class="pk-item ${x.visited?'visited':''} ${pkOpenIds.has(String(x.id))?'open':''}" data-id="${id}" data-cat="${pkEsc(x.category)}" onclick="pkExpand(event,this)">
-    <div class="pk-hero">
-      <span class="pk-hero-ic">${ic(PK_CAT_ICON[x.category]||'pin')}</span>
-      ${x.zone?`<span class="pk-zonepill">${pkEsc(x.zone)}</span>`:''}
-      ${pkHot(x)?'<span class="pk-hot">HOT</span>':''}
-      ${x.visited?`<span class="pk-been">${ic('check')}</span>`:''}
-    </div>
+    ${pkHeroHTML(pkRegion,x,mq)}
     <div class="pk-content">
       <div class="pk-name">${pkEsc(x.name)}</div>
-      ${pkRateHTML(x)}
       ${hasHrs?pkHoursHTML(x):''}
       <div class="pk-more">
+        <div class="pk-more-edit">${pkRateHTML(x)}<button class="pk-imgbtn" onclick="pkEditImage('${pkRegion}','${id}')">${ic('image')}${pkImg(x)?'換照片':'加照片'}</button></div>
         <div class="pk-more-row"><span class="pk-catlbl">${pkEsc(x.category)}</span>${tags.map(t=>`<span class="pk-tag">${pkEsc(t)}</span>`).join('')}</div>
         ${x.address?`<div class="pk-sub">${ic('map-pin')}${pkEsc(x.address)}</div>`:''}
         ${hasHrs?'':pkHoursHTML(x)}
@@ -2796,8 +2868,8 @@ function sgCard(r,x){
   const id=pkEsc(x.id), st=hrsStatus(x,tpSel);
   const q=encodeURIComponent(x.name+' '+(x.address||((tpZoneKey(x.zone)&&tpZoneKey(x.zone)!=='市區'?tpZoneKey(x.zone)+' ':'')+(TP_REGION_NAME[r]||''))));
   return `<div class="pk-item sg-item ${x.visited?'visited':''}" data-cat="${pkEsc(x.category)}">
-    <div class="pk-hero"><span class="pk-hero-ic">${ic(PK_CAT_ICON[x.category]||'pin')}</span>${x.zone?`<span class="pk-zonepill">${pkEsc(x.zone)}</span>`:''}${pkHot(x)?'<span class="pk-hot">HOT</span>':''}${x.visited?`<span class="pk-been">${ic('check')}</span>`:''}</div>
-    <div class="pk-content"><div class="pk-name">${pkEsc(x.name)}</div>${rateBadges(x)}${st?`<div class="sg-hb">${hrsBadge(st)}</div>`:''}
+    ${pkHeroHTML(r,x,q)}
+    <div class="pk-content"><div class="pk-name">${pkEsc(x.name)}</div>${st?`<div class="sg-hb">${hrsBadge(st)}</div>`:''}
       <div class="pk-actions"><a class="pk-nav" href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener" aria-label="導航">${ic('navigation')}</a>
       <button class="pk-today" onclick="tpToggle('${r}','${id}')">${ic('plus')}<span>加入</span></button></div></div></div>`;
 }
@@ -2822,6 +2894,92 @@ function itRender(di){
   itBaseRender(); itBannerRender(); moodRender(); sgRender();
   const d=days[di]; const sum=document.getElementById('it-orig-sum');
   if(sum&&d) sum.innerHTML=`${ic('scroll-text')}原定安排（參考）<span>${d.items.length} 項</span>${ic('chevron-down')}`;
+}
+
+// ══ 卡片照片（imageUrl）與無照片時的主題封面 ══
+function pkImg(x){const u=(x&&(x.imageUrl||x.image))||''; return /^https?:\/\//i.test(u)?u:'';}
+// 依店名/標籤判斷主題：[關鍵字, 封面文字, 圖示, 主題色]
+const PK_THEMES=[
+  [/抹茶|宇治|茶舗|茶房|一保堂|中村藤吉|伊藤久右衛門|丸久小山園|辻利|茶寮/,'抹茶','leaf','matcha'],
+  [/鰻|ひつまぶし|うなぎ|蓬萊軒/,'鰻魚飯','fish','unagi'],
+  [/壽司|寿司|すし|鮨|海鮮|丼/,'壽司海鮮','fish','sea'],
+  [/拉麵|ラーメン|麵屋|麺屋|中華そば|つけ麺|台灣拉麵|台湾/,'拉麵','soup','ramen'],
+  [/烏龍|うどん|蕎麥|そば|きしめん|味噌煮込/,'麵食','soup','udon'],
+  [/燒肉|焼肉|和牛|牛排|ステーキ|神戶牛|神戸牛|牛かつ|すき焼/,'和牛燒肉','beef','beef'],
+  [/雞|鶏|燒鳥|焼鳥|手羽|唐揚|親子丼|名古屋コーチン|世界の山ちゃん|風來坊/,'雞料理','drumstick','tori'],
+  [/味噌豬排|味噌カツ|豬排|とんかつ|カツ|矢場/,'豬排','utensils-crossed','katsu'],
+  [/咖哩|カレー/,'咖哩','flame','curry'],
+  [/居酒屋|酒|bar|ビール|立飲/i,'居酒屋','beer','izakaya'],
+  [/布丁|プリン|芭菲|パフェ|刨冰|かき氷|冰淇淋|ソフト|ジェラート/,'冰品甜點','ice-cream-cone','sweet'],
+  [/和菓子|甘味|團子|だんご|麻糬|餅|大福|羊羹|わらび/,'和菓子','cookie','wagashi'],
+  [/麵包|パン|bakery|可頌|吐司/i,'麵包','croissant','bread'],
+  [/咖啡|珈琲|coffee|cafe|カフェ|喫茶/i,'咖啡','coffee','cafe'],
+  [/神社|神宮|大社|稻荷|稲荷|天滿宮|天満宮|八幡/,'神社','landmark','shrine'],
+  [/寺|院|堂|塔頭|大佛|大仏/,'寺院','landmark','temple'],
+  [/城/,'城','castle','castle'],
+  [/庭園|公園|竹林|嵐山|山|瀑|滝|植物園|梅|櫻|桜|紅葉|天橋立|海岸/,'自然','trees','nature'],
+  [/水族|動物園|鹿/,'動物','fish','aqua'],
+  [/樂高|レゴ|樂園|遊園|摩天輪|觀覽車|ジブリ|吉卜力/,'樂園','ferris-wheel','park'],
+  [/博物|美術|科學|科学|資料館|記念館|紀念館|鐵道|鉄道|館/,'博物館','building-2','museum'],
+  [/展望|塔|タワー|tower|夜景/i,'展望','building','tower'],
+  [/商店街|市場|錦/,'商店街','store','market'],
+  [/寶可夢|ポケモン|扭蛋|ガチャ|動漫|anime/i,'玩具','gamepad-2','toy'],
+];
+const PK_CAT_THEME_FALLBACK={'景點':['景點','map-pinned','temple'],'美食':['美食','utensils','food'],'甜點':['甜點','cake','sweet'],'麵包甜點':['麵包','croissant','bread'],'咖啡':['咖啡','coffee','cafe'],'咖啡甜點':['咖啡甜點','coffee','cafe'],'咖啡美食':['咖啡','sandwich','cafe'],'購物':['購物','shopping-bag','market'],'購物景點':['購物','store','market'],'住宿':['住宿','bed-double','stay']};
+function pkTheme(x){
+  const t=(x.name||'')+' '+(x.tags||[]).join(' ');
+  for(const [re,l,icn,k] of PK_THEMES) if(re.test(t)) return {l,icn,k};
+  const f=PK_CAT_THEME_FALLBACK[x.category]||['口袋名單','pin','food']; return {l:f[0],icn:f[1],k:f[2]};
+}
+function pkHeroHTML(r,x,mq){
+  const u=pkImg(x), th=pkTheme(x), id=pkEsc(x.id);
+  const g=pkNum(x.rating&&x.rating.google), t=pkNum(x.rating&&x.rating.tabelog);
+  const rate=(g!==null||t!==null)?`<span class="ph-rate">${g!==null?`<span class="ph-g ${g>=4.5?'hi':''}">${ic('star')}${g.toFixed(1)}</span>`:''}${t!==null?`<span class="ph-t ${t>=3.5?'hi':''}">食 ${t.toFixed(2)}</span>`:''}</span>`:'';
+  return `<div class="pk-hero ph ${u?'has-img':'no-img'}" data-th="${th.k}" onclick="pkHeroTap(event,'${r}','${id}')" role="button" aria-label="${u?'放大照片':'在 Google 地圖看照片'}">
+      <div class="ph-cover"><span class="ph-word">${th.l}</span><span class="pk-hero-ic">${ic(th.icn)}</span></div>
+      ${u?`<img class="ph-img" src="${pkEsc(u)}" alt="${pkEsc(x.name)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onload="this.classList.add('ok')" onerror="this.closest('.ph').classList.replace('has-img','no-img');this.remove()">`:''}
+      ${pkHot(x)?'<span class="pk-hot">HOT</span>':''}
+      ${x.visited?`<span class="pk-been">${ic('check')}</span>`:''}
+      ${x.zone?`<span class="pk-zonepill">${pkEsc(x.zone)}</span>`:''}
+      ${rate}
+      <span class="ph-zoom">${ic(u?'maximize-2':'images')}</span>
+    </div>`;
+}
+function pkFindIn(r,id){return (pkData[r]||[]).find(i=>String(i.id)===String(id));}
+function pkMapsUrl(r,x){
+  const zk=(typeof tpZoneKey==='function'?tpZoneKey(x.zone):x.zone)||'';
+  return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(x.name+' '+(x.address||((zk&&zk!=='市區'?zk+' ':'')+((typeof TP_REGION_NAME!=='undefined'&&TP_REGION_NAME[r])||''))));
+}
+function pkHeroTap(e,r,id){
+  e.stopPropagation();
+  const x=pkFindIn(r,id); if(!x) return;
+  const u=pkImg(x), card=e.currentTarget;
+  if(!u||card.classList.contains('no-img')){ window.open(pkMapsUrl(r,x),'_blank','noopener'); return; }
+  pkLightbox(r,x,u);
+}
+function pkLightbox(r,x,u){
+  let lb=document.getElementById('pk-lb');
+  if(!lb){lb=document.createElement('div');lb.id='pk-lb';lb.className='pk-lb';document.body.appendChild(lb);
+    lb.addEventListener('click',ev=>{if(ev.target===lb||ev.target.closest('.lb-close')) pkLightboxClose();});}
+  const g=pkNum(x.rating&&x.rating.google), t=pkNum(x.rating&&x.rating.tabelog);
+  lb.innerHTML=`<div class="lb-box">
+    <button class="lb-close" aria-label="關閉">${ic('x')}</button>
+    <img src="${pkEsc(u)}" alt="${pkEsc(x.name)}" referrerpolicy="no-referrer">
+    <div class="lb-info"><b>${pkEsc(x.name)}</b>
+      <div class="ph-rate lb-rate">${g!==null?`<span class="ph-g ${g>=4.5?'hi':''}">${ic('star')}G ${g.toFixed(1)}</span>`:''}${t!==null?`<span class="ph-t ${t>=3.5?'hi':''}">食べログ ${t.toFixed(2)}</span>`:''}</div>
+      <a class="lb-maps" href="${pkMapsUrl(r,x)}" target="_blank" rel="noopener">${ic('images')}在 Google 地圖看更多照片與評價</a></div></div>`;
+  requestAnimationFrame(()=>lb.classList.add('on')); document.body.style.overflow='hidden';
+}
+function pkLightboxClose(){const lb=document.getElementById('pk-lb'); if(!lb) return; lb.classList.remove('on'); document.body.style.overflow=''; setTimeout(()=>{lb.innerHTML='';},200);}
+document.addEventListener('keydown',e=>{if(e.key==='Escape') pkLightboxClose();});
+function pkEditImage(r,id){
+  const x=pkFindIn(r,id); if(!x) return;
+  const v=prompt('貼上照片網址（https://…）\n例：Google 地圖照片上按右鍵／長按「複製圖片網址」\n留空＝移除照片，改用主題封面', x.imageUrl||'');
+  if(v===null) return;
+  const s=v.trim();
+  if(s&&!/^https?:\/\//i.test(s)){alert('網址要以 http:// 或 https:// 開頭');return;}
+  if(s) x.imageUrl=s; else {delete x.imageUrl; delete x.image;}
+  pkSave(); pkRender(); if(typeof sgRender==='function') sgRender();
 }
 
 pkLoad();
