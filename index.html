@@ -1088,6 +1088,76 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 .pk-actions{gap:6px;}
 .fnav-btn{position:relative;}
 .fnav-badge{position:absolute;top:2px;right:calc(50% - 20px);min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:var(--accent);color:#fff;font-size:10px;font-weight:700;line-height:16px;text-align:center;}
+
+/* ══ 多日排程 ══ */
+.tp-dates{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:10px 10px 4px;background:#fff;border-bottom:1px solid var(--border);}
+.tp-dates::-webkit-scrollbar{display:none;}
+.tp-date{position:relative;flex:0 0 auto;width:56px;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 0 7px;border-radius:10px;border:1px solid var(--border);background:var(--white);color:var(--ink-2);cursor:pointer;margin-bottom:6px;}
+.tp-date b{font-size:14px;font-variant-numeric:tabular-nums;}
+.tp-date span{font-size:10px;color:var(--faint);}
+.tp-date.active{background:var(--ink);border-color:var(--ink);color:#fff;}
+.tp-date.active span{color:rgba(255,255,255,.7);}
+.tp-date.today:not(.active){border-color:var(--sage);}
+.tp-dot{position:absolute;top:-6px;right:-4px;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:var(--accent);color:#fff;font-size:10px;font-style:normal;font-weight:700;line-height:17px;text-align:center;border:2px solid #fff;}
+.tp-hb{margin-top:4px;}
+/* 營業狀態 */
+.hb{display:inline-flex;align-items:center;font-size:11px;font-weight:700;border-radius:6px;padding:2px 7px;line-height:1.4;}
+.hb .ic{width:12px;height:12px;margin:0 3px 0 0;}
+.hb.open{background:#e6f4ea;color:#2f7a45;}
+.hb.soon{background:#fdf2d8;color:#8a5a00;}
+.hb.closed{background:#fbe3e0;color:#a32a1e;}
+.hb.shut{background:var(--light);color:var(--muted);}
+.hb.before,.hb.info{background:var(--light);color:var(--ink-2);font-weight:600;}
+.pk-hrs,.pk-hrs-add{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-top:6px;padding:0;border:none;background:none;cursor:pointer;text-align:left;}
+.pk-hrs-sub{font-size:11px;color:var(--muted);}
+.pk-hrs-add{font-size:11px;color:var(--faint);font-weight:500;}
+.pk-hrs-add .ic{width:12px;height:12px;margin-right:3px;}
+/* 每日行程頁的口袋名單地點 */
+.dp:empty{display:none;}
+.dp{margin:18px 0 0;background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--sh-1);padding:12px;}
+.dp-head{display:flex;align-items:center;gap:2px;font-size:13px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.dp-head .ic{width:15px;height:15px;color:var(--accent);}
+.dp-head button{margin-left:auto;display:inline-flex;align-items:center;font-size:12px;font-weight:600;color:var(--accent);background:none;border:none;cursor:pointer;}
+.dp-head button .ic{margin:0;width:14px;height:14px;}
+.dp-row{display:flex;align-items:center;gap:10px;padding:8px 4px;border-top:1px solid var(--border);}
+.dp-nav{width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:9px;background:var(--ink);color:#fff;}
+.dp-nav .ic{margin:0;width:16px;height:16px;}
+/* 附近 FAB */
+.nb-fab{position:fixed;right:16px;bottom:calc(92px + env(safe-area-inset-bottom));z-index:310;display:flex;align-items:center;gap:4px;height:48px;padding:0 16px 0 14px;border-radius:999px;border:none;background:var(--ink);color:#fff;font-size:14px;font-weight:700;box-shadow:var(--sh-3);cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.nb-fab .ic{margin:0;width:19px;height:19px;}
+.nb-fab:active{transform:scale(.96);}
+.bell-btn{bottom:calc(150px + env(safe-area-inset-bottom)) !important;}
+/* 附近 bottom sheet */
+.nb-overlay{position:fixed;inset:0;z-index:400;background:rgba(15,23,41,.38);display:none;align-items:flex-end;justify-content:center;}
+.nb-overlay.open{display:flex;animation:fadeIn .15s ease;}
+.nb-sheet{width:100%;max-width:620px;max-height:86vh;display:flex;flex-direction:column;background:var(--paper);border-radius:20px 20px 0 0;box-shadow:var(--sh-3);padding:6px 14px calc(14px + env(safe-area-inset-bottom));animation:slideUp .22s ease;}
+.nb-grab{width:40px;height:5px;border-radius:999px;background:var(--border-2);margin:4px auto 8px;}
+.nb-head{display:flex;align-items:center;justify-content:space-between;}
+.nb-title{display:flex;align-items:center;gap:2px;font-size:17px;font-weight:700;}
+.nb-title .ic{width:19px;height:19px;color:var(--accent);}
+.nb-x{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:none;background:var(--light);border-radius:50%;color:var(--muted);cursor:pointer;}
+.nb-x .ic{margin:0;width:18px;height:18px;}
+.nb-status{display:flex;align-items:center;flex-wrap:wrap;gap:2px;font-size:12px;color:var(--muted);margin:8px 2px;}
+.nb-status .ic{width:13px;height:13px;}
+.nb-err{color:#a32a1e;font-weight:600;line-height:1.6;}
+.nb-filters{display:flex;flex-direction:column;gap:6px;margin-bottom:10px;}
+.nb-chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;}
+.nb-chips::-webkit-scrollbar{display:none;}
+.nb-chip{flex:0 0 auto;display:inline-flex;align-items:center;gap:1px;height:34px;padding:0 13px;border-radius:999px;border:1px solid var(--border-2);background:var(--white);color:var(--ink-2);font-size:13px;font-weight:600;cursor:pointer;}
+.nb-chip .ic{width:14px;height:14px;}
+.nb-chip.on{background:var(--ink);border-color:var(--ink);color:#fff;}
+.nb-chip.ghost{border-style:dashed;color:var(--muted);}
+.nb-list{overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:8px;padding-bottom:4px;}
+.nb-item{display:flex;gap:10px;background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:12px;box-shadow:var(--sh-1);}
+.nb-dist{flex-shrink:0;min-width:56px;font-size:13px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;padding-top:2px;}
+.nb-body{flex:1;min-width:0;}
+.nb-body .pk-meta{align-items:center;}
+.nb-acts{display:flex;gap:6px;margin-top:10px;}
+.nb-empty{font-size:13px;color:var(--muted);line-height:1.7;padding:18px 6px;text-align:center;}
+.tp-title,.tp-tool{white-space:nowrap;}
+.tp-head{padding:10px 10px 10px 14px;}
+.tp-tools{gap:4px;flex-shrink:0;}
+.tp-tool{padding:0 8px;}
 </style>
 <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
 </head>
@@ -1135,6 +1205,7 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
   <div class="rail-hint"><i data-lucide="move-horizontal" class="ic"></i>左右滑動或點日期切換</div>
   <div id="day-hero"></div>
   <div class="tl2" id="timeline"></div>
+  <div class="dp" id="day-picks"></div>
   </div>
 </div>
 
@@ -1146,13 +1217,14 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 
   <div class="tp" id="tp">
     <div class="tp-head">
-      <div class="tp-title"><i data-lucide="route" class="ic"></i>今日行程<span class="tp-count" id="tp-count">0</span></div>
+      <div class="tp-title"><i data-lucide="route" class="ic"></i><span id="tp-title-txt">行程排程</span><span class="tp-count" id="tp-count">0</span></div>
       <div class="tp-tools">
         <a class="tp-tool" id="tp-route" target="_blank" rel="noopener" title="整條路線開 Google 地圖"><i data-lucide="map" class="ic"></i>路線</a>
-        <button class="tp-tool" id="tp-clear" onclick="tpClear()" title="清空今日行程"><i data-lucide="eraser" class="ic"></i>清空</button>
+        <button class="tp-tool" id="tp-clear" onclick="tpClear()" title="清空這天"><i data-lucide="eraser" class="ic"></i>清空</button>
         <button class="tp-tool icon" onclick="tpToggleOpen()" id="tp-fold" title="收合／展開"><i data-lucide="chevron-up" class="ic"></i></button>
       </div>
     </div>
+    <div class="tp-dates" id="tp-dates"></div>
     <div class="tp-body" id="tp-body">
       <div class="tp-list" id="tp-list"></div>
       <div class="tp-warns" id="tp-warns"></div>
@@ -1404,6 +1476,26 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
   <button class="fnav-btn" data-sec="checklist" onclick="goSec('checklist')"><i data-lucide="list-checks" class="ic"></i><span>待辦</span></button>
   <button class="fnav-btn" data-sec="expense" onclick="goSec('expense')"><i data-lucide="wallet" class="ic"></i><span>記帳</span></button>
 </nav>
+<button class="nb-fab" id="nb-fab" onclick="nbOpen()" aria-label="附近口袋名單"><i data-lucide="locate-fixed" class="ic"></i><span>附近</span></button>
+<div class="nb-overlay" id="nb-overlay" onclick="if(event.target===this)nbClose()">
+  <div class="nb-sheet" role="dialog" aria-label="附近口袋名單">
+    <div class="nb-grab"></div>
+    <div class="nb-head">
+      <div class="nb-title"><i data-lucide="locate-fixed" class="ic"></i>附近口袋名單</div>
+      <button class="nb-x" onclick="nbClose()" aria-label="關閉"><i data-lucide="x" class="ic"></i></button>
+    </div>
+    <div class="nb-status" id="nb-status"></div>
+    <div class="nb-filters">
+      <div class="nb-chips" id="nb-dist"></div>
+      <div class="nb-chips">
+        <button class="nb-chip" id="nb-food" onclick="nbToggle('food')"><i data-lucide="utensils" class="ic"></i>僅看美食</button>
+        <button class="nb-chip" id="nb-open" onclick="nbToggle('open')"><i data-lucide="clock" class="ic"></i>僅看營業中</button>
+        <button class="nb-chip ghost" onclick="nbLocate()"><i data-lucide="refresh-cw" class="ic"></i>重新定位</button>
+      </div>
+    </div>
+    <div class="nb-list" id="nb-list"></div>
+  </div>
+</div>
 <button class="bell-btn" id="bell-btn" onclick="showReminder()" title="查看行程提醒">
   <i data-lucide="bell" class="ic"></i>
   <span class="bell-badge" id="bell-badge" style="display:none"></span>
@@ -2152,6 +2244,7 @@ function pkCard(x){
         <div class="pk-name">${pkEsc(x.name)}${pkHot(x)?'<span class="pk-hot">高分</span>':''}</div>
         <div class="pk-meta"><span class="pk-catlbl">${pkEsc(x.category)}</span>${x.zone?`<span class="pk-zone">${ic('map-pin')}${pkEsc(x.zone)}</span>`:''}${(x.tags||[]).map(t=>`<span class="pk-tag">${pkEsc(t)}</span>`).join('')}</div>
         ${pkRateHTML(x)}
+        ${pkHoursHTML(x)}
         ${x.address?`<div class="pk-sub">${ic('map-pin')}${pkEsc(x.address)}</div>`:''}
         ${x.businessHours?`<div class="pk-sub">${ic('clock')}${pkEsc(x.businessHours)}</div>`:''}
       </div>
@@ -2160,7 +2253,7 @@ function pkCard(x){
     <div class="pk-actions">
       <a class="pk-nav" href="https://www.google.com/maps/search/?api=1&query=${mq}" target="_blank" rel="noopener">${ic('navigation')}導航</a>
       <button class="pk-visit ${x.visited?'on':''}" onclick="pkToggleVisited('${id}')">${x.visited?ic('circle-check')+'已造訪':ic('heart')+'想去'}</button>
-      <button class="pk-today ${tpHas(pkRegion,x.id)?'on':''}" onclick="tpToggle('${pkRegion}','${id}')">${tpHas(pkRegion,x.id)?ic('check')+'已加入':ic('plus')+'今日'}</button>
+      <button class="pk-today ${tpHas(pkRegion,x.id)?'on':''}" onclick="tpToggle('${pkRegion}','${id}')">${tpHas(pkRegion,x.id)?ic('check')+'已加入':ic('plus')+tpMD(tpSel)}</button>
     </div>
   </div>`;
 }
@@ -2272,21 +2365,104 @@ const TP_ZONE_POS={
   nagoya:{'榮':[35.1704,136.9083],'熱田':[35.128,136.909],'名站':[35.1709,136.8815],'伏見':[35.169,136.897],'久屋大通':[35.173,136.909],'大須':[35.159,136.902],'今池':[35.165,136.937],'天白區':[35.122,136.973],'本山':[35.163,136.962],'葵區':[35.172,136.925],'常滑':[34.888,136.835],'犬山':[35.388,136.944],'西區':[35.193,136.885],'清須':[35.217,136.843],'港區':[35.090,136.880],'千種':[35.157,136.976],'長久手':[35.175,137.088],'岐阜':[35.90,137.10],'三重':[35.054,136.712],'中區':[35.185,136.900],'綠區':[35.068,136.970],'豐田':[35.083,137.156]},
   osaka:{}
 };
-let tpData=[], tpOpen=true;
-function tpLoad(){try{const s=JSON.parse(localStorage.getItem(TP_KEY)||'{}');tpData=Array.isArray(s.items)?s.items:[];tpOpen=s.open!==false;}catch(e){tpData=[];}}
-function tpSave(){try{localStorage.setItem(TP_KEY,JSON.stringify({items:tpData,open:tpOpen}));}catch(e){}}
+// ══ 多日行程排程（1/18–1/28）══
+const TP_PLANS_KEY='japan2027-plans';
+const TP_DATES=Array.from({length:11},(_,i)=>{const d=new Date(Date.UTC(2027,0,18+i));return d.toISOString().slice(0,10);});
+const WD=['日','一','二','三','四','五','六'];
+const tpWd=iso=>new Date(iso+'T00:00:00Z').getUTCDay();
+const tpMD=iso=>{const [,m,d]=iso.split('-');return (+m)+'/'+(+d);};
+let tpPlans={}, tpSel=TP_DATES[0], tpOpen=true, tpData=[];
+// 日本時間（行程在日本，營業狀態用日本當地時間判斷）
+function jstNow(){
+  const d=window.__now?new Date(window.__now):new Date();
+  const f=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(d);
+  const g=t=>f.find(x=>x.type===t).value;
+  return {iso:`${g('year')}-${g('month')}-${g('day')}`,min:(+g('hour'))*60+(+g('minute'))};
+}
+function tpLoad(){
+  try{const s=JSON.parse(localStorage.getItem(TP_PLANS_KEY)||'null');
+    if(s){tpPlans=s.plans||{};tpOpen=s.open!==false;if(TP_DATES.includes(s.sel))tpSel=s.sel;}
+  }catch(e){}
+  // 舊版「今日行程」搬到第一天
+  try{const old=JSON.parse(localStorage.getItem('japan2027-today')||'null');
+    if(old&&Array.isArray(old.items)&&old.items.length){tpPlans[TP_DATES[0]]=(tpPlans[TP_DATES[0]]||[]).concat(old.items);}
+    localStorage.removeItem('japan2027-today');
+  }catch(e){}
+  const today=jstNow().iso; if(TP_DATES.includes(today)) tpSel=today;
+  TP_DATES.forEach(d=>{if(!Array.isArray(tpPlans[d])) tpPlans[d]=[];});
+  tpData=tpPlans[tpSel]; tpSave();
+}
+function tpSave(){tpPlans[tpSel]=tpData;try{localStorage.setItem(TP_PLANS_KEY,JSON.stringify({plans:tpPlans,sel:tpSel,open:tpOpen}));}catch(e){}}
+function tpSelect(d){tpSave();tpSel=d;tpData=tpPlans[d];tpOpen=true;tpSave();tpRender();pkRender();}
 function tpHas(r,id){return tpData.some(t=>t.r===r&&String(t.id)===String(id));}
 function tpLookup(t){return (pkData[t.r]||[]).find(x=>String(x.id)===String(t.id));}
-function tpToggle(r,id){
-  if(tpHas(r,id)) tpData=tpData.filter(t=>!(t.r===r&&String(t.id)===String(id)));
-  else{const x=(pkData[r]||[]).find(i=>String(i.id)===String(id)); if(!x) return;
-    tpData.push({r,id:x.id,name:x.name,zone:x.zone||'',category:x.category});
-    tpOpen=true;}
-  tpSave(); tpRender(); pkRender();
+
+// ── 營業時間 ──
+function hrsParse(s){
+  if(!s) return [];
+  return String(s).split(/[,，、;／\/]/).map(p=>{const m=p.match(/(\d{1,2}):?(\d{2})\s*[-~〜～–—]\s*(\d{1,2}):?(\d{2})/); if(!m) return null;
+    const a=(+m[1])*60+(+m[2]); let b=(+m[3])*60+(+m[4]); if(b<=a) b+=1440; return [a,b];}).filter(Boolean);
+}
+const hrsFmt=m=>{m=((m%1440)+1440)%1440;return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');};
+function hrsOf(x){return x.openHours||x.businessHours||'';}
+function hrsClosed(x){return Array.isArray(x.closedDays)?x.closedDays.map(Number):[];}
+// 回傳 {k:'closed'|'open'|'soon'|'shut'|'before'|'info', t:文字}
+function hrsStatus(x,iso){
+  const closed=hrsClosed(x), wd=tpWd(iso), now=jstNow(), isToday=now.iso===iso;
+  if(closed.includes(wd)) return {k:'closed',t:`${isToday?'今日':tpMD(iso)+' '}公休（週${WD[wd]}）`};
+  const rs=hrsParse(hrsOf(x)); if(!rs.length) return null;
+  if(!isToday) return {k:'info',t:'營業 '+rs.map(r=>hrsFmt(r[0])+'–'+hrsFmt(r[1])).join('、')};
+  const m=now.min;
+  for(const [a,b] of rs){ for(const t of [m,m+1440]){ if(t>=a&&t<b){const left=b-t; return left<=60?{k:'soon',t:`即將打烊（剩 ${left} 分鐘）`}:{k:'open',t:'營業中・到 '+hrsFmt(b)};} } }
+  const next=rs.map(r=>r[0]).filter(a=>a>m).sort((a,b)=>a-b)[0];
+  return next!==undefined?{k:'before',t:`尚未營業（${hrsFmt(next)} 開）`}:{k:'shut',t:'今日已打烊'};
+}
+function hrsBadge(st){
+  if(!st) return '';
+  const icn={closed:'siren',open:'circle-dot',soon:'triangle-alert',shut:'moon',before:'clock',info:'clock'}[st.k];
+  return `<span class="hb ${st.k}">${ic(icn)}${st.t}</span>`;
+}
+function pkHoursHTML(x){
+  const id=pkEsc(x.id), has=hrsOf(x)||hrsClosed(x).length;
+  if(!has) return `<button class="pk-hrs-add" onclick="pkEditHours('${id}')">${ic('clock')}加營業時間</button>`;
+  const iso=jstNow().iso; const ref=TP_DATES.includes(iso)?iso:tpSel;
+  const st=hrsStatus(x,ref);
+  const cd=hrsClosed(x);
+  return `<button class="pk-hrs" onclick="pkEditHours('${id}')" title="點一下修改營業時間">${hrsBadge(st)}${cd.length?`<span class="pk-hrs-sub">週${cd.map(d=>WD[d]).join('、')}公休</span>`:''}</button>`;
+}
+function pkEditHours(id){
+  const x=pkFind(id); if(!x) return;
+  const h=prompt(`「${x.name}」營業時間\n例：11:00-21:00；中午晚上分開用逗號：11:00-14:30,17:30-21:30\n留空代表不知道`, hrsOf(x)); if(h===null) return;
+  const cdTxt=hrsClosed(x).map(d=>WD[d]).join('');
+  const d=prompt(`「${x.name}」公休日\n輸入星期幾，例：三　或　二三　（留空代表無公休）`, cdTxt); if(d===null) return;
+  const days=[...new Set([...d].map(ch=>WD.indexOf(ch==='天'?'日':ch)).filter(n=>n>=0))].sort();
+  const hv=h.trim(); if(hv){x.openHours=hv;} else {delete x.openHours;} delete x.businessHours;
+  if(days.length) x.closedDays=days; else delete x.closedDays;
+  pkSave(); pkRender(); tpRender();
+}
+
+// ── 加入／移除 ──
+function tpAddCheck(x,iso){
+  const st=hrsStatus(x,iso);
+  if(st&&st.k==='closed') return confirm(`⚠️「${x.name}」${tpMD(iso)}（週${WD[tpWd(iso)]}）公休，確定仍要加入行程嗎？`);
+  if(st&&st.k==='shut') return confirm(`⚠️「${x.name}」今天已經打烊了，確定仍要加入行程嗎？`);
+  return true;
+}
+function tpToggle(r,id,iso){
+  iso=iso||tpSel;
+  const list=tpPlans[iso];
+  const i=list.findIndex(t=>t.r===r&&String(t.id)===String(id));
+  if(i>=0) list.splice(i,1);
+  else{const x=(pkData[r]||[]).find(v=>String(v.id)===String(id)); if(!x) return false;
+    if(!tpAddCheck(x,iso)) return false;
+    list.push({r,id:x.id,name:x.name,zone:x.zone||'',category:x.category}); if(iso===tpSel) tpOpen=true;}
+  if(iso===tpSel) tpData=list;
+  tpSave(); tpRender(); pkRender(); if(typeof nbRender==='function'&&nbState.open) nbRender();
+  return true;
 }
 function tpRemove(i){tpData.splice(i,1);tpSave();tpRender();pkRender();}
 function tpMove(i,d){const j=i+d; if(j<0||j>=tpData.length) return; [tpData[i],tpData[j]]=[tpData[j],tpData[i]]; tpSave(); tpRender();}
-function tpClear(){if(!tpData.length) return; if(!confirm('清空今日行程？')) return; tpData=[]; tpSave(); tpRender(); pkRender();}
+function tpClear(){if(!tpData.length) return; if(!confirm(`清空 ${tpMD(tpSel)} 的行程？`)) return; tpData.length=0; tpSave(); tpRender(); pkRender();}
 function tpToggleOpen(){tpOpen=!tpOpen; tpSave(); tpRender();}
 const tpZoneKey=z=>(z||'').split('/')[0].trim();
 function tpKm(a,b){const R=6371,toR=Math.PI/180,dLa=(b[0]-a[0])*toR,dLo=(b[1]-a[1])*toR;
@@ -2312,15 +2488,21 @@ function tpWarnings(){
     pairs.slice(0,3).forEach(([a,b,km])=>out.push({lvl:'yellow',html:`<b>距離提醒：</b>${TP_REGION_NAME[r]}的「${a}」與「${b}」相距約 ${km.toFixed(km<10?1:0)} km，${tpTravelHint(km)}，請注意拉車時間。`}));
     if(pairs.length>3) out.push({lvl:'yellow',html:`另外還有 ${pairs.length-3} 組距離較遠的地點。`});
   });
+  // 公休
+  tpData.forEach(t=>{const x=tpLookup(t); const st=x&&hrsStatus(x,tpSel); if(st&&st.k==='closed') out.push({lvl:'red',html:`<b>公休提醒：</b>「${pkEsc(t.name)}」${tpMD(tpSel)}（週${WD[tpWd(tpSel)]}）公休。`});});
   return out.sort((a,b)=>(a.lvl==='red'?0:1)-(b.lvl==='red'?0:1));
 }
 function tpRender(){
-  tpData.forEach(t=>{const x=tpLookup(t); if(x){t.name=x.name;t.zone=x.zone||'';t.category=x.category;}});
-  const n=tpData.length;
+  TP_DATES.forEach(d=>tpPlans[d].forEach(t=>{const x=tpLookup(t); if(x){t.name=x.name;t.zone=x.zone||'';t.category=x.category;}}));
+  const n=tpData.length, today=jstNow().iso;
   document.getElementById('tp-count').textContent=n;
+  document.getElementById('tp-title-txt').textContent=`${tpMD(tpSel)}（${WD[tpWd(tpSel)]}）`;
+  document.getElementById('tp-dates').innerHTML=TP_DATES.map((d,i)=>{const k=tpPlans[d].length;
+    return `<button class="tp-date ${d===tpSel?'active':''} ${d===today?'today':''}" onclick="tpSelect('${d}')"><b>${tpMD(d)}</b><span>${d===today?'今天':'週'+WD[tpWd(d)]}</span>${k?`<i class="tp-dot">${k}</i>`:''}</button>`;}).join('');
+  const total=TP_DATES.reduce((s,d)=>s+tpPlans[d].length,0);
   const badge=document.querySelector('.fnav-btn[data-sec="pocket"]');
-  if(badge){let b=badge.querySelector('.fnav-badge'); if(n){if(!b){b=document.createElement('span');b.className='fnav-badge';badge.appendChild(b);} b.textContent=n;} else if(b) b.remove();}
-  const tp=document.getElementById('tp'); tp.classList.toggle('closed',!tpOpen); tp.classList.toggle('empty',!n);
+  if(badge){let b=badge.querySelector('.fnav-badge'); if(total){if(!b){b=document.createElement('span');b.className='fnav-badge';badge.appendChild(b);} b.textContent=total;} else if(b) b.remove();}
+  const tp=document.getElementById('tp'); tp.classList.toggle('closed',!tpOpen);
   document.getElementById('tp-fold').innerHTML=ic(tpOpen?'chevron-up':'chevron-down');
   const route=document.getElementById('tp-route');
   if(n){
@@ -2330,19 +2512,31 @@ function tpRender(){
     route.classList.remove('off');
   } else { route.removeAttribute('href'); route.classList.add('off'); }
   document.getElementById('tp-clear').classList.toggle('off',!n);
-  document.getElementById('tp-list').innerHTML=n?tpData.map((t,i)=>`<div class="tp-row" data-i="${i}">
+  document.getElementById('tp-list').innerHTML=n?tpData.map((t,i)=>{const x=tpLookup(t); const st=x&&hrsStatus(x,tpSel);
+    return `<div class="tp-row" data-i="${i}">
       <button class="tp-handle" aria-label="拖曳排序" onpointerdown="tpDragStart(event)">${ic('grip-vertical')}</button>
       <div class="tp-num">${i+1}</div>
-      <div class="tp-info"><div class="tp-name">${pkEsc(t.name)}</div><div class="tp-sub">${pkEsc(TP_REGION_NAME[t.r]||t.r)}${t.zone?'・'+pkEsc(t.zone):''}${t.category?'・'+pkEsc(t.category):''}</div></div>
+      <div class="tp-info"><div class="tp-name">${pkEsc(t.name)}</div><div class="tp-sub">${pkEsc(TP_REGION_NAME[t.r]||t.r)}${t.zone?'・'+pkEsc(t.zone):''}${t.category?'・'+pkEsc(t.category):''}</div>${st?`<div class="tp-hb">${hrsBadge(st)}</div>`:''}</div>
       <div class="tp-btns">
         <button onclick="tpMove(${i},-1)" ${i===0?'disabled':''} aria-label="上移">${ic('chevron-up')}</button>
         <button onclick="tpMove(${i},1)" ${i===n-1?'disabled':''} aria-label="下移">${ic('chevron-down')}</button>
         <button class="rm" onclick="tpRemove(${i})" aria-label="移除">${ic('trash-2')}</button>
-      </div></div>`).join('')
-    :`<div class="tp-empty">在下方地點卡片按「${ic('plus')}今日」加入，就會出現在這裡。可以拖曳左邊的把手或用箭頭調整順序。</div>`;
+      </div></div>`;}).join('')
+    :`<div class="tp-empty">${tpMD(tpSel)} 還沒有加入地點。在下方卡片按「${ic('plus')}${tpMD(tpSel)}」就會排進這天；上面的日期可以切換要排哪一天。</div>`;
   if(n>10) document.getElementById('tp-list').insertAdjacentHTML('beforeend','<div class="tp-note">Google 地圖路線最多帶入前 10 個地點。</div>');
   const ws=tpWarnings();
   document.getElementById('tp-warns').innerHTML=ws.map(w=>`<div class="tp-warn ${w.lvl}">${ic(w.lvl==='red'?'siren':'triangle-alert')}<span>${w.html}</span></div>`).join('');
+  const sel=document.querySelector('.tp-date.active'); if(sel) sel.scrollIntoView({inline:'center',block:'nearest'});
+  if(typeof curDay==='number'&&document.getElementById('day-picks')) dpRender(curDay);
+}
+// 每日行程頁：顯示這天從口袋名單加入的地點
+function dpRender(di){
+  const iso=TP_DATES[di]; const box=document.getElementById('day-picks'); if(!box||!iso) return;
+  const list=tpPlans[iso]||[];
+  if(!list.length){box.innerHTML='';return;}
+  box.innerHTML=`<div class="dp-head">${ic('bookmark')}從口袋名單加入（${list.length}）<button onclick="tpSelect('${iso}');goSec('pocket')">到名單調整 ${ic('chevron-right')}</button></div>`+
+    list.map((t,i)=>{const x=tpLookup(t); const st=x&&hrsStatus(x,iso); const q=encodeURIComponent(t.name+' '+(tpZoneKey(t.zone)&&tpZoneKey(t.zone)!=='市區'?tpZoneKey(t.zone)+' ':'')+(TP_REGION_NAME[t.r]||''));
+      return `<div class="dp-row"><div class="tp-num">${i+1}</div><div class="tp-info"><div class="tp-name">${pkEsc(t.name)}</div><div class="tp-sub">${pkEsc(t.zone||'')}${t.category?'・'+pkEsc(t.category):''}</div>${st?`<div class="tp-hb">${hrsBadge(st)}</div>`:''}</div><a class="dp-nav" href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener">${ic('navigation')}</a></div>`;}).join('');
 }
 // 拖曳排序（手指按住左邊把手上下拖）
 // 只移動「相鄰的那一列」，被拖的那列本身不離開 DOM，手指追蹤才不會中斷
@@ -2375,11 +2569,66 @@ function tpDragEnd(e){
   window.removeEventListener('pointercancel',tpDragEnd);
   const order=[...document.querySelectorAll('#tp-list .tp-row')].map(r=>+r.dataset.i);
   tpDrag=null;
-  tpData=order.map(i=>tpData[i]); tpSave(); tpRender();
+  const re=order.map(i=>tpData[i]); tpData.length=0; tpData.push(...re); tpSave(); tpRender();
+}
+
+// ══ 附近口袋名單（GPS）══
+// 位置：地點有 lat/lng 就用；沒有就用所屬商圈的大概位置（誤差數百公尺～1 公里）
+const NB_FOOD=['美食','甜點','咖啡','咖啡甜點','麵包甜點','咖啡美食'];
+let nbState={open:false,pos:null,err:'',dist:1000,food:false,openOnly:false,loading:false};
+function pkPos(r,x){ if(pkNum(x.lat)!==null&&pkNum(x.lng)!==null) return {p:[+x.lat,+x.lng],exact:true};
+  const z=(TP_ZONE_POS[r]||{})[tpZoneKey(x.zone)]; return z?{p:z,exact:false}:null; }
+function nbOpen(){nbState.open=true;document.getElementById('nb-overlay').classList.add('open');document.body.style.overflow='hidden';nbRender();nbLocate();}
+function nbClose(){nbState.open=false;document.getElementById('nb-overlay').classList.remove('open');document.body.style.overflow='';}
+function nbToggle(k){if(k==='food')nbState.food=!nbState.food; else nbState.openOnly=!nbState.openOnly; nbRender();}
+function nbSetDist(d){nbState.dist=d;nbRender();}
+function nbLocate(){
+  if(window.__nbPos){nbState.pos=window.__nbPos;nbState.err='';nbRender();return;}
+  if(!navigator.geolocation){nbState.err='這個瀏覽器不支援定位。';nbRender();return;}
+  nbState.loading=true;nbState.err='';nbRender();
+  navigator.geolocation.getCurrentPosition(p=>{nbState.loading=false;nbState.pos=[p.coords.latitude,p.coords.longitude];nbRender();},
+    e=>{nbState.loading=false;nbState.err=e.code===1?'沒有定位權限：請到手機的「設定」允許瀏覽器使用位置，再按「重新定位」。':'暫時抓不到位置，請到室外或稍後按「重新定位」。';nbRender();},
+    {enableHighAccuracy:true,timeout:12000,maximumAge:60000});
+}
+function nbFmt(km){return km<1?Math.round(km*1000/10)*10+' m':km.toFixed(km<10?1:0)+' km';}
+function nbRender(){
+  const dists=[[500,'500 m'],[1000,'1 km'],[2000,'2 km'],[5000,'5 km']];
+  document.getElementById('nb-dist').innerHTML=dists.map(([d,l])=>`<button class="nb-chip ${nbState.dist===d?'on':''}" onclick="nbSetDist(${d})">${l} 內</button>`).join('');
+  document.getElementById('nb-food').classList.toggle('on',nbState.food);
+  document.getElementById('nb-open').classList.toggle('on',nbState.openOnly);
+  const st=document.getElementById('nb-status'), list=document.getElementById('nb-list');
+  if(nbState.loading){st.innerHTML=`${ic('loader')}定位中…`;list.innerHTML='';return;}
+  if(nbState.err){st.innerHTML=`<span class="nb-err">${nbState.err}</span>`;list.innerHTML='';return;}
+  if(!nbState.pos){st.textContent='';list.innerHTML='';return;}
+  const iso=jstNow().iso, ref=TP_DATES.includes(iso)?iso:tpSel;
+  let all=[];
+  PK_REGIONS.forEach(([r])=>(pkData[r]||[]).forEach(x=>{const ps=pkPos(r,x); if(!ps) return; all.push({r,x,km:tpKm(nbState.pos,ps.p),exact:ps.exact});}));
+  all.sort((a,b)=>a.km-b.km);
+  let res=all.filter(o=>o.km*1000<=nbState.dist);
+  if(nbState.food) res=res.filter(o=>NB_FOOD.includes(o.x.category));
+  let noHrs=0;
+  if(nbState.openOnly){res=res.filter(o=>{const s=hrsStatus(o.x,iso); if(!s){noHrs++;return false;} return s.k==='open'||s.k==='soon';});}
+  const near=all[0];
+  st.innerHTML=`${ic('map-pin')}${res.length?`找到 ${res.length} 個地點`:'範圍內沒有符合的地點'}・距離依商圈位置估算${noHrs?`・${noHrs} 個沒有營業時間資料，已略過`:''}`;
+  if(!res.length){
+    list.innerHTML=near?`<div class="nb-empty">最近的口袋名單地點是「${pkEsc(near.x.name)}」（${TP_REGION_NAME[near.r]}・${pkEsc(near.x.zone||'')}），直線約 ${nbFmt(near.km)}。<br>可以放寬距離或關掉篩選。</div>`:'<div class="nb-empty">名單裡沒有可以計算位置的地點。</div>';
+    return;
+  }
+  list.innerHTML=res.slice(0,40).map(o=>{const x=o.x, id=pkEsc(x.id), s=hrsStatus(x,iso), added=(tpPlans[ref]||[]).some(t=>t.r===o.r&&String(t.id)===String(x.id));
+    const q=encodeURIComponent(x.name+' '+(x.address||((tpZoneKey(x.zone)&&tpZoneKey(x.zone)!=='市區'?tpZoneKey(x.zone)+' ':'')+TP_REGION_NAME[o.r])));
+    return `<div class="nb-item">
+      <div class="nb-dist">${!o.exact&&o.km<0.3?'同一區':(o.exact?'':'約 ')+nbFmt(o.km)}</div>
+      <div class="nb-body"><div class="pk-name">${pkEsc(x.name)}${pkHot(x)?'<span class="pk-hot">高分</span>':''}</div>
+        <div class="pk-meta"><span class="pk-catlbl">${pkEsc(x.category)}</span>${x.zone?`<span class="pk-zone">${ic('map-pin')}${pkEsc(x.zone)}</span>`:''}${s?hrsBadge(s):''}</div>
+        <div class="nb-acts"><a class="pk-nav" href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener">${ic('navigation')}導航</a>
+        <button class="pk-today ${added?'on':''}" onclick="tpToggle('${o.r}','${id}','${ref}')">${added?ic('check')+'已加入 '+tpMD(ref):ic('plus')+'加入 '+tpMD(ref)}</button></div></div></div>`;}).join('');
 }
 tpLoad(); tpRender(); pkRender();
 
 
+
+const _renderItin=renderItinerary;
+renderItinerary=function(di){_renderItin(di);if(typeof dpRender==='function'&&typeof tpPlans!=='undefined')dpRender(di);};
 buildTabs();renderItinerary(0);renderTransport();renderChecklist();renderExp();checkBadge();
 // Show reminder on load if there are urgent items today
 (function(){
