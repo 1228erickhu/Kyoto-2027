@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>我們的家族京都之旅 2027</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#FDFBF7">
+<meta name="theme-color" content="#FAF7F2">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -13,7 +13,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>#kyoto-map{height:360px;width:100%;margin-top:16px;border-radius:4px;overflow:hidden;}
 /* ══ 軌道式日期選擇（仿影片）══ */
 .rail{position:relative;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin:0 -20px 14px;padding:0 20px;}
@@ -1299,51 +1299,156 @@ nav{background:rgba(253,251,247,.88);border-bottom:1px solid var(--border);}
 .nb-acts .pk-nav{background:var(--ink);border:none;}
 .nb-acts .pk-today{background:var(--accent-soft);border:none;color:var(--accent-ink);}
 .nb-acts .pk-today.on{background:var(--accent);color:#fff;}
+
+/* ════════════════════════════════════════════
+   CANVA 風格（覆寫層）
+   ════════════════════════════════════════════ */
+:root{
+  --paper:#FAF7F2; --ink:#3F3530; --ink-2:#64584F; --muted:#8E8278; --faint:#B7ABA1;
+  --border:#EFE6DB; --border-2:#E4D8CA; --light:#F4EEE6;
+  --butter:#FFD95A; --butter-soft:#FFF3C4; --mint:#7FD8B6; --mint-soft:#D9F5EA;
+  --taro:#F4A6C8; --taro-soft:#FDE3EF; --sea:#8EC5EE; --sea-soft:#DDEEFB; --coral:#FF8A70; --coral-soft:#FFE3DB;
+  --accent:#7B6CF0; --accent-soft:#ECE9FE; --accent-ink:#4E3FD0;
+  --r-lg:24px; --r-md:20px; --r-sm:14px;
+  --sh-1:0 4px 14px rgba(63,53,48,.05);
+  --sh-2:0 10px 28px rgba(63,53,48,.07);
+  --sh-3:0 16px 40px rgba(63,53,48,.14);
+}
+body{background:var(--paper);}
+.hero,nav:not(.fnav){display:none !important;}
+.section{padding-top:18px !important;}
+.sec-title{font-size:20px;font-weight:900;letter-spacing:-.01em;margin:4px 2px 14px;}
+.rail,.rail-hint{display:none !important;}
+/* 頂部 */
+.cv-top{padding:calc(14px + env(safe-area-inset-top)) 16px 10px;background:var(--paper);}
+.cv-brand{display:flex;align-items:baseline;gap:6px;font-family:'DM Serif Display',Georgia,serif !important;font-size:27px;line-height:1.1;color:var(--ink);letter-spacing:.01em;margin:2px 2px 12px;}
+.cv-brand *{font-family:'DM Serif Display',Georgia,serif !important;}
+.cv-brand .ic{width:20px;height:20px;margin:0 2px 0 0;color:var(--butter);fill:var(--butter);align-self:center;}
+.cv-brand b{font-weight:400;color:#fff;background:var(--coral);border-radius:10px;padding:1px 9px 2px;font-size:20px;transform:rotate(-3deg);display:inline-block;margin-left:4px;}
+.cv-search{display:flex;align-items:center;gap:8px;height:46px;background:#fff;border-radius:999px;padding:0 8px 0 16px;box-shadow:var(--sh-2);color:var(--faint);}
+.cv-search .ic{margin:0;width:18px;height:18px;}
+.cv-search input{flex:1;min-width:0;border:none;outline:none;background:transparent;font-size:15px;color:var(--ink);}
+.cv-search input::-webkit-search-cancel-button{display:none;}
+.cv-clear{display:none;width:32px;height:32px;border:none;border-radius:50%;background:var(--light);color:var(--muted);align-items:center;justify-content:center;cursor:pointer;}
+.cv-clear .ic{margin:0;width:15px;height:15px;}
+.cv-search.has .cv-clear{display:flex;}
+.cv-dates{position:sticky;top:0;z-index:150;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:10px 16px 12px;background:rgba(250,247,242,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+.cv-dates::-webkit-scrollbar{display:none;}
+.cv-date{position:relative;flex:0 0 auto;width:60px;display:flex;flex-direction:column;align-items:center;padding:7px 0 8px;border:none;border-radius:20px;background:var(--tint);color:var(--ink);cursor:pointer;transition:transform .15s;-webkit-tap-highlight-color:transparent;}
+.cv-date:active{transform:scale(.95);}
+.cv-date b{font-size:17px;font-weight:900;font-variant-numeric:tabular-nums;line-height:1.2;}
+.cv-wd{font-size:10px;font-weight:700;opacity:.65;}
+.cv-day{font-size:9px;font-weight:800;opacity:.45;letter-spacing:.04em;}
+.cv-date.active{background:var(--ink);color:#fff;box-shadow:0 8px 18px rgba(63,53,48,.25);transform:translateY(-2px);}
+.cv-date.active .cv-wd,.cv-date.active .cv-day{opacity:.8;}
+.cv-date.today:not(.active){outline:2.5px solid var(--coral);outline-offset:-2.5px;}
+.cv-dot{position:absolute;top:-5px;right:-3px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--coral);color:#fff;font-size:10px;font-style:normal;font-weight:800;line-height:18px;text-align:center;border:2px solid var(--paper);}
+/* 卡片共用 */
+.kawaii-banner{display:none !important;}
+.hotel-card,.tr-card,.cl-item,.sum-card,.budget-bar-wrap,.add-exp,.exp-wrap,.flt-card,.move-card,.day-hero,.dp,.tp,.pk-form,.pk-backup,.tips{border:none !important;border-radius:var(--r-lg) !important;box-shadow:var(--sh-2) !important;}
+.tl2-card{border:none !important;border-radius:18px !important;box-shadow:var(--sh-1) !important;}
+.day-hero{background:linear-gradient(135deg,#FFF3C4,#FDE3EF) !important;}
+.day-hero::before{display:none;}
+.day-hero-ill{background:#fff;border-radius:20px;}
+.day-hero-no{color:var(--coral);}
+.day-badge{background:var(--coral);}
+.mv-pill{border-radius:999px;}
+.mv-train{background:var(--mint-soft);color:#2D8A66;} .mv-plane{background:var(--sea-soft);color:#2F6E9E;}
+.mv-walk{background:var(--butter-soft);color:#8A6A0A;} .mv-car{background:var(--coral-soft);color:#C24E33;}
+.mv-shink{background:var(--accent-soft);color:var(--accent-ink);} .mv-bus{background:var(--sea-soft);color:#2F6E9E;}
+.tl2-row:has(.tl2-card.hi) .tl2-dot,.tp-num{background:var(--coral) !important;border-color:var(--coral) !important;}
+.tl2-title .star{color:var(--coral);}
+/* 排程面板 */
+.tp-head{background:linear-gradient(135deg,#7B6CF0,#F4A6C8) !important;}
+.tp-row{background:var(--paper);border-radius:18px;}
+/* 地區列與 chips */
+.pk-regions{gap:8px;padding:2px 0 4px;margin-bottom:12px;}
+.pk-region{border-radius:999px !important;padding:9px 15px !important;font-weight:800 !important;box-shadow:var(--sh-1);}
+.pk-region.active{background:var(--ink) !important;}
+.pk-region.dim{opacity:.4;}
+.pk-region.add{background:var(--butter) !important;color:var(--ink) !important;padding:9px 12px !important;}
+.pk-region.add .ic{margin:0;width:18px;height:18px;}
+.pk-cats{gap:6px;margin-bottom:10px;}
+.pk-cat{border-radius:999px;font-weight:700;}
+.pk-cat.active{background:var(--ink) !important;color:#fff !important;}
+.pk-cat.active span{color:rgba(255,255,255,.7) !important;}
+#pk-zones .pk-cat.active{background:var(--mint) !important;color:#14513B !important;}
+#pk-zones .pk-cat.active span{color:#14513B !important;}
+/* ══ Canva 圖塊卡片 ══ */
+.pk-list{gap:14px !important;}
+.pk-item{border-radius:24px !important;box-shadow:0 10px 26px rgba(63,53,48,.06) !important;}
+.pk-hero{height:96px;background:
+   radial-gradient(circle at 82% 22%,rgba(255,255,255,.55) 0 22px,transparent 23px),
+   radial-gradient(circle at 12% 110%,rgba(255,255,255,.35) 0 46px,transparent 47px),
+   radial-gradient(rgba(255,255,255,.55) 1.4px,transparent 1.6px) 0 0/12px 12px,
+   linear-gradient(135deg,var(--c1),var(--c2)) !important;}
+.pk-item{--c1:#E6DDD2;--c2:#F7F1EA;--ci:#8E8278;}
+.pk-item[data-cat="景點"]{--c1:#B9AEFA;--c2:#E3DEFF;--ci:#5B4BD6;}
+.pk-item[data-cat="美食"]{--c1:#FFAE96;--c2:#FFE1D6;--ci:#D2502F;}
+.pk-item[data-cat="甜點"]{--c1:#F7A9CB;--c2:#FDE0EE;--ci:#C23F7A;}
+.pk-item[data-cat="咖啡"],.pk-item[data-cat="咖啡甜點"],.pk-item[data-cat="咖啡美食"]{--c1:#FFD95A;--c2:#FFF1BE;--ci:#9A6E00;}
+.pk-item[data-cat="麵包甜點"]{--c1:#FFC97A;--c2:#FFEBC8;--ci:#A9620C;}
+.pk-item[data-cat="購物"],.pk-item[data-cat="購物景點"]{--c1:#7FD8B6;--c2:#D3F4E7;--ci:#1E7E5A;}
+.pk-item[data-cat="住宿"]{--c1:#8EC5EE;--c2:#DCEEFC;--ci:#2B6A9C;}
+.pk-hero-ic{width:56px;height:56px;border-radius:20px;background:#fff;transform:rotate(-8deg);box-shadow:0 8px 18px rgba(63,53,48,.10);}
+.pk-zonepill{left:10px;bottom:10px;background:rgba(255,255,255,.92);font-weight:800;padding:3px 10px;}
+.pk-hero .pk-hot{right:10px;top:10px;background:var(--ink);color:var(--butter);font-size:10px;font-weight:900;letter-spacing:.08em;border-radius:999px;padding:3px 9px;transform:rotate(4deg);}
+.pk-been{left:10px;top:10px;width:24px;height:24px;padding:0;justify-content:center;border-radius:50%;background:var(--mint);color:#fff;}
+.pk-been .ic{margin:0;width:14px;height:14px;}
+.pk-content{padding:11px 12px 12px;}
+.pk-name{font-size:15px;font-weight:900;letter-spacing:-.005em;}
+.pk-rate span{font-weight:800 !important;}
+.pk-g{background:var(--butter) !important;color:#5A4300 !important;}
+.pk-g.hi{background:#FFC93C !important;color:#3F2E00 !important;}
+.pk-t{background:var(--coral-soft) !important;color:#C24E33 !important;}
+.pk-t.hi{background:var(--coral) !important;color:#fff !important;}
+.hb.open{background:var(--mint-soft);color:#1E7E5A;}
+.hb.closed{background:#FFE0E6;color:#C0264B;}
+.hb.soon{background:var(--butter-soft);color:#8A6000;}
+.pk-actions{gap:8px !important;margin-top:12px !important;}
+.pk-actions .pk-nav,.pk-actions .pk-today{flex:1 !important;height:42px !important;border-radius:16px !important;font-size:13.5px !important;font-weight:800 !important;}
+.pk-actions .pk-nav{background:var(--ink) !important;}
+.pk-actions .pk-today{background:var(--butter) !important;color:var(--ink) !important;}
+.pk-actions .pk-today.on{background:var(--mint) !important;color:#0F4A35 !important;}
+.pk-actions .pk-nav span{display:inline !important;}
+.pk-actions .pk-nav{flex:1 !important;padding:0 !important;}
+.pk-more-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+.pk-more-btns .pk-visit,.pk-more-btns .pk-del{display:inline-flex;align-items:center;gap:3px;height:34px;padding:0 13px;border-radius:999px;font-size:12.5px;font-weight:700;border:none;cursor:pointer;margin:0;width:auto;}
+.pk-more-btns .pk-visit{background:var(--taro-soft);color:#B23E78;}
+.pk-more-btns .pk-visit.on{background:var(--mint-soft);color:#1E7E5A;}
+.pk-more-btns .pk-del{background:var(--light);color:var(--muted);}
+.pk-more-btns .ic{width:15px;height:15px;}
+/* FAB */
+.nb-fab{background:var(--ink) !important;color:#fff;box-shadow:0 12px 28px rgba(63,53,48,.3) !important;padding:0 18px 0 14px;}
+.nb-fab .ic{color:var(--butter);}
+.fnav{border-radius:26px !important;}
+.fnav-btn.active{background:var(--butter) !important;color:var(--ink) !important;}
+.fnav-badge{background:var(--coral) !important;}
+.nb-dist{background:var(--butter-soft) !important;color:#7A5A00 !important;font-weight:800;}
+.nb-chip.on{background:var(--ink) !important;}
+.nb-acts .pk-today{background:var(--butter) !important;color:var(--ink) !important;}
+.nb-acts .pk-today.on{background:var(--mint) !important;color:#0F4A35 !important;}
+.bell-btn{position:absolute !important;top:calc(12px + env(safe-area-inset-top)) !important;right:14px !important;bottom:auto !important;width:42px !important;height:42px !important;background:#fff !important;box-shadow:var(--sh-1) !important;}
+.cv-top{position:relative;}
+.cv-brand{padding-right:50px;}
+.nb-item .pk-hot{background:var(--ink);color:var(--butter);font-weight:900;letter-spacing:.06em;}
 </style>
 <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 
-<!-- MORANDI HERO -->
-<div class="hero">
-  <div id="snow-container"></div>
-  <div class="hero-content">
-    <div class="hero-label">
-      <div class="hero-jp">我們的家族京都之旅</div>
-      <div class="hero-sub">Kyoto Family Trip · 2027 · 六人同行</div>
-      <div class="hero-meta">
-        <div class="hero-pill">去程 <span>JX306</span> 台中→神戶</div>
-        <div class="hero-pill">回程 <span>JX839</span> 名古屋→桃園</div>
-        <div class="hero-pill">日期 <span>1/18–1/28</span> 11天</div>
-        <div class="hero-pill">成員 <span>大人 2 · 小孩 4</span></div>
-      </div>
-    </div>
-    <div class="hero-deco">— 神戶 · 京都 · 大阪 · 奈良 · 名古屋 —</div>
-  </div>
-</div>
-
-<nav>
-  <button class="nav-btn active" onclick="showSec('itinerary',this)">每日行程</button>
-  <button class="nav-btn" onclick="showSec('pocket',this)">口袋名單</button>
-  <button class="nav-btn" onclick="showSec('hotel',this)">住宿</button>
-  <button class="nav-btn" onclick="showSec('transport',this)">交通</button>
-  <button class="nav-btn" onclick="showSec('checklist',this)">待辦</button>
-  <button class="nav-btn" onclick="showSec('expense',this)">記帳</button>
-</nav>
+<div id="snow-container"></div>
+<header class="cv-top">
+  <div class="cv-brand"><i data-lucide="sparkles" class="ic"></i><span>Kyoto &amp; Nagoya</span><b>2027</b></div>
+  <label class="cv-search"><i data-lucide="search" class="ic"></i><input id="gs-q" type="search" placeholder="搜尋口袋名單" oninput="gsInput()" autocomplete="off"><button type="button" class="cv-clear" onclick="gsClear()" aria-label="清除"><i data-lucide="x" class="ic"></i></button></label>
+</header>
+<div class="cv-dates" id="cv-dates"></div>
 
 <!-- ITINERARY -->
 <div id="section-itinerary" class="section active">
   <div class="nb-page">
-  <div class="kawaii-banner">
-    <div class="kawaii-banner-icon"><i data-lucide="map" class="ic"></i></div>
-    <div class="kawaii-banner-text">
-      <div class="kawaii-banner-title">京都・名古屋 11 天 10 夜家族旅行</div>
-      <div class="kawaii-banner-sub">1/18（一）出發 → 1/28（四）回台</div>
-    </div>
-  </div>
-  <div class="sec-title"><span>01</span>每日行程</div>
+  <div class="sec-title">每日行程</div>
   <div class="rail" id="rail"><div class="rail-inner" id="rail-inner"></div></div>
-  <div class="rail-hint"><i data-lucide="move-horizontal" class="ic"></i>左右滑動或點日期切換</div>
   <div id="day-hero"></div>
   <div class="tl2" id="timeline"></div>
   <div class="dp" id="day-picks"></div>
@@ -1353,8 +1458,7 @@ nav{background:rgba(253,251,247,.88);border-bottom:1px solid var(--border);}
 <!-- POCKET LIST -->
 <div id="section-pocket" class="section">
   <div class="nb-page">
-  <div class="sec-title"><span>02</span>口袋名單</div>
-  <div class="sec-desc">想去的店和景點都在這裡。點「導航」直接開 Google 地圖，去過的按「已造訪」。所有變更都存在這台裝置。</div>
+  <div class="sec-title">口袋名單</div>
 
   <div class="tp" id="tp">
     <div class="tp-head">
@@ -1365,7 +1469,6 @@ nav{background:rgba(253,251,247,.88);border-bottom:1px solid var(--border);}
         <button class="tp-tool icon" onclick="tpToggleOpen()" id="tp-fold" title="收合／展開"><i data-lucide="chevron-up" class="ic"></i></button>
       </div>
     </div>
-    <div class="tp-dates" id="tp-dates"></div>
     <div class="tp-body" id="tp-body">
       <div class="tp-list" id="tp-list"></div>
       <div class="tp-warns" id="tp-warns"></div>
@@ -1373,13 +1476,7 @@ nav{background:rgba(253,251,247,.88);border-bottom:1px solid var(--border);}
   </div>
 
   <div class="pk-regions" id="pk-regions"></div>
-  <div class="pk-toolbar">
-    <div class="pk-search"><i data-lucide="search" class="ic"></i><input id="pk-q" type="search" placeholder="搜尋店名、商圈或標籤" oninput="pkRender()"></div>
-    <button class="pk-add-toggle" onclick="pkToggleForm()"><i data-lucide="plus" class="ic"></i>新增</button>
-  </div>
-  <div class="pk-filter-lbl">分類</div>
   <div class="pk-cats" id="pk-cats"></div>
-  <div class="pk-filter-lbl">商圈</div>
   <div class="pk-cats" id="pk-zones"></div>
 
   <div class="pk-form" id="pk-form">
@@ -1405,7 +1502,6 @@ nav{background:rgba(253,251,247,.88);border-bottom:1px solid var(--border);}
     <label class="pk-sort">排序<select id="pk-sort" onchange="pkSetSort(this.value)"><option value="default">分類</option><option value="google">Google 高→低</option><option value="tabelog">食べログ 高→低</option></select></label>
   </div>
   <label class="pk-switch"><input type="checkbox" id="pk-unvisited" onchange="pkRender()"><span class="pk-switch-ui"></span>只看還沒去過的</label>
-  <div class="pk-ratenote">評分是整理名單時的參考值，可能和現在的 Google／食べログ不同，點評分可修改。<span class="pk-hot">高分</span>＝Google 4.5 以上或食べログ 3.5 以上。「G」是 Google、「食」是食べログ。點卡片空白處可以看完整標籤。</div>
   <div class="pk-list" id="pk-list"></div>
 
   <div class="pk-backup">
@@ -1424,9 +1520,7 @@ nav{background:rgba(253,251,247,.88);border-bottom:1px solid var(--border);}
 <!-- HOTEL -->
 <div id="section-hotel" class="section">
   <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.8s ease-in-out infinite;"><i data-lucide="hotel" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">住宿：京都 → 名古屋</div><div class="kawaii-banner-sub">京都 7 晚 ＋ 名古屋 3 晚</div></div></div>
-  <div class="sec-title"><span>03</span>住宿資訊</div>
-  <div class="sec-desc">京都 7 晚 ＋ 名古屋 3 晚，1/25 是大移動日。</div>
+  <div class="sec-title">住宿資訊</div>
 
   <div class="stay-bar">
     <div class="stay-seg kyoto"><b>京都</b><span>1/18–1/25 · 7 晚</span></div>
@@ -1486,9 +1580,7 @@ nav{background:rgba(253,251,247,.88);border-bottom:1px solid var(--border);}
 <!-- TRANSPORT -->
 <div id="section-transport" class="section">
   <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.6s ease-in-out infinite;"><i data-lucide="train-front" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">交通資訊 ＆ 已訂機票</div><div class="kawaii-banner-sub">抵達後優先購買 ICOCA 卡</div></div></div>
-  <div class="sec-title"><span>04</span>交通資訊</div>
-  <div class="sec-desc">主要票券與費用整理，抵達後優先購買 ICOCA。</div>
+  <div class="sec-title">交通資訊</div>
 
   <div class="flt-head"><i data-lucide="ticket-check" class="ic"></i>已訂機票・星宇航空</div>
   <div class="flt-card">
@@ -1517,9 +1609,7 @@ nav{background:rgba(253,251,247,.88);border-bottom:1px solid var(--border);}
 <!-- CHECKLIST -->
 <div id="section-checklist" class="section">
   <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.2s ease-in-out infinite;"><i data-lucide="backpack" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">出發前別忘記！</div><div class="kawaii-banner-sub">點擊項目打勾，勾選狀態自動儲存</div></div></div>
-  <div class="sec-title"><span>05</span>出發前待辦</div>
-  <div class="sec-desc">點擊項目打勾，勾選狀態會自動儲存。</div>
+  <div class="sec-title">出發前待辦</div>
   <div class="alert-box" style="margin-bottom:18px"><p><i data-lucide="triangle-alert" class="ic"></i>DAY5 天橋立（1/22）可能下雪，記得準備防滑鞋！</p></div>
   <div class="cl-section"><div class="cl-title">行前必辦</div><div id="cl-before"></div></div>
   <div class="cl-section"><div class="cl-title">行李打包清單</div><div id="cl-pack"></div></div>
@@ -1529,9 +1619,7 @@ nav{background:rgba(253,251,247,.88);border-bottom:1px solid var(--border);}
 <!-- EXPENSE -->
 <div id="section-expense" class="section">
   <div class="nb-page">
-  <div class="kawaii-banner"><div class="kawaii-banner-icon" style="animation:wiggle 2.4s ease-in-out infinite;"><i data-lucide="wallet" class="ic"></i></div><div class="kawaii-banner-text"><div class="kawaii-banner-title">旅遊記帳</div><div class="kawaii-banner-sub">記錄每筆費用，自動換算台幣</div></div></div>
-  <div class="sec-title"><span>06</span>旅遊記帳</div>
-  <div class="sec-desc">記錄每筆費用（日圓 ¥），自動換算台幣，資料儲存在此裝置。</div>
+  <div class="sec-title">旅遊記帳</div>
 
   <!-- Budget bar -->
   <div class="budget-bar-wrap">
@@ -1617,7 +1705,7 @@ nav{background:rgba(253,251,247,.88);border-bottom:1px solid var(--border);}
   <button class="fnav-btn" data-sec="checklist" onclick="goSec('checklist')"><i data-lucide="list-checks" class="ic"></i><span>待辦</span></button>
   <button class="fnav-btn" data-sec="expense" onclick="goSec('expense')"><i data-lucide="wallet" class="ic"></i><span>記帳</span></button>
 </nav>
-<button class="nb-fab" id="nb-fab" onclick="nbOpen()" aria-label="附近口袋名單"><i data-lucide="locate-fixed" class="ic"></i><span>附近</span></button>
+<button class="nb-fab" id="nb-fab" onclick="nbOpen()" aria-label="附近口袋名單"><i data-lucide="locate-fixed" class="ic"></i><span>附近空檔快搜</span></button>
 <div class="nb-overlay" id="nb-overlay" onclick="if(event.target===this)nbClose()">
   <div class="nb-sheet" role="dialog" aria-label="附近口袋名單">
     <div class="nb-grab"></div>
@@ -2114,7 +2202,7 @@ function showSec(id,btn){
   document.getElementById('section-'+id).classList.add('active');
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   if(btn)btn.classList.add('active');
-  window.scrollTo({top:document.querySelector('nav').offsetTop-1,behavior:'smooth'});
+  const top=document.querySelector('.cv-top'); window.scrollTo({top:top?top.offsetHeight:0,behavior:'smooth'});
 }
 
 // ── Flight Calculator ──
@@ -2271,9 +2359,7 @@ showSec=function(id,btn){
   document.querySelectorAll('.fnav-btn').forEach(b=>b.classList.toggle('active',b.dataset.sec===id));
 };
 function goSec(id){
-  const top=[...document.querySelectorAll('nav:not(.fnav) .nav-btn')].find(b=>(b.getAttribute('onclick')||'').includes("'"+id+"'"));
-  showSec(id,top);
-  if(top) top.scrollIntoView({inline:'center',block:'nearest'});
+  showSec(id,null);
 }
 
 // ══ 口袋名單 ══
@@ -2335,7 +2421,7 @@ function pkLoad(){
 }
 function pkSave(){try{localStorage.setItem(PK_KEY,JSON.stringify(pkData));}catch(e){alert('儲存失敗：瀏覽器可能關閉了儲存功能');}}
 function pkFind(id){return (pkData[pkRegion]||[]).find(i=>String(i.id)===String(id));}
-function pkSetRegion(r){pkRegion=r;pkCat='全部';pkZone='全部';pkRender();window.scrollTo({top:document.getElementById('pk-regions').getBoundingClientRect().top+scrollY-70});}
+function pkSetRegion(r){pkRegion=r;pkCat='全部';pkZone='全部';pkRender();window.scrollTo({top:document.getElementById('pk-regions').getBoundingClientRect().top+scrollY-90});}
 function pkSetCat(v){pkCat=v;pkRender();}
 function pkSetZone(v){pkZone=v;pkRender();}
 function pkSetSort(v){pkSort=v;pkRender();}
@@ -2344,11 +2430,15 @@ function pkChips(list,cur,fn){
 }
 function pkRender(){
   const all=PK_REGIONS.reduce((n,[k])=>n+pkData[k].length,0);
+  const q=(document.getElementById('gs-q').value||'').trim().toLowerCase();
+  const hit=x=>!q||(x.name+' '+(x.zone||'')+' '+(x.tags||[]).join(' ')+' '+(x.address||'')+' '+x.category).toLowerCase().includes(q);
+  const cnt=Object.fromEntries(PK_REGIONS.map(([k])=>[k,pkData[k].filter(hit).length]));
+  if(q&&!cnt[pkRegion]){const f=PK_REGIONS.find(([k])=>cnt[k]); if(f){pkRegion=f[0];pkCat='全部';pkZone='全部';}}
   document.getElementById('pk-regions').innerHTML=PK_REGIONS.map(([k,l])=>
-    `<button class="pk-region ${k===pkRegion?'active':''}" onclick="pkSetRegion('${k}')">${l}<span>${pkData[k].length}</span></button>`).join('');
+    `<button class="pk-region ${k===pkRegion?'active':''} ${q&&!cnt[k]?'dim':''}" onclick="pkSetRegion('${k}')">${l}<span>${cnt[k]}</span></button>`).join('')+
+    `<button class="pk-region add" onclick="pkToggleForm()" aria-label="新增地點">${ic('plus')}</button>`;
   const list=pkData[pkRegion]||[];
   const onlyNew=document.getElementById('pk-unvisited').checked;
-  const q=(document.getElementById('pk-q').value||'').trim().toLowerCase();
   const base=list.filter(x=>(!onlyNew||!x.visited)&&(!q||(x.name+' '+(x.zone||'')+' '+(x.tags||[]).join(' ')+' '+(x.address||'')+' '+x.category).toLowerCase().includes(q)));
   // 分類 chips（依目前商圈）
   const byZone=base.filter(x=>pkZone==='全部'||x.zone===pkZone);
@@ -2387,28 +2477,29 @@ function pkCard(x){
   const mq=encodeURIComponent(x.name+' '+(x.address||((x.zone&&x.zone!=='市區'?x.zone+' ':'')+rl)));
   const id=pkEsc(x.id), th=PK_CAT_THEME[x.category]||PK_CAT_THEME['其他'];
   const tags=x.tags||[], added=tpHas(pkRegion,x.id), hasHrs=!!(hrsOf(x)||hrsClosed(x).length);
-  return `<div class="pk-item ${x.visited?'visited':''} ${pkOpenIds.has(String(x.id))?'open':''}" data-id="${id}" style="--c1:${th[0]};--c2:${th[1]};--ci:${th[2]}" onclick="pkExpand(event,this)">
+  return `<div class="pk-item ${x.visited?'visited':''} ${pkOpenIds.has(String(x.id))?'open':''}" data-id="${id}" data-cat="${pkEsc(x.category)}" onclick="pkExpand(event,this)">
     <div class="pk-hero">
       <span class="pk-hero-ic">${ic(PK_CAT_ICON[x.category]||'pin')}</span>
-      ${x.zone?`<span class="pk-zonepill">${ic('map-pin')}${pkEsc(x.zone)}</span>`:''}
-      ${pkHot(x)?'<span class="pk-hot">高分</span>':''}
-      ${x.visited?`<span class="pk-been">${ic('circle-check')}去過</span>`:''}
+      ${x.zone?`<span class="pk-zonepill">${pkEsc(x.zone)}</span>`:''}
+      ${pkHot(x)?'<span class="pk-hot">HOT</span>':''}
+      ${x.visited?`<span class="pk-been">${ic('check')}</span>`:''}
     </div>
     <div class="pk-content">
       <div class="pk-name">${pkEsc(x.name)}</div>
       ${pkRateHTML(x)}
       ${hasHrs?pkHoursHTML(x):''}
-      ${tags.length?`<div class="pk-tags">${tags.slice(0,2).map(t=>`<span class="pk-tag">${pkEsc(t)}</span>`).join('')}${tags.length>2?`<span class="pk-tag more">+${tags.length-2}</span>`:''}</div>`:''}
       <div class="pk-more">
         <div class="pk-more-row"><span class="pk-catlbl">${pkEsc(x.category)}</span>${tags.map(t=>`<span class="pk-tag">${pkEsc(t)}</span>`).join('')}</div>
         ${x.address?`<div class="pk-sub">${ic('map-pin')}${pkEsc(x.address)}</div>`:''}
         ${hasHrs?'':pkHoursHTML(x)}
-        <button class="pk-del" onclick="pkDel('${id}')">${ic('trash-2')}從名單刪除</button>
+        <div class="pk-more-btns">
+          <button class="pk-visit ${x.visited?'on':''}" onclick="pkToggleVisited('${id}')">${x.visited?ic('circle-check')+'去過了':ic('heart')+'標記去過'}</button>
+          <button class="pk-del" onclick="pkDel('${id}')">${ic('trash-2')}刪除</button>
+        </div>
       </div>
       <div class="pk-actions">
-        <a class="pk-nav" href="https://www.google.com/maps/search/?api=1&query=${mq}" target="_blank" rel="noopener" aria-label="Google 導航">${ic('navigation')}<span>導航</span></a>
-        <button class="pk-visit ${x.visited?'on':''}" onclick="pkToggleVisited('${id}')" aria-label="${x.visited?'已造訪':'想去'}">${x.visited?ic('circle-check'):ic('heart')}</button>
-        <button class="pk-today ${added?'on':''}" onclick="tpToggle('${pkRegion}','${id}')" aria-label="加入 ${tpMD(tpSel)} 行程">${added?ic('check'):ic('plus')}<span>${tpMD(tpSel)}</span></button>
+        <a class="pk-nav" href="https://www.google.com/maps/search/?api=1&query=${mq}" target="_blank" rel="noopener">${ic('navigation')}<span>導航</span></a>
+        <button class="pk-today ${added?'on':''}" onclick="tpToggle('${pkRegion}','${id}')">${added?ic('check'):ic('plus')}<span>${added?'已加入':'加入'}</span></button>
       </div>
     </div>
   </div>`;
@@ -2549,7 +2640,29 @@ function tpLoad(){
   tpData=tpPlans[tpSel]; tpSave();
 }
 function tpSave(){tpPlans[tpSel]=tpData;try{localStorage.setItem(TP_PLANS_KEY,JSON.stringify({plans:tpPlans,sel:tpSel,open:tpOpen}));}catch(e){}}
-function tpSelect(d){tpSave();tpSel=d;tpData=tpPlans[d];tpOpen=true;tpSave();tpRender();pkRender();}
+function tpSelect(d){tpOpen=true;renderItinerary(Math.max(0,TP_DATES.indexOf(d)));}
+// 頂部日期列（每日行程與排程共用）
+const CV_TINTS=['#FFE9A8','#C8F0DF','#F9CFE1','#CFE6F8','#FFD8C9','#E2D6F8'];
+function cvRenderDates(){
+  const box=document.getElementById('cv-dates'); if(!box) return;
+  const today=jstNow().iso;
+  box.innerHTML=TP_DATES.map((d,i)=>{const k=(tpPlans[d]||[]).length;
+    return `<button class="cv-date ${d===tpSel?'active':''} ${d===today?'today':''}" style="--tint:${CV_TINTS[i%CV_TINTS.length]}" onclick="cvSelect(${i})">
+      <span class="cv-wd">${d===today?'今天':'週'+WD[tpWd(d)]}</span><b>${tpMD(d)}</b><span class="cv-day">DAY ${i+1}</span>${k?`<i class="cv-dot">${k}</i>`:''}</button>`;}).join('');
+  const a=box.querySelector('.cv-date.active'); if(a) a.scrollIntoView({inline:'center',block:'nearest'});
+}
+function cvSelect(i){
+  const sec=(document.querySelector('.section.active')||{}).id||'';
+  if(sec!=='section-pocket'&&sec!=='section-itinerary') showSec('itinerary',null);
+  renderItinerary(i);
+}
+function gsInput(){
+  const q=document.getElementById('gs-q').value.trim();
+  document.querySelector('.cv-search').classList.toggle('has',!!q);
+  if(q&&!document.getElementById('section-pocket').classList.contains('active')) showSec('pocket',null);
+  pkRender();
+}
+function gsClear(){const i=document.getElementById('gs-q'); i.value=''; gsInput(); i.focus();}
 function tpHas(r,id){return tpData.some(t=>t.r===r&&String(t.id)===String(id));}
 function tpLookup(t){return (pkData[t.r]||[]).find(x=>String(x.id)===String(t.id));}
 
@@ -2600,7 +2713,7 @@ function pkEditHours(id){
 // ── 加入／移除 ──
 function tpAddCheck(x,iso){
   const st=hrsStatus(x,iso);
-  if(st&&st.k==='closed') return confirm(`⚠️「${x.name}」${tpMD(iso)}（週${WD[tpWd(iso)]}）公休，確定仍要加入行程嗎？`);
+  if(st&&st.k==='closed'){ alert(`🚫「${x.name}」${tpMD(iso)}（週${WD[tpWd(iso)]}）公休，不能排在這天。\n請在上方換別天再加入。`); return false; }
   if(st&&st.k==='shut') return confirm(`⚠️「${x.name}」今天已經打烊了，確定仍要加入行程嗎？`);
   return true;
 }
@@ -2653,7 +2766,8 @@ function tpRender(){
   const n=tpData.length, today=jstNow().iso;
   document.getElementById('tp-count').textContent=n;
   document.getElementById('tp-title-txt').textContent=`${tpMD(tpSel)}（${WD[tpWd(tpSel)]}）`;
-  document.getElementById('tp-dates').innerHTML=TP_DATES.map((d,i)=>{const k=tpPlans[d].length;
+  cvRenderDates();
+  if(false) TP_DATES.map((d,i)=>{const k=tpPlans[d].length;
     return `<button class="tp-date ${d===tpSel?'active':''} ${d===today?'today':''}" onclick="tpSelect('${d}')"><b>${tpMD(d)}</b><span>${d===today?'今天':'週'+WD[tpWd(d)]}</span>${k?`<i class="tp-dot">${k}</i>`:''}</button>`;}).join('');
   const total=TP_DATES.reduce((s,d)=>s+tpPlans[d].length,0);
   const badge=document.querySelector('.fnav-btn[data-sec="pocket"]');
@@ -2784,8 +2898,13 @@ tpLoad(); tpRender(); pkRender();
 
 
 const _renderItin=renderItinerary;
-renderItinerary=function(di){_renderItin(di);if(typeof dpRender==='function'&&typeof tpPlans!=='undefined')dpRender(di);};
-buildTabs();renderItinerary(0);renderTransport();renderChecklist();renderExp();checkBadge();
+renderItinerary=function(di){
+  _renderItin(di);
+  const d=TP_DATES[di];
+  if(d&&d!==tpSel){tpSave();tpSel=d;tpData=tpPlans[d];tpSave();}
+  tpRender(); pkRender(); dpRender(di);
+};
+buildTabs();renderItinerary(Math.max(0,TP_DATES.indexOf(tpSel)));renderTransport();renderChecklist();renderExp();checkBadge();
 // Show reminder on load if there are urgent items today
 (function(){
   const items=getTodayReminders();

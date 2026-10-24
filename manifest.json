@@ -1,12 +1,12 @@
 {
-  "name": "我們的家族京都之旅 2027",
-  "short_name": "京都 2027",
+  "name": "Kyoto & Nagoya 2027",
+  "short_name": "Kyoto 2027",
   "description": "京都・名古屋 11 天家族旅行：每日行程、口袋名單、住宿、交通與記帳",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#FDFBF7",
-  "theme_color": "#FDFBF7",
+  "background_color": "#FAF7F2",
+  "theme_color": "#FAF7F2",
   "lang": "zh-TW",
   "icons": [
     {
