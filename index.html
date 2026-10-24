@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>我們的家族京都之旅 2027</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0f1729">
+<meta name="theme-color" content="#FDFBF7">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1158,6 +1158,147 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 .tp-head{padding:10px 10px 10px 14px;}
 .tp-tools{gap:4px;flex-shrink:0;}
 .tp-tool{padding:0 8px;}
+
+/* ════════════════════════════════════════════
+   MACARON 馬卡龍改版（覆寫層）
+   ════════════════════════════════════════════ */
+:root{
+  --paper:#FDFBF7; --white:#FFFFFF; --ink:#4A403A; --ink-2:#6E625A; --muted:#91857C; --faint:#B9AEA5;
+  --border:#F1E9E0; --border-2:#E7DCD0; --light:#F7F2EC;
+  --accent:#9A86D6; --accent-soft:#F0EAFC; --accent-ink:#6E58B8;
+  --taro:#C9B6F2; --peach:#FFC8AE; --mint:#AEE2CB; --cream:#F7E3A6; --pink:#F7BDD0; --sky:#BCD8F4;
+  --sage:#5FAE8C; --sage-soft:#E3F5EC; --rose:#D4728A; --rose-soft:#FCE8EE;
+  --sand:#B08A3E; --sand-soft:#FBF1DA; --warm:#D08A62; --warm-soft:#FFEFE6;
+  --r-lg:20px; --r-md:16px; --r-sm:12px;
+  --sh-1:0 4px 14px rgba(74,64,58,.04);
+  --sh-2:0 8px 24px rgba(74,64,58,.06);
+  --sh-3:0 14px 36px rgba(74,64,58,.12);
+}
+body{background:var(--paper);color:var(--ink);}
+::selection{background:var(--taro);}
+/* 頂部 */
+.hero{background:linear-gradient(160deg,#F3ECFD 0%,#FFF1EA 45%,#EAF7F1 100%) !important;border-bottom:none;background-image:none;}
+.hero::before{background:radial-gradient(420px 220px at 15% 10%,rgba(201,182,242,.45),transparent 70%),radial-gradient(380px 200px at 90% 30%,rgba(255,200,174,.45),transparent 70%),radial-gradient(360px 220px at 50% 110%,rgba(174,226,203,.5),transparent 70%) !important;}
+.hero-label::before{background:rgba(255,255,255,.75);border-color:transparent;color:var(--accent-ink);border-radius:999px;}
+.hero-jp{color:var(--ink);}
+.hero-pill{background:rgba(255,255,255,.8);border:none;box-shadow:var(--sh-1);border-radius:999px;}
+.hero-deco{color:var(--muted);}
+nav{background:rgba(253,251,247,.88);border-bottom:1px solid var(--border);}
+.nav-btn.active{color:var(--ink);border-bottom-color:var(--accent);}
+.sec-title{color:var(--ink);}
+.kawaii-banner,.tips,.hotel-card,.tr-card,.cl-item,.sum-card,.budget-bar-wrap,.add-exp,.exp-wrap,.flt-card,.move-card,.day-hero,.tl2-card,.dp,.food-card,.spot-card{border-color:var(--border) !important;border-radius:var(--r-lg);box-shadow:var(--sh-2);}
+.tl2-card{border-radius:var(--r-md);}
+.kawaii-banner-icon{background:var(--accent-soft);border-radius:14px;}
+.day-hero::before{background:linear-gradient(var(--taro),var(--peach));width:5px;}
+.tl2::before{background:var(--border-2);}
+.tl2-row:has(.tl2-card.hi) .tl2-dot{background:var(--accent);border-color:var(--accent);}
+.hotel-badge{background:var(--sage-soft);color:var(--sage);border-radius:999px;}
+.stay-seg.kyoto{background:#F0EAFC;} .stay-seg.nagoya{background:#FFEFE6;}
+.tips{border-left:none !important;background:#FFFDF8;}
+/* 按鈕：可可色主按鈕、粉色系次按鈕 */
+.add-btn,.flight-calc-btn,.budget-set-btn,.reminder-btn.primary,.pk-btn.primary,.pk-add-toggle{background:var(--ink);border-color:var(--ink);border-radius:14px;}
+.filter-btn,.pk-btn,.gm-btn{border-radius:999px;}
+.gm-btn.main{background:var(--ink);}
+/* 底部導覽 */
+.fnav{background:rgba(255,255,255,.9);border:none;border-radius:24px;box-shadow:0 10px 30px rgba(74,64,58,.12);}
+.fnav-btn.active{background:var(--accent-soft);color:var(--accent-ink);}
+.fnav-badge{background:var(--rose);}
+.nb-fab{background:linear-gradient(135deg,#8E78D2,#B49BEA);box-shadow:0 10px 26px rgba(142,120,210,.4);}
+.bell-btn{border:none;box-shadow:var(--sh-3);}
+/* 日期排程面板 */
+.tp{border:none;border-radius:24px;box-shadow:var(--sh-2);}
+.tp-head{background:linear-gradient(135deg,#8E78D2,#B49BEA);}
+.tp-tool{border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.16);border-radius:12px;}
+.tp-dates{background:#FFFDFB;border-bottom-color:var(--border);}
+.tp-date{border-radius:16px;border-color:var(--border);}
+.tp-date.active{background:var(--accent);border-color:var(--accent);}
+.tp-date.today:not(.active){border-color:var(--mint);background:#F2FBF7;}
+.tp-dot{background:var(--rose);}
+.tp-row{background:#FBF8F4;border-radius:16px;}
+.tp-num{background:var(--accent);}
+.tp-warn{border-radius:14px;}
+.tp-warn.red{background:#FDECEF;color:#A63D57;border-color:#F7D3DC;}
+.tp-warn.yellow{background:#FFF7E3;color:#8A6A1C;border-color:#F6E6B8;}
+.tl2-warn{background:#FDECEF;color:#A63D57;border-radius:12px;}
+/* 篩選 chips */
+.pk-region{border:none;border-radius:16px;box-shadow:var(--sh-1);background:#fff;}
+.pk-region.active{background:var(--ink);}
+.pk-search{border:none;border-radius:16px;box-shadow:var(--sh-1);}
+.pk-cat{border:none;background:#fff;box-shadow:var(--sh-1);}
+.pk-cat.active{background:var(--accent-soft);color:var(--accent-ink);}
+.pk-switch input:checked + .pk-switch-ui{background:var(--sage);}
+.pk-form,.pk-backup{border-radius:var(--r-lg);border-color:var(--border);}
+/* 狀態標籤（柔和但仍醒目） */
+.hb{border-radius:999px;padding:2px 8px;}
+.hb.open{background:#E3F5EC;color:#2F8A5E;}
+.hb.soon{background:#FFF1CC;color:#8A5E00;}
+.hb.closed{background:#FCE1E7;color:#B0304F;}
+.pk-hot{background:linear-gradient(135deg,#F28AA5,#F5A98A);border-radius:999px;padding:2px 8px;}
+
+/* ══ 圖塊化卡片 ══ */
+.pk-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start;}
+@media(min-width:720px){.pk-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}}
+@media(max-width:340px){.pk-list{grid-template-columns:1fr;}}
+.pk-item{display:block;padding:0 !important;border:none !important;border-radius:20px !important;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.04) !important;overflow:hidden;cursor:pointer;content-visibility:auto;contain-intrinsic-size:auto 250px;transition:transform .15s ease,box-shadow .15s ease;-webkit-tap-highlight-color:transparent;}
+.pk-item:active{transform:scale(.985);}
+.pk-item.open{grid-column:1/-1;cursor:default;}
+.pk-hero{position:relative;height:86px;background:
+   radial-gradient(60px 60px at 18% 28%,rgba(255,255,255,.55),transparent 70%),
+   radial-gradient(90px 70px at 88% 100%,rgba(255,255,255,.45),transparent 70%),
+   radial-gradient(40px 40px at 70% 18%,rgba(255,255,255,.35),transparent 70%),
+   linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;}
+.pk-item.open .pk-hero{height:104px;}
+.pk-hero-ic{width:52px;height:52px;border-radius:18px;background:rgba(255,255,255,.75);display:flex;align-items:center;justify-content:center;color:var(--ci);box-shadow:0 6px 16px rgba(0,0,0,.05);transform:rotate(-6deg);}
+.pk-hero-ic .ic{margin:0;width:26px;height:26px;stroke-width:1.9;}
+.pk-zonepill{position:absolute;left:8px;bottom:8px;display:inline-flex;align-items:center;max-width:calc(100% - 16px);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:11px;font-weight:700;color:var(--ink);background:rgba(255,255,255,.85);border-radius:999px;padding:3px 9px 3px 7px;}
+.pk-zonepill .ic{width:11px;height:11px;margin:0 2px 0 0;color:var(--ci);}
+.pk-hero .pk-hot{position:absolute;right:8px;top:8px;margin:0;font-size:10px;}
+.pk-been{position:absolute;left:8px;top:8px;display:inline-flex;align-items:center;font-size:10px;font-weight:700;color:#2F8A5E;background:rgba(255,255,255,.9);border-radius:999px;padding:2px 8px 2px 6px;}
+.pk-been .ic{width:12px;height:12px;margin:0 2px 0 0;}
+.pk-item.visited .pk-hero{filter:saturate(.55) brightness(1.03);}
+.pk-item.visited .pk-name{color:var(--muted);}
+.pk-content{padding:10px 11px 11px;}
+.pk-name{font-size:14.5px;font-weight:700;line-height:1.35;color:var(--ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:break-word;}
+.pk-item.open .pk-name{-webkit-line-clamp:unset;font-size:16px;}
+.pk-rate{margin-top:7px;gap:4px;}
+.pk-rate span{font-size:11px;padding:2px 7px;border-radius:999px;}
+.pk-g{background:#FFF4D6;color:#9A7420;}
+.pk-g.hi{background:#FFE7A8;color:#7E5A0A;}
+.pk-t{background:#FFE9E1;color:#B35A3C;}
+.pk-t.hi{background:#FFD6C6;color:#9A4024;}
+.pk-hrs,.pk-hrs-add{margin-top:6px;}
+.pk-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px;}
+.pk-tag{font-size:10.5px;color:var(--ink-2);background:var(--light);border-radius:999px;padding:2px 8px;line-height:1.5;}
+.pk-tag.more{background:none;color:var(--faint);padding:2px 2px;}
+.pk-item.open .pk-tags{display:none;}
+.pk-more{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed var(--border-2);}
+.pk-item.open .pk-more{display:block;}
+.pk-more-row{display:flex;flex-wrap:wrap;gap:4px;}
+.pk-catlbl{border-radius:999px;background:var(--accent-soft);color:var(--accent-ink);padding:2px 9px;}
+.pk-more .pk-del{width:auto;height:auto;display:inline-flex;align-items:center;gap:3px;margin-top:10px;padding:6px 12px;border-radius:999px;background:var(--rose-soft);color:var(--rose);font-size:12px;font-weight:600;}
+.pk-more .pk-del .ic{width:14px;height:14px;}
+.pk-actions{display:flex;gap:6px;margin:10px 0 0 !important;}
+.pk-actions .pk-nav,.pk-actions .pk-visit,.pk-actions .pk-today{height:38px;border-radius:14px;font-size:12.5px;gap:2px;}
+.pk-actions .pk-nav{flex:1.25;background:var(--ink);border:none;color:#fff;}
+.pk-actions .pk-visit{flex:0 0 38px;padding:0;background:#FFF0F4;border:none;color:#D4728A;}
+.pk-actions .pk-visit.on{background:#E3F5EC;color:#2F8A5E;}
+.pk-actions .pk-today{flex:1;background:var(--accent-soft);border:none;color:var(--accent-ink);}
+.pk-actions .pk-today.on{background:var(--accent);color:#fff;}
+.pk-actions .ic{width:16px;height:16px;margin:0;}
+.pk-actions .pk-nav span,.pk-actions .pk-today span{margin-left:3px;}
+@media(max-width:380px){.pk-actions .pk-nav span{display:none;}.pk-actions .pk-nav{flex:0 0 38px;padding:0;}}
+.pk-item.open .pk-actions .pk-nav span{display:inline;}
+.pk-item.open .pk-actions .pk-nav{flex:1.25;}
+/* 附近清單也改成圖塊感 */
+.nb-sheet{background:var(--paper);border-radius:24px 24px 0 0;}
+.nb-item{border:none;border-radius:18px;box-shadow:0 8px 24px rgba(0,0,0,.04);}
+.nb-dist{color:var(--accent-ink);background:var(--accent-soft);border-radius:12px;height:fit-content;padding:6px 8px;text-align:center;}
+.nb-chip{border:none;box-shadow:var(--sh-1);}
+.nb-chip.on{background:var(--accent);color:#fff;}
+.nb-acts .pk-nav,.nb-acts .pk-today{height:38px;border-radius:14px;}
+.nb-acts .pk-nav{background:var(--ink);border:none;}
+.nb-acts .pk-today{background:var(--accent-soft);border:none;color:var(--accent-ink);}
+.nb-acts .pk-today.on{background:var(--accent);color:#fff;}
 </style>
 <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
 </head>
@@ -1264,7 +1405,7 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
     <label class="pk-sort">排序<select id="pk-sort" onchange="pkSetSort(this.value)"><option value="default">分類</option><option value="google">Google 高→低</option><option value="tabelog">食べログ 高→低</option></select></label>
   </div>
   <label class="pk-switch"><input type="checkbox" id="pk-unvisited" onchange="pkRender()"><span class="pk-switch-ui"></span>只看還沒去過的</label>
-  <div class="pk-ratenote">評分是整理名單時的參考值，可能和現在的 Google／食べログ不同，點評分可修改。<span class="pk-hot">高分</span>＝Google 4.5 以上或食べログ 3.5 以上。</div>
+  <div class="pk-ratenote">評分是整理名單時的參考值，可能和現在的 Google／食べログ不同，點評分可修改。<span class="pk-hot">高分</span>＝Google 4.5 以上或食べログ 3.5 以上。「G」是 Google、「食」是食べログ。點卡片空白處可以看完整標籤。</div>
   <div class="pk-list" id="pk-list"></div>
 
   <div class="pk-backup">
@@ -1830,7 +1971,7 @@ const dayTheme=[
   {ill:'flag',bg:'#e8eefc',wave:'#b9c9f5'},
   {ill:'plane-takeoff',bg:'#efe6f7',wave:'#d7c8ff'},
 ];
-const MASCOT_SVG=`<svg viewBox="0 0 28 28"><path d="M14 26s-8-8.2-8-14a8 8 0 0 1 16 0c0 5.8-8 14-8 14z" fill="#0f1729"/><circle cx="14" cy="12" r="3.2" fill="#fff"/></svg>`;
+const MASCOT_SVG=`<svg viewBox="0 0 28 28"><path d="M14 26s-8-8.2-8-14a8 8 0 0 1 16 0c0 5.8-8 14-8 14z" fill="#4A403A"/><circle cx="14" cy="12" r="3.2" fill="#fff"/></svg>`;
 let curDay=0;
 function itRate(it){
   const r=it.rating; if(!r) return '';
@@ -2233,27 +2374,42 @@ function pkRender(){
   document.getElementById('pk-count').textContent=`${rl}・顯示 ${items.length} 項｜已造訪 ${visited}/${list.length}（全部 ${all} 項）`;
   document.getElementById('pk-list').innerHTML=items.length?items.map(pkCard).join(''):`<div class="pk-empty">${q||onlyNew||pkCat!=='全部'||pkZone!=='全部'?'沒有符合條件的地點':'這裡還沒有地點，按「新增」加入吧'}</div>`;
 }
+// 分類 → 馬卡龍配色 [主色, 淺色, 圖示色]
+const PK_CAT_THEME={
+  '景點':['#D9C8F5','#F1EAFD','#7E68C2'],'美食':['#FFCBB0','#FFEADF','#C9714A'],'甜點':['#F8C2D2','#FDE6ED','#C2607E'],
+  '麵包甜點':['#F4D9A8','#FCF0DA','#B07F2E'],'咖啡':['#F3DFA2','#FDF4D8','#A88328'],'咖啡甜點':['#F6D3B5','#FDEEE2','#B27447'],
+  '咖啡美食':['#F6D3B5','#FDEEE2','#B27447'],'購物':['#B8E5D2','#E3F6EE','#4A9B7A'],'購物景點':['#B8E5D2','#E3F6EE','#4A9B7A'],
+  '住宿':['#BCD8F4','#E6F1FC','#4F7FB3'],'其他':['#E3DCD3','#F5F1EC','#8C8079']};
+const pkOpenIds=new Set();
+function pkExpand(e,el){ if(e.target.closest('button,a,input,select,textarea')) return; const id=el.dataset.id; if(pkOpenIds.has(id)) pkOpenIds.delete(id); else pkOpenIds.add(id); el.classList.toggle('open'); }
 function pkCard(x){
   const rl=PK_REGIONS.find(r=>r[0]===pkRegion)[1];
   const mq=encodeURIComponent(x.name+' '+(x.address||((x.zone&&x.zone!=='市區'?x.zone+' ':'')+rl)));
-  const id=pkEsc(x.id);
-  return `<div class="pk-item ${x.visited?'visited':''}">
-    <div class="pk-top">
-      <div class="pk-ic">${ic(PK_CAT_ICON[x.category]||'pin')}</div>
-      <div class="pk-body">
-        <div class="pk-name">${pkEsc(x.name)}${pkHot(x)?'<span class="pk-hot">高分</span>':''}</div>
-        <div class="pk-meta"><span class="pk-catlbl">${pkEsc(x.category)}</span>${x.zone?`<span class="pk-zone">${ic('map-pin')}${pkEsc(x.zone)}</span>`:''}${(x.tags||[]).map(t=>`<span class="pk-tag">${pkEsc(t)}</span>`).join('')}</div>
-        ${pkRateHTML(x)}
-        ${pkHoursHTML(x)}
-        ${x.address?`<div class="pk-sub">${ic('map-pin')}${pkEsc(x.address)}</div>`:''}
-        ${x.businessHours?`<div class="pk-sub">${ic('clock')}${pkEsc(x.businessHours)}</div>`:''}
-      </div>
-      <button class="pk-del" onclick="pkDel('${id}')" title="刪除" aria-label="刪除">${ic('trash-2')}</button>
+  const id=pkEsc(x.id), th=PK_CAT_THEME[x.category]||PK_CAT_THEME['其他'];
+  const tags=x.tags||[], added=tpHas(pkRegion,x.id), hasHrs=!!(hrsOf(x)||hrsClosed(x).length);
+  return `<div class="pk-item ${x.visited?'visited':''} ${pkOpenIds.has(String(x.id))?'open':''}" data-id="${id}" style="--c1:${th[0]};--c2:${th[1]};--ci:${th[2]}" onclick="pkExpand(event,this)">
+    <div class="pk-hero">
+      <span class="pk-hero-ic">${ic(PK_CAT_ICON[x.category]||'pin')}</span>
+      ${x.zone?`<span class="pk-zonepill">${ic('map-pin')}${pkEsc(x.zone)}</span>`:''}
+      ${pkHot(x)?'<span class="pk-hot">高分</span>':''}
+      ${x.visited?`<span class="pk-been">${ic('circle-check')}去過</span>`:''}
     </div>
-    <div class="pk-actions">
-      <a class="pk-nav" href="https://www.google.com/maps/search/?api=1&query=${mq}" target="_blank" rel="noopener">${ic('navigation')}導航</a>
-      <button class="pk-visit ${x.visited?'on':''}" onclick="pkToggleVisited('${id}')">${x.visited?ic('circle-check')+'已造訪':ic('heart')+'想去'}</button>
-      <button class="pk-today ${tpHas(pkRegion,x.id)?'on':''}" onclick="tpToggle('${pkRegion}','${id}')">${tpHas(pkRegion,x.id)?ic('check')+'已加入':ic('plus')+tpMD(tpSel)}</button>
+    <div class="pk-content">
+      <div class="pk-name">${pkEsc(x.name)}</div>
+      ${pkRateHTML(x)}
+      ${hasHrs?pkHoursHTML(x):''}
+      ${tags.length?`<div class="pk-tags">${tags.slice(0,2).map(t=>`<span class="pk-tag">${pkEsc(t)}</span>`).join('')}${tags.length>2?`<span class="pk-tag more">+${tags.length-2}</span>`:''}</div>`:''}
+      <div class="pk-more">
+        <div class="pk-more-row"><span class="pk-catlbl">${pkEsc(x.category)}</span>${tags.map(t=>`<span class="pk-tag">${pkEsc(t)}</span>`).join('')}</div>
+        ${x.address?`<div class="pk-sub">${ic('map-pin')}${pkEsc(x.address)}</div>`:''}
+        ${hasHrs?'':pkHoursHTML(x)}
+        <button class="pk-del" onclick="pkDel('${id}')">${ic('trash-2')}從名單刪除</button>
+      </div>
+      <div class="pk-actions">
+        <a class="pk-nav" href="https://www.google.com/maps/search/?api=1&query=${mq}" target="_blank" rel="noopener" aria-label="Google 導航">${ic('navigation')}<span>導航</span></a>
+        <button class="pk-visit ${x.visited?'on':''}" onclick="pkToggleVisited('${id}')" aria-label="${x.visited?'已造訪':'想去'}">${x.visited?ic('circle-check'):ic('heart')}</button>
+        <button class="pk-today ${added?'on':''}" onclick="tpToggle('${pkRegion}','${id}')" aria-label="加入 ${tpMD(tpSel)} 行程">${added?ic('check'):ic('plus')}<span>${tpMD(tpSel)}</span></button>
+      </div>
     </div>
   </div>`;
 }
@@ -2262,8 +2418,8 @@ function pkRateHTML(x){
   const id=pkEsc(x.id);
   if(g===null&&t===null) return `<button class="pk-rate empty" onclick="pkEditRating('${id}')">${ic('star')}加評分</button>`;
   return `<button class="pk-rate" onclick="pkEditRating('${id}')" title="點一下修改評分">
-    ${g!==null?`<span class="pk-g ${g>=4.5?'hi':''}">${ic('star')}Google ${g.toFixed(1)}</span>`:''}
-    ${t!==null?`<span class="pk-t ${t>=3.5?'hi':''}">食べログ ${t.toFixed(2)}</span>`:''}</button>`;
+    ${g!==null?`<span class="pk-g ${g>=4.5?'hi':''}" title="Google 評分">${ic('star')}G ${g.toFixed(1)}</span>`:''}
+    ${t!==null?`<span class="pk-t ${t>=3.5?'hi':''}" title="食べログ評分">食 ${t.toFixed(2)}</span>`:''}</button>`;
 }
 function pkToggleVisited(id){const x=pkFind(id); if(!x) return; x.visited=!x.visited; if(!x.visited) delete x.visited; pkSave(); pkRender();}
 function pkEditRating(id){
