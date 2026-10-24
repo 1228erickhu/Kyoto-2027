@@ -1044,6 +1044,50 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 .pk-item.visited .pk-name{color:var(--muted);}
 .pk-item.visited .pk-ic{background:var(--sage-soft);color:var(--sage);}
 @media(max-width:380px){.pk-actions{margin-left:0;}}
+
+/* ══ 今日行程規劃區 ══ */
+.tp{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--sh-2);margin:0 0 22px;overflow:hidden;}
+.tp-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 12px 12px 16px;background:var(--ink);color:#fff;}
+.tp-title{display:flex;align-items:center;gap:2px;font-size:15px;font-weight:700;}
+.tp-title .ic{width:18px;height:18px;}
+.tp-count{margin-left:6px;font-size:12px;font-weight:700;background:rgba(255,255,255,.18);border-radius:999px;padding:1px 8px;}
+.tp-tools{display:flex;gap:6px;}
+.tp-tool{display:inline-flex;align-items:center;gap:1px;height:32px;padding:0 10px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-size:12px;font-weight:600;text-decoration:none;cursor:pointer;}
+.tp-tool .ic{width:14px;height:14px;}
+.tp-tool.icon{padding:0 7px;}
+.tp-tool.icon .ic{margin:0;width:18px;height:18px;}
+.tp-tool.off{opacity:.4;pointer-events:none;}
+.tp.closed .tp-body{display:none;}
+.tp-body{padding:10px 10px 12px;}
+.tp-list{display:flex;flex-direction:column;gap:6px;}
+.tp-row{display:flex;align-items:center;gap:8px;background:var(--light);border-radius:10px;padding:6px 6px 6px 2px;transition:box-shadow .15s,background .15s;}
+.tp-row.dragging{background:#fff;box-shadow:var(--sh-3);position:relative;z-index:2;}
+.tp-handle{width:34px;height:40px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:none;background:none;color:var(--faint);cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none;}
+.tp-handle .ic{margin:0;width:18px;height:18px;}
+.tp-num{width:22px;height:22px;flex-shrink:0;border-radius:50%;background:var(--ink);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.tp-info{flex:1;min-width:0;}
+.tp-name{font-size:14px;font-weight:600;line-height:1.35;word-break:break-word;}
+.tp-sub{font-size:11px;color:var(--muted);margin-top:1px;}
+.tp-btns{display:flex;gap:2px;}
+.tp-btns button{width:32px;height:36px;display:flex;align-items:center;justify-content:center;border:none;background:none;border-radius:8px;color:var(--muted);cursor:pointer;}
+.tp-btns button .ic{margin:0;width:17px;height:17px;}
+.tp-btns button:disabled{opacity:.25;}
+.tp-btns button.rm:active,.tp-btns button.rm:hover{color:var(--rose);background:var(--rose-soft);}
+.tp-empty{font-size:13px;color:var(--muted);line-height:1.7;padding:8px 6px;}
+.tp-empty .ic{width:13px;height:13px;margin-right:1px;}
+.tp-note{font-size:11px;color:var(--faint);padding:2px 6px;}
+.tp-warns{display:flex;flex-direction:column;gap:6px;margin-top:10px;}
+.tp-warns:empty{display:none;}
+.tp-warn{display:flex;align-items:flex-start;gap:6px;font-size:12.5px;line-height:1.6;border-radius:10px;padding:9px 11px;}
+.tp-warn .ic{width:16px;height:16px;margin:2px 0 0;flex-shrink:0;}
+.tp-warn.red{background:#fbeceb;color:#9b2c22;border:1px solid #f1cfcb;}
+.tp-warn.yellow{background:#fdf6e3;color:#7a5a13;border:1px solid #f1e2b5;}
+.pk-today{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:2px;height:36px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;background:var(--accent-soft);color:var(--accent-ink);border:1px solid #dfe3f1;-webkit-tap-highlight-color:transparent;}
+.pk-today .ic{width:15px;height:15px;}
+.pk-today.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+.pk-actions{gap:6px;}
+.fnav-btn{position:relative;}
+.fnav-badge{position:absolute;top:2px;right:calc(50% - 20px);min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:var(--accent);color:#fff;font-size:10px;font-weight:700;line-height:16px;text-align:center;}
 </style>
 <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
 </head>
@@ -1099,6 +1143,21 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
   <div class="nb-page">
   <div class="sec-title"><span>02</span>口袋名單</div>
   <div class="sec-desc">想去的店和景點都在這裡。點「導航」直接開 Google 地圖，去過的按「已造訪」。所有變更都存在這台裝置。</div>
+
+  <div class="tp" id="tp">
+    <div class="tp-head">
+      <div class="tp-title"><i data-lucide="route" class="ic"></i>今日行程<span class="tp-count" id="tp-count">0</span></div>
+      <div class="tp-tools">
+        <a class="tp-tool" id="tp-route" target="_blank" rel="noopener" title="整條路線開 Google 地圖"><i data-lucide="map" class="ic"></i>路線</a>
+        <button class="tp-tool" id="tp-clear" onclick="tpClear()" title="清空今日行程"><i data-lucide="eraser" class="ic"></i>清空</button>
+        <button class="tp-tool icon" onclick="tpToggleOpen()" id="tp-fold" title="收合／展開"><i data-lucide="chevron-up" class="ic"></i></button>
+      </div>
+    </div>
+    <div class="tp-body" id="tp-body">
+      <div class="tp-list" id="tp-list"></div>
+      <div class="tp-warns" id="tp-warns"></div>
+    </div>
+  </div>
 
   <div class="pk-regions" id="pk-regions"></div>
   <div class="pk-toolbar">
@@ -2101,6 +2160,7 @@ function pkCard(x){
     <div class="pk-actions">
       <a class="pk-nav" href="https://www.google.com/maps/search/?api=1&query=${mq}" target="_blank" rel="noopener">${ic('navigation')}導航</a>
       <button class="pk-visit ${x.visited?'on':''}" onclick="pkToggleVisited('${id}')">${x.visited?ic('circle-check')+'已造訪':ic('heart')+'想去'}</button>
+      <button class="pk-today ${tpHas(pkRegion,x.id)?'on':''}" onclick="tpToggle('${pkRegion}','${id}')">${tpHas(pkRegion,x.id)?ic('check')+'已加入':ic('plus')+'今日'}</button>
     </div>
   </div>`;
 }
@@ -2178,7 +2238,147 @@ function pkReset(){
   if(!confirm('還原成預設名單？你新增、刪除和「已造訪」紀錄都會消失（建議先匯出備份）。')) return;
   pkData=pkClone(PK_DEFAULT); pkData._meta={v:PK_VER,deleted:[]}; pkSave(); pkCat='全部'; pkZone='全部'; pkRender();
 }
-pkLoad(); pkRender();
+pkLoad();
+
+// ══ 今日行程規劃區 ══
+const TP_KEY='japan2027-today';
+const TP_REGION_NAME={kyoto:'京都',uji:'宇治',nara:'奈良',kobe:'神戶',nagoya:'名古屋',osaka:'大阪'};
+// 各大區代表位置（算直線距離用）
+const TP_REGION_POS={kyoto:[34.9858,135.7588],uji:[34.889,135.800],nara:[34.684,135.828],kobe:[34.6945,135.1955],nagoya:[35.1709,136.8815],osaka:[34.7025,135.4959]};
+// 大區之間的交通（約略值）；lvl: red=建議分開安排, yellow=可同日但注意時間
+const TP_CROSS={
+  'kyoto|nagoya':{lvl:'red',t:'搭新幹線約 35 分鐘，のぞみ指定席 ¥5,910、自由席 ¥5,170'},
+  'kyoto|uji':{lvl:'yellow',t:'JR 奈良線約 20–30 分鐘'},
+  'kyoto|nara':{lvl:'red',t:'近鐵約 35–45 分鐘'},
+  'kobe|kyoto':{lvl:'red',t:'JR 新快速到三宮約 50 分鐘'},
+  'kyoto|osaka':{lvl:'red',t:'JR 新快速約 30 分鐘'},
+  'nara|uji':{lvl:'red',t:'JR 奈良線約 30–40 分鐘'},
+  'kobe|uji':{lvl:'red',t:'約 1.5 小時，經京都轉車'},
+  'nagoya|uji':{lvl:'red',t:'約 1–1.5 小時，新幹線到京都再轉 JR'},
+  'osaka|uji':{lvl:'red',t:'約 1 小時'},
+  'kobe|nara':{lvl:'red',t:'阪神・近鐵直通約 1 小時 15 分'},
+  'nagoya|nara':{lvl:'red',t:'約 1.5–2 小時'},
+  'nara|osaka':{lvl:'red',t:'近鐵約 40 分鐘'},
+  'kobe|nagoya':{lvl:'red',t:'新幹線到新神戶約 65 分鐘'},
+  'kobe|osaka':{lvl:'red',t:'JR 約 25 分鐘'},
+  'nagoya|osaka':{lvl:'red',t:'新幹線約 50 分鐘'}
+};
+// 次分區大概位置（同一大區內距離提醒用；「市區」等不明確的不比對）
+const TP_ZONE_POS={
+  kyoto:{'東山':[35.003,135.781],'祇園':[35.0037,135.775],'八幡':[34.880,135.700],'上京':[35.029,135.757],'太秦':[35.016,135.708],'大原':[35.119,135.835],'滋賀':[35.274,136.004],'烏丸':[35.004,135.760],'三條':[35.009,135.770],'下鴨':[35.039,135.773],'二條':[35.012,135.748],'出町柳':[35.031,135.772],'河原町':[35.004,135.769],'桂':[34.984,135.705],'伏見':[34.967,135.772],'府廳前':[35.021,135.756],'清水寺':[34.995,135.785],'紫野':[35.046,135.743],'北區':[35.055,135.755],'北野':[35.031,135.735],'上賀茂':[35.060,135.753],'五條':[34.996,135.765],'四條烏丸':[35.0035,135.759],'御所':[35.025,135.762],'木屋町':[35.006,135.771],'京都車站':[34.9858,135.7588],'壬生':[35.003,135.742],'宮川町':[35.000,135.772],'寺町':[35.009,135.767],'宮津':[35.565,135.190],'天橋立':[35.565,135.190],'東寺':[34.981,135.747],'四條':[35.004,135.765],'錦市場':[35.005,135.764],'先斗町':[35.006,135.771],'御幸町':[35.006,135.766],'岡崎':[35.013,135.785],'西陣':[35.031,135.745],'烏丸御池':[35.0106,135.7595],'金閣寺':[35.039,135.729],'嵐山':[35.0094,135.6668],'貴船':[35.121,135.763],'鞍馬':[35.117,135.772]},
+  uji:{'宇治車站':[34.889,135.800],'宇治':[34.889,135.807]},
+  nara:{'奈良公園':[34.685,135.843],'近鐵奈良':[34.684,135.828],'平城宮跡':[34.692,135.796],'西之京':[34.669,135.785],'斑鳩':[34.614,135.734],'櫻井':[34.535,135.906],'當麻':[34.515,135.700],'奈良町':[34.677,135.830],'藤井寺':[34.568,135.597],'信貴山':[34.613,135.673]},
+  kobe:{'港島':[34.662,135.218],'須磨':[34.638,135.125],'三宮':[34.6945,135.1955],'南京町':[34.688,135.188],'摩耶':[34.727,135.208],'北野':[34.700,135.190],'元町':[34.689,135.186],'御影':[34.721,135.257],'美利堅公園':[34.682,135.188],'港區':[34.680,135.183],'新神戶':[34.706,135.196]},
+  nagoya:{'榮':[35.1704,136.9083],'熱田':[35.128,136.909],'名站':[35.1709,136.8815],'伏見':[35.169,136.897],'久屋大通':[35.173,136.909],'大須':[35.159,136.902],'今池':[35.165,136.937],'天白區':[35.122,136.973],'本山':[35.163,136.962],'葵區':[35.172,136.925],'常滑':[34.888,136.835],'犬山':[35.388,136.944],'西區':[35.193,136.885],'清須':[35.217,136.843],'港區':[35.090,136.880],'千種':[35.157,136.976],'長久手':[35.175,137.088],'岐阜':[35.90,137.10],'三重':[35.054,136.712],'中區':[35.185,136.900],'綠區':[35.068,136.970],'豐田':[35.083,137.156]},
+  osaka:{}
+};
+let tpData=[], tpOpen=true;
+function tpLoad(){try{const s=JSON.parse(localStorage.getItem(TP_KEY)||'{}');tpData=Array.isArray(s.items)?s.items:[];tpOpen=s.open!==false;}catch(e){tpData=[];}}
+function tpSave(){try{localStorage.setItem(TP_KEY,JSON.stringify({items:tpData,open:tpOpen}));}catch(e){}}
+function tpHas(r,id){return tpData.some(t=>t.r===r&&String(t.id)===String(id));}
+function tpLookup(t){return (pkData[t.r]||[]).find(x=>String(x.id)===String(t.id));}
+function tpToggle(r,id){
+  if(tpHas(r,id)) tpData=tpData.filter(t=>!(t.r===r&&String(t.id)===String(id)));
+  else{const x=(pkData[r]||[]).find(i=>String(i.id)===String(id)); if(!x) return;
+    tpData.push({r,id:x.id,name:x.name,zone:x.zone||'',category:x.category});
+    tpOpen=true;}
+  tpSave(); tpRender(); pkRender();
+}
+function tpRemove(i){tpData.splice(i,1);tpSave();tpRender();pkRender();}
+function tpMove(i,d){const j=i+d; if(j<0||j>=tpData.length) return; [tpData[i],tpData[j]]=[tpData[j],tpData[i]]; tpSave(); tpRender();}
+function tpClear(){if(!tpData.length) return; if(!confirm('清空今日行程？')) return; tpData=[]; tpSave(); tpRender(); pkRender();}
+function tpToggleOpen(){tpOpen=!tpOpen; tpSave(); tpRender();}
+const tpZoneKey=z=>(z||'').split('/')[0].trim();
+function tpKm(a,b){const R=6371,toR=Math.PI/180,dLa=(b[0]-a[0])*toR,dLo=(b[1]-a[1])*toR;
+  const h=Math.sin(dLa/2)**2+Math.cos(a[0]*toR)*Math.cos(b[0]*toR)*Math.sin(dLo/2)**2;return 2*R*Math.asin(Math.sqrt(h));}
+function tpTravelHint(km){ if(km<15) return '單程約 30–50 分鐘'; if(km<30) return '單程約 40–70 分鐘'; if(km<60) return '單程約 1–1.5 小時'; return '單程約 2 小時以上'; }
+function tpWarnings(){
+  const out=[];
+  const regions=[...new Set(tpData.map(t=>t.r))];
+  for(let i=0;i<regions.length;i++) for(let j=i+1;j<regions.length;j++){
+    const a=regions[i],b=regions[j], key=[a,b].sort().join('|'), info=TP_CROSS[key]||{lvl:'red',t:'交通時間較長'};
+    const km=Math.round(tpKm(TP_REGION_POS[a]||TP_REGION_POS.kyoto,TP_REGION_POS[b]||TP_REGION_POS.kyoto));
+    const A=TP_REGION_NAME[a]||a,B=TP_REGION_NAME[b]||b;
+    out.push(info.lvl==='red'
+      ?{lvl:'red',html:`<b>跨區域警示：</b>${A}與${B}直線距離約 ${km} km（${info.t}），建議分開安排！`}
+      :{lvl:'yellow',html:`<b>跨區提醒：</b>${A}與${B}距離約 ${km} km（${info.t}），可以同一天，但要算進交通時間。`});
+  }
+  regions.forEach(r=>{
+    const pos=TP_ZONE_POS[r]||{};
+    const zones=[...new Set(tpData.filter(t=>t.r===r).map(t=>tpZoneKey(t.zone)).filter(z=>pos[z]))];
+    const pairs=[];
+    for(let i=0;i<zones.length;i++) for(let j=i+1;j<zones.length;j++){const km=tpKm(pos[zones[i]],pos[zones[j]]); if(km>=7) pairs.push([zones[i],zones[j],km]);}
+    pairs.sort((x,y)=>y[2]-x[2]);
+    pairs.slice(0,3).forEach(([a,b,km])=>out.push({lvl:'yellow',html:`<b>距離提醒：</b>${TP_REGION_NAME[r]}的「${a}」與「${b}」相距約 ${km.toFixed(km<10?1:0)} km，${tpTravelHint(km)}，請注意拉車時間。`}));
+    if(pairs.length>3) out.push({lvl:'yellow',html:`另外還有 ${pairs.length-3} 組距離較遠的地點。`});
+  });
+  return out.sort((a,b)=>(a.lvl==='red'?0:1)-(b.lvl==='red'?0:1));
+}
+function tpRender(){
+  tpData.forEach(t=>{const x=tpLookup(t); if(x){t.name=x.name;t.zone=x.zone||'';t.category=x.category;}});
+  const n=tpData.length;
+  document.getElementById('tp-count').textContent=n;
+  const badge=document.querySelector('.fnav-btn[data-sec="pocket"]');
+  if(badge){let b=badge.querySelector('.fnav-badge'); if(n){if(!b){b=document.createElement('span');b.className='fnav-badge';badge.appendChild(b);} b.textContent=n;} else if(b) b.remove();}
+  const tp=document.getElementById('tp'); tp.classList.toggle('closed',!tpOpen); tp.classList.toggle('empty',!n);
+  document.getElementById('tp-fold').innerHTML=ic(tpOpen?'chevron-up':'chevron-down');
+  const route=document.getElementById('tp-route');
+  if(n){
+    const q=t=>encodeURIComponent(t.name+' '+(tpZoneKey(t.zone)&&tpZoneKey(t.zone)!=='市區'?tpZoneKey(t.zone)+' ':'')+(TP_REGION_NAME[t.r]||''));
+    const pts=tpData.slice(0,10), dest=pts[pts.length-1], wps=pts.slice(0,-1);
+    route.href=`https://www.google.com/maps/dir/?api=1&destination=${q(dest)}${wps.length?'&waypoints='+wps.map(q).join('%7C'):''}`;
+    route.classList.remove('off');
+  } else { route.removeAttribute('href'); route.classList.add('off'); }
+  document.getElementById('tp-clear').classList.toggle('off',!n);
+  document.getElementById('tp-list').innerHTML=n?tpData.map((t,i)=>`<div class="tp-row" data-i="${i}">
+      <button class="tp-handle" aria-label="拖曳排序" onpointerdown="tpDragStart(event)">${ic('grip-vertical')}</button>
+      <div class="tp-num">${i+1}</div>
+      <div class="tp-info"><div class="tp-name">${pkEsc(t.name)}</div><div class="tp-sub">${pkEsc(TP_REGION_NAME[t.r]||t.r)}${t.zone?'・'+pkEsc(t.zone):''}${t.category?'・'+pkEsc(t.category):''}</div></div>
+      <div class="tp-btns">
+        <button onclick="tpMove(${i},-1)" ${i===0?'disabled':''} aria-label="上移">${ic('chevron-up')}</button>
+        <button onclick="tpMove(${i},1)" ${i===n-1?'disabled':''} aria-label="下移">${ic('chevron-down')}</button>
+        <button class="rm" onclick="tpRemove(${i})" aria-label="移除">${ic('trash-2')}</button>
+      </div></div>`).join('')
+    :`<div class="tp-empty">在下方地點卡片按「${ic('plus')}今日」加入，就會出現在這裡。可以拖曳左邊的把手或用箭頭調整順序。</div>`;
+  if(n>10) document.getElementById('tp-list').insertAdjacentHTML('beforeend','<div class="tp-note">Google 地圖路線最多帶入前 10 個地點。</div>');
+  const ws=tpWarnings();
+  document.getElementById('tp-warns').innerHTML=ws.map(w=>`<div class="tp-warn ${w.lvl}">${ic(w.lvl==='red'?'siren':'triangle-alert')}<span>${w.html}</span></div>`).join('');
+}
+// 拖曳排序（手指按住左邊把手上下拖）
+// 只移動「相鄰的那一列」，被拖的那列本身不離開 DOM，手指追蹤才不會中斷
+let tpDrag=null;
+function tpDragStart(e){
+  const row=e.target.closest('.tp-row'); if(!row) return;
+  e.preventDefault();
+  tpDrag={row,id:e.pointerId}; row.classList.add('dragging');
+  window.addEventListener('pointermove',tpDragMove,{passive:false});
+  window.addEventListener('pointerup',tpDragEnd);
+  window.addEventListener('pointercancel',tpDragEnd);
+}
+function tpDragMove(e){
+  if(!tpDrag||e.pointerId!==tpDrag.id) return;
+  e.preventDefault();
+  const list=document.getElementById('tp-list'), row=tpDrag.row;
+  let moved=true;
+  while(moved){
+    moved=false;
+    const next=row.nextElementSibling&&row.nextElementSibling.classList.contains('tp-row')?row.nextElementSibling:null;
+    const prev=row.previousElementSibling;
+    if(next){const r=next.getBoundingClientRect(); if(e.clientY>r.top+r.height/2){list.insertBefore(next,row); moved=true; continue;}}
+    if(prev){const r=prev.getBoundingClientRect(); if(e.clientY<r.top+r.height/2){list.insertBefore(prev,row.nextSibling); moved=true;}}
+  }
+}
+function tpDragEnd(e){
+  if(!tpDrag||(e&&e.pointerId!==tpDrag.id)) return;
+  window.removeEventListener('pointermove',tpDragMove);
+  window.removeEventListener('pointerup',tpDragEnd);
+  window.removeEventListener('pointercancel',tpDragEnd);
+  const order=[...document.querySelectorAll('#tp-list .tp-row')].map(r=>+r.dataset.i);
+  tpDrag=null;
+  tpData=order.map(i=>tpData[i]); tpSave(); tpRender();
+}
+tpLoad(); tpRender(); pkRender();
+
 
 buildTabs();renderItinerary(0);renderTransport();renderChecklist();renderExp();checkBadge();
 // Show reminder on load if there are urgent items today
