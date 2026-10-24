@@ -1432,13 +1432,61 @@ body{background:var(--paper);}
 .cv-top{position:relative;}
 .cv-brand{padding-right:50px;}
 .nb-item .pk-hot{background:var(--ink);color:var(--butter);font-weight:900;letter-spacing:.06em;}
+
+/* ══ 三大分頁：各分頁只顯示需要的東西 ══ */
+body[data-sec="tools"] .cv-dates,body[data-sec="tools"] .cv-search,body[data-sec="itinerary"] .cv-search{display:none;}
+body:not([data-sec="pocket"]) .nb-fab{display:none;}
+.fnav{padding:6px 8px !important;}
+.fnav-btn{font-size:11.5px !important;gap:4px !important;padding:8px 0 7px !important;}
+.fnav-btn .ic{width:22px !important;height:22px !important;}
+.cv-offline{display:none;align-items:center;gap:4px;width:fit-content;margin:0 0 8px;padding:4px 12px;border-radius:999px;background:var(--ink);color:var(--butter);font-size:12px;font-weight:800;}
+.cv-offline .ic{width:14px;height:14px;margin:0;}
+body.is-offline .cv-offline{display:inline-flex;}
+/* 助手分頁 */
+.tl-tabs{position:sticky;top:0;z-index:140;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -16px 16px;padding:10px 16px;background:rgba(250,247,242,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+.tl-tabs::-webkit-scrollbar{display:none;}
+.tl-tab{flex:0 0 auto;display:inline-flex;align-items:center;gap:2px;height:40px;padding:0 15px;border:none;border-radius:999px;background:#fff;color:var(--ink-2);font-size:14px;font-weight:800;box-shadow:var(--sh-1);cursor:pointer;}
+.tl-tab .ic{width:16px;height:16px;}
+.tl-tab.active{background:var(--ink);color:#fff;}
+.tl-pane{display:none;} .tl-pane.active{display:block;animation:fadeUp .2s ease both;}
+.tl-sub{display:block !important;padding:0 !important;max-width:none !important;margin:0 0 28px !important;}
+.tl-sub .nb-page{padding:0;}
+.tl-sub .sec-title{font-size:17px;margin:4px 2px 12px;}
+/* 換算器 */
+.fx{background:linear-gradient(150deg,#FFF3C4 0%,#FDE3EF 55%,#DDEEFB 100%);border-radius:28px;padding:18px 16px 16px;box-shadow:var(--sh-2);}
+.fx-head{display:flex;align-items:center;gap:6px;margin-bottom:12px;}
+.fx-head .ic{width:16px;height:16px;margin:0;color:var(--ink-2);}
+.fx-flag{font-size:12px;font-weight:900;letter-spacing:.06em;background:#fff;border-radius:999px;padding:4px 10px;color:#C0264B;}
+.fx-flag.tw{color:#2F6E9E;}
+.fx-rate{margin-left:auto;display:inline-flex;align-items:center;gap:3px;height:32px;padding:0 12px;border:none;border-radius:999px;background:rgba(255,255,255,.75);color:var(--ink-2);font-size:12.5px;font-weight:800;cursor:pointer;}
+.fx-rate .ic{width:13px;height:13px;margin:0;}
+.fx-box{display:flex;align-items:center;gap:8px;background:#fff;border-radius:22px;padding:6px 18px;box-shadow:var(--sh-1);}
+.fx-sym{font-size:20px;font-weight:900;color:var(--faint);min-width:38px;}
+.fx-box input{flex:1;min-width:0;border:none;outline:none;background:transparent;font-size:34px;font-weight:900;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums;padding:8px 0;}
+.fx-box.twd input{color:#2F6E9E;}
+.fx-eq{display:flex;justify-content:center;margin:-6px 0;position:relative;z-index:1;}
+.fx-eq .ic{width:30px;height:30px;margin:0;padding:6px;border-radius:50%;background:var(--ink);color:#fff;}
+.fx-quick{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;}
+.fx-quick button{height:48px;border:none;border-radius:18px;background:#fff;color:var(--ink);font-size:16px;font-weight:900;box-shadow:var(--sh-1);cursor:pointer;font-variant-numeric:tabular-nums;-webkit-tap-highlight-color:transparent;}
+.fx-quick button:active{transform:scale(.95);background:var(--butter);}
+.fx-quick button.clr{display:inline-flex;align-items:center;justify-content:center;gap:2px;background:rgba(255,255,255,.55);color:var(--muted);font-size:14px;}
+.fx-quick .ic{width:15px;height:15px;}
+.fx-log{width:100%;margin-top:10px;height:48px;display:flex;align-items:center;justify-content:center;gap:4px;border:none;border-radius:18px;background:var(--ink);color:#fff;font-size:15px;font-weight:800;cursor:pointer;}
+.fx-log .ic{width:17px;height:17px;}
+.off-card{margin-top:16px;}
+.off-ok,.off-wait{display:flex;gap:10px;align-items:flex-start;border-radius:22px;padding:14px 16px;box-shadow:var(--sh-1);}
+.off-ok{background:var(--mint-soft);color:#1E5E46;} .off-wait{background:var(--butter-soft);color:#7A5A00;}
+.off-ok .ic,.off-wait .ic{width:22px;height:22px;margin:2px 0 0;flex-shrink:0;}
+.off-ok b,.off-wait b{display:block;font-size:14px;font-weight:900;margin-bottom:2px;}
+.off-ok span,.off-wait span{font-size:12.5px;line-height:1.6;opacity:.85;}
 </style>
-<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="icons.js"></script>
 </head>
 <body>
 
 <div id="snow-container"></div>
 <header class="cv-top">
+  <div class="cv-offline" id="cv-offline"><i data-lucide="wifi-off" class="ic"></i>離線中・顯示已儲存的內容</div>
   <div class="cv-brand"><i data-lucide="sparkles" class="ic"></i><span>Kyoto &amp; Nagoya</span><b>2027</b></div>
   <label class="cv-search"><i data-lucide="search" class="ic"></i><input id="gs-q" type="search" placeholder="搜尋口袋名單" oninput="gsInput()" autocomplete="off"><button type="button" class="cv-clear" onclick="gsClear()" aria-label="清除"><i data-lucide="x" class="ic"></i></button></label>
 </header>
@@ -1514,6 +1562,36 @@ body{background:var(--paper);}
       <input type="file" id="pk-import" accept=".json,application/json" style="display:none" onchange="pkImport(this)">
     </div>
   </div>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<div id="section-tools" class="section">
+  <div class="nb-page">
+  <div class="tl-tabs" id="tl-tabs">
+    <button class="tl-tab active" data-pane="fx" onclick="tlPane('fx')"><i data-lucide="arrow-left-right" class="ic"></i>換算</button>
+    <button class="tl-tab" data-pane="trip" onclick="tlPane('trip')"><i data-lucide="plane" class="ic"></i>航班住宿</button>
+    <button class="tl-tab" data-pane="todo" onclick="tlPane('todo')"><i data-lucide="list-checks" class="ic"></i>待辦</button>
+    <button class="tl-tab" data-pane="money" onclick="tlPane('money')"><i data-lucide="wallet" class="ic"></i>記帳</button>
+  </div>
+
+  <div class="tl-pane active" data-pane="fx">
+    <div class="fx">
+      <div class="fx-head"><span class="fx-flag">JPY</span><i data-lucide="arrow-right" class="ic"></i><span class="fx-flag tw">TWD</span><button class="fx-rate" onclick="fxEditRate()" id="fx-rate-btn"></button></div>
+      <label class="fx-box jpy"><span class="fx-sym">¥</span><input id="fx-jpy" type="text" inputmode="numeric" placeholder="0" oninput="fxFrom('jpy')" autocomplete="off"></label>
+      <div class="fx-eq"><i data-lucide="equal" class="ic"></i></div>
+      <label class="fx-box twd"><span class="fx-sym">NT$</span><input id="fx-twd" type="text" inputmode="decimal" placeholder="0" oninput="fxFrom('twd')" autocomplete="off"></label>
+      <div class="fx-quick">
+        <button onclick="fxAdd(100)">+100</button><button onclick="fxAdd(500)">+500</button><button onclick="fxAdd(1000)">+1,000</button>
+        <button onclick="fxAdd(5000)">+5,000</button><button onclick="fxAdd(10000)">+10,000</button><button class="clr" onclick="fxClear()"><i data-lucide="rotate-ccw" class="ic"></i>清除</button>
+      </div>
+      <button class="fx-log" onclick="fxToExpense()"><i data-lucide="notebook-pen" class="ic"></i>記到帳本</button>
+    </div>
+    <div class="off-card" id="off-card"></div>
+  </div>
+  <div class="tl-pane" data-pane="trip" id="tl-trip"></div>
+  <div class="tl-pane" data-pane="todo" id="tl-todo"></div>
+  <div class="tl-pane" data-pane="money" id="tl-money"></div>
   </div>
 </div>
 
@@ -1698,12 +1776,9 @@ body{background:var(--paper);}
 <!-- Floating bell button -->
 
 <nav class="fnav" id="fnav" aria-label="快速導覽">
-  <button class="fnav-btn active" data-sec="itinerary" onclick="goSec('itinerary')"><i data-lucide="calendar-days" class="ic"></i><span>行程</span></button>
-  <button class="fnav-btn" data-sec="pocket" onclick="goSec('pocket')"><i data-lucide="bookmark" class="ic"></i><span>名單</span></button>
-  <button class="fnav-btn" data-sec="hotel" onclick="goSec('hotel')"><i data-lucide="bed-double" class="ic"></i><span>住宿</span></button>
-  <button class="fnav-btn" data-sec="transport" onclick="goSec('transport')"><i data-lucide="train-front" class="ic"></i><span>交通</span></button>
-  <button class="fnav-btn" data-sec="checklist" onclick="goSec('checklist')"><i data-lucide="list-checks" class="ic"></i><span>待辦</span></button>
-  <button class="fnav-btn" data-sec="expense" onclick="goSec('expense')"><i data-lucide="wallet" class="ic"></i><span>記帳</span></button>
+  <button class="fnav-btn active" data-sec="itinerary" onclick="goSec('itinerary')"><i data-lucide="calendar-days" class="ic"></i><span>今日與行程</span></button>
+  <button class="fnav-btn" data-sec="pocket" onclick="goSec('pocket')"><i data-lucide="map-pinned" class="ic"></i><span>口袋名單</span></button>
+  <button class="fnav-btn" data-sec="tools" onclick="goSec('tools')"><i data-lucide="luggage" class="ic"></i><span>旅途助手</span></button>
 </nav>
 <button class="nb-fab" id="nb-fab" onclick="nbOpen()" aria-label="附近口袋名單"><i data-lucide="locate-fixed" class="ic"></i><span>附近空檔快搜</span></button>
 <div class="nb-overlay" id="nb-overlay" onclick="if(event.target===this)nbClose()">
@@ -1887,7 +1962,9 @@ const clPack=['防滑鞋（DAY5 天橋立可能下雪）','厚外套 + 保暖內
 
 let expenses=JSON.parse(localStorage.getItem('japan2027-exp')||'[]');
 let budget=parseInt(localStorage.getItem('japan2027-budget')||'0');
-const TWD_RATE=0.218; // 1 JPY ≈ 0.218 TWD
+// 匯率（1 日圓 = ? 台幣），可在「旅途助手 → 換算」修改，記帳也用同一個匯率
+let fxRate=(()=>{try{const v=parseFloat(localStorage.getItem('japan2027-fx'));return v>0&&v<5?v:0.21;}catch(e){return 0.21;}})();
+const TWD_RATE=fxRate;
 const catInfo={food:{icon:'utensils',label:'餐飲',cls:'cat-food',color:'#c0392b'},transport:{icon:'tram-front',label:'交通',cls:'cat-transport',color:'#8c7b6b'},hotel:{icon:'bed-double',label:'住宿',cls:'cat-hotel',color:'#4a7c59'},ticket:{icon:'ticket',label:'門票',cls:'cat-ticket',color:'#a0732a'},shop:{icon:'shopping-bag',label:'購物',cls:'cat-shop',color:'#4a52b7'},other:{icon:'pin',label:'其他',cls:'cat-other',color:'#8c7b6b'}};
 
 function saveExp(){localStorage.setItem('japan2027-exp',JSON.stringify(expenses));}
@@ -1919,8 +1996,7 @@ function drawPie(ct){
 }
 function renderExp(){
   const total=expenses.reduce((s,e)=>s+e.amount,0);
-  const twd=Math.round(total*TWD_RATE*4.5); // JPY->TWD: *0.218*~4.5 adjusted
-  const twdDirect=Math.round(total*0.218);
+  const twd=Math.round(total*fxRate);
   // budget bar
   if(budget>0){
     const pct=Math.min(Math.round(total/budget*100),100);
@@ -1938,8 +2014,8 @@ function renderExp(){
   }
   const isOver=budget>0&&total>budget;
   document.getElementById('exp-summary').innerHTML=
-    `<div class="sum-card ${isOver?'over-budget':''}"><div class="sum-lbl">總計（¥）</div><div class="sum-amt total ${isOver?'over':''}">¥${total.toLocaleString()}</div><div class="sum-sub">約 NT$${Math.round(total/4.5).toLocaleString()}</div></div>`+
-    `<div class="sum-card"><div class="sum-lbl">換算台幣</div><div class="sum-amt">NT$${Math.round(total/4.5).toLocaleString()}</div><div class="sum-sub">匯率 ¥1 ≈ NT$0.22</div></div>`+
+    `<div class="sum-card ${isOver?'over-budget':''}"><div class="sum-lbl">總計（¥）</div><div class="sum-amt total ${isOver?'over':''}">¥${total.toLocaleString()}</div><div class="sum-sub">約 NT$${twd.toLocaleString()}</div></div>`+
+    `<div class="sum-card"><div class="sum-lbl">換算台幣</div><div class="sum-amt">NT$${twd.toLocaleString()}</div><div class="sum-sub">匯率 ¥1 ≈ NT$${fxRate}</div></div>`+
     `<div class="sum-card"><div class="sum-lbl">筆數</div><div class="sum-amt">${expenses.length}</div><div class="sum-sub">筆費用</div></div>`+
     (budget>0?`<div class="sum-card ${isOver?'over-budget':''}"><div class="sum-lbl">剩餘預算</div><div class="sum-amt ${isOver?'over':''}">${isOver?'-':''}¥${Math.abs(budget-total).toLocaleString()}</div><div class="sum-sub">${isOver?ic('triangle-alert')+'超出預算！':'預算 ¥'+budget.toLocaleString()}</div></div>`:'');
   const list=document.getElementById('exp-list'),empty=document.getElementById('exp-empty');
@@ -2897,6 +2973,57 @@ tpLoad(); tpRender(); pkRender();
 
 
 
+
+// ══ 旅途助手：分頁、換算器、離線狀態 ══
+const TL_MAP={hotel:'trip',transport:'trip',checklist:'todo',expense:'money'};
+function tlMount(){
+  const put=(secId,paneId)=>{const s=document.getElementById(secId),pane=document.getElementById(paneId); if(s&&pane&&s.parentElement!==pane){s.classList.remove('section','active');s.classList.add('tl-sub');pane.appendChild(s);}};
+  put('section-transport','tl-trip'); put('section-hotel','tl-trip'); put('section-checklist','tl-todo'); put('section-expense','tl-money');
+}
+let tlCur='fx';
+function tlPane(k){tlCur=k;document.querySelectorAll('.tl-tab').forEach(b=>b.classList.toggle('active',b.dataset.pane===k));document.querySelectorAll('.tl-pane').forEach(p=>p.classList.toggle('active',p.dataset.pane===k));
+  try{localStorage.setItem('japan2027-tlpane',k);}catch(e){} if(k==='fx') offRender();}
+const _showSec3=showSec;
+showSec=function(id,btn){
+  if(TL_MAP[id]){tlPane(TL_MAP[id]); id='tools';}
+  _showSec3(id,btn);
+  document.body.dataset.sec=id;
+};
+// 換算器
+const fxFmt=(n,d)=>isFinite(n)?n.toLocaleString('en-US',{maximumFractionDigits:d}):'';
+const fxNum=s=>parseFloat(String(s).replace(/[^\d.]/g,''))||0;
+function fxRateLabel(){document.getElementById('fx-rate-btn').innerHTML=`1 ¥ = ${fxRate} NT$ ${ic('pencil')}`;}
+function fxFrom(src){
+  const j=document.getElementById('fx-jpy'), t=document.getElementById('fx-twd');
+  if(src==='jpy'){const v=fxNum(j.value); j.value=j.value?fxFmt(v,0):''; t.value=j.value?fxFmt(Math.round(v*fxRate),0):'';}
+  else{const v=fxNum(t.value); j.value=t.value?fxFmt(Math.round(v/fxRate),0):'';}
+}
+function fxAdd(n){const j=document.getElementById('fx-jpy'); j.value=fxFmt(fxNum(j.value)+n,0); fxFrom('jpy');}
+function fxClear(){document.getElementById('fx-jpy').value='';document.getElementById('fx-twd').value='';}
+function fxEditRate(){
+  const v=prompt('1 日圓等於多少台幣？\n（可到銀行或 Google 查「日圓 台幣」）',fxRate); if(v===null) return;
+  const n=parseFloat(v); if(!(n>0&&n<5)){alert('請輸入 0 到 5 之間的數字，例如 0.21');return;}
+  fxRate=Math.round(n*10000)/10000; try{localStorage.setItem('japan2027-fx',fxRate);}catch(e){}
+  fxRateLabel(); fxFrom('jpy'); if(typeof renderExp==='function') renderExp();
+}
+function fxToExpense(){
+  const v=fxNum(document.getElementById('fx-jpy').value); tlPane('money');
+  const a=document.getElementById('exp-amount'); if(a&&v){a.value=v;} const n=document.getElementById('exp-name'); if(n) setTimeout(()=>n.focus(),100);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+// 離線狀態
+async function offRender(){
+  const box=document.getElementById('off-card'); if(!box) return;
+  let ready=false;
+  try{ if('caches' in window){const keys=await caches.keys(); for(const k of keys){const cch=await caches.open(k); if(await cch.match('./index.html')||await cch.match('./')){ready=true;break;}}} }catch(e){}
+  const sw=!!(navigator.serviceWorker&&navigator.serviceWorker.controller);
+  box.innerHTML=ready&&sw
+    ?`<div class="off-ok">${ic('circle-check')}<div><b>已可離線使用</b><span>行程、口袋名單、待辦、記帳都存在手機裡，沒訊號也能打開。地圖導航和地圖小視窗仍需要網路。</span></div></div>`
+    :`<div class="off-wait">${ic('cloud-download')}<div><b>離線準備中</b><span>在有網路時打開一次網站並重新整理一次，就會存好離線版本。</span></div></div>`;
+}
+function offBanner(){document.body.classList.toggle('is-offline',!navigator.onLine);}
+window.addEventListener('online',offBanner); window.addEventListener('offline',offBanner);
+
 const _renderItin=renderItinerary;
 renderItinerary=function(di){
   _renderItin(di);
@@ -2904,7 +3031,10 @@ renderItinerary=function(di){
   if(d&&d!==tpSel){tpSave();tpSel=d;tpData=tpPlans[d];tpSave();}
   tpRender(); pkRender(); dpRender(di);
 };
-buildTabs();renderItinerary(Math.max(0,TP_DATES.indexOf(tpSel)));renderTransport();renderChecklist();renderExp();checkBadge();
+buildTabs();renderItinerary(Math.max(0,TP_DATES.indexOf(tpSel)));
+tlMount(); fxRateLabel(); offBanner(); document.body.dataset.sec='itinerary';
+try{const k=localStorage.getItem('japan2027-tlpane'); if(k) tlPane(k);}catch(e){}
+if(navigator.serviceWorker) navigator.serviceWorker.addEventListener('controllerchange',offRender);renderTransport();renderChecklist();renderExp();checkBadge();
 // Show reminder on load if there are urgent items today
 (function(){
   const items=getTodayReminders();

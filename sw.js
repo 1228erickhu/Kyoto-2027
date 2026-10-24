@@ -1,48 +1,88 @@
-// 京都 2027 行程網站：離線快取
-// 更新網站後若想強制刷新快取，把下面的版本號加 1 即可
-const CACHE = 'kyoto2027-v1';
-const CORE = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
-const CDN = ['unpkg.com', 'fonts.googleapis.com', 'fonts.gstatic.com', 'cdn.jsdelivr.net'];
+// 京都・名古屋 2027 行程網站：離線快取（Service Worker）
+// ─────────────────────────────────────────────
+// 策略：
+//   • 網頁本身（index.html）：有網路先抓最新版，但最多等 3 秒；
+//     訊號弱或沒網路就立刻改用手機裡存的版本 → 地下街、山區也打得開。
+//   • 圖示（icons.js）、字型、manifest 等靜態資源：Cache First（先用手機裡的，背景再更新）。
+//   • Google 地圖、導航等外部服務：照常連網，不快取。
+// 更新網站後想強制所有人換新快取，把 CACHE 版本號加 1。
+const CACHE = 'kyoto2027-v2';
+
+// 安裝時就先存好的檔案（同網域）
+const CORE = ['./', './index.html', './icons.js', './manifest.json', './icon-192.png', './icon-512.png'];
+// 安裝時一併預先下載的外部資源（字型樣式；圖示已放在本站 icons.js）
+const CDN_PRECACHE = [
+  'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=DM+Serif+Display&display=swap'
+];
+// 執行時遇到就快取的外部網域（字型檔等）
+const CDN_HOSTS = ['unpkg.com', 'fonts.googleapis.com', 'fonts.gstatic.com', 'cdn.jsdelivr.net'];
+const NAV_TIMEOUT = 3000;
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
+  e.waitUntil((async () => {
+    const cache = await caches.open(CACHE);
+    await cache.addAll(CORE);
+    // 外部資源一個一個存，某一個失敗不影響其他
+    await Promise.allSettled(CDN_PRECACHE.map(async url => {
+      const res = await fetch(new Request(url, { mode: 'no-cors' }));
+      if (res && (res.ok || res.type === 'opaque')) await cache.put(url, res);
+    }));
+    await self.skipWaiting();
+  })());
 });
 
 self.addEventListener('activate', e => {
-  e.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
-      .then(() => self.clients.claim())
-  );
+  e.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)));
+    await self.clients.claim();
+  })());
 });
+
+function timeout(ms) { return new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms)); }
+
+async function fromCache(req) {
+  const cache = await caches.open(CACHE);
+  return (await cache.match(req, { ignoreSearch: true })) || null;
+}
 
 self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
 
-  // 網頁本身：有網路就抓最新版，沒網路就用快取
+  // 1) 網頁本身：網路優先（3 秒逾時）→ 失敗用快取
   if (req.mode === 'navigate') {
-    e.respondWith(
-      fetch(req).then(res => {
-        const copy = res.clone();
-        caches.open(CACHE).then(c => c.put('./index.html', copy));
+    e.respondWith((async () => {
+      const cache = await caches.open(CACHE);
+      const net = fetch(req).then(res => {
+        if (res && res.ok) cache.put('./index.html', res.clone());
         return res;
-      }).catch(() => caches.match('./index.html').then(r => r || caches.match('./')))
-    );
+      });
+      try {
+        return await Promise.race([net, timeout(NAV_TIMEOUT)]);
+      } catch (err) {
+        const hit = (await cache.match('./index.html')) || (await cache.match('./'));
+        if (hit) { net.catch(() => {}); return hit; }
+        return net; // 第一次開、還沒快取時只能等網路
+      }
+    })());
     return;
   }
 
-  // 同網域檔案、圖示庫、字型：先用快取，背景更新
-  if (url.origin === location.origin || CDN.includes(url.hostname)) {
-    e.respondWith(
-      caches.open(CACHE).then(cache => cache.match(req).then(hit => {
-        const net = fetch(req).then(res => {
-          if (res && (res.ok || res.type === 'opaque')) cache.put(req, res.clone());
-          return res;
-        }).catch(() => hit);
-        return hit || net;
-      }))
-    );
+  // 2) 同網域靜態檔與 CDN：Cache First，背景更新
+  if (url.origin === location.origin || CDN_HOSTS.includes(url.hostname)) {
+    e.respondWith((async () => {
+      const cache = await caches.open(CACHE);
+      const hit = await cache.match(req, { ignoreSearch: url.origin === location.origin });
+      const update = fetch(req).then(res => {
+        if (res && (res.ok || res.type === 'opaque')) cache.put(req, res.clone());
+        return res;
+      }).catch(() => null);
+      if (hit) { e.waitUntil(update); return hit; }
+      const res = await update;
+      return res || new Response('', { status: 504, statusText: 'offline' });
+    })());
   }
-  // 其他（Google 地圖等）不處理，照常連網
+  // 3) 其他（Google 地圖等）不攔截
 });
