@@ -6,13 +6,16 @@
 //   • 圖示（icons.js）、字型、manifest 等靜態資源：Cache First（先用手機裡的，背景再更新）。
 //   • Google 地圖、導航等外部服務：照常連網，不快取。
 // 更新網站後想強制所有人換新快取，把 CACHE 版本號加 1。
-const CACHE = 'kyoto2027-v4';
+importScripts('./covers.js');  // 主題封面照片清單（self.KYOTO_COVERS）
+const CACHE = 'kyoto2027-v5';
+// 主題封面照片：安裝時全部先存好（換照片時把版本號加 1）
+const COVER_CACHE = 'kyoto2027-covers-v1';
 // 看過的地點照片另外存一份（最多 IMG_MAX 張，舊的自動刪），沒網路時卡片照片也看得到
 const IMG_CACHE = 'kyoto2027-img';
 const IMG_MAX = 150;
 
 // 安裝時就先存好的檔案（同網域）
-const CORE = ['./', './index.html', './icons.js', './manifest.json', './icon-192.png', './icon-512.png'];
+const CORE = ['./', './index.html', './icons.js', './covers.js', './manifest.json', './icon-192.png', './icon-512.png'];
 // 安裝時一併預先下載的外部資源（字型樣式；圖示已放在本站 icons.js）
 const CDN_PRECACHE = [
   'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=DM+Serif+Display&display=swap'
@@ -30,6 +33,14 @@ self.addEventListener('install', e => {
       const res = await fetch(new Request(url, { mode: 'no-cors' }));
       if (res && (res.ok || res.type === 'opaque')) await cache.put(url, res);
     }));
+    // 主題封面照片（約 50 張、合計約 1–2 MB）
+    const cc = await caches.open(COVER_CACHE);
+    const have = new Set((await cc.keys()).map(r => r.url));
+    await Promise.allSettled(self.KYOTO_COVERS.all.filter(u => !have.has(u)).map(async url => {
+      let res = await fetch(url, { mode: 'cors' }).catch(() => null);
+      if (!res || !res.ok) res = await fetch(new Request(url, { mode: 'no-cors' }));
+      if (res && (res.ok || res.type === 'opaque')) await cc.put(url, res);
+    }));
     await self.skipWaiting();
   })());
 });
@@ -37,7 +48,7 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
   e.waitUntil((async () => {
     const keys = await caches.keys();
-    await Promise.all(keys.filter(k => k !== CACHE && k !== IMG_CACHE).map(k => caches.delete(k)));
+    await Promise.all(keys.filter(k => k !== CACHE && k !== IMG_CACHE && k !== COVER_CACHE).map(k => caches.delete(k)));
     await self.clients.claim();
   })());
 });
@@ -73,11 +84,11 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // 2) 外部照片（地點卡片的 imageUrl）：Cache First，存在獨立快取
+  // 2) 外部照片（主題封面＋自訂 imageUrl）：Cache First；先找預存的封面，再找看過的照片
   if (req.destination === 'image' && url.origin !== location.origin) {
     e.respondWith((async () => {
       const cache = await caches.open(IMG_CACHE);
-      const hit = await cache.match(req);
+      const hit = (await caches.match(req.url)) || (await cache.match(req));
       if (hit) return hit;
       try {
         const res = await fetch(req);

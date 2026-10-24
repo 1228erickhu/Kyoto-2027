@@ -1641,8 +1641,43 @@ body[data-sec="itinerary"] .nb-fab{display:flex !important;}
 .lb-rate{position:static;max-width:none;}
 .lb-maps{display:flex;align-items:center;justify-content:center;gap:6px;height:48px;border-radius:18px;background:var(--ink);color:#fff;font-weight:800;font-size:14px;text-decoration:none;}
 .lb-maps .ic{width:18px;height:18px;margin:0;}
+
+/* ══ 主題照片封面 v2：評分右上、地區右下、兩顆大按鈕 ══ */
+.pk-hero.ph{height:160px !important;border-radius:24px 24px 0 0;}
+.sg-item .pk-hero.ph,.pk-item.open .pk-hero.ph{height:160px !important;}
+.ph.has-img::after{background:linear-gradient(180deg,rgba(20,14,10,.30) 0%,rgba(20,14,10,0) 34%,rgba(20,14,10,0) 58%,rgba(20,14,10,.42) 100%);}
+.ph-img{filter:saturate(1.05) brightness(1.03);}
+.ph-zoom{display:none !important;}
+.ph > .pk-hot{left:10px !important;right:auto !important;top:10px !important;transform:rotate(-4deg) !important;}
+.ph-rate{left:auto !important;right:8px;top:8px;bottom:auto !important;flex-direction:column;align-items:flex-end;gap:4px;max-width:none;}
+.ph-rate > span{height:24px;padding:0 8px 0 6px;gap:3px;font-size:12px;background:rgba(255,255,255,.82);color:#3F3530;border:1px solid rgba(255,255,255,.6);}
+.ph-rate .ic{width:12px;height:12px;}
+.ph-g .ic{color:#F5A623;fill:#F5A623;}
+.ph-g.hi{background:rgba(255,217,90,.95) !important;}
+.ph-t .ic{color:#D2502F;}
+.ph-t.hi{background:rgba(255,174,150,.95) !important;color:#5A1E0D !important;}
+.ph-t.hi .ic{color:#9C2C12;}
+.ph > .pk-zonepill{left:auto !important;right:8px;top:auto !important;bottom:8px !important;max-width:calc(100% - 60px);display:inline-flex;align-items:center;gap:2px;height:24px;padding:0 9px 0 6px !important;font-size:11.5px;font-weight:800;background:rgba(227,222,255,.94) !important;color:#3E2FA8 !important;box-shadow:0 4px 12px rgba(0,0,0,.12);}
+.ph > .pk-zonepill .ic{width:12px;height:12px;margin:0;}
+.ph > .pk-been{left:8px !important;right:auto !important;bottom:8px !important;top:auto !important;width:26px;height:26px;}
+.ph-tag{position:absolute;left:10px;bottom:10px;z-index:2;font-size:10.5px;font-weight:800;color:#fff;opacity:.9;text-shadow:0 1px 4px rgba(0,0,0,.4);letter-spacing:.04em;}
+.ph:has(.pk-been) .ph-tag{left:42px;bottom:14px;}
+.ph.no-img .ph-tag{display:none;}
+.pk-content{padding:12px 12px 12px !important;}
+/* 兩顆大按鈕 */
+.pk-item .pk-actions{display:grid !important;grid-template-columns:1fr 1fr;gap:8px !important;margin-top:10px !important;}
+.pk-item .pk-actions .pk-nav,.pk-item .pk-actions .pk-today{flex:none !important;width:auto !important;height:46px !important;border-radius:16px !important;display:inline-flex;align-items:center;justify-content:center;gap:4px !important;padding:0 !important;font-size:13.5px !important;font-weight:800 !important;text-decoration:none;}
+.pk-item .pk-actions .pk-nav{background:var(--ink) !important;color:#fff !important;}
+.pk-item .pk-actions .pk-today{background:var(--butter,#FFD95A) !important;color:var(--ink) !important;}
+.pk-item .pk-actions .pk-today.on{background:#7FD8B6 !important;color:#14513B !important;}
+.pk-item .pk-actions .ic{width:19px !important;height:19px !important;margin:0 !important;}
+.pk-item .pk-actions span{display:inline !important;}
+@media(max-width:360px){.pk-item .pk-actions span{display:none !important;}}
+.lb-note{position:absolute;left:12px;top:14px;z-index:2;font-size:11px;font-weight:800;color:#fff;background:rgba(0,0,0,.45);border-radius:999px;padding:4px 10px;}
+.lb-rate{position:static !important;flex-direction:row !important;align-items:center !important;justify-content:flex-start;}
 </style>
 <script src="icons.js"></script>
+<script src="covers.js"></script>
 </head>
 <body>
 
@@ -1945,7 +1980,7 @@ body[data-sec="itinerary"] .nb-fab{display:flex !important;}
 <!-- Floating bell button -->
 
 <nav class="fnav" id="fnav" aria-label="快速導覽">
-  <button class="fnav-btn active" data-sec="itinerary" onclick="goSec('itinerary')"><i data-lucide="calendar-days" class="ic"></i><span>今日與行程</span></button>
+  <button class="fnav-btn active" data-sec="itinerary" onclick="goSec('itinerary')"><i data-lucide="calendar-days" class="ic"></i><span>今日行程</span></button>
   <button class="fnav-btn" data-sec="pocket" onclick="goSec('pocket')"><i data-lucide="map-pinned" class="ic"></i><span>口袋名單</span></button>
   <button class="fnav-btn" data-sec="tools" onclick="goSec('tools')"><i data-lucide="luggage" class="ic"></i><span>旅途助手</span></button>
 </nav>
@@ -2739,8 +2774,8 @@ function pkCard(x){
         </div>
       </div>
       <div class="pk-actions">
-        <a class="pk-nav" href="https://www.google.com/maps/search/?api=1&query=${mq}" target="_blank" rel="noopener">${ic('navigation')}<span>導航</span></a>
-        <button class="pk-today ${added?'on':''}" onclick="tpToggle('${pkRegion}','${id}')">${added?ic('check'):ic('plus')}<span>${added?'已加入':'加入'}</span></button>
+        <a class="pk-nav" href="https://www.google.com/maps/search/?api=1&query=${mq}" target="_blank" rel="noopener" aria-label="Google 導航">${ic('map-pin')}<span>導航</span></a>
+        <button class="pk-today ${added?'on':''}" onclick="tpToggle('${pkRegion}','${id}')" aria-label="加入今日候選池">${added?ic('check'):ic('plus')}<span>${added?'已加入':'加入'}</span></button>
       </div>
     </div>
   </div>`;
@@ -2870,7 +2905,7 @@ function sgCard(r,x){
   return `<div class="pk-item sg-item ${x.visited?'visited':''}" data-cat="${pkEsc(x.category)}">
     ${pkHeroHTML(r,x,q)}
     <div class="pk-content"><div class="pk-name">${pkEsc(x.name)}</div>${st?`<div class="sg-hb">${hrsBadge(st)}</div>`:''}
-      <div class="pk-actions"><a class="pk-nav" href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener" aria-label="導航">${ic('navigation')}</a>
+      <div class="pk-actions"><a class="pk-nav" href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener" aria-label="Google 導航">${ic('map-pin')}<span>導航</span></a>
       <button class="pk-today" onclick="tpToggle('${r}','${id}')">${ic('plus')}<span>加入</span></button></div></div></div>`;
 }
 function itBaseRender(){
@@ -2918,31 +2953,45 @@ const PK_THEMES=[
   [/寺|院|堂|塔頭|大佛|大仏/,'寺院','landmark','temple'],
   [/城/,'城','castle','castle'],
   [/庭園|公園|竹林|嵐山|山|瀑|滝|植物園|梅|櫻|桜|紅葉|天橋立|海岸/,'自然','trees','nature'],
-  [/水族|動物園|鹿/,'動物','fish','aqua'],
+  [/纜車|ロープウェイ|索道|ケーブル|登山車|吊椅/,'纜車','cable-car','ropeway'],
+  [/鹿|奈良公園/,'奈良鹿','trees','deer'],
+  [/水族|動物園/,'水族館','fish','aqua'],
   [/樂高|レゴ|樂園|遊園|摩天輪|觀覽車|ジブリ|吉卜力/,'樂園','ferris-wheel','park'],
   [/博物|美術|科學|科学|資料館|記念館|紀念館|鐵道|鉄道|館/,'博物館','building-2','museum'],
   [/展望|塔|タワー|tower|夜景/i,'展望','building','tower'],
   [/商店街|市場|錦/,'商店街','store','market'],
   [/寶可夢|ポケモン|扭蛋|ガチャ|動漫|anime/i,'玩具','gamepad-2','toy'],
 ];
-const PK_CAT_THEME_FALLBACK={'景點':['景點','map-pinned','temple'],'美食':['美食','utensils','food'],'甜點':['甜點','cake','sweet'],'麵包甜點':['麵包','croissant','bread'],'咖啡':['咖啡','coffee','cafe'],'咖啡甜點':['咖啡甜點','coffee','cafe'],'咖啡美食':['咖啡','sandwich','cafe'],'購物':['購物','shopping-bag','market'],'購物景點':['購物','store','market'],'住宿':['住宿','bed-double','stay']};
+const PK_CAT_THEME_FALLBACK={'景點':['景點','map-pinned','sight'],'美食':['美食','utensils','food'],'甜點':['甜點','cake','sweet'],'麵包甜點':['麵包','croissant','bread'],'咖啡':['咖啡','coffee','cafe'],'咖啡甜點':['咖啡甜點','coffee','cafe'],'咖啡美食':['咖啡','sandwich','cafe'],'購物':['購物','shopping-bag','market'],'購物景點':['購物','store','market'],'住宿':['住宿','bed-double','stay']};
 function pkTheme(x){
   const t=(x.name||'')+' '+(x.tags||[]).join(' ');
   for(const [re,l,icn,k] of PK_THEMES) if(re.test(t)) return {l,icn,k};
   const f=PK_CAT_THEME_FALLBACK[x.category]||['口袋名單','pin','food']; return {l:f[0],icn:f[1],k:f[2]};
 }
+function pkCoverUrl(x,th,w,h){
+  const K=window.KYOTO_COVERS; if(!K) return '';
+  return K.url(K.pick(th.k,x.id||x.name),w,h);
+}
+// 照片載入失敗：自訂照片 → 主題照片 → 馬卡龍色塊封面
+function phErr(img){
+  const box=img.closest('.ph'); if(!box) return;
+  const fb=img.dataset.fb;
+  if(fb&&img.src!==fb){ img.dataset.fb=''; box.dataset.src='theme'; img.src=fb; return; }
+  box.classList.replace('has-img','no-img'); box.dataset.src='none'; img.remove();
+}
 function pkHeroHTML(r,x,mq){
-  const u=pkImg(x), th=pkTheme(x), id=pkEsc(x.id);
+  const own=pkImg(x), th=pkTheme(x), id=pkEsc(x.id), cov=pkCoverUrl(x,th);
+  const src=own||cov;
   const g=pkNum(x.rating&&x.rating.google), t=pkNum(x.rating&&x.rating.tabelog);
-  const rate=(g!==null||t!==null)?`<span class="ph-rate">${g!==null?`<span class="ph-g ${g>=4.5?'hi':''}">${ic('star')}${g.toFixed(1)}</span>`:''}${t!==null?`<span class="ph-t ${t>=3.5?'hi':''}">食 ${t.toFixed(2)}</span>`:''}</span>`:'';
-  return `<div class="pk-hero ph ${u?'has-img':'no-img'}" data-th="${th.k}" onclick="pkHeroTap(event,'${r}','${id}')" role="button" aria-label="${u?'放大照片':'在 Google 地圖看照片'}">
+  const rate=(g!==null||t!==null)?`<span class="ph-rate">${g!==null?`<span class="ph-g ${g>=4.5?'hi':''}" title="Google 評分">${ic('star')}${g.toFixed(1)}</span>`:''}${t!==null?`<span class="ph-t ${t>=3.5?'hi':''}" title="食べログ評分">${ic('utensils')}${t.toFixed(2)}</span>`:''}</span>`:'';
+  return `<div class="pk-hero ph ${src?'has-img':'no-img'}" data-th="${th.k}" data-src="${own?'own':'theme'}" onclick="pkHeroTap(event,'${r}','${id}')" role="button" aria-label="放大照片">
       <div class="ph-cover"><span class="ph-word">${th.l}</span><span class="pk-hero-ic">${ic(th.icn)}</span></div>
-      ${u?`<img class="ph-img" src="${pkEsc(u)}" alt="${pkEsc(x.name)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onload="this.classList.add('ok')" onerror="this.closest('.ph').classList.replace('has-img','no-img');this.remove()">`:''}
+      ${src?`<img class="ph-img" src="${pkEsc(src)}" ${own&&cov?`data-fb="${pkEsc(cov)}"`:''} alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onload="this.classList.add('ok')" onerror="phErr(this)">`:''}
       ${pkHot(x)?'<span class="pk-hot">HOT</span>':''}
-      ${x.visited?`<span class="pk-been">${ic('check')}</span>`:''}
-      ${x.zone?`<span class="pk-zonepill">${pkEsc(x.zone)}</span>`:''}
       ${rate}
-      <span class="ph-zoom">${ic(u?'maximize-2':'images')}</span>
+      ${x.visited?`<span class="pk-been">${ic('check')}</span>`:''}
+      ${x.zone?`<span class="pk-zonepill">${ic('map-pin')}${pkEsc(x.zone)}</span>`:''}
+      ${own?'':`<span class="ph-tag">${th.l}</span>`}
     </div>`;
 }
 function pkFindIn(r,id){return (pkData[r]||[]).find(i=>String(i.id)===String(id));}
@@ -2953,20 +3002,22 @@ function pkMapsUrl(r,x){
 function pkHeroTap(e,r,id){
   e.stopPropagation();
   const x=pkFindIn(r,id); if(!x) return;
-  const u=pkImg(x), card=e.currentTarget;
-  if(!u||card.classList.contains('no-img')){ window.open(pkMapsUrl(r,x),'_blank','noopener'); return; }
-  pkLightbox(r,x,u);
+  const card=e.currentTarget, own=pkImg(x);
+  if(card.classList.contains('no-img')){ window.open(pkMapsUrl(r,x),'_blank','noopener'); return; }
+  const th=pkTheme(x), useOwn=own&&card.dataset.src==='own';
+  pkLightbox(r,x,useOwn?own:pkCoverUrl(x,th,1200,800),!useOwn);
 }
-function pkLightbox(r,x,u){
+function pkLightbox(r,x,u,isTheme){
   let lb=document.getElementById('pk-lb');
   if(!lb){lb=document.createElement('div');lb.id='pk-lb';lb.className='pk-lb';document.body.appendChild(lb);
     lb.addEventListener('click',ev=>{if(ev.target===lb||ev.target.closest('.lb-close')) pkLightboxClose();});}
   const g=pkNum(x.rating&&x.rating.google), t=pkNum(x.rating&&x.rating.tabelog);
   lb.innerHTML=`<div class="lb-box">
     <button class="lb-close" aria-label="關閉">${ic('x')}</button>
-    <img src="${pkEsc(u)}" alt="${pkEsc(x.name)}" referrerpolicy="no-referrer">
+    <img src="${pkEsc(u)}" alt="${pkEsc(x.name)}" referrerpolicy="no-referrer" onerror="this.src=pkCoverUrl(pkFindIn('${r}','${pkEsc(x.id)}')||{},pkTheme(pkFindIn('${r}','${pkEsc(x.id)}')||{}));this.onerror=null">
+    ${isTheme?`<span class="lb-note">主題示意圖・非店家實景</span>`:''}
     <div class="lb-info"><b>${pkEsc(x.name)}</b>
-      <div class="ph-rate lb-rate">${g!==null?`<span class="ph-g ${g>=4.5?'hi':''}">${ic('star')}G ${g.toFixed(1)}</span>`:''}${t!==null?`<span class="ph-t ${t>=3.5?'hi':''}">食べログ ${t.toFixed(2)}</span>`:''}</div>
+      <div class="ph-rate lb-rate">${g!==null?`<span class="ph-g ${g>=4.5?'hi':''}">${ic('star')}G ${g.toFixed(1)}</span>`:''}${t!==null?`<span class="ph-t ${t>=3.5?'hi':''}">${ic('utensils')}食べログ ${t.toFixed(2)}</span>`:''}</div>
       <a class="lb-maps" href="${pkMapsUrl(r,x)}" target="_blank" rel="noopener">${ic('images')}在 Google 地圖看更多照片與評價</a></div></div>`;
   requestAnimationFrame(()=>lb.classList.add('on')); document.body.style.overflow='hidden';
 }
