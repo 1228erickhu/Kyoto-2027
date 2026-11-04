@@ -1690,111 +1690,12 @@ body[data-sec="itinerary"] .nb-fab{display:flex !important;}
 </style>
 <script src="icons.js"></script>
 <script src="covers.js"></script>
-
-<style id="mini-style">
-/* ══ 極簡版（iPhone 原生 App 風格）══ */
-body.mini{background:#F2F2F7 !important;font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Noto Sans TC',sans-serif;}
-body.mini #snow-container,body.mini .fnav,body.mini .bell-btn,body.mini #rail,body.mini #day-picks,
-body.mini .cv-brand,body.mini #tp-clear,body.mini #tp-fold,body.mini .tp-warn.yellow,body.mini .tp-note{display:none !important;}
-body.mini .cv-top{background:#F2F2F7 !important;padding:calc(10px + env(safe-area-inset-top)) 16px 2px !important;}
-body.mini .mn-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;}
-body.mini .mn-title{font-size:22px;font-weight:800;color:#1C1C1E;letter-spacing:.5px;}
-body.mini .mn-more,body.mini .mn-back{height:40px;padding:0 16px;border:none;border-radius:999px;background:#fff;color:#1C1C1E;font-size:16px;font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.08);cursor:pointer;-webkit-tap-highlight-color:transparent;}
-body.mini .mn-back{display:none;color:#007AFF;padding-left:12px;}
-body.mini:not([data-sec="itinerary"]) .mn-back{display:inline-flex;align-items:center;}
-body.mini:not([data-sec="itinerary"]) .mn-title{display:none;}
-body.mini .cv-search{display:none !important;}
-body.mini:not([data-sec="itinerary"]) .cv-top{position:sticky;top:0;z-index:200;box-shadow:0 1px 0 rgba(0,0,0,.06);}
-body.mini:not([data-sec="itinerary"]) .cv-dates{position:static !important;}
-body.mini[data-sec="pocket"] .cv-search{display:flex !important;margin-top:8px;}
-body.mini:not([data-sec="itinerary"]):not([data-sec="pocket"]) .cv-dates{display:none !important;}
-/* 日期切換列 */
-body.mini .cv-dates{background:rgba(242,242,247,.94) !important;padding:8px 16px 10px !important;gap:8px !important;}
-body.mini .cv-date{width:56px !important;background:#fff !important;border-radius:14px !important;color:#1C1C1E !important;box-shadow:0 1px 2px rgba(0,0,0,.06) !important;transform:none !important;padding:6px 0 7px !important;}
-body.mini .cv-date .cv-day{display:none;}
-body.mini .cv-date b{font-size:17px;}
-body.mini .cv-date .cv-wd{font-size:11px;opacity:.6;}
-body.mini .cv-date.active{background:#1C1C1E !important;color:#fff !important;}
-body.mini .cv-date.active .cv-wd{opacity:.8;}
-body.mini .cv-date.today:not(.active){outline:2px solid #FF3B30 !important;outline-offset:-2px !important;}
-body.mini .cv-dot{background:#007AFF !important;color:#fff !important;}
-/* 今日行程 */
-body.mini #section-itinerary{padding-bottom:calc(110px + env(safe-area-inset-bottom));}
-body.mini .tp{background:transparent !important;box-shadow:none !important;border:none !important;margin:4px 0 0 !important;overflow:visible !important;}
-body.mini .tp-head{background:none !important;color:#1C1C1E !important;padding:6px 2px 12px !important;}
-body.mini .tp-title{font-size:21px !important;font-weight:800 !important;color:#1C1C1E !important;gap:8px;}
-body.mini .tp-title .ic{display:none;}
-body.mini .tp-count{background:#E5E5EA !important;color:#3C3C43 !important;font-size:13px !important;}
-body.mini #tp-route{background:#fff !important;color:#007AFF !important;border:none !important;border-radius:999px !important;height:36px;padding:0 14px !important;font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.08);}
-body.mini #tp-route .ic{color:#007AFF;}
-body.mini #tp-route.off{display:none !important;}
-body.mini .tp-body{padding:0 !important;background:none !important;}
-body.mini .tp-list{display:flex;flex-direction:column;gap:12px;}
-body.mini .tp-row.mc{display:block !important;background:#fff !important;border-radius:20px !important;padding:12px 12px 12px 6px !important;box-shadow:0 1px 3px rgba(0,0,0,.07) !important;}
-body.mini .tp-row.mc.dragging{box-shadow:0 14px 34px rgba(0,0,0,.2) !important;}
-.mc-top{display:flex;align-items:center;gap:10px;}
-.mc-grip{flex:0 0 22px;width:22px;height:56px;display:grid;place-items:center;border:none;background:none;color:#C7C7CC;padding:0;touch-action:none;cursor:grab;}
-.mc-grip .ic{width:18px;height:18px;margin:0;}
-.mc-thumb{position:relative;flex:0 0 76px;width:76px;height:76px;border-radius:16px;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,#E9E4FF,#FFE3EE);font-size:30px;}
-.mc-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-.mc-num{position:absolute;left:5px;top:5px;z-index:1;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;font-weight:800;line-height:22px;text-align:center;}
-.mc-info{flex:1;min-width:0;}
-.mc-name{font-size:18px;font-weight:800;color:#1C1C1E;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-.mc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px;}
-.mc-tags span{font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px;background:#F2F2F7;color:#3C3C43;white-space:nowrap;}
-.mc-tags .mc-g{background:#FFF4D6;color:#8A5A00;}
-.mc-tags .mc-t{background:#FFEBE3;color:#B23A12;}
-.mc-tags .mc-x{background:#FFE5E5;color:#D70015;}
-.mc-acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0 6px;}
-.mc-btn{height:54px;border:none;border-radius:16px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:18px;font-weight:800;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;font-family:inherit;}
-.mc-btn:active{transform:scale(.97);}
-.mc-nav{background:#007AFF;color:#fff !important;}
-.mc-rm{background:#F2F2F7;color:#FF3B30;}
-body.mini .tp-empty{background:#fff;border-radius:20px;padding:28px 18px;text-align:center;font-size:16px;line-height:1.7;color:#3C3C43;}
-body.mini .tp-warns{margin-top:12px;}
-body.mini .tp-warn.red{font-size:14px;border-radius:14px;}
-body.mini .tp-reset{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:16px;background:none !important;border:none !important;}
-body.mini .tp-state{font-size:13px;color:#8E8E93 !important;background:none !important;}
-body.mini .tp-resetbtn{height:44px;padding:0 18px;border-radius:999px;border:none !important;background:#fff !important;color:#007AFF !important;font-size:15px;font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.08);}
-body.mini .tp-resetbtn:disabled{display:none;}
-/* 找附近 */
-body.mini .nb-fab{right:16px !important;bottom:calc(22px + env(safe-area-inset-bottom)) !important;height:62px !important;padding:0 24px !important;border-radius:999px !important;background:#007AFF !important;color:#fff !important;font-size:19px !important;font-weight:800 !important;box-shadow:0 12px 30px rgba(0,122,255,.42) !important;z-index:320;}
-body.mini[data-sec="tools"] .nb-fab,body.mini[data-sec="dayinfo"] .nb-fab{display:none !important;}
-body.mini .nb-title{font-size:19px;font-weight:800;}
-body.mini .nb-acts .pk-nav,body.mini .nb-acts .pk-today{height:50px !important;border-radius:14px !important;font-size:16px !important;font-weight:800 !important;}
-body.mini .nb-acts .pk-nav{background:#F2F2F7 !important;color:#007AFF !important;}
-body.mini .nb-acts .pk-today{background:#007AFF !important;color:#fff !important;}
-body.mini .nb-acts .pk-today.on{background:#34C759 !important;}
-.nb-sep{margin:14px 4px 4px;font-size:13px;font-weight:700;color:#8E8E93;}
-/* ⚙️ 更多 */
-.mn-overlay{position:fixed;inset:0;z-index:450;background:rgba(0,0,0,.35);display:none;align-items:flex-end;justify-content:center;}
-.mn-overlay.open{display:flex;}
-.mn-sheet{width:100%;max-width:620px;max-height:88vh;overflow-y:auto;background:#F2F2F7;border-radius:22px 22px 0 0;padding:6px 16px calc(18px + env(safe-area-inset-bottom));animation:slideUp .22s ease;}
-.mn-head{display:flex;align-items:center;justify-content:space-between;padding:6px 2px 12px;font-size:20px;}
-.mn-group{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:14px;}
-.mn-item{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;padding:0 16px;border:none;background:#fff;color:#1C1C1E;font-size:17px;font-weight:600;text-align:left;text-decoration:none;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent;}
-.mn-item+.mn-item{border-top:1px solid #E5E5EA;}
-.mn-item span{font-size:22px;width:28px;text-align:center;}
-.mn-item:active{background:#E5E5EA;}
-.mn-item.danger{color:#FF3B30;}
-.mn-item.off{opacity:.35;pointer-events:none;}
-/* 移除後的復原提示 */
-.mn-toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));transform:translate(-50%,20px);z-index:500;display:flex;align-items:center;gap:14px;max-width:calc(100% - 32px);padding:12px 12px 12px 18px;border-radius:16px;background:rgba(28,28,30,.94);color:#fff;font-size:15px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;}
-.mn-toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto;}
-.mn-toast span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.mn-toast button{flex:0 0 auto;height:36px;padding:0 14px;border:none;border-radius:10px;background:#0A84FF;color:#fff;font-size:15px;font-weight:800;}
-</style>
 </head>
 <body>
 
 <div id="snow-container"></div>
 <header class="cv-top">
   <div class="cv-offline" id="cv-offline"><i data-lucide="wifi-off" class="ic"></i>離線中・顯示已儲存的內容</div>
-  <div class="mn-bar">
-    <button type="button" class="mn-back" onclick="goSec('itinerary')" aria-label="回今日行程">‹ 今日行程</button>
-    <div class="mn-title">京都 2027</div>
-    <button type="button" class="mn-more" onclick="mnOpen()" aria-label="更多功能">⚙️ 更多</button>
-  </div>
   <div class="cv-brand"><i data-lucide="sparkles" class="ic"></i><span>Kyoto &amp; Nagoya</span><b>2027</b></div>
   <label class="cv-search"><i data-lucide="search" class="ic"></i><input id="gs-q" type="search" placeholder="搜尋口袋名單" oninput="gsInput()" autocomplete="off"><button type="button" class="cv-clear" onclick="gsClear()" aria-label="清除"><i data-lucide="x" class="ic"></i></button></label>
 </header>
@@ -1830,14 +1731,6 @@ body.mini .nb-acts .pk-today.on{background:#34C759 !important;}
     <div class="tl2" id="timeline"></div>
   </details>
   <div class="dp" id="day-picks"></div>
-  </div>
-</div>
-
-<!-- 今日推薦・原定安排（從 ⚙️ 更多進入）-->
-<div id="section-dayinfo" class="section">
-  <div class="nb-page">
-  <div class="sec-title" id="di-title">今日推薦・原定安排</div>
-  <div id="di-body"></div>
   </div>
 </div>
 
@@ -2104,12 +1997,12 @@ body.mini .nb-acts .pk-today.on{background:#34C759 !important;}
   <button class="fnav-btn" data-sec="pocket" onclick="goSec('pocket')"><i data-lucide="map-pinned" class="ic"></i><span>口袋名單</span></button>
   <button class="fnav-btn" data-sec="tools" onclick="goSec('tools')"><i data-lucide="luggage" class="ic"></i><span>旅途助手</span></button>
 </nav>
-<button class="nb-fab" id="nb-fab" onclick="nbOpen()" aria-label="找附近"><span>📍 找附近</span></button>
+<button class="nb-fab" id="nb-fab" onclick="nbOpen()" aria-label="附近口袋名單"><i data-lucide="locate-fixed" class="ic"></i><span>附近口袋名單</span></button>
 <div class="nb-overlay" id="nb-overlay" onclick="if(event.target===this)nbClose()">
   <div class="nb-sheet" role="dialog" aria-label="附近口袋名單">
     <div class="nb-grab"></div>
     <div class="nb-head">
-      <div class="nb-title">📍 附近的口袋名單</div>
+      <div class="nb-title"><i data-lucide="locate-fixed" class="ic"></i>附近口袋名單</div>
       <button class="nb-x" onclick="nbClose()" aria-label="關閉"><i data-lucide="x" class="ic"></i></button>
     </div>
     <div class="nb-status" id="nb-status"></div>
@@ -2124,30 +2017,6 @@ body.mini .nb-acts .pk-today.on{background:#34C759 !important;}
     <div class="nb-list" id="nb-list"></div>
   </div>
 </div>
-
-<!-- ⚙️ 更多：非現場急需的功能都放這裡 -->
-<div class="mn-overlay" id="mn-overlay" onclick="if(event.target===this)mnClose()">
-  <div class="mn-sheet" role="dialog" aria-label="更多功能">
-    <div class="nb-grab"></div>
-    <div class="mn-head"><b>更多</b><button type="button" class="nb-x" onclick="mnClose()" aria-label="關閉"><i data-lucide="x" class="ic"></i></button></div>
-    <div class="mn-group">
-      <button type="button" class="mn-item" onclick="mnGo('pocket')"><span>🔍</span>口袋名單（搜尋・新增）</button>
-      <button type="button" class="mn-item" onclick="mnGo('dayinfo')"><span>✨</span>今日推薦・原定安排</button>
-      <a class="mn-item" id="mn-route" target="_blank" rel="noopener" onclick="mnClose()"><span>🗺️</span>今天整條路線（Google 地圖）</a>
-    </div>
-    <div class="mn-group">
-      <button type="button" class="mn-item" onclick="mnGo('tools','fx')"><span>💱</span>日圓換算</button>
-      <button type="button" class="mn-item" onclick="mnGo('tools','trip')"><span>✈️</span>航班・住宿・交通</button>
-      <button type="button" class="mn-item" onclick="mnGo('tools','todo')"><span>✅</span>行前待辦・行李清單</button>
-      <button type="button" class="mn-item" onclick="mnGo('tools','money')"><span>💰</span>記帳</button>
-      <button type="button" class="mn-item" onclick="mnClose();showReminder()"><span>🔔</span>行程提醒</button>
-    </div>
-    <div class="mn-group">
-      <button type="button" class="mn-item danger" onclick="mnClose();tpClear()"><span>🧹</span>清空這天的行程</button>
-    </div>
-  </div>
-</div>
-<div class="mn-toast" id="mn-toast" role="status" aria-live="polite"><span id="mn-toast-t"></span><button type="button" id="mn-toast-b">復原</button></div>
 <button class="bell-btn" id="bell-btn" onclick="showReminder()" title="查看行程提醒">
   <i data-lucide="bell" class="ic"></i>
   <span class="bell-badge" id="bell-badge" style="display:none"></span>
@@ -3481,10 +3350,10 @@ function tpDragEnd(e){
 // ══ 附近口袋名單（GPS）══
 // 位置：地點有 lat/lng 就用；沒有就用所屬商圈的大概位置（誤差數百公尺～1 公里）
 const NB_FOOD=['美食','甜點','咖啡','咖啡甜點','麵包甜點','咖啡美食'];
-let nbState={open:false,pos:null,err:'',dist:2000,food:false,openOnly:true,loading:false};
+let nbState={open:false,pos:null,err:'',dist:1000,food:false,openOnly:false,loading:false};
 function pkPos(r,x){ if(pkNum(x.lat)!==null&&pkNum(x.lng)!==null) return {p:[+x.lat,+x.lng],exact:true};
   const z=(TP_ZONE_POS[r]||{})[tpZoneKey(x.zone)]; return z?{p:z,exact:false}:null; }
-function nbOpen(){const tt=document.getElementById('mn-toast'); if(tt) tt.classList.remove('show'); nbState.open=true;document.getElementById('nb-overlay').classList.add('open');document.body.style.overflow='hidden';nbRender();nbLocate();}
+function nbOpen(){nbState.open=true;document.getElementById('nb-overlay').classList.add('open');document.body.style.overflow='hidden';nbRender();nbLocate();}
 function nbClose(){nbState.open=false;document.getElementById('nb-overlay').classList.remove('open');document.body.style.overflow='';}
 function nbToggle(k){if(k==='food')nbState.food=!nbState.food; else nbState.openOnly=!nbState.openOnly; nbRender();}
 function nbSetDist(d){nbState.dist=d;nbRender();}
@@ -3513,23 +3382,21 @@ function nbRender(){
   let res=all.filter(o=>o.km*1000<=nbState.dist);
   if(nbState.food) res=res.filter(o=>NB_FOOD.includes(o.x.category));
   let noHrs=0;
-  if(nbState.openOnly){const op=[],unk=[]; res.forEach(o=>{const s=hrsStatus(o.x,iso); if(!s){unk.push(o);} else if(s.k==='open'||s.k==='soon') op.push(o);}); noHrs=unk.length; unk.forEach(o=>o.unk=true); res=op.concat(unk);}
+  if(nbState.openOnly){res=res.filter(o=>{const s=hrsStatus(o.x,iso); if(!s){noHrs++;return false;} return s.k==='open'||s.k==='soon';});}
   const near=all[0];
-  st.innerHTML=`${ic('map-pin')}${res.length?`找到 ${res.length-noHrs} 個營業中${noHrs?`，另有 ${noHrs} 個營業時間不確定`:''}`:'範圍內沒有符合的地點'}・距離為估算`;
-  if(!nbState.openOnly) st.innerHTML=`${ic('map-pin')}${res.length?`找到 ${res.length} 個地點`:'範圍內沒有符合的地點'}・距離為估算`;
+  st.innerHTML=`${ic('map-pin')}${res.length?`找到 ${res.length} 個地點`:'範圍內沒有符合的地點'}・距離依商圈位置估算${noHrs?`・${noHrs} 個沒有營業時間資料，已略過`:''}`;
   if(!res.length){
     list.innerHTML=near?`<div class="nb-empty">最近的口袋名單地點是「${pkEsc(near.x.name)}」（${TP_REGION_NAME[near.r]}・${pkEsc(near.x.zone||'')}），直線約 ${nbFmt(near.km)}。<br>可以放寬距離或關掉篩選。</div>`:'<div class="nb-empty">名單裡沒有可以計算位置的地點。</div>';
     return;
   }
-  let unkShown=false;
-  list.innerHTML=res.slice(0,40).map(o=>{const sep=(o.unk&&!unkShown)?(unkShown=true,'<div class="nb-sep">營業時間不確定（出發前請先確認）</div>'):''; const x=o.x, id=pkEsc(x.id), s=hrsStatus(x,iso), added=(tpPlans[ref]||[]).some(t=>t.r===o.r&&String(t.id)===String(x.id));
+  list.innerHTML=res.slice(0,40).map(o=>{const x=o.x, id=pkEsc(x.id), s=hrsStatus(x,iso), added=(tpPlans[ref]||[]).some(t=>t.r===o.r&&String(t.id)===String(x.id));
     const q=encodeURIComponent(x.name+' '+(x.address||((tpZoneKey(x.zone)&&tpZoneKey(x.zone)!=='市區'?tpZoneKey(x.zone)+' ':'')+TP_REGION_NAME[o.r])));
-    return sep+`<div class="nb-item">
+    return `<div class="nb-item">
       <div class="nb-dist">${ic('footprints')}<b>${!o.exact&&o.km<0.3?'同一區':(o.exact?'':'約 ')+nbFmt(o.km)}</b>${o.km<3&&(o.exact||o.km>=0.3)?`<span>步行約 ${Math.max(1,Math.round(o.km*1000/80))} 分</span>`:''}</div>
       <div class="nb-body"><div class="pk-name">${pkEsc(x.name)}${pkHot(x)?'<span class="pk-hot">高分</span>':''}</div>
         <div class="pk-meta"><span class="pk-catlbl">${pkEsc(x.category)}</span>${x.zone?`<span class="pk-zone">${ic('map-pin')}${pkEsc(x.zone)}</span>`:''}${s?hrsBadge(s):''}</div>
-        <div class="nb-acts"><a class="pk-nav" href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener">📍 導航</a>
-        <button class="pk-today ${added?'on':''}" onclick="tpToggle('${o.r}','${id}','${ref}')">${added?'✓ 已加入 '+tpMD(ref):'＋ 加入 '+tpMD(ref)}</button></div></div></div>`;}).join('');
+        <div class="nb-acts"><a class="pk-nav" href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener">${ic('navigation')}導航</a>
+        <button class="pk-today ${added?'on':''}" onclick="tpToggle('${o.r}','${id}','${ref}')">${added?ic('check')+'已加入 '+tpMD(ref):ic('plus')+'加入 '+tpMD(ref)}</button></div></div></div>`;}).join('');
 }
 tpLoad(); tpRender(); pkRender();
 
@@ -3641,72 +3508,6 @@ setInterval(createSnow,250);
   draw();
 })();
 if(window.lucide) lucide.createIcons({attrs:{'stroke-width':1.75}});
-</script>
-<script>
-// ══ 極簡版：首頁只留日期列＋今日行程，其餘收進 ⚙️ 更多 ══
-document.body.classList.add('mini');
-document.body.dataset.sec='itinerary';
-// 推薦、原定安排等搬到「今日推薦・原定安排」頁
-(function(){const box=document.getElementById('di-body');
-  ['it-base','it-banner','mood-it','it-suggest','it-orig'].forEach(id=>{const el=document.getElementById(id); if(el&&box) box.appendChild(el);});
-  const o=document.getElementById('it-orig'); if(o) o.open=true;})();
-function mnOpen(){
-  document.getElementById('mn-toast').classList.remove('show');
-  const r=document.getElementById('tp-route'), m=document.getElementById('mn-route');
-  if(r&&r.href){m.href=r.href;m.classList.remove('off');} else {m.removeAttribute('href');m.classList.add('off');}
-  document.getElementById('mn-overlay').classList.add('open');document.body.style.overflow='hidden';
-}
-function mnClose(){document.getElementById('mn-overlay').classList.remove('open');document.body.style.overflow='';}
-function mnGo(sec,pane){mnClose(); if(pane) tlPane(pane); goSec(sec);
-  if(sec==='dayinfo'){const t=document.getElementById('di-title'); if(t) t.textContent=`${tpMD(tpSel)}（週${WD[tpWd(tpSel)]}）推薦・原定安排`;}}
-// 移除後 6 秒內可以復原
-let mnToastTimer=null;
-function mnToast(msg,undo){
-  const el=document.getElementById('mn-toast'); document.getElementById('mn-toast-t').textContent=msg;
-  document.getElementById('mn-toast-b').onclick=()=>{el.classList.remove('show'); undo();};
-  el.classList.add('show'); clearTimeout(mnToastTimer); mnToastTimer=setTimeout(()=>el.classList.remove('show'),6000);
-}
-function mcRemove(i){
-  const day=tpSel, it=tpData[i]; if(!it) return;
-  tpRemove(i);
-  mnToast(`已移除「${it.name}」`,()=>{const L=tpPlans[day]; L.splice(Math.min(i,L.length),0,it); if(day===tpSel) tpData=L; tpSaveDay(day); tpSaveMeta(); tpRender(); pkRender(); sgRender();});
-}
-function mcErr(img){const fb=img.dataset.fb; if(fb&&img.src!==fb){img.dataset.fb='';img.src=fb;} else img.remove();}
-function mcCard(t,i){
-  const x=tpLookup(t), base=x||{id:t.id,name:t.name,category:t.category,tags:[]};
-  const th=pkTheme(base), own=pkImg(base), cov=pkCoverUrl(base,th), src=own||cov;
-  const g=x?pkNum(x.rating&&x.rating.google):null, tb=x?pkNum(x.rating&&x.rating.tabelog):null;
-  const zk=tpZoneKey(t.zone), zone=(zk&&zk!=='市區')?zk:(TP_REGION_NAME[t.r]||'');
-  const st=x&&hrsStatus(x,tpSel);
-  const warn=st&&st.k==='closed'?'<span class="mc-x">公休</span>':(st&&st.k==='shut'?'<span class="mc-x">已打烊</span>':'');
-  const q=encodeURIComponent(t.name+' '+((x&&x.address)||((zk&&zk!=='市區'?zk+' ':'')+(TP_REGION_NAME[t.r]||''))));
-  return `<div class="tp-row mc" data-i="${i}">
-    <div class="mc-top">
-      <button type="button" class="tp-handle mc-grip" aria-label="按住上下拖曳排序" onpointerdown="tpDragStart(event)">${ic('grip-vertical')}</button>
-      <div class="mc-thumb"><span>${{景點:'⛩️',美食:'🍜',甜點:'🍡',咖啡:'☕',咖啡甜點:'☕',麵包甜點:'🥐',咖啡美食:'☕',購物:'🛍️'}[t.category]||'📍'}</span>${src?`<img src="${pkEsc(src)}" ${own&&cov?`data-fb="${pkEsc(cov)}"`:''} alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="mcErr(this)">`:''}<span class="mc-num">${i+1}</span></div>
-      <div class="mc-info"><div class="mc-name">${pkEsc(t.name)}</div>
-        <div class="mc-tags">${zone?`<span>${pkEsc(zone)}</span>`:''}${g!==null?`<span class="mc-g">★ ${g.toFixed(1)}</span>`:''}${tb!==null?`<span class="mc-t">食べログ ${tb.toFixed(2)}</span>`:''}${warn}</div></div>
-    </div>
-    <div class="mc-acts">
-      <a class="mc-btn mc-nav" href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener">📍 導航</a>
-      <button type="button" class="mc-btn mc-rm" onclick="mcRemove(${i})">❌ 移除</button>
-    </div></div>`;
-}
-// 換頁時回到最上面（返回鈕才看得到）
-const _showSecMini=showSec;
-showSec=function(id,btn){_showSecMini(id,btn); window.scrollTo(0,0);};
-const _tpRenderFull=tpRender;
-tpRender=function(){
-  tpOpen=true;
-  const tt=document.getElementById('mn-toast'); if(tt) tt.classList.remove('show');
-  _tpRenderFull();
-  const n=tpData.length;
-  document.getElementById('tp-title-txt').textContent=`${tpMD(tpSel)}（週${WD[tpWd(tpSel)]}）行程`;
-  document.getElementById('tp-list').innerHTML=n?tpData.map(mcCard).join('')
-    :`<div class="tp-empty">這天還沒有安排<br>按右下角 <b>📍 找附近</b>，或從 <b>⚙️ 更多 → 口袋名單</b> 加入</div>`;
-  const r=document.getElementById('tp-route'); if(r) r.innerHTML='🗺️ 路線';
-};
-tpRender();
 </script>
 <script>
 // ── 離線功能（PWA）：需要和 index.html 放在同一層的 sw.js ──
