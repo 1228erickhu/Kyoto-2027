@@ -1336,6 +1336,16 @@ body{background:var(--paper);}
 .cv-dates::-webkit-scrollbar{display:none;}
 .cv-date{position:relative;flex:0 0 auto;width:60px;display:flex;flex-direction:column;align-items:center;padding:7px 0 8px;border:none;border-radius:20px;background:var(--tint);color:var(--ink);cursor:pointer;transition:transform .15s;-webkit-tap-highlight-color:transparent;}
 .cv-date:active{transform:scale(.95);}
+/* 推薦口袋名單：預設收起，按按鈕才展開 */
+.sg-toggle{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin:4px 0 14px;padding:13px 16px;border:1.5px dashed var(--border-2,#d6d0c8);border-radius:16px;background:var(--white,#fff);color:var(--ink);font:700 15px var(--font,inherit);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .2s,border-color .2s;}
+.sg-toggle:active{transform:scale(.98);}
+.sg-toggle .sg-t-ar{font-size:13px;color:var(--muted);transition:transform .3s ease;}
+.sg-toggle[aria-expanded="true"]{border-style:solid;background:var(--light,#f6f3ee);}
+.sg-wrap{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .35s ease,opacity .3s ease;}
+.sg-wrap.open{grid-template-rows:1fr;opacity:1;}
+.sg-inner{overflow:hidden;min-height:0;}
+.sg-wrap:not(.open) .sg-inner{visibility:hidden;transition:visibility 0s .35s;}
+
 /* 每天的水彩封面卡 */
 .it-base:has(.it-cover){flex-wrap:wrap;overflow:visible;}
 .it-cover{flex:1 1 100%;display:flex;align-items:center;gap:14px;background:var(--white,#fff);border-radius:20px;padding:10px;box-shadow:0 8px 22px rgba(74,64,58,.08);}
@@ -1735,8 +1745,11 @@ body[data-sec="itinerary"] .nb-fab{display:flex !important;}
     </div>
   </div>
 
+  <button type="button" class="sg-toggle" id="sg-toggle" aria-expanded="false" aria-controls="sg-wrap" onclick="sgToggleOpen()"><span class="sg-t-ic">➕</span><span class="sg-t-tx">展開/新增口袋名單</span><span class="sg-t-ar">▾</span></button>
+  <div class="sg-wrap" id="sg-wrap"><div class="sg-inner">
   <div class="mood" id="mood-it"></div>
   <div class="sg" id="it-suggest"></div>
+  </div></div>
   <details class="it-orig" id="it-orig">
     <summary id="it-orig-sum">原定安排</summary>
     <div id="day-hero"></div>
@@ -2913,6 +2926,15 @@ function rateBadges(x){
 function sgScore(x){const g=pkNum(x.rating&&x.rating.google)||0, t=pkNum(x.rating&&x.rating.tabelog); return (t!==null?(t-3)*2:0)+g;}
 var sgLimit=8;
 function sgMore(){sgLimit+=8;sgRender();}
+// 推薦口袋名單的展開／收起（每次打開網頁都先收起）
+function sgToggleOpen(force){
+  const w=document.getElementById('sg-wrap'), b=document.getElementById('sg-toggle'); if(!w||!b) return;
+  const open=typeof force==='boolean'?force:!w.classList.contains('open');
+  w.classList.toggle('open',open); b.setAttribute('aria-expanded',open);
+  b.querySelector('.sg-t-ic').textContent=open?'🔼':'➕';
+  b.querySelector('.sg-t-tx').textContent=open?'收起口袋名單':'展開/新增口袋名單';
+  b.querySelector('.sg-t-ar').textContent=open?'':'▾';
+}
 function sgRender(){
   const box=document.getElementById('it-suggest'); if(!box) return;
   const base=baseOf(tpSel);
