@@ -681,7 +681,7 @@ html{-webkit-text-size-adjust:100%;}
 body,button,input,select,textarea{font-family:var(--font) !important;}
 body{background:var(--paper);background-image:none;color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;letter-spacing:0;}
 *{letter-spacing:normal;}
-.snowflake{background:#cbd5e1;opacity:.35 !important;}
+.snowflake{background:#fff;box-shadow:0 0 0 .5px rgba(110,130,165,.30),0 0 5px rgba(140,165,205,.45);opacity:.85 !important;}
 
 /* HERO */
 .hero{background:var(--white);border-bottom:1px solid var(--border);padding:64px 20px 48px;
@@ -1067,7 +1067,8 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 .tp-num{width:22px;height:22px;flex-shrink:0;border-radius:50%;background:var(--ink);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
 .tp-info{flex:1;min-width:0;}
 .tp-name{font-size:14px;font-weight:600;line-height:1.35;word-break:break-word;}
-.tp-sub{font-size:11px;color:var(--muted);margin-top:1px;}
+.tp-sub{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.7;}
+.tp-seg{white-space:nowrap;}
 .tp-btns{display:flex;gap:2px;}
 .tp-btns button{width:32px;height:36px;display:flex;align-items:center;justify-content:center;border:none;background:none;border-radius:8px;color:var(--muted);cursor:pointer;}
 .tp-btns button .ic{margin:0;width:17px;height:17px;}
@@ -3326,7 +3327,7 @@ function tpRender(){
       <button class="tp-handle" aria-label="拖曳排序" onpointerdown="tpDragStart(event)">${ic('grip-vertical')}</button>
       <div class="tp-num">${i+1}</div>
       <div class="tp-thumb pk-item" data-cat="${pkEsc(t.category||'')}"><span>${ic(PK_CAT_ICON[t.category]||'pin')}</span></div>
-      <div class="tp-info"><div class="tp-name">${pkEsc(t.name)}</div><div class="tp-sub">${t.def?`<span class="tp-def">原定${t.time?' '+pkEsc(t.time):''}</span>`:''}${pkEsc(TP_REGION_NAME[t.r]||t.r)}${t.zone?'・'+pkEsc(t.zone):''}${t.category?'・'+pkEsc(t.category):''}</div>${st?`<div class="tp-hb">${hrsBadge(st)}</div>`:''}</div>
+      <div class="tp-info"><div class="tp-name">${pkEsc(t.name)}</div><div class="tp-sub">${t.def?`<span class="tp-def">原定${t.time?' '+pkEsc(t.time):''}</span>`:''}<span class="tp-seg">${pkEsc(TP_REGION_NAME[t.r]||t.r)}</span>${t.zone?'・<span class="tp-seg">'+pkEsc(t.zone)+'</span>':''}${t.category?'・<span class="tp-seg">'+pkEsc(t.category)+'</span>':''}</div>${st?`<div class="tp-hb">${hrsBadge(st)}</div>`:''}</div>
       <div class="tp-btns">
         <button onclick="tpMove(${i},-1)" ${i===0?'disabled':''} aria-label="上移">${ic('chevron-up')}</button>
         <button onclick="tpMove(${i},1)" ${i===n-1?'disabled':''} aria-label="下移">${ic('chevron-down')}</button>
