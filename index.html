@@ -1742,6 +1742,10 @@ body[data-sec="itinerary"] .nb-fab{display:flex !important;}
 .tl2-rm .ic{width:14px;height:14px;margin:0;}
 .it-banner.arrive,.it-banner.move,.it-banner.leave{display:none;}
 .tp-reset{border-top:none;padding-top:0;}
+.cv-dates,.fnav{touch-action:pan-y;}
+.cv-date,.fnav-btn{transition:transform .12s ease-out;will-change:transform;}
+.cv-date{transform-origin:center center;}
+.fnav-btn{transform-origin:center bottom;position:relative;}
 </style>
 <script src="icons.js"></script>
 <script src="covers.js"></script>
@@ -3545,6 +3549,37 @@ renderItinerary=function(di){
 };
 {const b=baseOf(tpSel); if(!b.regions.includes(pkRegion)) pkRegion=b.regions[0];}
 buildTabs();renderItinerary(Math.max(0,TP_DATES.indexOf(tpSel)));
+// ══ 像 Mac Dock：滑過去圖示會放大（滑鼠移過、或手指按著左右滑）══
+function dockFx(box,sel,o){
+  if(!box||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let downEl=null, moved=false, sx=0, sy=0;
+  const items=()=>[...box.querySelectorAll(sel)];
+  const paint=(x,y)=>items().forEach(el=>{
+    const w=el.offsetWidth,h=el.offsetHeight,r=el.getBoundingClientRect();
+    const cx=r.left+r.width/2, cy=o.twoD?r.top+r.height/2:y;
+    const d=Math.hypot(x-cx,y-cy), k=1+o.grow*Math.max(0,1-d/o.reach);
+    el.style.transform=k>1.01?`scale(${k.toFixed(3)})`:'';
+    el.style.zIndex=k>1.08?'5':'';
+  });
+  const clear=()=>items().forEach(el=>{el.style.transform='';el.style.zIndex='';});
+  box.addEventListener('pointerdown',e=>{downEl=e.target.closest(sel);moved=false;sx=e.clientX;sy=e.clientY;paint(e.clientX,e.clientY);});
+  box.addEventListener('pointermove',e=>{
+    if(e.pointerType!=='mouse'&&!downEl) return;
+    if(Math.hypot(e.clientX-sx,e.clientY-sy)>12) moved=true;
+    paint(e.clientX,e.clientY);
+  });
+  box.addEventListener('pointerup',e=>{
+    if(e.pointerType!=='mouse'&&moved){
+      const t=document.elementFromPoint(e.clientX,e.clientY), el=t&&t.closest(sel);
+      if(el&&el!==downEl&&box.contains(el)) el.click();
+    }
+    downEl=null; if(e.pointerType!=='mouse') clear();
+  });
+  box.addEventListener('pointerleave',()=>{downEl=null;clear();});
+  box.addEventListener('pointercancel',()=>{downEl=null;clear();});
+}
+dockFx(document.getElementById('cv-dates'),'.cv-date',{grow:.42,reach:105,twoD:true});
+dockFx(document.getElementById('fnav'),'.fnav-btn',{grow:.22,reach:150,twoD:false});
 tlMount(); fxRateLabel(); offBanner(); document.body.dataset.sec='itinerary';
 try{const k=localStorage.getItem('japan2027-tlpane'); if(k) tlPane(k);}catch(e){}
 if(navigator.serviceWorker) navigator.serviceWorker.addEventListener('controllerchange',offRender);renderTransport();renderChecklist();renderExp();checkBadge();
