@@ -1015,7 +1015,7 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 .tl2-rate span{display:inline-flex;align-items:center;font-size:11px;font-weight:600;font-variant-numeric:tabular-nums;border-radius:5px;padding:1px 6px;}
 .tl2-rate .ic{width:11px;height:11px;margin:0 2px 0 0;fill:currentColor;}
 
-/* ══ 口袋名單 v5 ══ */
+/* ══ 想去的地方 v5 ══ */
 .pk-filter-lbl{font-size:11px;font-weight:600;color:var(--faint);letter-spacing:.06em;margin:2px 2px 6px;}
 .pk-cat span{font-size:11px;color:var(--faint);font-weight:500;margin-left:1px;}
 .pk-cat.active span{color:var(--accent);}
@@ -1113,7 +1113,7 @@ button .ic,.gm-btn .ic,.hotel-badge .ic,.cbadge .ic,.reminder-tag .ic,.mv-pill .
 .pk-hrs-sub{font-size:11px;color:var(--muted);}
 .pk-hrs-add{font-size:11px;color:var(--faint);font-weight:500;}
 .pk-hrs-add .ic{width:12px;height:12px;margin-right:3px;}
-/* 每日行程頁的口袋名單地點 */
+/* 每日行程頁的想去的地方地點 */
 .dp:empty{display:none;}
 .dp{margin:18px 0 0;background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--sh-1);padding:12px;}
 .dp-head{display:flex;align-items:center;gap:2px;font-size:13px;font-weight:700;color:var(--ink);margin-bottom:8px;}
@@ -1337,7 +1337,7 @@ body{background:var(--paper);}
 .cv-dates::-webkit-scrollbar{display:none;}
 .cv-date{position:relative;flex:0 0 auto;width:60px;display:flex;flex-direction:column;align-items:center;padding:7px 0 8px;border:none;border-radius:20px;background:var(--tint);color:var(--ink);cursor:pointer;transition:transform .15s;-webkit-tap-highlight-color:transparent;}
 .cv-date:active{transform:scale(.95);}
-/* 推薦口袋名單：預設收起，按按鈕才展開 */
+/* 推薦想去的地方：預設收起，按按鈕才展開 */
 .sg-toggle{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin:4px 0 14px;padding:13px 16px;border:1.5px dashed var(--border-2,#d6d0c8);border-radius:16px;background:var(--white,#fff);color:var(--ink);font:700 15px var(--font,inherit);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .2s,border-color .2s;}
 .sg-toggle:active{transform:scale(.98);}
 .sg-toggle .sg-t-ar{font-size:13px;color:var(--muted);transition:transform .3s ease;}
@@ -1710,6 +1710,38 @@ body[data-sec="itinerary"] .nb-fab{display:flex !important;}
 .tp-resetbtn:active{transform:scale(.96);}
 .tp-resetbtn:disabled{background:#F2EDE6;color:var(--faint);cursor:default;}
 .tp-def{display:inline-flex;align-items:center;height:18px;padding:0 6px;margin-right:5px;border-radius:999px;background:#E3DEFF;color:#3E2FA8;font-size:10.5px;font-weight:800;vertical-align:1px;}
+
+/* ══ 2026-11 直覺版：日期兩排、行程合一、少按鈕 ══ */
+.cv-dates{display:grid !important;grid-template-columns:repeat(6,1fr);gap:6px;overflow:visible;padding:8px 12px 10px;}
+.cv-date{width:auto !important;min-height:52px;padding:6px 0;border-radius:14px;justify-content:center;}
+.cv-dates > .cv-date:first-child,.cv-dates > .cv-date:last-child{margin:0;}
+.cv-day{display:none;}
+.cv-date b{font-size:17px;}
+.cv-wd{font-size:11px;opacity:.75;}
+.cv-date.active{transform:none;}
+.cv-date.today .cv-wd{opacity:1;font-weight:900;}
+.cv-date.today:not(.active) .cv-wd{color:var(--coral);}
+.cv-dot{top:-4px;right:-2px;min-width:16px;height:16px;line-height:16px;font-size:9px;border-width:1.5px;padding:0 4px;}
+.tp{overflow:visible !important;}
+.tp-head{border-radius:24px 24px 0 0;}
+.tp-title{font-size:17px;}
+.tp-tool{height:38px;font-size:13px;padding:0 12px;gap:4px;}
+.tp-more{position:relative;}
+.tp-more summary{list-style:none;}
+.tp-more summary::-webkit-details-marker{display:none;}
+.tp-menu{position:absolute;right:0;top:44px;z-index:60;min-width:190px;background:#fff;border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,.2);padding:6px;display:flex;flex-direction:column;}
+.tp-menu button{height:46px;border:none;background:none;text-align:left;font:700 15px var(--font,inherit);color:var(--ink);padding:0 12px;border-radius:10px;cursor:pointer;}
+.tp-menu button:active{background:var(--paper);}
+.tp-menu button:disabled,.tp-menu button.off{color:var(--faint);pointer-events:none;}
+.tp-body{padding:16px 12px 12px;}
+.tp-body .tl2-row:last-child{margin-bottom:4px;}
+.tp-extra-h{font-size:13px;font-weight:800;color:var(--muted);margin:16px 4px 8px;}
+.tp-row{padding:8px 8px 8px 10px !important;}
+.tl2-card{position:relative;}
+.tl2-rm{position:absolute;top:-9px;right:-7px;width:28px;height:28px;border-radius:50%;border:none;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.2);color:var(--muted);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;}
+.tl2-rm .ic{width:14px;height:14px;margin:0;}
+.it-banner.arrive,.it-banner.move,.it-banner.leave{display:none;}
+.tp-reset{border-top:none;padding-top:0;}
 </style>
 <script src="icons.js"></script>
 <script src="covers.js"></script>
@@ -1720,7 +1752,7 @@ body[data-sec="itinerary"] .nb-fab{display:flex !important;}
 <header class="cv-top">
   <div class="cv-offline" id="cv-offline"><i data-lucide="wifi-off" class="ic"></i>離線中・顯示已儲存的內容</div>
   <div class="cv-brand"><i data-lucide="sparkles" class="ic"></i><span>Kyoto &amp; Nagoya</span><b>2027</b></div>
-  <label class="cv-search"><i data-lucide="search" class="ic"></i><input id="gs-q" type="search" placeholder="搜尋口袋名單" oninput="gsInput()" autocomplete="off"><button type="button" class="cv-clear" onclick="gsClear()" aria-label="清除"><i data-lucide="x" class="ic"></i></button></label>
+  <label class="cv-search"><i data-lucide="search" class="ic"></i><input id="gs-q" type="search" placeholder="搜尋想去的地方" oninput="gsInput()" autocomplete="off"><button type="button" class="cv-clear" onclick="gsClear()" aria-label="清除"><i data-lucide="x" class="ic"></i></button></label>
 </header>
 <div class="cv-dates" id="cv-dates"></div>
 
@@ -1732,30 +1764,33 @@ body[data-sec="itinerary"] .nb-fab{display:flex !important;}
   <div id="it-banner"></div>
   <div class="tp" id="tp">
     <div class="tp-head">
-      <div class="tp-title"><i data-lucide="route" class="ic"></i><span id="tp-title-txt">今日候選池</span><span class="tp-count" id="tp-count">0</span></div>
+      <div class="tp-title"><i data-lucide="route" class="ic"></i><span id="tp-title-txt">今天的行程</span><span class="tp-count" id="tp-count">0</span></div>
       <div class="tp-tools">
-        <a class="tp-tool" id="tp-route" target="_blank" rel="noopener" title="整條路線開 Google 地圖"><i data-lucide="map" class="ic"></i>路線</a>
-        <button class="tp-tool" id="tp-clear" onclick="tpClear()" title="清空這天"><i data-lucide="eraser" class="ic"></i>清空</button>
-        <button class="tp-tool icon" onclick="tpToggleOpen()" id="tp-fold" title="收合／展開"><i data-lucide="chevron-up" class="ic"></i></button>
+        <a class="tp-tool" id="tp-route" target="_blank" rel="noopener" title="整條路線開 Google 地圖"><i data-lucide="map" class="ic"></i>地圖路線</a>
+        <details class="tp-more" id="tp-more"><summary class="tp-tool" aria-label="更多功能">更多</summary>
+          <div class="tp-menu">
+            <button type="button" id="tp-clear" onclick="tpMenu(tpClear)">清空這天</button>
+            <button type="button" id="tp-undo" onclick="tpMenu(tpResetDay)">恢復原本的行程</button>
+          </div>
+        </details>
+        <button hidden id="tp-fold"></button>
       </div>
     </div>
     <div class="tp-body" id="tp-body">
+      <div class="tl2" id="timeline"></div>
+      <div class="tp-extra-h" id="tp-extra-h">另外加的地方</div>
       <div class="tp-list" id="tp-list"></div>
       <div class="tp-warns" id="tp-warns"></div>
       <div class="tp-reset" id="tp-reset"></div>
     </div>
   </div>
 
-  <button type="button" class="sg-toggle" id="sg-toggle" aria-expanded="false" aria-controls="sg-wrap" onclick="sgToggleOpen()"><span class="sg-t-ic">➕</span><span class="sg-t-tx">展開/新增口袋名單</span><span class="sg-t-ar">▾</span></button>
+  <button type="button" class="sg-toggle" id="sg-toggle" aria-expanded="false" aria-controls="sg-wrap" onclick="sgToggleOpen()"><span class="sg-t-ic">➕</span><span class="sg-t-tx">加入想去的地方</span><span class="sg-t-ar">▾</span></button>
   <div class="sg-wrap" id="sg-wrap"><div class="sg-inner">
   <div class="mood" id="mood-it"></div>
   <div class="sg" id="it-suggest"></div>
   </div></div>
-  <details class="it-orig" id="it-orig">
-    <summary id="it-orig-sum">原定安排</summary>
-    <div id="day-hero"></div>
-    <div class="tl2" id="timeline"></div>
-  </details>
+  <div id="it-orig" hidden><span id="it-orig-sum"></span><div id="day-hero"></div></div>
   <div class="dp" id="day-picks"></div>
   </div>
 </div>
@@ -1763,7 +1798,7 @@ body[data-sec="itinerary"] .nb-fab{display:flex !important;}
 <!-- POCKET LIST -->
 <div id="section-pocket" class="section">
   <div class="nb-page">
-  <div class="sec-title">口袋名單</div>
+  <div class="sec-title">想去的地方</div>
 
   <div class="pk-regions" id="pk-regions"></div>
   <div class="pk-cats" id="pk-cats"></div>
@@ -2020,15 +2055,15 @@ body[data-sec="itinerary"] .nb-fab{display:flex !important;}
 
 <nav class="fnav" id="fnav" aria-label="快速導覽">
   <button class="fnav-btn active" data-sec="itinerary" onclick="goSec('itinerary')"><i data-lucide="calendar-days" class="ic"></i><span>今日行程</span></button>
-  <button class="fnav-btn" data-sec="pocket" onclick="goSec('pocket')"><i data-lucide="map-pinned" class="ic"></i><span>口袋名單</span></button>
+  <button class="fnav-btn" data-sec="pocket" onclick="goSec('pocket')"><i data-lucide="map-pinned" class="ic"></i><span>想去的地方</span></button>
   <button class="fnav-btn" data-sec="tools" onclick="goSec('tools')"><i data-lucide="luggage" class="ic"></i><span>旅途助手</span></button>
 </nav>
-<button class="nb-fab" id="nb-fab" onclick="nbOpen()" aria-label="附近口袋名單"><i data-lucide="locate-fixed" class="ic"></i><span>附近口袋名單</span></button>
+<button class="nb-fab" id="nb-fab" onclick="nbOpen()" aria-label="附近想去的地方"><i data-lucide="locate-fixed" class="ic"></i><span>附近有什麼</span></button>
 <div class="nb-overlay" id="nb-overlay" onclick="if(event.target===this)nbClose()">
-  <div class="nb-sheet" role="dialog" aria-label="附近口袋名單">
+  <div class="nb-sheet" role="dialog" aria-label="附近想去的地方">
     <div class="nb-grab"></div>
     <div class="nb-head">
-      <div class="nb-title"><i data-lucide="locate-fixed" class="ic"></i>附近口袋名單</div>
+      <div class="nb-title"><i data-lucide="locate-fixed" class="ic"></i>附近想去的地方</div>
       <button class="nb-x" onclick="nbClose()" aria-label="關閉"><i data-lucide="x" class="ic"></i></button>
     </div>
     <div class="nb-status" id="nb-status"></div>
@@ -2458,7 +2493,7 @@ function buildTabs(){
   const area=document.getElementById('section-itinerary');
   area.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
   area.addEventListener('touchend',e=>{
-    if(e.target.closest('.rail,.tp,.mood,.sg,.it-base,.cv-dates,.tl-tabs')) return;
+    if(e.target.closest('.rail,.tp-list,.tp-head,.mood,.sg,.it-base,.cv-dates,.tl-tabs')) return;
     const dx=e.changedTouches[0].clientX-sx, dy=e.changedTouches[0].clientY-sy;
     if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){
       const n=curDay+(dx<0?1:-1);
@@ -2483,7 +2518,16 @@ function renderItinerary(di){
     <div class="day-hero-ill">${DAY_COVER[TP_DATES[di]]?`<img src="${DAY_COVER[TP_DATES[di]]}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">`:ic(th.ill)}</div>
     <div class="day-hero-txt"><div class="day-hero-no">Day ${di+1} · ${d.date}${d.badge?`<span class="day-badge">${d.badge}</span>`:''}</div><div class="day-hero-title">${d.title}</div><div class="day-hero-area">${ic("map-pin")}${d.area}</div></div></div>`;
 
-  document.getElementById('timeline').innerHTML=d.items.map((it,i)=>{
+  tlRender(di);
+}
+function tpMenu(fn){const m=document.getElementById('tp-more'); if(m) m.open=false; fn();}
+function tpRemoveId(id){const i=tpData.findIndex(t=>t.id===id); if(i>=0) tpRemove(i);}
+function tlRender(di){
+  const d=days[di]; if(!d) return; const iso=TP_DATES[di], plan=tpPlans[iso]; let k=-1;
+  const html=d.items.map((it,i)=>{
+    let rm='';
+    if(it.type==='spot'||it.type==='food'){k++; const id='def-'+iso+'-'+k;
+      if(plan){ if(!plan.some(t=>t.id===id)) return ''; rm=`<button class="tl2-rm" onclick="event.stopPropagation();tpRemoveId('${id}')" aria-label="從今天拿掉">${ic('x')}</button>`; }}
     const delay=`style="animation-delay:${i*.04}s"`;
     if(it.type==='transport'){
       const [cls,lbl]=moveKind(it);
@@ -2495,8 +2539,9 @@ function renderItinerary(di){
       <div class="tl2-card ${it.isHighlight?'hi':''} ${it.warn?'has-warn':''}" data-q="${q?q.replace(/"/g,''):''}" data-url="${it.url||''}" onclick="if(!event.target.closest('.gm-slot'))openPlace(this)">
         <div class="tl2-title">${it.isHighlight?'<span class="star">'+ic('star')+'</span>':''}${it.title}${itRate(it)}${(q||it.url)?'<span class="tl2-tap">'+ic('map-pin')+'看評價</span>':''}</div>
         ${it.warn?`<div class="tl2-warn">${ic('triangle-alert')}<span>${it.warn}</span></div>`:''}
-        <div class="tl2-note">${it.note?it.note.replace(/\n/g,'<br>'):''}<div class="gm-slot"></div></div></div></div>`;
+        <div class="tl2-note">${it.note?it.note.replace(/\n/g,'<br>'):''}<div class="gm-slot"></div></div>${rm}</div></div>`;
   }).join('');
+  document.getElementById('timeline').innerHTML=html;
 }
 
 function renderSpots(f){
@@ -2681,12 +2726,12 @@ function goSec(id){
   showSec(id,null);
 }
 
-// ══ 口袋名單 ══
+// ══ 想去的地方 ══
 const PK_DEFAULT={"kyoto":[{"id":"k3","name":"石清水八幡宮","category":"景點","zone":"八幡","tags":["神社","纜車"],"rating":{"google":4.5,"tabelog":null}},{"id":"k4","name":"飛行神社","category":"景點","zone":"八幡","tags":["神社","飛行安全"],"rating":{"google":4.2,"tabelog":null}},{"id":"k6","name":"太秦映畫村","category":"景點","zone":"太秦","tags":["主題樂園","江戶街景"],"rating":{"google":4.2,"tabelog":null}},{"id":"k7","name":"大原三千院","category":"景點","zone":"大原","tags":["古寺","苔庭"],"rating":{"google":4.6,"tabelog":null}},{"id":"k8","name":"白鬚神社","category":"景點","zone":"滋賀","tags":["神社","水中鳥居"],"rating":{"google":4.3,"tabelog":null}},{"id":"k10","name":"壇王法林寺","category":"景點","zone":"三條","tags":["寺院","黑貓"],"rating":{"google":4.2,"tabelog":null}},{"id":"k11","name":"河合神社","category":"景點","zone":"下鴨","tags":["神社","鏡繪馬"],"rating":{"google":4.4,"tabelog":null}},{"id":"k12","name":"神泉苑","category":"景點","zone":"二條","tags":["庭園","平安京遺構"],"rating":{"google":4.3,"tabelog":null}},{"id":"k13","name":"大黑屋餅舖","category":"甜點","zone":"烏丸","tags":["傳統餅舖"],"rating":{"google":4.2,"tabelog":3.35}},{"id":"k14","name":"豆大福 出町雙葉","category":"甜點","zone":"出町柳","tags":["豆大福","排隊名店"],"rating":{"google":4.5,"tabelog":3.79}},{"id":"k15","name":"村上開新堂","category":"甜點","zone":"河原町","tags":["洋菓子","老舖"],"rating":{"google":4.3,"tabelog":3.65}},{"id":"k16","name":"茶寮寶全","category":"甜點","zone":"下鴨","address":"京都府京都市左京区下鴨西高木町25","tags":["和菓子"],"rating":{"google":4.4,"tabelog":3.52}},{"id":"k17","name":"加茂みたらし茶屋","category":"甜點","zone":"下鴨","tags":["醬油糰子","發源老店"],"rating":{"google":4.2,"tabelog":3.68}},{"id":"k18","name":"中村軒","category":"甜點","zone":"桂","tags":["和菓子","刨冰"],"rating":{"google":4.4,"tabelog":3.71}},{"id":"k19","name":"阿闍梨餅本舖 満月","category":"甜點","zone":"出町柳","tags":["阿闍梨餅","伴手禮"],"rating":{"google":4.5,"tabelog":3.72}},{"id":"k20","name":"カタパン屋","category":"甜點","zone":"伏見","tags":["硬派麵包"],"rating":{"google":4.1,"tabelog":3.25}},{"id":"k21","name":"麩嘉","category":"甜點","zone":"府廳前","tags":["生麩","麩饅頭"],"rating":{"google":4.4,"tabelog":3.64}},{"id":"k22","name":"糖太郎","category":"甜點","zone":"烏丸","tags":["特色甜點"],"rating":{"google":4.3,"tabelog":3.48}},{"id":"k23","name":"本家月餅家直正","category":"甜點","zone":"三條","tags":["蕨餅","老舖"],"rating":{"google":4.6,"tabelog":3.78}},{"id":"k24","name":"かぎ甚","category":"甜點","zone":"祇園","tags":["祇園","和菓子"],"rating":{"google":4.3,"tabelog":3.5}},{"id":"k25","name":"Mamemono and Taiyaki 清水店","category":"甜點","zone":"清水寺","tags":["鯛魚燒","奶油鯛魚燒"],"rating":{"google":4.4,"tabelog":3.42}},{"id":"k26","name":"吉祥菓寮","category":"甜點","zone":"祇園","tags":["黃豆粉刨冰","芭菲"],"rating":{"google":4.3,"tabelog":3.62}},{"id":"k27","name":"梅園","category":"甜點","zone":"河原町","tags":["烤糰子","甘味處"],"rating":{"google":4.2,"tabelog":3.55}},{"id":"k28","name":"一文字屋和輔","category":"甜點","zone":"紫野","tags":["今宮神社","烤麻糬"],"rating":{"google":4.5,"tabelog":3.74}},{"id":"k29","name":"栗屋","category":"甜點","zone":"烏丸","tags":["栗子甜點"],"rating":{"google":4.2,"tabelog":3.3}},{"id":"k30","name":"御倉屋","category":"甜點","zone":"北區","tags":["和菓子"],"rating":{"google":4.4,"tabelog":3.58}},{"id":"k31","name":"とようけ屋山本 / とようけ茶屋","category":"美食","zone":"北野","tags":["豆腐料理","油豆腐"],"rating":{"google":4.3,"tabelog":3.67}},{"id":"k32","name":"祇園小森","category":"甜點","zone":"祇園","tags":["抹茶甜點","祇園"],"rating":{"google":4.3,"tabelog":3.63}},{"id":"k33","name":"神馬堂","category":"甜點","zone":"上賀茂","tags":["現烤燒餅","限量老舖"],"rating":{"google":4.5,"tabelog":3.73}},{"id":"k34","name":"葵家やきもち総本舗","category":"甜點","zone":"上賀茂","tags":["燒餅","御手洗餅"],"rating":{"google":4.3,"tabelog":3.56}},{"id":"k35","name":"今西軒","category":"甜點","zone":"五條","tags":["手作荻餅","限量名店"],"rating":{"google":4.6,"tabelog":3.81}},{"id":"k83","name":"治一郎 大丸京都店","category":"甜點","zone":"四條烏丸","address":"大丸京都店 B1F","tags":["年輪蛋糕","布丁","人氣伴手禮"],"rating":{"google":4.3,"tabelog":3.12}},{"id":"k84","name":"虎屋菓寮 京都一条店","category":"甜點","zone":"御所","tags":["羊羹發祥老舖","枯山水庭園"],"rating":{"google":4.5,"tabelog":3.73}},{"id":"k85","name":"鍵善良房 本店","category":"甜點","zone":"祇園","tags":["祇園老舖","黑糖葛切","和菓子"],"rating":{"google":4.3,"tabelog":3.78}},{"id":"k86","name":"GION GOZU 祇園布丁","category":"甜點","zone":"祇園","tags":["祇園散策","濃郁布丁"],"rating":{"google":4.4,"tabelog":3.45}},{"id":"k87","name":"和栗專門 紗織","category":"甜點","zone":"木屋町","tags":["現擠和栗蒙布朗","奢華甜點"],"rating":{"google":4.3,"tabelog":3.68}},{"id":"k36","name":"京都鴨蕎麦 田","category":"美食","zone":"祇園","tags":["鴨肉蕎麥麵"],"rating":{"google":4.4,"tabelog":3.55}},{"id":"k37","name":"京ラーメン さだかず 祇園本店","category":"美食","zone":"祇園","tags":["祇園","深夜拉麵"],"rating":{"google":4.3,"tabelog":3.61}},{"id":"k38","name":"和醸良麺 すがり (Sugari)","category":"美食","zone":"四條烏丸","tags":["沾麵","町家風格"],"rating":{"google":4.3,"tabelog":3.76}},{"id":"k39","name":"貝だし麺 きた田","category":"美食","zone":"京都車站","tags":["貝類湯頭","拉麵"],"rating":{"google":4.3,"tabelog":3.64}},{"id":"k40","name":"おうどん一","category":"美食","zone":"河原町","tags":["烏龍麵"],"rating":{"google":4.2,"tabelog":3.45}},{"id":"k41","name":"セアブラノ神 壬生本店","category":"美食","zone":"壬生","tags":["背脂醬油拉麵","極粗麵"],"rating":{"google":4.2,"tabelog":3.68}},{"id":"k42","name":"無礙山房","category":"美食","zone":"東山","tags":["抹茶","芭菲","庭園"],"rating":{"google":4.4,"tabelog":3.77}},{"id":"k43","name":"彌生軒食堂","category":"美食","zone":"河原町","tags":["平價定食"],"rating":{"google":4.1,"tabelog":3.2}},{"id":"k44","name":"宮川豚衛門","category":"美食","zone":"宮川町","tags":["炸豬排","宮川町"],"rating":{"google":4.5,"tabelog":3.58}},{"id":"k45","name":"炭火燒鳥 馬耳東風","category":"美食","zone":"四條烏丸","tags":["燒鳥","居酒屋"],"rating":{"google":4.5,"tabelog":3.79}},{"id":"k46","name":"karaageya","category":"美食","zone":"河原町","tags":["日式炸雞"],"rating":{"google":4.3,"tabelog":3.32}},{"id":"k47","name":"手づくりハンバーグの店 とくら 京都三条店","category":"美食","zone":"三條","tags":["爆漿漢堡排","排隊名店"],"rating":{"google":4.4,"tabelog":3.65}},{"id":"k48","name":"洋食堂のろ","category":"美食","zone":"二條","tags":["精緻洋食"],"rating":{"google":4.5,"tabelog":3.62}},{"id":"k49","name":"天丼まきの 京都寺町店","category":"美食","zone":"寺町","tags":["天丼","海老天婦羅"],"rating":{"google":4.3,"tabelog":3.51}},{"id":"k50","name":"京都海老天丼徳","category":"美食","zone":"河原町","tags":["天丼"],"rating":{"google":4.2,"tabelog":3.38}},{"id":"k51","name":"New Babe Kyoto","category":"美食","zone":"烏丸","tags":["炸豬排"],"rating":{"google":4.6,"tabelog":3.55}},{"id":"k52","name":"鯛壽司","category":"美食","zone":"木屋町","tags":["老字號壽司"],"rating":{"google":4.3,"tabelog":3.54}},{"id":"k53","name":"海鮮工房橋立物產","category":"美食","zone":"宮津","tags":["海鮮","伴手禮"],"rating":{"google":4.1,"tabelog":3.22}},{"id":"k54","name":"Spice Curry Kiteretsu","category":"美食","zone":"北區","tags":["斯里蘭卡咖哩","香料咖哩"],"rating":{"google":4.6,"tabelog":3.58}},{"id":"k55","name":"MR.餃子","category":"美食","zone":"東寺","tags":["煎餃","爆汁"],"rating":{"google":4.3,"tabelog":3.69}},{"id":"k56","name":"新門前米村","category":"美食","zone":"祇園","tags":["創新料理","精緻餐飲"],"rating":{"google":4.6,"tabelog":3.92}},{"id":"k57","name":"酒呑氣 びんご","category":"美食","zone":"烏丸","tags":["居酒屋"],"rating":{"google":4.4,"tabelog":3.55}},{"id":"k58","name":"京都炭火串燒 Tsujiya 四條御幸町店","category":"美食","zone":"四條","tags":["串燒","雞肉料理"],"rating":{"google":4.3,"tabelog":3.48}},{"id":"k59","name":"田中雞卵","category":"美食","zone":"錦市場","tags":["錦市場","玉子燒"],"rating":{"google":4.2,"tabelog":3.49}},{"id":"k60","name":"京都柳小路 TAKA","category":"美食","zone":"河原町","tags":["柳小路","時尚居酒屋"],"rating":{"google":4.4,"tabelog":3.59}},{"id":"k61","name":"先斗町薬膳カレー","category":"美食","zone":"先斗町","tags":["藥膳咖哩","無添加"],"rating":{"google":4.2,"tabelog":3.48}},{"id":"k62","name":"百年蕎麦 壽","category":"美食","zone":"御幸町","tags":["百年蕎麥","站立蕎麥"],"rating":{"google":4.1,"tabelog":3.32}},{"id":"k63","name":"御飯屋 一芯","category":"美食","zone":"三條","tags":["羽釜炊飯","日式定食"],"rating":{"google":4.4,"tabelog":3.65}},{"id":"k88","name":"炭炉まん (炭爐Man)","category":"美食","zone":"河原町","tags":["炭燒料理","爐端燒","精緻串燒"],"rating":{"google":4.5,"tabelog":3.58}},{"id":"k89","name":"京的燒肉處 弘","category":"美食","zone":"三條/木屋町","tags":["高品質和牛","人氣燒肉連鎖"],"rating":{"google":4.5,"tabelog":3.58}},{"id":"k90","name":"京蕎麥處 花卷","category":"美食","zone":"市區","tags":["傳統手打蕎麥麵","京風味"],"rating":{"google":4.2,"tabelog":3.42}},{"id":"k91","name":"祇園 鰻 川藤","category":"美食","zone":"祇園","tags":["炭烤鰻魚","精緻鰻魚飯"],"rating":{"google":4.4,"tabelog":3.55}},{"id":"k64","name":"weekends coffee","category":"咖啡","zone":"岡崎","tags":["質感咖啡"],"rating":{"google":4.5,"tabelog":3.52}},{"id":"k65","name":"Inahiko Coffee 伏見稲荷本店","category":"咖啡","zone":"伏見","tags":["伏見稻荷","特色咖啡"],"rating":{"google":4.6,"tabelog":3.28}},{"id":"k66","name":"スターバックスコーヒー京都円山公園菊の渓店","category":"咖啡","zone":"東山","tags":["圓山公園","特色星巴克"],"rating":{"google":4.3,"tabelog":3.15}},{"id":"k67","name":"Here咖啡 (HERE KYOTO)","category":"咖啡","zone":"二條","tags":["設計感咖啡"],"rating":{"google":4.3,"tabelog":3.55}},{"id":"k68","name":"日東堂咖啡牛奶","category":"咖啡","zone":"清水寺","tags":["清水寺周邊","質感選物"],"rating":{"google":4.2,"tabelog":3.3}},{"id":"k69","name":"京都いとおかし","category":"咖啡","zone":"市區","tags":["甜點喫茶"],"rating":{"google":4.3,"tabelog":3.38}},{"id":"k70","name":"SHUHARI KYOTO","category":"咖啡","zone":"西陣","tags":["手刷抹茶"],"rating":{"google":4.7,"tabelog":3.42}},{"id":"k71","name":"sui","category":"咖啡","zone":"市區","tags":["質感咖啡廳"],"rating":{"google":4.4,"tabelog":3.35}},{"id":"k72","name":"TO.","category":"咖啡","zone":"御所","tags":["風格餐酒","咖啡"],"rating":{"google":4.5,"tabelog":3.58}},{"id":"k73","name":"La Madrague (喫茶マドラグ)","category":"咖啡","zone":"烏丸御池","tags":["厚蛋燒三明治","懷舊喫茶"],"rating":{"google":4.3,"tabelog":3.68}},{"id":"k74","name":"Creperie Garcon","category":"咖啡","zone":"河原町","tags":["法式可麗餅"],"rating":{"google":4.5,"tabelog":3.52}},{"id":"k75","name":"smart coffee (スマート珈琲店)","category":"咖啡","zone":"三條","tags":["昭和喫茶","法式吐司"],"rating":{"google":4.4,"tabelog":3.74}},{"id":"k76","name":"くるみ (Kurumi)","category":"咖啡","zone":"四條","tags":["特色喫茶"],"rating":{"google":4.2,"tabelog":3.48}},{"id":"k77","name":"乃咫 nota (Dorayaki & Black Tea)","category":"咖啡","zone":"五條","tags":["銅鑼燒","和紅茶"],"rating":{"google":4.6,"tabelog":3.45}},{"id":"k78","name":"京都 Godiva 麵包","category":"咖啡","zone":"河原町","tags":["Godiva","巧克力烘焙"],"rating":{"google":4.2,"tabelog":3.25}},{"id":"k80","name":"茶房 居雨 KYO AMAHARE","category":"咖啡","zone":"市區","tags":["日式極致美學","隱世茶房"],"rating":{"google":4.6,"tabelog":3.52}},{"id":"k81","name":"ARCHI coffee and wine","category":"咖啡","zone":"市區","tags":["極簡風格","自然酒","咖啡酒吧"],"rating":{"google":4.5,"tabelog":3.38}},{"id":"k82","name":"京都茅乃舍","category":"購物","zone":"河原町","tags":["高湯包","伴手禮"],"rating":{"google":4.4,"tabelog":null}},{"id":"k92","name":"麥當勞 金閣寺店","category":"美食","zone":"金閣寺","tags":["速食","便利點"],"rating":{"google":3.9,"tabelog":null}},{"id":"k93","name":"麥當勞 河原町店","category":"美食","zone":"河原町","tags":["速食","便利點"],"rating":{"google":3.8,"tabelog":null}},{"id":"k94","name":"The OneFive Kyoto","category":"住宿","zone":"二條","tags":["質感飯店"],"rating":{"google":4.2,"tabelog":null}}],"uji":[{"id":"u1","name":"hoho焙茶 (HOHO HOJICHA)","category":"咖啡甜點","zone":"宇治車站","tags":["焙茶專賣","宇治茶","焙茶甜點"],"rating":{"google":4.4,"tabelog":3.52}}],"nara":[{"id":"n2","name":"二月堂","category":"景點","zone":"奈良公園","tags":["古寺","俯瞰市景"],"rating":{"google":4.7,"tabelog":null}},{"id":"n3","name":"興福寺","category":"景點","zone":"近鐵奈良","tags":["五重塔","古蹟"],"rating":{"google":4.5,"tabelog":null}},{"id":"n4","name":"朱雀門","category":"景點","zone":"平城宮跡","tags":["歷史地標"],"rating":{"google":4.3,"tabelog":null}},{"id":"n5","name":"唐招提寺","category":"景點","zone":"西之京","tags":["鑑真和尚","唐風建築"],"rating":{"google":4.6,"tabelog":null}},{"id":"n6","name":"藥師寺","category":"景點","zone":"西之京","tags":["東塔","法相宗"],"rating":{"google":4.5,"tabelog":null}},{"id":"n7","name":"法隆寺","category":"景點","zone":"斑鳩","tags":["世界最早木造建築"],"rating":{"google":4.6,"tabelog":null}},{"id":"n8","name":"長谷寺","category":"景點","zone":"櫻井","tags":["牡丹名所","懸造本堂"],"rating":{"google":4.6,"tabelog":null}},{"id":"n9","name":"中將堂本舖","category":"甜點","zone":"當麻","tags":["中將餅","艾草麻糬","百年老舖"],"rating":{"google":4.4,"tabelog":3.68}},{"id":"n10","name":"中古堂","category":"甜點","zone":"奈良町","tags":["和菓子","伴手禮"],"rating":{"google":4.2,"tabelog":3.35}},{"id":"n11","name":"道明寺 + 御手橋","category":"景點","zone":"藤井寺","tags":["道明寺粉發源地","古橋"],"rating":{"google":4.3,"tabelog":null}},{"id":"n12","name":"信貴山成福院","category":"景點","zone":"信貴山","tags":["虎之寺","祈求財運"],"rating":{"google":4.5,"tabelog":null}}],"kobe":[{"id":"b1","name":"動物王國","category":"景點","zone":"港島","tags":["親近動物","親子"],"rating":{"google":4.6,"tabelog":null}},{"id":"b2","name":"須磨海洋世界虎鯨秀","category":"景點","zone":"須磨","tags":["海洋館","虎鯨秀"],"rating":{"google":4.4,"tabelog":null}},{"id":"b3","name":"かつ丼吉兵衛 三宮本店","category":"美食","zone":"三宮","tags":["豬排丼","三宮"],"rating":{"google":4.2,"tabelog":3.62}},{"id":"b4","name":"not's","category":"美食","zone":"三宮","tags":["神戶牛排"],"rating":{"google":4.6,"tabelog":3.55}},{"id":"b5","name":"Bakery RIKI","category":"麵包甜點","zone":"南京町","tags":["排隊名店","人氣麵包"],"rating":{"google":4.5,"tabelog":3.75}},{"id":"b6","name":"TAOCA COFFEE","category":"咖啡","zone":"三宮","tags":["起司蛋糕","咖啡試喝"],"rating":{"google":4.4,"tabelog":3.38}},{"id":"b7","name":"isuzu 麵包坊","category":"麵包甜點","zone":"三宮","tags":["老字號麵包"],"rating":{"google":4.3,"tabelog":3.6}},{"id":"b8","name":"生田神社","category":"景點","zone":"三宮","tags":["神社","市中心"],"rating":{"google":4.5,"tabelog":null}},{"id":"b9","name":"摩耶山","category":"景點","zone":"摩耶","tags":["掬星台","三大夜景"],"rating":{"google":4.6,"tabelog":null}},{"id":"b10","name":"Ça Marche","category":"麵包甜點","zone":"北野","tags":["法式麵包"],"rating":{"google":4.4,"tabelog":3.72}},{"id":"b11","name":"紗布起司","category":"麵包甜點","zone":"元町","tags":["起司甜點"],"rating":{"google":4.2,"tabelog":3.25}},{"id":"b12","name":"人生餃子店","category":"美食","zone":"三宮","tags":["特色餃子"],"rating":{"google":4.1,"tabelog":3.35}},{"id":"b13","name":"呼炉凪来 三宮店","category":"美食","zone":"三宮","tags":["關東煮","居酒屋"],"rating":{"google":4.3,"tabelog":3.28}},{"id":"b14","name":"Tommy's Sannomiya","category":"麵包甜點","zone":"三宮","tags":["紅豆吐司","名店"],"rating":{"google":4.3,"tabelog":3.65}},{"id":"b15","name":"DoRSIA","category":"咖啡","zone":"三宮","tags":["人氣布丁","咖啡廳"],"rating":{"google":4.3,"tabelog":3.52}},{"id":"b16","name":"賀正軒","category":"美食","zone":"御影","tags":["拉麵"],"rating":{"google":4.2,"tabelog":3.58}},{"id":"b17","name":"北野異人館","category":"景點","zone":"北野","tags":["洋館街區","異國風情"],"rating":{"google":4.2,"tabelog":null}},{"id":"b18","name":"神戶塔","category":"景點","zone":"美利堅公園","tags":["神戶港","經典地標"],"rating":{"google":4.3,"tabelog":null}},{"id":"b19","name":"麵包超人博物館","category":"景點","zone":"港區","tags":["親子","打卡景點"],"rating":{"google":4.4,"tabelog":null}},{"id":"b20","name":"Étoile KOBE (エトワール コウベ)","category":"麵包甜點","zone":"三宮","tags":["神戶夜景甜點","法式糕點"],"rating":{"google":4.3,"tabelog":3.42}},{"id":"b21","name":"神戶布引香草園","category":"景點","zone":"新神戶","tags":["纜車","俯瞰神戶港夜景"],"rating":{"google":4.5,"tabelog":null}}],"nagoya":[{"id":"ngo1","name":"HARBS 榮本店","category":"咖啡甜點","zone":"榮","tags":["創始本店","水果千層"],"rating":{"google":4.3,"tabelog":3.58}},{"id":"ngo2","name":"あつた蓬萊軒 本店","category":"美食","zone":"熱田","tags":["鰻魚飯三吃始祖","百年老店"],"rating":{"google":4.6,"tabelog":3.79}},{"id":"ngo3","name":"風來坊 榮店","category":"美食","zone":"榮","tags":["手羽先創始店","夢幻炸雞翅"],"rating":{"google":4.1,"tabelog":3.51}},{"id":"ngo4","name":"矢場豬排 榮セントライズ店","category":"美食","zone":"榮","tags":["味噌豬排","昭和老店"],"rating":{"google":4.2,"tabelog":3.39}},{"id":"ngo5","name":"山本屋總本家 / 本店","category":"美食","zone":"榮/名站","tags":["味噌煮込烏龍麵"],"rating":{"google":4.1,"tabelog":3.52}},{"id":"ngo6","name":"世界的山將 榮店","category":"美食","zone":"榮","tags":["夢幻手羽先","居酒屋"],"rating":{"google":4.2,"tabelog":3.48}},{"id":"ngo7","name":"ひつまぶし う家 名古屋店","category":"美食","zone":"名站","tags":["鰻魚飯三吃","備長炭現烤"],"rating":{"google":4.5,"tabelog":3.65}},{"id":"ngo8","name":"宮鍵","category":"美食","zone":"伏見","tags":["百年老店","雞肉料理","鰻魚丼"],"rating":{"google":4.3,"tabelog":3.68}},{"id":"ngo9","name":"鰻木屋","category":"美食","zone":"久屋大通","tags":["在地隱藏老店","炭燒鰻魚"],"rating":{"google":4.5,"tabelog":3.82}},{"id":"ngo10","name":"鰻魚いば昇","category":"美食","zone":"榮","tags":["百年鰻魚飯"],"rating":{"google":4.3,"tabelog":3.72}},{"id":"ngo11","name":"Yakko (やっこ)","category":"美食","zone":"大須","tags":["老字號鰻魚飯","味噌料理"],"rating":{"google":4.1,"tabelog":3.48}},{"id":"ngo12","name":"滿州城","category":"美食","zone":"市區","tags":["在地中華料理","餃子"],"rating":{"google":4.1,"tabelog":3.32}},{"id":"ngo13","name":"塚ちゃん餃子","category":"美食","zone":"市區","tags":["手作煎餃","居酒屋"],"rating":{"google":4.4,"tabelog":3.42}},{"id":"ngo14","name":"麵屋獅子丸","category":"美食","zone":"名站","tags":["濃厚雞白湯拉麵","泡沫系"],"rating":{"google":4.3,"tabelog":3.74}},{"id":"ngo15","name":"麵屋Hayabusa (麺屋はやぶさ)","category":"美食","zone":"名站","tags":["創意拉麵","貝類高湯"],"rating":{"google":4.3,"tabelog":3.65}},{"id":"ngo16","name":"麺屋 有象無象","category":"美食","zone":"大須","tags":["濃厚魚介豚骨","魚介沾麵"],"rating":{"google":4.3,"tabelog":3.61}},{"id":"ngo17","name":"とろ〜り卵のオムライス さん太","category":"美食","zone":"市區/岡崎","tags":["爆漿流心蛋包飯","神級蛋包飯"],"rating":{"google":4.3,"tabelog":3.55}},{"id":"ngo18","name":"昼だけうなぎ屋 今池店","category":"美食","zone":"今池","tags":["中午限定鰻魚飯","超高CP值"],"rating":{"google":4.4,"tabelog":3.48}},{"id":"ngo50","name":"鳥開總本家","category":"美食","zone":"名站/榮","tags":["金賞親子丼","名古屋地雞"],"rating":{"google":4.2,"tabelog":3.55}},{"id":"ngo51","name":"まるや本店 (Maruya Honten)","category":"美食","zone":"名站","tags":["鰻魚飯三吃","備長炭現烤"],"rating":{"google":4.5,"tabelog":3.72}},{"id":"ngo52","name":"がブリチキン。大須三丁目店","category":"美食","zone":"大須","tags":["金賞日式炸雞","骨付鳥"],"rating":{"google":4.1,"tabelog":3.32}},{"id":"ngo53","name":"麵屋優光 名古屋店","category":"美食","zone":"榮","tags":["京都黑醬油拉麵","貝類高湯"],"rating":{"google":4.3,"tabelog":3.62}},{"id":"ngo81","name":"イチビキ (Ichibiki)","category":"美食","zone":"名站","tags":["排隊第一神店","超厚夢幻鰻魚丼"],"rating":{"google":4.5,"tabelog":4.15}},{"id":"ngo82","name":"ひつまぶし名古屋備長","category":"美食","zone":"榮","tags":["備長炭直火炭烤","鰻魚飯三吃"],"rating":{"google":4.4,"tabelog":3.68}},{"id":"ngo83","name":"和食とみだ (富田)","category":"美食","zone":"市區","tags":["精緻和食","手作料理"],"rating":{"google":4.4,"tabelog":3.65}},{"id":"ngo84","name":"カツレツマツムラ","category":"美食","zone":"市區","tags":["米其林推薦炸豬排","極致酥脆"],"rating":{"google":4.6,"tabelog":3.82}},{"id":"ngo90","name":"とんかつ百年亭","category":"美食","zone":"天白區","tags":["老字號極致炸豬排","多汁豬排"],"rating":{"google":4.5,"tabelog":3.68}},{"id":"ngo91","name":"一両生煎","category":"美食","zone":"大須","tags":["大須商店街","爆汁生煎包"],"rating":{"google":4.3,"tabelog":3.48}},{"id":"ngo92","name":"炭燒富士鰻魚","category":"美食","zone":"名站/榮","tags":["直火炭燒鰻魚","鰻魚飯三吃"],"rating":{"google":4.4,"tabelog":3.65}},{"id":"ngo94","name":"鬼天 (大須屋台村內)","category":"美食","zone":"大須","tags":["鬼天炸蝦飯糰","手作飯糰"],"rating":{"google":4.4,"tabelog":3.45}},{"id":"ngo95","name":"たこ本舗 (大須屋台村內)","category":"美食","zone":"大須","tags":["章魚燒","大須屋台美食"],"rating":{"google":4.2,"tabelog":3.32}},{"id":"ngo96","name":"炎旨大鷄排 (大須屋台村內)","category":"美食","zone":"大須","tags":["台式大雞排","散步小吃"],"rating":{"google":4.1,"tabelog":3.28}},{"id":"ngo19","name":"Échiré 艾許奶油 名古屋店","category":"甜點","zone":"名站","tags":["頂級奶油","限定甜點"],"rating":{"google":4.4,"tabelog":3.62}},{"id":"ngo20","name":"つばめパン & Milk","category":"咖啡甜點","zone":"名站","tags":["天然酵母吐司","厚燒玉子三明治"],"rating":{"google":4.3,"tabelog":3.55}},{"id":"ngo21","name":"Coffee House KAKO 花車本店","category":"咖啡","zone":"名站","tags":["元祖紅豆果醬吐司","昭和喫茶"],"rating":{"google":4.3,"tabelog":3.67}},{"id":"ngo22","name":"KONPARU 招牌炸蝦三明治","category":"咖啡美食","zone":"大須/名站","tags":["昭和喫茶","酥脆炸蝦排"],"rating":{"google":4.1,"tabelog":3.52}},{"id":"ngo23","name":"いもんね (Imonne)","category":"甜點","zone":"市區","tags":["現包Gelato大福","地瓜甜點"],"rating":{"google":4.5,"tabelog":3.5}},{"id":"ngo24","name":"Ralph's Coffee 名古屋久屋大通","category":"咖啡甜點","zone":"久屋大通","tags":["久屋大通公園","美式精品咖啡"],"rating":{"google":4.3,"tabelog":3.52}},{"id":"ngo25","name":"Panel Cafe 名古屋駅前店","category":"咖啡甜點","zone":"名站","tags":["爆漿舒芙蕾鬆餅","抹茶鬆餅"],"rating":{"google":4.4,"tabelog":3.48}},{"id":"ngo26","name":"大須ベーカリー (大須麵包店)","category":"麵包甜點","zone":"大須","tags":["昭和復古烘焙","菠蘿麵包"],"rating":{"google":4.4,"tabelog":3.58}},{"id":"ngo27","name":"Fruit Candy ar. 水果糖葫蘆","category":"甜點","zone":"大須","tags":["鮮果冰糖葫蘆"],"rating":{"google":4.4,"tabelog":3.25}},{"id":"ngo28","name":"鯛福茶庵 八代目澤屋","category":"甜點","zone":"大須","tags":["現烤鯛魚燒","單頭烤具"],"rating":{"google":4.2,"tabelog":3.52}},{"id":"ngo54","name":"KANNON COFFEE 大須本店","category":"咖啡甜點","zone":"大須","tags":["手沖咖啡","特色烤餅乾"],"rating":{"google":4.4,"tabelog":3.58}},{"id":"ngo55","name":"UNI DONUTS 名古屋","category":"甜點","zone":"市區","tags":["生甜甜圈專賣","爆漿生奶油"],"rating":{"google":4.3,"tabelog":3.42}},{"id":"ngo56","name":"@DONUT (アットドナツ)","category":"甜點","zone":"市區","tags":["手作手工甜甜圈"],"rating":{"google":4.2,"tabelog":3.35}},{"id":"ngo57","name":"R ART OF COFFEE","category":"咖啡","zone":"本山","tags":["自家焙煎","精品咖啡"],"rating":{"google":4.5,"tabelog":3.52}},{"id":"ngo58","name":"AOI CELESTIE COFFEE ROASTERY","category":"咖啡","zone":"葵區","tags":["極簡風格咖啡"],"rating":{"google":4.6,"tabelog":3.48}},{"id":"ngo59","name":"星巴克 名古屋JR GATE TOWER店","category":"咖啡","zone":"名站","tags":["最高樓層星巴克","空中花園夜景"],"rating":{"google":4.3,"tabelog":3.25}},{"id":"ngo60","name":"加藤咖啡店 (Kato Coffee)","category":"咖啡","zone":"久屋大通","tags":["紅豆吐司名店","百名店喫茶"],"rating":{"google":4.4,"tabelog":3.71}},{"id":"ngo61","name":"Bond cafe","category":"咖啡","zone":"名站","tags":["質感沙發咖啡廳","Night Cafe"],"rating":{"google":4.3,"tabelog":3.45}},{"id":"ngo62","name":"あんバターは名古屋のもの","category":"甜點","zone":"市區","tags":["紅豆奶油專賣","伴手禮"],"rating":{"google":4.2,"tabelog":3.3}},{"id":"ngo85","name":"GLITCH COFFEE NAGOYA","category":"咖啡","zone":"久屋大通","tags":["東京知名冠軍咖啡","淺焙單品"],"rating":{"google":4.5,"tabelog":3.62}},{"id":"ngo86","name":"Bucyo Coffee","category":"咖啡","zone":"大須","tags":["厚燒小倉紅豆吐司","復古喫茶"],"rating":{"google":4.4,"tabelog":3.69}},{"id":"ngo87","name":"茶寮 汐入","category":"咖啡甜點","zone":"市區","tags":["日式茶寮","抹茶與和菓子"],"rating":{"google":4.4,"tabelog":3.48}},{"id":"ngo88","name":"キティ珈琲店 (Kitty Coffee)","category":"咖啡","zone":"市區","tags":["復古喫茶店","手沖咖啡"],"rating":{"google":4.2,"tabelog":3.42}},{"id":"ngo89","name":"Konparu Sun Road 地下街店","category":"咖啡","zone":"名站","tags":["地下街喫茶","炸蝦三明治"],"rating":{"google":4.1,"tabelog":3.52}},{"id":"ngo97","name":"PIECE OF BAKE 名古屋店","category":"甜點","zone":"名站","tags":["爆漿生甜甜圈","Bomboloni"],"rating":{"google":4.3,"tabelog":3.45}},{"id":"ngo98","name":"Penguin Cafe Tail","category":"咖啡","zone":"市區","tags":["企鵝主題咖啡","質感拉花"],"rating":{"google":4.5,"tabelog":3.38}},{"id":"ngo99","name":"COCO Cookies","category":"甜點","zone":"大須","tags":["美式軟餅乾","打卡甜點"],"rating":{"google":4.4,"tabelog":3.25}},{"id":"ngo100","name":"pause pause","category":"咖啡甜點","zone":"大須","tags":["韓系簡約咖啡廳"],"rating":{"google":4.5,"tabelog":3.35}},{"id":"ngo29","name":"名古屋寶可夢中心","category":"購物景點","zone":"榮","tags":["寶可夢官方商店","松坂屋"],"rating":{"google":4.4,"tabelog":null}},{"id":"ngo30","name":"三輪神社","category":"景點","zone":"大須","tags":["兔子神社","可愛御朱印"],"rating":{"google":4.4,"tabelog":null}},{"id":"ngo31","name":"萬松寺","category":"景點","zone":"大須","tags":["織田信長菩提寺","機關人偶"],"rating":{"google":4,"tabelog":null}},{"id":"ngo32","name":"常滑 招財貓街","category":"景點","zone":"常滑","tags":["招財貓故鄉","巨大招財貓"],"rating":{"google":4.4,"tabelog":null}},{"id":"ngo33","name":"三光稻荷神社","category":"景點","zone":"犬山","tags":["粉紅愛心繪馬","洗錢弁天"],"rating":{"google":4.3,"tabelog":null}},{"id":"ngo34","name":"針網神社","category":"景點","zone":"犬山","tags":["犬山城下町","歷史古社"],"rating":{"google":4.2,"tabelog":null}},{"id":"ngo35","name":"伊奴神社","category":"景點","zone":"西區","tags":["狗狗神社","安產除厄"],"rating":{"google":4.4,"tabelog":null}},{"id":"ngo36","name":"中日大樓 (Chunichi Building)","category":"購物景點","zone":"榮","tags":["榮商圈新地標","展望台"],"rating":{"google":4.2,"tabelog":null}},{"id":"ngo37","name":"清洲城","category":"景點","zone":"清須","tags":["織田信長起家城","天守閣"],"rating":{"google":4.1,"tabelog":null}},{"id":"ngo38","name":"AEON MALL 名古屋則武新町","category":"購物","zone":"名站","tags":["蔦屋書店打卡牆","大型購物商場"],"rating":{"google":4.3,"tabelog":null}},{"id":"ngo39","name":"Yellow Noritakeshinmachi","category":"購物","zone":"名站","address":"AEON MALL 1F","tags":["專賣店"],"rating":{"google":4.2,"tabelog":3.25}},{"id":"ngo40","name":"SkYlee","category":"購物景點","zone":"市區","tags":["特色選物"],"rating":{"google":4.2,"tabelog":null}},{"id":"ngo41","name":"尾張松風屋 寶可夢蝦餅","category":"購物","zone":"名站","tags":["伴手禮","寶可夢包裝"],"rating":{"google":4.2,"tabelog":null}},{"id":"ngo42","name":"#C-pla 大須店 (千台扭蛋機)","category":"購物景點","zone":"大須","tags":["巨大扭蛋專賣店","動漫週邊"],"rating":{"google":4.1,"tabelog":null}},{"id":"ngo43","name":"Sanoya (佐野屋) 便宜超市","category":"購物","zone":"大須","tags":["大須商店街","平價生鮮超市"],"rating":{"google":4,"tabelog":null}},{"id":"ngo44","name":"熱田神宮","category":"景點","zone":"熱田","tags":["三大神宮","草薙劍"],"rating":{"google":4.5,"tabelog":null}},{"id":"ngo45","name":"名古屋港水族館","category":"景點","zone":"港區","tags":["虎鯨秀","海豚表演"],"rating":{"google":4.6,"tabelog":null}},{"id":"ngo46","name":"東山動植物園","category":"景點","zone":"千種","tags":["帥氣猩猩Shabani","植物園"],"rating":{"google":4.4,"tabelog":null}},{"id":"ngo48","name":"中部電力 MIRAI TOWER","category":"景點","zone":"榮","tags":["電視塔夜景","久屋大通公園"],"rating":{"google":4.3,"tabelog":null}},{"id":"ngo49","name":"屋上觀覽車 (榮町大樓)","category":"景點","zone":"榮","tags":["最古老屋頂摩天輪"],"rating":{"google":4,"tabelog":null}},{"id":"ngo65","name":"吉卜力公園 (Ghibli Park)","category":"景點","zone":"長久手","tags":["吉卜力大倉庫","龍貓森林"],"rating":{"google":4.4,"tabelog":null}},{"id":"ngo66","name":"白川鄉合掌村","category":"景點","zone":"岐阜","tags":["世界文化遺產","合掌造り"],"rating":{"google":4.7,"tabelog":null}},{"id":"ngo67","name":"下呂溫泉","category":"景點","zone":"岐阜","tags":["三大名泉","美肌之湯"],"rating":{"google":4.4,"tabelog":null}},{"id":"ngo68","name":"名花之里 (Nabana no Sato)","category":"景點","zone":"三重","tags":["日本最大級燈海","四季花園"],"rating":{"google":4.5,"tabelog":null}},{"id":"ngo70","name":"名古屋城 + 名城公園","category":"景點","zone":"中區","tags":["金鯱","夏日祭典花火"],"rating":{"google":4.3,"tabelog":null}},{"id":"ngo71","name":"本丸御殿博物館商店","category":"購物","zone":"中區","tags":["小常華貓貓","名古屋城限定"],"rating":{"google":4.4,"tabelog":null}},{"id":"ngo72","name":"大須觀音 + 大須商店街","category":"景點","zone":"大須","tags":["庶民美食天堂","古着與動漫"],"rating":{"google":4.2,"tabelog":null}},{"id":"ngo73","name":"久屋大通庭園 Flarie","category":"景點","zone":"榮","tags":["歐風花園","溫室花卉"],"rating":{"google":4.3,"tabelog":null}},{"id":"ngo74","name":"有松老街","category":"景點","zone":"綠區","tags":["江戶老街","傳統絞染"],"rating":{"google":4.3,"tabelog":null}},{"id":"ngo75","name":"戶田川綠地公園","category":"景點","zone":"港區","tags":["大型戶外公園","賞花綠地"],"rating":{"google":4.2,"tabelog":null}},{"id":"ngo76","name":"白鳥庭園","category":"景點","zone":"熱田","tags":["東海最大日本庭園","清澈水景"],"rating":{"google":4.5,"tabelog":null}},{"id":"ngo77","name":"山觀光農園柴久園","category":"景點","zone":"豐田","tags":["季節採果","葡萄/草莓"],"rating":{"google":4.2,"tabelog":null}},{"id":"ngo78","name":"水曜日のアリス","category":"購物景點","zone":"大須","tags":["愛麗絲夢遊仙境","奇幻雜貨"],"rating":{"google":4.3,"tabelog":null}},{"id":"ngo79","name":"Oasis 21 哈利波特榮公園店","category":"購物","zone":"榮","tags":["綠洲21","哈利波特周邊"],"rating":{"google":4.3,"tabelog":null}},{"id":"ngo80","name":"中日大樓 7樓空中廣場","category":"景點","zone":"榮","tags":["榮商圈觀景台","俯瞰夜景"],"rating":{"google":4.4,"tabelog":null}},{"id":"ngo102","name":"名古屋 PARCO 商場","category":"購物","zone":"榮","tags":["時尚流行品牌","動漫快閃店"],"rating":{"google":4.3,"tabelog":null}}],"osaka":[]};
 const PK_KEY='japan2027-pocket';
 const PK_VER=6;
 const PK_REGIONS=[['kyoto','京都'],['uji','宇治'],['nara','奈良'],['kobe','神戶'],['nagoya','名古屋'],['osaka','大阪']];
-// 已排進每日行程的地點，不放在口袋名單（評分改顯示在行程卡片上）
+// 已排進每日行程的地點，不放在想去的地方（評分改顯示在行程卡片上）
 const PK_IN_ITINERARY=['33間堂','建仁寺','御金神社','靈光殿天滿宮','東大寺','一保堂茶舗 京都本店','名古屋市科學館','日本樂高樂園'];
 // 舊版名稱 → 新版名稱
 const PK_ALIAS={'Mamemono and Taiyaki まめものとたい焼き 清水店':'Mamemono and Taiyaki 清水店','Inahiko Coffee 稲彦珈琲 伏見稲荷本店':'Inahiko Coffee 伏見稲荷本店','hoho焙茶 (ほうほう / HOHO HOJICHA)':'hoho焙茶 (HOHO HOJICHA)','炉端とおでん 呼炉凪来 三宮店':'呼炉凪来 三宮店','KONPARU (コンパル) 招牌炸蝦三明治':'KONPARU 招牌炸蝦三明治'};
@@ -2814,7 +2859,7 @@ function pkCard(x){
       </div>
       <div class="pk-actions">
         <a class="pk-nav" href="https://www.google.com/maps/search/?api=1&query=${mq}" target="_blank" rel="noopener" aria-label="Google 導航">${ic('map-pin')}<span>導航</span></a>
-        <button class="pk-today ${added?'on':''}" onclick="tpToggle('${pkRegion}','${id}')" aria-label="加入今日候選池">${added?ic('check'):ic('plus')}<span>${added?'已加入':'加入'}</span></button>
+        <button class="pk-today ${added?'on':''}" onclick="tpToggle('${pkRegion}','${id}')" aria-label="加入今天的行程">${added?ic('check'):ic('plus')}<span>${added?'已加入':'加入'}</span></button>
       </div>
     </div>
   </div>`;
@@ -2882,7 +2927,7 @@ function pkImport(input){
   r.onload=()=>{try{
     let d=JSON.parse(r.result); if(d.japanTravelData) d=d.japanTravelData;
     if(!PK_REGIONS.some(([k])=>Array.isArray(d[k]))) throw 0;
-    if(!confirm('匯入會取代目前這台裝置上的口袋名單，確定嗎？')) return;
+    if(!confirm('匯入會取代目前這台裝置上的想去的地方，確定嗎？')) return;
     pkData=d; if(!pkData._meta) pkData._meta={v:PK_VER,deleted:[]};
     PK_REGIONS.forEach(([k])=>{if(!Array.isArray(pkData[k])) pkData[k]=[];});
     pkSave(); pkLoad(); pkRender(); alert('匯入完成');
@@ -2893,7 +2938,7 @@ function pkReset(){
   if(!confirm('還原成預設名單？你新增、刪除和「已造訪」紀錄都會消失（建議先匯出備份）。')) return;
   pkData=pkClone(PK_DEFAULT); pkData._meta={v:PK_VER,deleted:[]}; pkSave(); pkCat='全部'; pkZone='全部'; pkRender();
 }
-// ══ 飯店錨點、今日候選池、情境篩選 ══
+// ══ 飯店錨點、今天的行程、情境篩選 ══
 const BASE_KYOTO={k:'kyoto',name:'京都',regions:['kyoto','uji','nara','kobe','osaka'],hotel:'三條格拉斯麗酒店',of:7,first:0};
 const BASE_NAGOYA={k:'nagoya',name:'名古屋',regions:['nagoya'],hotel:'名古屋飯店（待補）',of:3,first:7};
 function baseOf(iso){return iso<='2027-01-24'?BASE_KYOTO:BASE_NAGOYA;}
@@ -2927,13 +2972,13 @@ function rateBadges(x){
 function sgScore(x){const g=pkNum(x.rating&&x.rating.google)||0, t=pkNum(x.rating&&x.rating.tabelog); return (t!==null?(t-3)*2:0)+g;}
 var sgLimit=8;
 function sgMore(){sgLimit+=8;sgRender();}
-// 推薦口袋名單的展開／收起（每次打開網頁都先收起）
+// 推薦想去的地方的展開／收起（每次打開網頁都先收起）
 function sgToggleOpen(force){
   const w=document.getElementById('sg-wrap'), b=document.getElementById('sg-toggle'); if(!w||!b) return;
   const open=typeof force==='boolean'?force:!w.classList.contains('open');
   w.classList.toggle('open',open); b.setAttribute('aria-expanded',open);
   b.querySelector('.sg-t-ic').textContent=open?'🔼':'➕';
-  b.querySelector('.sg-t-tx').textContent=open?'收起口袋名單':'展開/新增口袋名單';
+  b.querySelector('.sg-t-tx').textContent=open?'收起':'加入想去的地方';
   b.querySelector('.sg-t-ar').textContent=open?'':'▾';
 }
 function sgRender(){
@@ -2945,7 +2990,7 @@ function sgRender(){
   const ml=(MOODS.find(m=>m[0]===moodSel)||MOODS[0])[1];
   box.innerHTML=`<div class="sg-head"><b>${moodSel==='all'?'推薦加入':ml}</b><span>${base.name}周邊・${items.length} 個</span></div>`+
     (items.length?`<div class="sg-grid">${items.slice(0,sgLimit).map(o=>sgCard(o.r,o.x)).join('')}</div>`:`<div class="sg-empty">這個情境在${base.name}周邊沒有符合的地點。</div>`)+
-    `<div class="sg-foot">${items.length>sgLimit?`<button class="sg-more" onclick="sgMore()">再看 8 個</button>`:''}<button class="sg-more ghost" onclick="goSec('pocket')">${ic('map-pinned')}到口袋名單看全部</button></div>`;
+    `<div class="sg-foot">${items.length>sgLimit?`<button class="sg-more" onclick="sgMore()">再看 8 個</button>`:''}<button class="sg-more ghost" onclick="goSec('pocket')">${ic('map-pinned')}到想去的地方看全部</button></div>`;
 }
 function sgCard(r,x){
   const id=pkEsc(x.id), st=hrsStatus(x,tpSel);
@@ -3018,7 +3063,7 @@ const PK_CAT_THEME_FALLBACK={'景點':['景點','map-pinned','sight'],'美食':[
 function pkTheme(x){
   const t=(x.name||'')+' '+(x.tags||[]).join(' ');
   for(const [re,l,icn,k] of PK_THEMES) if(re.test(t)) return {l,icn,k};
-  const f=PK_CAT_THEME_FALLBACK[x.category]||['口袋名單','pin','food']; return {l:f[0],icn:f[1],k:f[2]};
+  const f=PK_CAT_THEME_FALLBACK[x.category]||['想去的地方','pin','food']; return {l:f[0],icn:f[1],k:f[2]};
 }
 function pkCoverUrl(x,th,w,h){
   const K=window.KYOTO_COVERS; if(!K) return '';
@@ -3188,7 +3233,6 @@ function cvRenderDates(){
   box.innerHTML=TP_DATES.map((d,i)=>{const k=(tpPlans[d]||[]).length;
     return `<button class="cv-date ${d===tpSel?'active':''} ${d===today?'today':''}" style="--tint:${CV_TINTS[i%CV_TINTS.length]}" onclick="cvSelect(${i})">
       <span class="cv-wd">${d===today?'今天':'週'+WD[tpWd(d)]}</span><b>${tpMD(d)}</b><span class="cv-day">DAY ${i+1}</span>${k?`<i class="cv-dot">${k}</i>`:''}</button>`;}).join('');
-  const a=box.querySelector('.cv-date.active'); if(a) a.scrollIntoView({inline:'center',block:'nearest'});
 }
 function cvSelect(i){
   const sec=(document.querySelector('.section.active')||{}).id||'';
@@ -3270,7 +3314,7 @@ function tpToggle(r,id,iso){
 }
 function tpRemove(i){tpData.splice(i,1);tpSave();tpRender();pkRender();sgRender();}
 function tpMove(i,d){const j=i+d; if(j<0||j>=tpData.length) return; [tpData[i],tpData[j]]=[tpData[j],tpData[i]]; tpSave(); tpRender();}
-function tpClear(){if(!tpData.length) return; if(!confirm(`清空 ${tpMD(tpSel)} 的行程？`)) return; tpData.length=0; tpSave(); tpRender(); pkRender();}
+function tpClear(){if(!tpData.length) return; if(!confirm(`把 ${tpMD(tpSel)} 的地點全部拿掉？（之後可以按「恢復原本的行程」還原）`)) return; tpData.length=0; tpSave(); tpRender(); pkRender();}
 function tpToggleOpen(){tpOpen=!tpOpen; tpSave(); tpRender();}
 const tpZoneKey=z=>(z||'').split('/')[0].trim();
 function tpKm(a,b){const R=6371,toR=Math.PI/180,dLa=(b[0]-a[0])*toR,dLo=(b[1]-a[1])*toR;
@@ -3305,15 +3349,16 @@ function tpRender(){
   TP_DATES.forEach(d=>tpPlans[d].forEach(t=>{const x=tpLookup(t); if(x){t.name=x.name;t.zone=x.zone||'';t.category=x.category;}}));
   const n=tpData.length, today=jstNow().iso;
   document.getElementById('tp-count').textContent=n;
-  document.getElementById('tp-title-txt').textContent='今日候選池';
+  document.getElementById('tp-title-txt').textContent='今天的行程';
   cvRenderDates();
   if(false) TP_DATES.map((d,i)=>{const k=tpPlans[d].length;
     return `<button class="tp-date ${d===tpSel?'active':''} ${d===today?'today':''}" onclick="tpSelect('${d}')"><b>${tpMD(d)}</b><span>${d===today?'今天':'週'+WD[tpWd(d)]}</span>${k?`<i class="tp-dot">${k}</i>`:''}</button>`;}).join('');
   const total=TP_DATES.reduce((s,d)=>s+tpPlans[d].length,0);
   const badge=document.querySelector('.fnav-btn[data-sec="pocket"]');
   if(badge){let b=badge.querySelector('.fnav-badge'); if(false&&total){if(!b){b=document.createElement('span');b.className='fnav-badge';badge.appendChild(b);} b.textContent=total;} else if(b) b.remove();}
-  const tp=document.getElementById('tp'); tp.classList.toggle('closed',!tpOpen);
-  document.getElementById('tp-fold').innerHTML=ic(tpOpen?'chevron-up':'chevron-down');
+  const tp=document.getElementById('tp'); tp.classList.remove('closed');
+  
+  if(typeof curDay==='number') tlRender(curDay);
   const route=document.getElementById('tp-route');
   if(n){
     const q=t=>encodeURIComponent(t.name+' '+(tpZoneKey(t.zone)&&tpZoneKey(t.zone)!=='市區'?tpZoneKey(t.zone)+' ':'')+(TP_REGION_NAME[t.r]||''));
@@ -3322,33 +3367,31 @@ function tpRender(){
     route.classList.remove('off');
   } else { route.removeAttribute('href'); route.classList.add('off'); }
   document.getElementById('tp-clear').classList.toggle('off',!n);
-  document.getElementById('tp-list').innerHTML=n?tpData.map((t,i)=>{const x=tpLookup(t); const st=x&&hrsStatus(x,tpSel);
+  document.getElementById('tp-list').innerHTML=tpData.map((t,i)=>{if(t.def) return ''; const x=tpLookup(t); const st=x&&hrsStatus(x,tpSel);
     return `<div class="tp-row" data-i="${i}">
-      <button class="tp-handle" aria-label="拖曳排序" onpointerdown="tpDragStart(event)">${ic('grip-vertical')}</button>
-      <div class="tp-num">${i+1}</div>
       <div class="tp-thumb pk-item" data-cat="${pkEsc(t.category||'')}"><span>${ic(PK_CAT_ICON[t.category]||'pin')}</span></div>
       <div class="tp-info"><div class="tp-name">${pkEsc(t.name)}</div><div class="tp-sub">${t.def?`<span class="tp-def">原定${t.time?' '+pkEsc(t.time):''}</span>`:''}<span class="tp-seg">${pkEsc(TP_REGION_NAME[t.r]||t.r)}</span>${t.zone?'・<span class="tp-seg">'+pkEsc(t.zone)+'</span>':''}${t.category?'・<span class="tp-seg">'+pkEsc(t.category)+'</span>':''}</div>${st?`<div class="tp-hb">${hrsBadge(st)}</div>`:''}</div>
       <div class="tp-btns">
-        <button onclick="tpMove(${i},-1)" ${i===0?'disabled':''} aria-label="上移">${ic('chevron-up')}</button>
-        <button onclick="tpMove(${i},1)" ${i===n-1?'disabled':''} aria-label="下移">${ic('chevron-down')}</button>
         <button class="rm" onclick="tpRemove(${i})" aria-label="移除">${ic('trash-2')}</button>
-      </div></div>`;}).join('')
-    :`<div class="tp-empty">${ic('sparkles')}今天想去哪？從下方推薦挑 3–5 個，或到口袋名單加入。</div>`;
+      </div></div>`;}).join('');
+  {const nx=tpData.filter(t=>!t.def).length; document.getElementById('tp-extra-h').style.display=nx?'':'none';
+   if(!document.getElementById('timeline').innerHTML.trim()&&!nx) document.getElementById('tp-list').innerHTML=`<div class="tp-empty">${ic('sparkles')}這天還沒有安排。按下面「加入想去的地方」挑幾個。</div>`;}
   const isDef=tpIsDefault(tpSel), nDef=tpDefaults(tpSel).length;
-  document.getElementById('tp-reset').innerHTML=`<span class="tp-state ${isDef?'def':'mod'}">${ic(isDef?'circle-check':'pencil')}${isDef?`預設行程${nDef?'（'+nDef+' 個原定地點）':''}`:`已自訂・只存在 ${tpMD(tpSel)}`}</span>
-    <button class="tp-resetbtn" onclick="tpResetDay()" ${isDef?'disabled':''}>${ic('rotate-ccw')}重置 ${tpMD(tpSel)} 行程</button>`;
+  document.getElementById('tp-reset').innerHTML=isDef?'':`<span class="tp-state mod">${ic('pencil')}你改過這天的行程。想還原，按右上角「更多」→「恢復原本的行程」</span>`;
+  document.getElementById('tp-reset').style.display=isDef?'none':'';
+  document.getElementById('tp-undo').disabled=isDef;
   if(n>10) document.getElementById('tp-list').insertAdjacentHTML('beforeend','<div class="tp-note">Google 地圖路線最多帶入前 10 個地點。</div>');
   const ws=tpWarnings();
   document.getElementById('tp-warns').innerHTML=ws.map(w=>`<div class="tp-warn ${w.lvl}">${ic(w.lvl==='red'?'siren':'triangle-alert')}<span>${w.html}</span></div>`).join('');
   const sel=document.querySelector('.tp-date.active'); if(sel) sel.scrollIntoView({inline:'center',block:'nearest'});
-  if(typeof curDay==='number'&&document.getElementById('day-picks')) dpRender(curDay);
+  if(typeof curDay==='number'){ if(document.getElementById('day-picks')) dpRender(curDay); }
 }
-// 每日行程頁：顯示這天從口袋名單加入的地點
+// 每日行程頁：顯示這天從想去的地方加入的地點
 function dpRender(di){
   const iso=TP_DATES[di]; const box=document.getElementById('day-picks'); if(!box||!iso) return;
   const list=tpPlans[iso]||[];
   if(!list.length){box.innerHTML='';return;}
-  box.innerHTML=`<div class="dp-head">${ic('bookmark')}從口袋名單加入（${list.length}）<button onclick="tpSelect('${iso}');goSec('pocket')">到名單調整 ${ic('chevron-right')}</button></div>`+
+  box.innerHTML=`<div class="dp-head">${ic('bookmark')}從想去的地方加入（${list.length}）<button onclick="tpSelect('${iso}');goSec('pocket')">到名單調整 ${ic('chevron-right')}</button></div>`+
     list.map((t,i)=>{const x=tpLookup(t); const st=x&&hrsStatus(x,iso); const q=encodeURIComponent(t.name+' '+(tpZoneKey(t.zone)&&tpZoneKey(t.zone)!=='市區'?tpZoneKey(t.zone)+' ':'')+(TP_REGION_NAME[t.r]||''));
       return `<div class="dp-row"><div class="tp-num">${i+1}</div><div class="tp-info"><div class="tp-name">${pkEsc(t.name)}</div><div class="tp-sub">${pkEsc(t.zone||'')}${t.category?'・'+pkEsc(t.category):''}</div>${st?`<div class="tp-hb">${hrsBadge(st)}</div>`:''}</div><a class="dp-nav" href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener">${ic('navigation')}</a></div>`;}).join('');
 }
@@ -3386,7 +3429,7 @@ function tpDragEnd(e){
   const re=order.map(i=>tpData[i]); tpData.length=0; tpData.push(...re); tpSave(); tpRender();
 }
 
-// ══ 附近口袋名單（GPS）══
+// ══ 附近想去的地方（GPS）══
 // 位置：地點有 lat/lng 就用；沒有就用所屬商圈的大概位置（誤差數百公尺～1 公里）
 const NB_FOOD=['美食','甜點','咖啡','咖啡甜點','麵包甜點','咖啡美食'];
 let nbState={open:false,pos:null,err:'',dist:1000,food:false,openOnly:false,loading:false};
@@ -3425,7 +3468,7 @@ function nbRender(){
   const near=all[0];
   st.innerHTML=`${ic('map-pin')}${res.length?`找到 ${res.length} 個地點`:'範圍內沒有符合的地點'}・距離依商圈位置估算${noHrs?`・${noHrs} 個沒有營業時間資料，已略過`:''}`;
   if(!res.length){
-    list.innerHTML=near?`<div class="nb-empty">最近的口袋名單地點是「${pkEsc(near.x.name)}」（${TP_REGION_NAME[near.r]}・${pkEsc(near.x.zone||'')}），直線約 ${nbFmt(near.km)}。<br>可以放寬距離或關掉篩選。</div>`:'<div class="nb-empty">名單裡沒有可以計算位置的地點。</div>';
+    list.innerHTML=near?`<div class="nb-empty">最近的想去的地方地點是「${pkEsc(near.x.name)}」（${TP_REGION_NAME[near.r]}・${pkEsc(near.x.zone||'')}），直線約 ${nbFmt(near.km)}。<br>可以放寬距離或關掉篩選。</div>`:'<div class="nb-empty">名單裡沒有可以計算位置的地點。</div>';
     return;
   }
   list.innerHTML=res.slice(0,40).map(o=>{const x=o.x, id=pkEsc(x.id), s=hrsStatus(x,iso), added=(tpPlans[ref]||[]).some(t=>t.r===o.r&&String(t.id)===String(x.id));
@@ -3486,7 +3529,7 @@ async function offRender(){
   try{ if('caches' in window){const keys=await caches.keys(); for(const k of keys){const cch=await caches.open(k); if(await cch.match('./index.html')||await cch.match('./')){ready=true;break;}}} }catch(e){}
   const sw=!!(navigator.serviceWorker&&navigator.serviceWorker.controller);
   box.innerHTML=ready&&sw
-    ?`<div class="off-ok">${ic('circle-check')}<div><b>已可離線使用</b><span>行程、口袋名單、待辦、記帳都存在手機裡，沒訊號也能打開。地圖導航和地圖小視窗仍需要網路。</span></div></div>`
+    ?`<div class="off-ok">${ic('circle-check')}<div><b>已可離線使用</b><span>行程、想去的地方、待辦、記帳都存在手機裡，沒訊號也能打開。地圖導航和地圖小視窗仍需要網路。</span></div></div>`
     :`<div class="off-wait">${ic('cloud-download')}<div><b>離線準備中</b><span>在有網路時打開一次網站並重新整理一次，就會存好離線版本。</span></div></div>`;
 }
 function offBanner(){document.body.classList.toggle('is-offline',!navigator.onLine);}
